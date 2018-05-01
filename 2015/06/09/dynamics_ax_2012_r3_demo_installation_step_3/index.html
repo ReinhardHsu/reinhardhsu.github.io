@@ -1,0 +1,397 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="&nbsp;&nbsp;&nbsp; 在前两节中，Reinhard主要讲解了如何配置安装环境，安装数据库服务器，AOS和客户端。至此安装工作已经结束，下面Reinhard开始讲解如何编译和配置。&nbsp;&nbsp;&nbsp; 运行客户端后，系统弹出初始化核对清单。将生命周期服务和客户反馈选项标记为完成。点击编译应用程序。编译的过程中，窗体可能处于无法响应的假死状态，也不要关闭。这个过程...">
+  
+  <title>Dynamics AX 2012 R3 Demo 安装与配置 – 编译和配置 (Step 3) - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../12/dynamics_ax_2012_R3_demo_installation_step_4/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R3 Demo 安装与配置 – 导入测试数据 (Step 4)
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../02/dynamics_ax_2012_r3_demo_installation_step_2/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R3 Demo 安装与配置 – 安装数据服务器、AOS和客户端 (Step 2)
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R3 Demo 安装与配置 – 编译和配置 (Step 3)</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-06-09</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_23-00-05.png" alt="2015-05-28_23-00-05" title="2015-05-28_23-00-05"></font><br><p><font size="4">&nbsp;&nbsp;&nbsp; 在前两节中，Reinhard主要讲解了如何配置安装环境，安装数据库服务器，AOS和客户端。至此安装工作已经结束，下面Reinhard开始讲解如何编译和配置。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 运行客户端后，系统弹出初始化核对清单。将生命周期服务和客户反馈选项标记为完成。点击编译应用程序。编译的过程中，窗体可能处于无法响应的假死状态，也不要关闭。这个过程比较漫长，根据你的计算机硬件配置，可能需要四五个小时。去休息一下吧。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-52-37.png" alt="2015-05-27_22-52-37" title="2015-05-27_22-52-37"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 当编译完成后，点击编译为DotNet框架通用中间语言。这个过程也比较漫长，大概需要一个小时，期间窗口处于假死状态，大家不要乱点，可以去休息一下。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 编译完毕后，系统会给出提示。点击关闭。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_20-59-53.png" alt="2015-05-28_20-59-53" title="2015-05-28_20-59-53"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 因为Reinhard一会儿要导入测试数据，所以先将提供许可证和配置应用程序标记为完成。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_21-01-33.png" alt="2015-05-28_21-01-33" title="2015-05-28_21-01-33"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 点击修改数据类型，修改系统字段的长度。因为Reinhard是用于测试用途，所以这里保持默认即可。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 稍等片刻，点击同步数据库。这个过程可能要半个小时。去休息一下好了。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_21-02-18.png" alt="2015-05-28_21-02-18" title="2015-05-28_21-02-18"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 休息回来，继续配置。因为Reinhard一会儿要导入测试数据，所以将创建分区和初始化用户配置文件标记为完成。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; AIF暂时也用不到，所以标记为完成，待以后用的时候Reinhard再进行配置。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 点击配置系统账户。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_21-46-13.png" alt="2015-05-28_21-46-13" title="2015-05-28_21-46-13"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 输入BC代理账户和同步服务账户，Reinhard这里默认都使用第一节里创建的域账户。点击确定。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_21-49-41.png" alt="2015-05-28_21-49-41" title="2015-05-28_21-49-41"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 点击配置分区账户，这里Reinhard也使用第一节里创建的域账户。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_21-52-19.png" alt="2015-05-28_21-52-19" title="2015-05-28_21-52-19"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 点击常见引用数据，稍等片刻。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 因为Reinhard一会儿要导入的测试数据中，包含法人，所以将创建法人标记为完成。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 点击设置系统参数，将系统语言设置为中文。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 后面Reinhard会用测试数据导入工具，进行测试数据的导入，所以将导入数据标记为完成。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_21-57-11.png" alt="2015-05-28_21-57-11" title="2015-05-28_21-57-11"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 重启系统，打开AX客户端，即可看到熟悉的界面。现在系统中还没有数据。</font><br></p><p><font size="4"><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-28_22-00-40.png" alt="2015-05-28_22-00-40" title="2015-05-28_22-00-40"></font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 本节，Reinhard主要讲解了如何进行安装后的编译和配置工作。下节，Reinhard将讲解如何进行测试数据的导入。</font><br></p><p><font size="4">&nbsp;&nbsp;&nbsp; 喜欢本系列的同学，请点个赞哦。</font><br></p><p><font size="4"></font>
+</p>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../12/dynamics_ax_2012_R3_demo_installation_step_4/" class="prev">&larr; Prev post Dynamics AX 2012 R3 Demo 安装与配置 – 导入测试数据 (Step 4)</a>
+  
+
+  
+
+  
+    <a href="../../02/dynamics_ax_2012_r3_demo_installation_step_2/" class="next">Next post Dynamics AX 2012 R3 Demo 安装与配置 – 安装数据服务器、AOS和客户端 (Step 2) &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

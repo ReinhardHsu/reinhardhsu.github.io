@@ -1,0 +1,434 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="https://msdn.microsoft.com/EN-US/library/dd252604.aspx
+    Cube是一个多维度的结构，它是BI应用开发的基础。本文描述了cube的组成部分，让你能更好地理解如何使用cube来分析数据。
+1、Cube的结构    一个cube由一组测量和维度属性构成。对于AX分析cube，测量和维度在AOT中定义。Perspective用于标识那些包...">
+  
+  <title>[译]Dynamics AX 2012 R2 BI系列-Cube概览 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../09/dynamics_ax_2012_r2_bi_series_analytics_architecture/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        [译]Dynamics AX 2012 R2 BI系列-分析的架构
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../09/28/dynamics_ax_2012_r2_ssrs_report_preview_no_data_in_vs2010/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 SSRS报表在VS2010中预览没有数据
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>[译]Dynamics AX 2012 R2 BI系列-Cube概览</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-10-08</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><a href="https://msdn.microsoft.com/EN-US/library/dd252604.aspx" target="_blank" rel="noopener"><span style="font-family: 微软雅黑; font-size: large;">https://msdn.microsoft.com/EN-US/library/dd252604.aspx</span></a></p>
+<p><span style="font-family: 微软雅黑; font-size: large;">    Cube是一个多维度的结构，它是BI应用开发的基础。本文描述了cube的组成部分，让你能更好地理解如何使用cube来分析数据。</span></p>
+<h2 id="1、Cube的结构"><a href="#1、Cube的结构" class="headerlink" title="1、Cube的结构"></a><span style="font-family: 微软雅黑;">1、Cube的结构</span></h2><p><span style="font-family: 微软雅黑; font-size: large;">    一个cube由一组测量和维度属性构成。对于AX分析cube，测量和维度在AOT中定义。Perspective用于标识那些包含着测量和维度的表和视图。</span><span id="more-537"></span></p>
+<h3 id="1-1、测量"><a href="#1-1、测量" class="headerlink" title="1.1、测量"></a><span style="font-family: 微软雅黑;">1.1、测量</span></h3><p><span style="font-family: 微软雅黑; font-size: large;">    一个测量，是表或视图中一个包含着可计量的数据的列，通常是数字，可以被聚合。测量，相当于是用户想要审查或分析的东西。例如收入，收益，或卖出的产品总数。当你指定一个测量，你也必须指定一个聚合功能，用于聚合数据。一个Cube有一个或多个测量。</span></p>
+<p><span style="font-family: 微软雅黑; font-size: large;">    你在AX中指定的测量，会被加到测量组中。</span></p>
+<p><span style="font-family: 微软雅黑; font-size: large;">    你可以使用属性表中的BI相关属性，在不同的级别和不同的AOT对象上定义测量。下表描述了你可以定义测量的对象，和如何使用：</span></p>
+<p><table border="5" width="600" cellspacing="0" cellpadding="2"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td valign="top" width="145"><span style="font-family: 微软雅黑; font-size: large;">对象</span></td></p>
+<p><td valign="top" width="455"><span style="font-family: 微软雅黑; font-size: large;">用途</span></td><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="145"><span style="font-family: 微软雅黑; font-size: large;">EDT</span></td></p>
+<p><td valign="top" width="455"><span style="font-family: 微软雅黑; font-size: large;">当你将一个EDT标记为一个测量时，除非在表字段上重新覆盖，不然的话所有引用该EDT的字段都将会成为测量。</span></td></p><p></p>
+<p><span style="font-family: 微软雅黑; font-size: large;">一个EDT可以扩展另一个EDT。如果基本EDT是一个测量，那么你既可以保持，也可以在基本EDT的设置中覆盖。</span><br></p>
+<p><tr></tr></p>
+<p><td valign="top" width="145"><span style="font-family: 微软雅黑; font-size: large;">字段</span></td></p>
+<p><td valign="top" width="455"><span style="font-family: 微软雅黑; font-size: large;">如果该字段参照的EDT已经被标识为一个测量，你可以在字段的这只中覆盖。</span></td></p>
+<p><span style="font-family: 微软雅黑; font-size: large;">有两个位置，你可以将一个字段标识为一个测量：</span></p>
+<ul>
+<li><span style="font-family: 微软雅黑; font-size: large;">直接在表上</span></li>
+<li><span style="font-family: 微软雅黑; font-size: large;">在用于定义cube的透视的表和视图上</span></li>
+</ul>
+<p><span style="font-family: 微软雅黑; font-size: large;">透视上的设置，会覆盖其他位置的设置</span><br><br><br></p>
+<p></p><p>&nbsp;</p>
+<h3 id="1-2、维度"><a href="#1-2、维度" class="headerlink" title="1.2、维度"></a><span style="font-family: 微软雅黑;">1.2、维度</span></h3><p><span style="font-family: 微软雅黑; font-size: large;">    你可以在表，视图，和字段上设置AOT属性，来创建分析服务维度和属性。属性，是AOT中的表或视图上的字段或列。维度，是属性组。</span></p>
+<p><span style="font-family: 微软雅黑; font-size: large;">    当你定义维度和属性后，你添加维度表和视图到透视中，以创建Cube。如果你不想在表和视图上直接指定维度和属性，你可以创建一个透视，接着在透视上添加维度信息。</span></p>
+<h2 id="2、维度和测量组的关系"><a href="#2、维度和测量组的关系" class="headerlink" title="2、维度和测量组的关系"></a><span style="font-family: 微软雅黑;">2、维度和测量组的关系</span></h2><p><span style="font-family: 微软雅黑; font-size: large;">   定义在Cube中的维度和测量组的关系，指明了Cube中的数据是如何被切片的。对于AX Cube而言，会基于系统中表和视图之间已有的关系，来生成关系。当你在BIDS（SQL Server Business Development Studio）中打开一个BI项目时，你可以在Cube设计器中查看生成的关系。在Cube设计器中，你可以在维度和测量组之间添加新的关系，也可以修改已有的关系。</span></p>
+<h2 id="3、KPI和计算成员"><a href="#3、KPI和计算成员" class="headerlink" title="3、KPI和计算成员"></a><span style="font-family: 微软雅黑;">3、KPI和计算成员</span></h2><p><span style="font-family: 微软雅黑; font-size: large;">    一个KPI(Key Performance Indicator)是用于测量业务成功的计算的一个集合。用于计算的成员，是一个维度或测量组的一个成员，它基于Cube数据，算法操作，数字，和功能的一个组合。当一个项目被生成后，在BIDS中使用Cube设计器添加KPI。KPI的计算，是MDX(Multidimensional Expressions)和用于计算的成员的组合。一个KPI一般由实现的值，目标值，状态值，和趋势值构成。</span></p>
+<p>&nbsp;</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Cube的结构"><span class="toc-text">1、Cube的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、测量"><span class="toc-text">1.1、测量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、维度"><span class="toc-text">1.2、维度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、维度和测量组的关系"><span class="toc-text">2、维度和测量组的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、KPI和计算成员"><span class="toc-text">3、KPI和计算成员</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../09/dynamics_ax_2012_r2_bi_series_analytics_architecture/" class="prev">&larr; Prev post [译]Dynamics AX 2012 R2 BI系列-分析的架构</a>
+  
+
+  
+
+  
+    <a href="../../../09/28/dynamics_ax_2012_r2_ssrs_report_preview_no_data_in_vs2010/" class="next">Next post Dynamics AX 2012 R2 SSRS报表在VS2010中预览没有数据 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

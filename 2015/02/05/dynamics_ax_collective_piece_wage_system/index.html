@@ -1,0 +1,458 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="集体计件工资
+什么是集体计件工资
+计件工资是按照劳动者生产合格产品的数量和预先规定的计件单价计量和支付劳动报酬的一种工资形式。计件工资按计件对象不同分为个人计件工资和集体计件工资。
+
+集体计件工资是以工作队（组）为计算单位，工资取决于计件单位集体的劳动成果，它是以工作队（组）生产的合格产品的数量乘以计件单价，计算出应得的计件工资总额，然后在班组或工作队内部工人之间根据每个人的技术熟练程度和贡...">
+  
+  <title>Dynamics AX 集体计件工资制 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../10/dynamics_ax_2012_r2_setup_reporting_server/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 设置报表服务器
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../03/dynamics_ax_proforma_invoice/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 形式发票
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 集体计件工资制</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-02-05</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><strong>集体计件工资</strong></p>
+<p><strong>什么是集体计件工资</strong></p>
+<p><strong>计件工资</strong>是按照劳动者生产合格产品的数量和预先规定的计件单价计量和支付劳动报酬的一种工资形式。计件工资按计件对象不同分为<strong>个人计件工资</strong>和<strong>集体计件工资</strong>。</p>
+<p><span id="more-259"></span></p>
+<p><strong>集体计件工资</strong>是以工作队（组）为计算单位，工资取决于计件单位集体的劳动成果，它是以工作队（组）生产的合格产品的数量乘以计件单价，计算出应得的计件工资总额，然后在班组或工作队内部工人之间根据每个人的技术熟练程度和贡献大小等情况进行合理的分配。</p>
+<p><strong>集体计件工资的分配</strong></p>
+<p>分配的办法，一般有以下三种：</p>
+<p>1、<strong>按照本人标准工资分配</strong>。即将集体所得的计件工资，按照成员个人日工资标准和实际工作天数进行分配。其计算公式：</p>
+<p>个人实得计件工资 = 个人日工资标准×实际工作天数×工资分配系数</p>
+<p>其中：工资分配系数 = 集体实得计件工资总额/集体应得标准工资总额</p>
+<p>集体应得计件工资总额 = 工作队（组）生产合格产品数量×计件单价</p>
+<p>集体应得标准工资总额 = ∑（个人日工资标准×实际工作天数）</p>
+<p>例：某生产班组共有甲、乙、丙、丁四名工人，该月生产某产品2000件，每件计件单价为3元，班组成员日工资标准和实际工作天数如下表：</p>
+<p>工人 月工资标准（元） 日工资标准（元） 工作天数</p>
+<p>甲 1500 71.70 22</p>
+<p>乙 1300 62.14 22</p>
+<p>丙 1000 47.80 21</p>
+<p>丁 800 38.24 20</p>
+<p>合计 85</p>
+<p>根据上式，按下列步骤计算：</p>
+<p>1）求集体计件工资总额和集体标准工资总额。</p>
+<p>集体计件工资总额 = 2000×3 = 6000（元）</p>
+<p>集体标准工资总额 = （71.70×22）+ （62.14×22）+ （47.80×21）+ （38.24×20）= 4713.08（元）</p>
+<p>2、）求工资分配系数。</p>
+<p>工资分配系数=\frac{6000}{4713.08}=1.273</p>
+<p>3)计算每个人实得计件工资。</p>
+<p>甲实得计件工资 = 71.70×22×1.273 = 2008（元）</p>
+<p>乙实得计件工资 = 62.14×22×1.273 = 1740（元）</p>
+<p>丙实得计件工资 = 47.80×21×1.273 = 1278（元）</p>
+<p>丁实得计件工资 = 38.24×20×1.273 = 974（元）</p>
+<p>2、<strong>按照实际工作天数平均分配</strong>。它适用于工人技术熟练程度相差不大的情形。其计算公式：</p>
+<p>个人实得计件工资 = 工资分配系数×个人实际工作天数</p>
+<p>工资分配系数 =集体实得计件工资总额/集体应得标准工资总额</p>
+<p>集体实际工作天数 = ∑（个人实际工作天数）</p>
+<p>按前例，根据公式按下列步骤计算：</p>
+<p>1）求集体工作天数。</p>
+<p>集体工作天数 = 22+22+21+20 = 85（天）</p>
+<p>2）求工资分配系数。</p>
+<p>工资分配系数=\frac{6000}{85}=70.59（元）</p>
+<p>3)计算每人实得计件工资。</p>
+<p>甲实得计件工资 = 22×70.59 = 1553（元）</p>
+<p>乙实得计件工资 = 22×70.59 = 1553（元）</p>
+<p>丙实得计件工资 = 21×70.59 = 1482（元）</p>
+<p>丁实得计件工资= 20×70.59 = 1412（元）</p>
+<p>3、<strong>定额内部分，按照个人日标准工资和实际工作天数分；超额部分，按照每个人实际工作天数分配</strong>。其计算公式：</p>
+<p>个人实得计件工资 = 定额内部分应得工资 + 超额部分应得工资</p>
+<p>定额内部分应得工资 = 个人日标准工资×个人实际工作天数</p>
+<p>超额部分应得工资 = 超额部分工资分配系数×个人实际工作天数</p>
+<p>工资分配系数 =（集体实得计件工资总额-集体应得标准工资总额 ）/集体实际工作天数</p>
+<p>按上例，根据公式，计算如下：</p>
+<p>1）求工资分配系数。</p>
+<p>工资分配系数 = \frac{6000-4713.08}{85}=\frac{1286.92}{85}=15.14</p>
+<p>2)计算个人实得计件工资。</p>
+<p>甲实得计件工资 = （71.70×22）+（22×15.14）= 1910（元）</p>
+<p>乙实得计件工资 = （62.14×22）+（22×15.14）=1700（元）</p>
+<p>丙实得计件工资 = （47.80×21）+（21×15.14）=1322（元）</p>
+<p>丁实得计件工资 = （38.24×20）+（20×15.14）=1068（元）</p>
+<p>转自：<a href="http://wiki.mbalib.com/wiki/集体计件工资制" target="_blank" rel="noopener">http://wiki.mbalib.com/wiki/集体计件工资制</a></p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../10/dynamics_ax_2012_r2_setup_reporting_server/" class="prev">&larr; Prev post Dynamics AX 2012 R2 设置报表服务器</a>
+  
+
+  
+
+  
+    <a href="../../03/dynamics_ax_proforma_invoice/" class="next">Next post Dynamics AX 形式发票 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

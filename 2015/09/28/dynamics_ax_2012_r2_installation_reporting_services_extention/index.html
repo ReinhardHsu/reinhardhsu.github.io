@@ -1,0 +1,435 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="&nbsp;&nbsp;&nbsp; 今天Reinhard在VS中部署SSRS报表时，接到以下错误：
+
+
+部署因错误而被取消。在报表服务器上，验证：-SQL Server Reporting Services 服务是否正在运行。
+
+&nbsp;&nbsp;&nbsp; 接着，Reinhard进入到AX中，检查系统的报表服务器配置是否正确。不知道怎么配置的同学可以查看Reinhard之前的博文...">
+  
+  <title>Dynamics AX 2012 R2 安装Reporting Services 扩展 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../dynamics_ax_2012_r2_ssrs_report_preview_no_data_in_vs2010/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 SSRS报表在VS2010中预览没有数据
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../08/28/dynamics_ax_2012_r2_business_series_purchase_process/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 业务系列-采购业务流程
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 安装Reporting Services 扩展</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-09-28</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/123.jpg" alt="123" title="123"></font><br><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 今天<a href="http://reinhardhsu.com">Reinhard</a>在VS中部署SSRS报表时，接到以下错误：</font>
+
+<blockquote>
+<p></p><p><em><font face="微软雅黑">部署因错误而被取消。在报表服务器上，验证：-SQL Server Reporting Services 服务是否正在运行。</font></em></p>
+</blockquote>
+<font face="微软雅黑">&nbsp;&nbsp;&nbsp; 接着，<a href="http://reinhardhsu.com">Reinhard</a>进入到AX中，检查系统的报表服务器配置是否正确。不知道怎么配置的同学可以查看<a href="http://reinhardhsu.com">Reinhard</a>之前的博文 </font><a href="http://www.cnblogs.com/msdynax/p/set-up-report-server.html" target="_blank" rel="noopener"><font face="微软雅黑">Dynamics AX 2012 R2 配置报表服务器</font></a><font face="微软雅黑">&nbsp; 。检查发现，报表服务器中的配置也正确。<a href="http://reinhardhsu.com">Reinhard</a>点击了一下 验证设置 按钮，收到以下错误：</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/124.jpg" alt="124" title="124"></font>
+
+<blockquote>
+<p></p><p><em><font face="微软雅黑">无法连接到位于MSDynAX的报表服务器<a href="http://MSDynAX/Reports。确保SQL" target="_blank" rel="noopener">http://MSDynAX/Reports。确保SQL</a> Server Reporting Services 正确配置为与 Microsoft Dynamics AX 客户端中的报表服务器配置匹配。</font></em></p>
+</blockquote>
+<font face="微软雅黑">&nbsp;&nbsp;&nbsp; 根据错误提示，<a href="http://reinhardhsu.com">Reinhard</a>进入到报表服务器，检查SSRS服务是否启动。检查发现，报表服务没有启动。<a href="http://reinhardhsu.com">Reinhard</a>将其启动后，再次点击 验证设置 按钮，又收到以下错误：</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/125.jpg" alt="125" title="125"></font>
+
+<blockquote>
+<p></p><p><font face="微软雅黑">&nbsp;<em>在 URL <a href="http://MSDynAX/ReportServer" target="_blank" rel="noopener">http://MSDynAX/ReportServer</a> 的报表服务器上找不到文件夹 DynamicsAX 。</em></font></p>
+</blockquote>
+<font face="微软雅黑">&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com">Reinhard</a>判断，报表服务器上很有可能没有安装AX的 Reporting Services 扩展。到服务器上检查了下，果然没有装。接着， Reinhard就开始安装该扩展吧。 <img src="http://reinhardhsu.com/wp-content/uploads/2015/09/126.jpg" alt="126" title="126"></font>
+
+<font face="微软雅黑">&nbsp;&nbsp;&nbsp; 点击下一步，进入必备项验证，验证通过后继续下一步，<a href="http://reinhardhsu.com">Reinhard</a>又收到以下错误：</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/127.jpg" alt="127" title="127"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 这是因为<a href="http://reinhardhsu.com">Reinhard</a>的AOS和报表服务器不在一台服务器上，并且报表服务器的BC没有指向AOS所在服务器。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com">Reinhard</a>进入到AX配置实用程序，将BC指向AOS所在服务器。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/128.jpg" alt="128" title="128"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 修改完记得点击 应用 按钮。重新回到AX组件安装程序，继续安装，录入BC账号的密码，进入下一步。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image.png" alt="Image" title="Image"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 选择本机的数据库实例，记得把 部署报表 的CheckBox选中，点击下一步。这里我们选择AX的数据库服务器的名称，和数据库名称。这里Reinhard收到以下错误：</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/129.jpg" alt="129" title="129"></font>
+
+<blockquote>
+<p></p><p><em><font face="微软雅黑">安装程序无法连接到数据库服务器“MSDynAX”。</font></em></p>
+</blockquote>
+<font face="微软雅黑">&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com">Reinhard</a>猜测可能是BC账户没有AX数据库的权限。检查后，<a href="http://reinhardhsu.com">Reinhard</a>发现BC账户的权限没有问题。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 那究竟问题出在哪里呢？Reinhard突然想到刚刚只是将BC指向了AOS，没有将本地客户端指向AOS。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com">Reinhard</a>重新运行AX配置工具，将本地客户端指向AOS，应用设置。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 接着，<a href="http://reinhardhsu.com">Reinhard</a>重新运行AX组件安装工具，这次可以获取到AX数据服务器的数据库名称了。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image1.png" alt="Image(1)" title="Image(1)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 点击下一步，必备项检查完毕。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image2.png" alt="Image(2)" title="Image(2)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp; 接着点击下一步，开始安装。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image3.png" alt="Image(3)" title="Image(3)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 恭喜<a href="http://reinhardhsu.com">Reinhard</a>，安装过程中又收到以下错误：</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image4.png" alt="Image(4)" title="Image(4)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 点击完成，打开错误日志。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image5.png" alt="Image(5)" title="Image(5)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 查看安装日志，</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image6.png" alt="Image(6)" title="Image(6)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com">Reinhard</a>想到，可能是SSRS没有启动，检查后，发现果真如此。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image7.png" alt="Image(7)" title="Image(7)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 点击 启动 按钮，待SSRS启动成功后，重新运行AX组件安装程序，执行上面的步骤，在必备项验证时，<a href="http://reinhardhsu.com">Reinhard</a>又幸运的收到下面的错误：</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image8.png" alt="Image(8)" title="Image(8)"></font>
+
+<blockquote>
+<p></p><p><em><font face="微软雅黑">1.确认安装了支持的 Microsoft SQL Server Reporting Services 版本。有关支持哪些版本的详细信息，请参阅 <a href="http://go.microsoft.com/fwlink/?LinkId=165377" target="_blank" rel="noopener">http://go.microsoft.com/fwlink/?LinkId=165377</a> 上的 System Requirements (系统要求)。</font></em></p>
+<p></p><p><em><font face="微软雅黑">2.打开浏览器，然后确认可访问 Reporting Services Web 服务 URL <a href="http://MSDynAX/ReportServer" target="_blank" rel="noopener">http://MSDynAX/ReportServer</a></font></em></p>
+</blockquote>
+<font face="微软雅黑">&nbsp;&nbsp;&nbsp; Reinhard打开SSRS的Web服务URL <a href="http://MSDynAX/ReportServer，发现根本打不开。" target="_blank" rel="noopener">http://MSDynAX/ReportServer，发现根本打不开。</a></font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image9.png" alt="Image(9)" title="Image(9)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 并且，<a href="http://reinhardhsu.com">Reinhard</a>发现SSRS的系统服务根本就没有启动。<a href="http://reinhardhsu.com">Reinhard</a>试着重新启动SSRS系统服务，启动不起来。<a href="http://reinhardhsu.com">Reinhard</a>发现这个服务的登陆账户为BC账户，会不会是这个原因呢。Reinhard将该系统服务的登陆账户改为网络服务，然后可以成功启动了。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 可是这时SSRS的Web服务URL <a href="http://MSDynAX/ReportServer" target="_blank" rel="noopener">http://MSDynAX/ReportServer</a> 依然报503错误，<a href="http://reinhardhsu.com">Reinhard</a>猜测可能是SSRS服务没有部署好。先将BC加入到本地管理员账户，然后重新部署了SSRS，打开<a href="http://MSDynAX/Reports，终于把Web服务配置好了。" target="_blank" rel="noopener">http://MSDynAX/Reports，终于把Web服务配置好了。</a></font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image10.png" alt="Image(10)" title="Image(10)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 重新进行必备项检查，这次终于通过了，点击下一步，开始进行安装。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image11.png" alt="Image(11)" title="Image(11)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 这次还比较顺利，等待命令行窗体自己消失即可。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 接着，我们进入网页中，确认 DynamicsAX文件夹已经存在。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image12.png" alt="Image(12)" title="Image(12)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 回到AX中，验证报表服务器配置。</font><br></p><p><font face="微软雅黑"><img src="http://reinhardhsu.com/wp-content/uploads/2015/09/Image13.png" alt="Image(13)" title="Image(13)"></font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 这样，Dynamics AX R2的Reporting Services 扩展就安装部署好了。</font><br></p><p><font face="微软雅黑">&nbsp;&nbsp;&nbsp; 绕了这么多弯路，下面总结吧：</font>
+
+<ol>
+<li><font face="微软雅黑">需要将BC账户加入到报表服务器本机管理员组</font><br></li><li><font face="微软雅黑">需要授予BC账户在AX数据库的权限</font><br></li><li><font face="微软雅黑">需要授予BC账户在报表数据库的权限</font><br></li><li><font face="微软雅黑">需要SSRS服务以网络服务的账户运行</font><br></li><li><font face="微软雅黑">需要将报表服务器的客户端和BC指向AOS服务器</font><br></li><li><font face="微软雅黑">安装完SSRS需要配置一下</font><br></li><li><font face="微软雅黑">需要在AX系统中设置报表服务器</font><br><p><font face="微软雅黑"></font>
+</p></li>
+</ol>
+</p>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../dynamics_ax_2012_r2_ssrs_report_preview_no_data_in_vs2010/" class="prev">&larr; Prev post Dynamics AX 2012 R2 SSRS报表在VS2010中预览没有数据</a>
+  
+
+  
+
+  
+    <a href="../../../08/28/dynamics_ax_2012_r2_business_series_purchase_process/" class="next">Next post Dynamics AX 2012 R2 业务系列-采购业务流程 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

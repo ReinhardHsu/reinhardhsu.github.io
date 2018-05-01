@@ -1,0 +1,479 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="Python程序是怎么运行的
+用户运行程序
+从磁盘上读取程序，到内存中
+操作系统设置两个内存区域，一个叫运行时栈，一个叫堆。程序会用到这两个区域。
+操作系统告诉中央处理单元，执行计算机的第一个条指令，以开始执行程序。
+程序从键盘，鼠标，硬盘，或其它输入源读取数据。
+程序的每一个指令，检索RAM中的一小块数据，操作它，并将新数据写回RAM。
+一旦数据处理完，就会在屏幕或其它输出设备中，输出结果...">
+  
+  <title>Data Structures and Algorithms Python － 2、递归 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../data_structures_and_algorithms_python_3_sequences/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms Python － 3、序列
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../05/31/dynamics_ax_7_new_feature_explore/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Microsoft Dynamics AX 7 新特性探索 – Demo 部署(Part 1)
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Structures and Algorithms Python － 2、递归</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-15</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/python/">Python</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="Python程序是怎么运行的"><a href="#Python程序是怎么运行的" class="headerlink" title="Python程序是怎么运行的"></a>Python程序是怎么运行的</h2><ol>
+<li>用户运行程序</li>
+<li>从磁盘上读取程序，到内存中</li>
+<li>操作系统设置两个内存区域，一个叫运行时栈，一个叫堆。程序会用到这两个区域。</li>
+<li>操作系统告诉中央处理单元，执行计算机的第一个条指令，以开始执行程序。</li>
+<li>程序从键盘，鼠标，硬盘，或其它输入源读取数据。</li>
+<li>程序的每一个指令，检索RAM中的一小块数据，操作它，并将新数据写回RAM。</li>
+<li>一旦数据处理完，就会在屏幕或其它输出设备中，输出结果。</li>
+</ol>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li>Python是如何辨别程序中的标识符</li>
+<li>当一个函数被调用后，在运行时栈中发生了什么</li>
+<li>当一个函数的调用返回后，在运行时栈中发生了什么</li>
+<li>递归函数最重要的两部分是什么，并且哪一部分先执行</li>
+<li>当一个return被执行后，发生了什么</li>
+<li>如何使用调试器，检查运行时栈的内容</li>
+</ol>
+<h2 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h2><p>Python解释器是如何执行一个Python程序的？</p>
+<p>  x=6</p>
+<p>上面那句话的意思是，x是一个引用，它指向一个对象，这个对象包含了6 。我们要辨别引用和对象之间的不同。</p>
+<h3 id="本地范围"><a href="#本地范围" class="headerlink" title="本地范围"></a>本地范围</h3><p>本地范围，是计算机当前正在执行的函数的范围。当执行一行代码时，包裹这行代码的范围，就叫做本地范围。在程序声明里引用了一个标识符，Python会先在本地范围中寻找它。</p>
+<ol>
+<li>一个声明，像id=???这样，出现在当前范围。这种情况，id是对当前范围中一个对象的引用。</li>
+<li>id作为一个参数名，出现在当前范围的函数中。这种情况下，id是对被作为参数传递给当前函数的那个对象的额引用。</li>
+<li>通过使用def或class，在当前方位中定义函数或类，id作为函数名或类名。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">PI=math.pi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">area</span><span class="params">(redius)</span>:</span></span><br><span class="line">  theArea=PI*radius**<span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span> theArea</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">  historyOfPrompts=[]</span><br><span class="line">  historyOfOutput=[]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getInput</span><span class="params">(prompt)</span>:</span></span><br><span class="line">    x=input(prompt)</span><br><span class="line">    historyOfPrompts.append(prompt)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">showOutput</span><span class="params">(val)</span>:</span></span><br><span class="line">    historyOfOutput.append(val)</span><br><span class="line">    print(val)</span><br><span class="line"></span><br><span class="line">  rString=getInput(<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  r=float(rString)</span><br><span class="line"></span><br><span class="line">  val=area(r)</span><br><span class="line"></span><br><span class="line">  showOutput(str(val))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> name==<span class="string">"__main__"</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+<p>程序运行到historyOfOutput.append(val)时，本地范围内定义引用val。如果Python在本地范围内找到了id，它就会查找相应的值，并获取它。这就是在这一行遇到val时，发生的事情。<br>val指向的对象，会被找到，并拿过来。</p>
+<h3 id="封闭范围"><a href="#封闭范围" class="headerlink" title="封闭范围"></a>封闭范围</h3><p>如果Python在本地范围内没有找到id引用，它会到封闭区间里，看id在不在。程序运行到historyOfOutput.append(val)时，它的封闭区间是整个main函数内的区域。<br>这个封闭范围内定义的标识符有historyOfPrompts，historyOfOutput，rString，r，val，getInput，showInput。注意，函数名也是标识符。<br>标识符必须通过id=??的形式定义，它必须是封闭函数的一个参数，或者是在这个封闭函数中定义的类或函数。</p>
+<h3 id="全局范围"><a href="#全局范围" class="headerlink" title="全局范围"></a>全局范围</h3><p>使用太多的全局变量是个坏实践。</p>
+<h3 id="内建范围"><a href="#内建范围" class="headerlink" title="内建范围"></a>内建范围</h3><p>Python先去本地范围找，再去封闭范围找，再去全局范围找，最后会去内建范围找。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x=int(<span class="string">"6"</span>)</span><br></pre></td></tr></table></figure>
+<p>Python会在内建范围中，找到int类或结构。<br>也就是说，你自己做了一个int类的话，那么就没办法用内建范围中的int了，因为Python会先在本地或封闭范围内找到int。</p>
+<h2 id="运行时栈和堆"><a href="#运行时栈和堆" class="headerlink" title="运行时栈和堆"></a>运行时栈和堆</h2><p>一个函数的本地范围中定义的参数和变量，必须存储到RAM中的某个地方。Python将RAM分成两部分：运行时栈和堆。<br>运行时栈就像食堂的一摞餐盘，很多食堂都有放餐盘的设备，餐盘拿走时，下面会升高，餐盘放上去时，下面会降低，可以一直保持一个完美的高度。<br>运行时栈，是一个活动记录的栈。当一个函数被调用后，Python解释器会向运行时栈push一个活动记录。当函数return时，Python解释器从运行时栈里pop那个相应的活动记录。<br>Python在一个活动记录里，存储着本地范围中定义的标识符。当一个函数被调用后，新的范围会变成本地范围。同时，一个新的活动记录会被push到运行时栈中。这个新的活动记录，持有这个新的本地范围中定义的所有变量。当一个函数return，它相应的活动记录会从运行时栈中pop掉。<br>堆，是所有对象存储的地方。一个对象被创建后，这个对象住在堆中。运行时栈里永远也不会包含对象。对对象的引用，是存储在运行时栈中，并且这些引用指向堆里的对象。<br>当程序运行到historyOfOutput.append(val)时，运行时栈中会有三个活动记录。<br>第一个被push到栈中的是module。当module第一次执行时，Python解释器会将module从头到尾看一遍，将module范围内定义的变量，放到module的活动记录里。在这个例子中，就是PI到值3.14159的引用。<br>接着，module底部的if声明，会调用main函数。这个调用，会导致Python解释器为main函数push一条活动记录。main函数中定义的变量，会放到main函数的活动记录里。包括historyOfPrompts，historyOfOutput，rString，r，val。<br>当main函数开始执行后，调用到getInput函数。这个调用，会导致Python解释器为getInput函数push一个活动记录。这个活动记录包含prompt和x变量。当解释器从这个函数的调用中返回后，运行时栈中相应的活动记录也会pop掉。<br>最后，程序调用showOutput函数，showOutput函数的活动记录会push到运行时栈中。本地范围的引用，也就是val变量，会存储到这个活动记录内。</p>
+<h2 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h2><p>递归函数，就是自己调用自己的函数。<br>我们知道，每次调用一个函数时，会给运行时栈push一个该函数的活动记录。<br>如果一个递归函数永不停止，那么运行时栈会被填满，这是会得到stack overflow error，栈溢出错误。</p>
+<p>记录递归函数的4个规则：</p>
+<ol>
+<li>决定函数的名字，和函数的参数，和函数的返回值。</li>
+<li>首先写递归函数的基本条件。基本条件是一个if声明，通过返回一个值，来处理非常见到那的情况。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recSumFirstN</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> recSumFirstN(n<span class="number">-1</span>)+n</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    x=input(input(<span class="string">"a non-negative integer: "</span>))</span><br><span class="line">    s=recSumFirstN(x)</span><br><span class="line"></span><br><span class="line">    print(str(s))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>运行程序。</li>
+<li>module的Activation Record会被push到运行时栈中。</li>
+<li>main函数的Activation Record会被push到运行时栈中。</li>
+<li>当执行到s=recSumFirstN时，是recSumFirstN函数第一次被调用，为函数的这次调用，会push一个新的活动记录。</li>
+<li>Python解释器带着n指向数字4，jumps到def recSumFirstN处。</li>
+<li>recSumFirstN(4)开始执行，n的值不是0，所以Python执行return recSumFirstN。</li>
+<li>这导致了Python解释器push另一个n=3的activation record到运行时栈中，并且解释器再次jumps到def recSumFirstN处。</li>
+<li>这次，n的值是3，不是0，再执行return recSumFirstN，另一个n=2的activation record被push到运行时栈中。</li>
+</ol>
+<p>重要的一点是，每次递归函数被调用，变量n都会被复制一份，存储到activation record中。Activation record持有本地变量，和函数的本地范围内的所有变量的参数。<br>每次函数被调用，一个新的activation record就被push到运行时栈，activation record里面存储着对本地变量的一个新的拷贝。</p>
+<ol>
+<li>当程序的执行，遇到n等于0时，Python解释器在代码的第二行找到n等于0。这时，sumFirstN函数才返回它的第一个值。</li>
+<li>它返回0给之前的函数调用，也就是n是1的那个。返回发生在代码的第5行。</li>
+<li>调用n是0的那个函数产生的activation record，就被pop出运行时栈。</li>
+<li>当函数返回后，activation record的空间就被回收。</li>
+<li>堆上包含0的对象，也通过垃圾收集器回收了，因为这时已经没有任何引用指向它了。</li>
+<li>这里会到第2步，代码的第5行。但是这句声明也包含一个返回声明。</li>
+<li>所以，函数再次返回。这次的返回的值是1。</li>
+<li>函数再次返回，这次的返回的值是3 。</li>
+<li>又回到第5行，这次的返回的值是6 。</li>
+<li>最后一次，这次的返回的值是10 。</li>
+<li><p>这时，recSumFirstN函数返回到main函数的第10行，s就指向10值。</p>
+</li>
+<li><p>接着程序将10打印到屏幕，从main函数return。</p>
+</li>
+<li>从module return。</li>
+</ol>
+<p>上面的例子，演示了每次递归调用，都会拷贝一份它的本地变量和参数，到相应的activation record。当一个函数调用返回时，相应的activation record会从运行时栈中pop。递归算法比迭代算法慢的原因可能就在这里。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python程序是怎么运行的"><span class="toc-text">Python程序是怎么运行的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范围"><span class="toc-text">范围</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地范围"><span class="toc-text">本地范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封闭范围"><span class="toc-text">封闭范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局范围"><span class="toc-text">全局范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内建范围"><span class="toc-text">内建范围</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时栈和堆"><span class="toc-text">运行时栈和堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归函数"><span class="toc-text">递归函数</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../data_structures_and_algorithms_python_3_sequences/" class="prev">&larr; Prev post Data Structures and Algorithms Python － 3、序列</a>
+  
+
+  
+
+  
+    <a href="../../../05/31/dynamics_ax_7_new_feature_explore/" class="next">Next post Microsoft Dynamics AX 7 新特性探索 – Demo 部署(Part 1) &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

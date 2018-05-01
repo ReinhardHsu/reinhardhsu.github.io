@@ -1,0 +1,412 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="最近Reinhard看了部纪录片，叫 安然：房间里最聪明的人 ，感到无比震惊。恰巧Reinhard找到一份安然公司的数据，Reinhard就从这些数据中，利用机器学习的相关知识，看看能不能找到欺诈的证据。
+安然事件有些同学可能还不了解安然事件，这里Reinhard先简要地讲讲。
+安然曾经是美国第七大企业，资产近七百亿美元，事发前股价曾一度达到到九十多美元。安然多年来通过设立空壳公司转移负债，...">
+  
+  <title>Data Analysis Weekend Project 安然事件 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../20/career_2016_personal_summary_community_edition/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Career 2016年个人总结社区版
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../../2016/12/28/dynamics_ax_iot/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 的工业物联网解决方案
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis Weekend Project 安然事件</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-01-04</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/weekend-project/">Weekend Project</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>最近<a href="http://cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>看了部纪录片，叫 <a href="https://movie.douban.com/subject/2268042/" target="_blank" rel="noopener">安然：房间里最聪明的人</a> ，感到无比震惊。恰巧<a href="http://cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>找到一份安然公司的数据，<a href="http://cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>就从这些数据中，利用机器学习的相关知识，看看能不能找到欺诈的证据。</p>
+<h2 id="安然事件"><a href="#安然事件" class="headerlink" title="安然事件"></a>安然事件</h2><p>有些同学可能还不了解<a href="https://en.wikipedia.org/wiki/Enron" target="_blank" rel="noopener">安然事件</a>，这里<a href="http://cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>先简要地讲讲。</p>
+<p>安然曾经是美国第七大企业，资产近七百亿美元，事发前股价曾一度达到到九十多美元。安然多年来通过设立空壳公司转移负债，海外假账，来操作自己的利润。通过人为断电，造成加州缺电的假象，抬高电价，谋取暴利。</p>
+<p>事发后，它本来还有机会被竞争对手收购。但是随着重磅消息一个一个地被披露出来，股价持续下跌，被投资服务公司评为“垃圾债”，贷款到期，已经没人愿意再与其扯上关系。最后被股票交易所停止交易，至此安然已完全崩塌。</p>
+<p>从事发到破产只用了几个星期，甚至连美国政府也与其撇清关系，不愿伸出援手。同时，与其紧密联系的世界前五大会计事务所的安达信，也被吊销执照。</p>
+<p>说到安然就不得不提一个人，那就是它的CEO，人称点子王的Jeffrey Skilling。他发明了“假设未来价值会计原则”。也就是允许安然将未来的获利，在签约当日结算，而不论当日的实际收入有多少。</p>
+<p>Jeffrey Skilling最爱的书是《自私的基因》，这本书主张人类进化是由贪婪和竞争推动的。他对于世界运作的看法，深刻地影响了安然。他在安然彻底地实行“物竞天择”，通过“排名砍人”：每年通过绩效审查将员工分为五等，第五等员工会被“淘汰”掉，而第一等员工会获得数百万的奖励。</p>
+<p>可以讲他们是一群最聪明的人，但是被贪婪蒙蔽了双眼，出状况只是早晚的事，并且一出事就是崩盘。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安然事件"><span class="toc-text">安然事件</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../20/career_2016_personal_summary_community_edition/" class="prev">&larr; Prev post Career 2016年个人总结社区版</a>
+  
+
+  
+
+  
+    <a href="../../../../2016/12/28/dynamics_ax_iot/" class="next">Next post Dynamics AX 2012 的工业物联网解决方案 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

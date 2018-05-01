@@ -1,0 +1,441 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="数据结构与算法－2、数组和ArrayList1、数组C#中数组是一个类对象，其源自System.Array。
+1.1、数组元素的设置和存取访问常见的有：
+12names[2]="Reinhar Hsu";myName=names[2];
+不常见的还有Set和Get方法：
+12names.SetValue("Reinhard Hsu",2);myname=names.GetValue(2);
+...">
+  
+  <title>Data Structures and Algorithms DotNet － 2、数组和ArrayList - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../data_structures_and_algorithms_python_1_overview/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms Python － 1、概览
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../data_structures_and_algorithms_dotnet_5_stacks_and_queues/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms DotNet － 5、栈和队列
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Structures and Algorithms DotNet － 2、数组和ArrayList</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-15</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/dotnet/">DotNet</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="数据结构与算法－2、数组和ArrayList"><a href="#数据结构与算法－2、数组和ArrayList" class="headerlink" title="数据结构与算法－2、数组和ArrayList"></a>数据结构与算法－2、数组和ArrayList</h1><h2 id="1、数组"><a href="#1、数组" class="headerlink" title="1、数组"></a>1、数组</h2><p>C#中数组是一个类对象，其源自System.Array。</p>
+<h3 id="1-1、数组元素的设置和存取访问"><a href="#1-1、数组元素的设置和存取访问" class="headerlink" title="1.1、数组元素的设置和存取访问"></a>1.1、数组元素的设置和存取访问</h3><p>常见的有：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names[<span class="number">2</span>]=<span class="string">"Reinhar Hsu"</span>;</span><br><span class="line">myName=names[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+<p>不常见的还有Set和Get方法：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names.SetValue(<span class="string">"Reinhard Hsu"</span>,<span class="number">2</span>);</span><br><span class="line">myname=names.GetValue(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="1-2、检索数数组元数据的方法和属性"><a href="#1-2、检索数数组元数据的方法和属性" class="headerlink" title="1.2、检索数数组元数据的方法和属性"></a>1.2、检索数数组元数据的方法和属性</h3><ul>
+<li>Length：返回<strong>所有维数</strong>内元素的总数量</li>
+<li>GetLength：返回<strong>指定维数</strong>内元素的数量</li>
+<li>GetUpperBound：返回<strong>指定维数</strong>内最大的索引号</li>
+<li>Rank：返回数组的维数</li>
+<li>GetType：返回数组实例的类型，如 System.Int32[]</li>
+</ul>
+<h3 id="1-3、多维数组"><a href="#1-3、多维数组" class="headerlink" title="1.3、多维数组"></a>1.3、多维数组</h3><p>C#中数组最多可以达到32维。</p>
+<pre><code>int [,] grades=new int[4,5];
+</code></pre><p>可以对多维数组使用Get方法：</p>
+<pre><code>grade=grades.GetValue(0,2);
+</code></pre><p>但是不能使用Set方法，因为Set方法只接收两个参数，一个是值，一个是索引。<br>对于上面那个4行5列的二维数组，可以这样访问：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*最后一门成绩的索引  */</span></span><br><span class="line"><span class="keyword">int</span> last_grade=grades.GetUpperBound(<span class="number">1</span>);  </span><br><span class="line"></span><br><span class="line"><span class="comment">/*最后一个学生的索引  */</span></span><br><span class="line"><span class="keyword">int</span> last_student=grades.GetUppderBound(<span class="number">0</span>);  </span><br><span class="line"></span><br><span class="line"><span class="comment">/*最有一个学生的最后一门成绩  */</span></span><br><span class="line">grades[last_student,last_grade];</span><br></pre></td></tr></table></figure>
+<h3 id="1-4、参数数组"><a href="#1-4、参数数组" class="headerlink" title="1.4、参数数组"></a>1.4、参数数组</h3><p>这个我们平时很常见，怎么实现呢：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Sum</span>(<span class="params"><span class="keyword">params</span> <span class="keyword">int</span>[] nums</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=nums.GetUpperBound(<span class="number">0</span>);i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum+=nums[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">total=sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<p>使用参数数组定义方法时，参数数组的参数，要放到方法的参数列表的最后，否则编译器不能正常处理。</p>
+<h3 id="1-5、锯齿数组"><a href="#1-5、锯齿数组" class="headerlink" title="1.5、锯齿数组"></a>1.5、锯齿数组</h3><p>之前创建的多维数组，每一行都有相同的元素数。但是有些情况，如12个月中，每个月的天数从28天到31天不等。这时候可以使用锯齿数组，数据量庞大的时候，可以有效减少空间。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] Jan=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">31</span>];</span><br><span class="line"><span class="keyword">int</span>[] Feb=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">29</span>];</span><br><span class="line"><span class="keyword">int</span>[][] sales=<span class="keyword">new</span> <span class="keyword">int</span>[][]&#123;Jan,Feb&#125;;</span><br><span class="line">sales[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">41</span>;</span><br></pre></td></tr></table></figure>
+<p>这里sales是一个有着2个元素的整数数组，每个元素又是一个整数数组。</p>
+<h2 id="2、ArrayList类"><a href="#2、ArrayList类" class="headerlink" title="2、ArrayList类"></a>2、ArrayList类</h2><p>当数组超出存储空间时，ArrayList可以自动调整自身的大小。  </p>
+<h3 id="2-1、Capacity的初始值真的是16吗？"><a href="#2-1、Capacity的初始值真的是16吗？" class="headerlink" title="2.1、Capacity的初始值真的是16吗？"></a>2.1、Capacity的初始值真的是16吗？</h3><p>ArrayList的Capacity属性，存储着数组容量。很多地方说Capacity初始值是16，但是<br>Reinhard在测试的时候，发现并不是16。详情可以看<a href="https://github.com/dotnet/corefx/blob/e88bf5f29be03434bb7b6385c93534deef4a5731/src/System.Collections.NonGeneric/src/System/Collections/ArrayList.cs" target="_blank" rel="noopener">DotNet 源代码</a>。</p>
+<h3 id="2-2、ArrayList的内部实现"><a href="#2-2、ArrayList的内部实现" class="headerlink" title="2.2、ArrayList的内部实现"></a>2.2、ArrayList的内部实现</h3><p>这里简单讲讲ArrayList内部实现。<br>ArrayList里面维护着一个默认起步容量，是4。<br>ArrayList里面维护着一个Object数组，使用无参数的构造函数初始化时，或者构造函数的参数Capacity为0初始化时，Object数组就会被初始化为Array.Empty<object>()。<br>ArrayList里面还维护着一个记录元素个数的内部变量size，当插入或新增元素时，size就增加。当删除元素时，size就减小。<br>Capacity属性的Get访问器，返回的是Object数组的Length。<br>Count属性的Get访问器，返回的是size。<br>使用无参数的构造函数初始化ArrayList后，因为没有添加过元素，所以size是0，Count就返回0。因为内部Ojbect数组是用Array.Empty<object>()初始化的，Length是0，所以Capacity也是0。<br>这时候给ArrayList添加1个元素，那么ArrayList的容量最小必须是size+1，才能添加得进去。<br>ArrayList会看Object数组的长度是不是比size+1小，如果小的话，就得加容量。<br>加多少容量呢？先看Object数组的长度现在是多少了。如果是0的话，就给一个默认容量4。如果不是0的话，就现有容量乘以2 。<br>这时候Capacity的Set访问器里，就用新的容量初始化一个Object数组，用Array.Copy()，将老的Object数组里的元素，拷贝给新的Ojbect数组，最后将老的Object数组引用指向新的Ojbect数组。<br>所以，用无参数构造函数初始化ArrayList后，一个一个地添加元素的话，容量的变化会是0 ，4，8，16，32 ….<br>还记得上次我们的性能测试，ArrayList的耗时是Array的16倍不，应该就浪费在容量不够，拷贝来拷贝去了。  </object></object></p>
+<h3 id="2-3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？"><a href="#2-3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？" class="headerlink" title="2.3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？"></a>2.3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？</h3><p>那我们再来测试下容量设为1亿，看性能是否会提升。</p>
+<pre><code>10s~13s之间
+</code></pre><p>虽然提升了20%多，跟Array依然差距明显，看来Array.Copy()的效率还是蛮高的。  </p>
+<h3 id="2-4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？"><a href="#2-4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？" class="headerlink" title="2.4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？"></a>2.4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？</h3><p>那问题出在哪呢？并且List也是自动调整自身大小的，为什么就能比ArrayList快6倍？<br>Reinhard看了List的自动调整自身大小的实现，跟ArrayList差不多。但是，List与ArrayList不同的是，List是泛型的，避免了装箱／拆箱的操作。拆箱和装箱就这么影响性能么？   </p>
+<h3 id="2-5、装箱-拆箱操作对性能的影响"><a href="#2-5、装箱-拆箱操作对性能的影响" class="headerlink" title="2.5、装箱/拆箱操作对性能的影响"></a>2.5、装箱/拆箱操作对性能的影响</h3><p>那我们再来测试下，对1亿个整数进行装箱，看看耗时多少。</p>
+<pre><code>2.5s
+</code></pre><p>而给整数赋值的耗时，和给数组赋值耗时是一样的。<br><strong>装箱</strong>，是把一个<strong>值类型</strong>，放在一个未确定类型的<strong>引用对象</strong>中。这个新的<strong>引用类型</strong>（就是箱子），将存储于<strong>堆</strong>上，并且，值类型的一个副本，会存放在引用类型的内部。箱子里包含了值类型的副本，并且提供了值类型公有接口的功能。<br><strong>拆箱</strong>，是从箱中取出值类型的副本。<strong>这个副本，是值类型的另一个副本</strong>。<br>也就是，<strong>关键之处在于，装箱时存放的是值类型的副本，获取箱中数据时，返回的是值类型的另一个副本</strong>。  </p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构与算法－2、数组和ArrayList"><span class="toc-text">数据结构与算法－2、数组和ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、数组"><span class="toc-text">1、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、数组元素的设置和存取访问"><span class="toc-text">1.1、数组元素的设置和存取访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、检索数数组元数据的方法和属性"><span class="toc-text">1.2、检索数数组元数据的方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、多维数组"><span class="toc-text">1.3、多维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、参数数组"><span class="toc-text">1.4、参数数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、锯齿数组"><span class="toc-text">1.5、锯齿数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、ArrayList类"><span class="toc-text">2、ArrayList类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、Capacity的初始值真的是16吗？"><span class="toc-text">2.1、Capacity的初始值真的是16吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、ArrayList的内部实现"><span class="toc-text">2.2、ArrayList的内部实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？"><span class="toc-text">2.3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？"><span class="toc-text">2.4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、装箱-拆箱操作对性能的影响"><span class="toc-text">2.5、装箱/拆箱操作对性能的影响</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../data_structures_and_algorithms_python_1_overview/" class="prev">&larr; Prev post Data Structures and Algorithms Python － 1、概览</a>
+  
+
+  
+
+  
+    <a href="../data_structures_and_algorithms_dotnet_5_stacks_and_queues/" class="next">Next post Data Structures and Algorithms DotNet － 5、栈和队列 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

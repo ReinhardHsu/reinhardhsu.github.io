@@ -1,0 +1,425 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="Extended data type (EDT) 属性分为以下几组:   对所有EDTs都通用的Common to all EDTs
+   只适用于特定基本类型的Available only for certain base data types
+
+
+Properties Common to All EDTsPropertyDescriptionNew in this version ofM...">
+  
+  <title>Dynamics AX 2012 R2 Extended Data Type Properties - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../dynamics_ax_2012_r2_data_set_data_source_properties/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Data Set Data Source Properties
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../dynamics_ax_2012_r2_base_enum_properties/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Base Enum Properties
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 Extended Data Type Properties</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-05</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <div class="introduction"><br><br>Extended data type (EDT) 属性分为以下几组:<br><br><em>   <a href="http://msdn.microsoft.com/en-us/library/aa575242.aspx#BKMKcommon" target="_blank" rel="noopener">对所有EDTs都通用的Common to all EDTs</a>
+</em>   <a href="http://msdn.microsoft.com/en-us/library/aa575242.aspx#BKMKonlybase" target="_blank" rel="noopener">只适用于特定基本类型的Available only for certain base data types</a><br></div>
+
+<p><span id="more-47"></span></p>
+<div><br><div class="LW_CollapsibleArea_TitleDiv"><br><div><a class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all."><span class="LW_CollapsibleArea_Title">Properties Common to All EDTs</span></a><p></p><br><div class="LW_CollapsibleArea_HrDiv"></div><br></div><br></div><br><div class="sectionblock"><br><div class="caption"></div><br><div class="caption"></div><br><div class="tableSection"><br><table><br><tbody><br><tr><br><th colspan="1">Property</th><br><th colspan="1">Description</th><br><th colspan="1">New in this version of<br><br>Microsoft Dynamics AX</th><br></tr><br><tr><br><td colspan="1"><span class="label">Alignment(对齐)</span></td><br><td colspan="1">Changes the alignment of the text (Left, Right, Center).</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">AnalysisDefaultSort(分析默认排序)</span></td><br><td colspan="1">指定在使用该EDT的报表模型中,默认根据该字段排序.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">AnalysisDefaultTotal</span></td><br><td colspan="1">为度量决定聚合函数. 当 <span class="label">AnalysisUsage </span>设为 <span class="label">Measure(测量) </span>时,可以使用该属性. 你可以指定以下值之一.<p></p><br><br><em>   <span class="label">Sum </span>&#8211; Returns the sum of all the values in a set.
+</em>   <span class="label">Count </span>&#8211; Returns the number of non-null items in a set.<br><em>   <span class="label">CountDistinct </span>&#8211; Returns the number of distinct non-null items in a set.
+</em>   <span class="label">Min </span>&#8211; Returns the minimum value in a set.<br><em>   <span class="label">Max </span>&#8211; Returns the maximum value in a set.
+</em>   <span class="label">None </span>&#8211; No aggregate function is applied.<br><em>   <span class="label">Auto </span>&#8211; 可应用于派生的EDTs. 将使用父EDT的 <span class="label">AnalysisUsage </span>属性的值.<br><br>聚合函数可以在字段级别被重写.也就是说, 你可以使用 <span class="label">AnalysisDefaultTotal </span>属性改变要聚合的字段.</em></td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">AnalysisGrouping</span></td><br><td colspan="1">Specifies whether a field that has this EDT is grouped by default when the field is added to a report using the Report Builder for Microsoft SQL Server Reporting Services.The property is automatically set to <span class="label">Discouraged </span>for currency amounts. For other fields that are unique, you should set the property to<span class="label">Discouraged </span>. For more information about report models, see &#8220;Generate and publish report models&#8221; in the <span class="label">Help </span>menu for <span class="label">System and Application Setup </span>.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">AnalysisUsage</span></td><br><td colspan="1">Identifies the role of the EDT in a cube. This setting is automatically propagated to all table fields that reference the EDT. However, the setting can be overridden on the table field. Specify one of the following values.
+
+   <span class="label">Attribute </span>&#8211; A field that references the EDT is a dimension attribute.<br><em>   <span class="label">Measure </span>&#8211; A field that references the EDT is a measure.
+</em>   <span class="label">Both </span>&#8211; A field that references the EDT is both a dimension attribute and a measure.<br><em>   <span class="label">None </span>&#8211; A field that references the EDT is not a dimension attribute and not a measure.
+</em>   <span class="label">Auto </span>&#8211; Applies to derived EDTs. The value of the <span class="label">AnalysisUsage </span>property for the parent EDT is to be used.<br><div class="alert"><br><table><br><tbody><br><tr><br><th align="left"><strong>Note</strong></th><br></tr><br><tr><br><td>EDTs that are based on enumerations cannot be measures.</td><br></tr><br></tbody><br></table><br></div><br></td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ArrayLength(数组长度</span></td><br><td colspan="1">只读属性.默认 <span class="code">ArrayLength </span>是 1. 要添加数组元素到EDT,右键单击 <span class="code">Array Element </span>节点,选择 <span class="code">New Array Element </span>. <span class="code">ArrayLength </span>属性的值会据此增加.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ButtonImage</span></td><br><td colspan="1">当EDT用作窗体上的查找按钮时,指定它要显示的图像.The possible values are as follows:<p></p><br><br><em>   Arrow (default)
+</em>   Mail (possible use: the e-mail type)<br><em>   URL (possible use: the URL type)
+</em>   ThreeDots (&#8230;)<br><em>   OpenFile (possible uses: the <span class="code">FilenameOpen </span>and <span class="code">FilenameSave </span>types)
+</em>   Calendar (possible use: date types)<br></td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">CollectionLabel</span></td><br><td colspan="1">Specifies the label that is used to display the plural name of a field that has this EDT.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ConfigurationKey</span></td><br><td colspan="1">Specifies the configuration key for the EDT.</td><br><td></td><br></tr><br><tr><br><td><span class="label">CountryRegionCodes</span></td><br><td>Specifies the country region codes where the menu is applicable or valid. The client uses this property to enable or disable country or region specific features. This is implemented as a comma-separated list of ISO country codes in a single string. The values must match data that is contained in the global address book.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">DisplayLength</span></td><br><td colspan="1">Specify a maximum number of characters to be displayed in a form or report.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">EnumType</span></td><br><td colspan="1">Specifies an enumerated data type. If an EDT is of type enum, it is mandatory to set the EnumType property.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">Extends</span></td><br><td colspan="1">Enables you to base the EDT on another EDT.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">FormHelp</span></td><br><td colspan="1">Specifies a form that will be used when you perform lookup from a field in a form.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">HelpText</span></td><br><td colspan="1">Creates a Help string for the EDT. The Help string is displayed when the type is used in a form.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ID</span></td><br><td colspan="1">Read-only property.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">Label</span></td><br><td colspan="1">Specifies a label for the type that is shown when the type is used in a form or report.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">Model</span></td><br><td colspan="1">Specifies which model the table is in.A model is a logical grouping of elements in a layer. An element can exist in exactly one model in a layer. Examples of elements are a table or class. The same element can exist in a customized version in a model in a higher layer.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">Name</span></td><br><td colspan="1">Specifies the name of the type.The name is used when it refers to the type from X++.</td><br><td></td><br></tr><br><tr><br><td><span class="label">PresenceClass</span></td><br><td>Identifies the X++ class that will be used with the <span class="label">PresenceMethod </span>to return a <span class="label">PresenceInfo </span>object instance.</td><br><td>AX 2012</td><br></tr><br><tr><br><td><span class="label">PresenceIndicatorAllowed</span></td><br><td>Specifies whether the control referencing the EDT will use presence. Default value is <span class="label">Yes </span>.</td><br><td>AX 2012</td><br></tr><br><tr><br><td><span class="label">PresenceMethod</span></td><br><td>Identifies the X++ static class method in <span class="label">PresenceClass </span>to be called with a controls data value; this returns a <span class="label">PresenceInfo </span>object instance that contains the data needed by the Presence indicator.</td><br><td>AX 2012</td><br></tr><br><tr><br><td><span class="label">ReferenceTable</span></td><br><td>Identifies the table that is referenced by this EDT, and which has the primary key.Indicates the primary key table which this EDT references.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">Style</span></td><br><td colspan="1">Changes the default display of the EDT. Options Are:<p></p><br><br><em>   Auto
+</em>   Combo box<br>*   Radio button<br></td><br><td>AX 2012</td><br></tr><br></tbody><br></table><br></div>
+
+<p>For rules and hints about how to set these properties, see <a href="http://msdn.microsoft.com/en-us/library/aa621435.aspx" target="_blank" rel="noopener">Best Practice for extended data types </a>.</p>
+<p></p></div><br></div><p></p>
+<a id="more"></a>
+<!--more-->
+<!--more-->
+<div><br><div class="LW_CollapsibleArea_TitleDiv"><br><div><a class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all."><span class="LW_CollapsibleArea_Title">Properties that are only Available for Certain Base Data Types</span></a><p></p><br><div class="LW_CollapsibleArea_HrDiv"><br><br><em> </em> <em><br><br></em></div><br></div><br></div><br><div class="sectionblock"><a id="sectionToggle1"></a>Leave these properties set to <span class="label">Auto </span>unless specified otherwise in the following table.<p></p><br><div class="caption"></div><br><div class="tableSection"><br><table><br><tbody><br><tr><br><th colspan="1">Property</th><br><th colspan="1">Exists for these types:</th><br><th colspan="1">Description</th><br></tr><br><tr><br><td colspan="1"><span class="label">Adjustment</span></td><br><td colspan="1">String</td><br><td colspan="1">For fixed length strings, this specifies whether the entered characters will be stored on the left or the right side of the padding spaces.Values are Left or Right. The default value is <span class="label">Left </span>.</td><br></tr><br><tr><br><td colspan="1"><span class="label">AllowNegative</span></td><br><td colspan="1">IntegerInt64Real</td><br><td colspan="1">Specifies whether the field can accept negative values.</td><br></tr><br><tr><br><td colspan="1"><span class="label">AutoInsSeparator</span></td><br><td colspan="1">Real</td><br><td colspan="1">Specifies whether the system inserts a decimal separator automatically. For example, if you enter 2222, the system automatically shows 2222.00.</td><br></tr><br><tr><br><td colspan="1"><span class="label">ChangeCase</span></td><br><td colspan="1">String</td><br><td colspan="1">Specifies how text entered in a string control should be formatted. This property is not supported for Enterprise Portal.For example, the text can be formatted as uppercase, or with title capitalization.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DateDay</span></td><br><td colspan="1">DateUtcDateTime</td><br><td colspan="1">Specifies how the day should be displayed.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DateFormat</span></td><br><td colspan="1">DateUtcDateTime</td><br><td colspan="1">Specifies the layout of a date.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DateMonth</span></td><br><td colspan="1">DateUtcDateTime</td><br><td colspan="1">Specifies how the month should be displayed.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DateSeparator</span></td><br><td colspan="1">DateUtcDateTime</td><br><td colspan="1">Specifies the separators between year, month, and day.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DateYear</span></td><br><td colspan="1">DateUtcDateTime</td><br><td colspan="1">Specifies how the year should be displayed.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DecimalSeparator</span></td><br><td colspan="1">Real</td><br><td colspan="1">Specifies the decimal separator. The default (Auto) setting is whatever is specified in the system setup.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DisplaceNegative</span></td><br><td colspan="1">IntegerInt64Real</td><br><td colspan="1">Specifies if negative numbers should be indented to the left.</td><br></tr><br><tr><br><td colspan="1"><span class="label">DisplayHeight</span></td><br><td colspan="1">String</td><br><td colspan="1">Specifies the number of lines to be displayed simultaneously when the EDT is displayed in a form.</td><br></tr><br><tr><br><td colspan="1"><span class="label">EnumType</span></td><br><td colspan="1">Enum</td><br><td colspan="1">Specifies the base <span class="code">enum </span>used to create the EDT.</td><br></tr><br><tr><br><td colspan="1"><span class="label">FormatMST</span></td><br><td colspan="1">Real</td><br><td colspan="1">Specifies how to format master currency values.The following list contains the possible values for this property:<p></p>
+
+   Auto<br><em>   Yes
+</em>   No<br><p>The default value is <span class="label">Auto </span>.</p></td><br></tr><br><tr><br><td colspan="1"><span class="label">NoOfDecimals</span></td><br><td colspan="1">Real</td><br><td colspan="1">Determines the number of decimals when a value displays on a form or a report.</td><br></tr><br><tr><br><td colspan="1"><span class="label">RotateSign</span></td><br><td colspan="1">IntegerInt64Real</td><br><td colspan="1">Choose this to negate the number, that is, change &#8211; to + and + to -.</td><br></tr><br><tr><br><td colspan="1"><span class="label">ShowZero</span></td><br><td colspan="1">IntegerInt64Real</td><br><td colspan="1">Specifies whether the value zero should be shown as an empty field.If the value zero in fields of this kind means null/nothing, ShowZero set to <span class="label">No </span>.</td><br></tr><br><tr><br><td colspan="1"><span class="label">SignDisplay</span></td><br><td colspan="1">IntegerInt64Real</td><br><td colspan="1">Specifies whether the sign of a number should be displayed, if it is a negative number, and also whether the sign should be before or after the number.Normally set to <span class="label">Auto </span>. Can be set to <span class="label">None </span>if they are used with <span class="label">DisplaceNegative </span>.</td><br></tr><br><tr><br><td colspan="1"><span class="label">StringSize</span></td><br><td colspan="1">String</td><br><td colspan="1">Specifies the maximum size of the string.</td><br></tr><br><tr><br><td colspan="1"><span class="label">ThousandSeparator</span></td><br><td colspan="1">Real</td><br><td colspan="1">Specifies the thousand separator.</td><br></tr><br><tr><br><td colspan="1"><span class="label">TimeFormat</span></td><br><td colspan="1">TimeUtcDateTime</td><br><td colspan="1">Specifies how times should be formatted.</td><br></tr><br><tr><br><td colspan="1"><span class="label">TimeHours</span></td><br><td colspan="1">TimeUtcDateTime</td><br><td colspan="1">Specifies whether hours should be included.</td><br></tr><br><tr><br><td colspan="1"><span class="label">TimeMinute</span></td><br><td colspan="1">TimeUtcDateTime</td><br><td colspan="1">Specifies whether minutes should be included.</td><br></tr><br><tr><br><td colspan="1"><span class="label">TimeSeconds</span></td><br><td colspan="1">TimeUtcDateTime</td><br><td colspan="1">Specifies whether seconds should be included.</td><br></tr><br><tr><br><td colspan="1"><span class="label">TimeSeparator</span></td><br><td colspan="1">TimeUtcDateTime</td><br><td colspan="1">Specifies the separator that must be used when displaying times.</td><br></tr><br><tr><br><td colspan="1"><span class="label">TimezonePreference</span></td><br><td colspan="1">UtcDateTime</td><br><td colspan="1">Specifies the time zone that the value should be converted to from Coordinated Universal Time (UTC).For more information, see <a href="http://msdn.microsoft.com/en-us/library/aa845161.aspx" target="_blank" rel="noopener">Form Control Properties </a>.</td><br></tr><br></tbody><br></table><br></div><br></div><br></div>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../dynamics_ax_2012_r2_data_set_data_source_properties/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Data Set Data Source Properties</a>
+  
+
+  
+
+  
+    <a href="../dynamics_ax_2012_r2_base_enum_properties/" class="next">Next post Dynamics AX 2012 R2 Base Enum Properties &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

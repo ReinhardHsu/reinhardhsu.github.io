@@ -1,0 +1,474 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="数据结构与算法－1、群集1、群集的定义群集（Collection），是一种结构化的数据类型，它存储数据并且提供数据向集群中添加、删除和更新操作，以及对集群的不同属性值进行设置与返回的操作。群集有一套定义好的属性（如Count）和操作（如Add,Insert,Remove,Clear,Contains,IndexOf）。
+2、集群的描述2.1、线性群集例如数组，数据里面的元素顺次相连，由位置来...">
+  
+  <title>Data Structures and Algorithms DotNet－ 1、群集 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../data_structures_and_algorithms_dotnet_3_basic_sorting_algorithms/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms DotNet － 3、基础排序算法
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../data_structures_and_algorithms_python_3_sequences/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms Python － 3、序列
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Structures and Algorithms DotNet－ 1、群集</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-15</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/dotnet/">DotNet</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="数据结构与算法－1、群集"><a href="#数据结构与算法－1、群集" class="headerlink" title="数据结构与算法－1、群集"></a>数据结构与算法－1、群集</h1><h2 id="1、群集的定义"><a href="#1、群集的定义" class="headerlink" title="1、群集的定义"></a>1、群集的定义</h2><p><strong>群集（Collection）</strong>，是一种结构化的数据类型，它存储数据并且提供数据向集群中添加、删除和更新操作，以及对集群的不同属性值进行设置与返回的操作。<br>群集有一套定义好的属性（如<strong>Count</strong>）和操作（如<strong>Add,Insert,Remove,Clear,Contains,IndexOf</strong>）。</p>
+<h2 id="2、集群的描述"><a href="#2、集群的描述" class="headerlink" title="2、集群的描述"></a>2、集群的描述</h2><h3 id="2-1、线性群集"><a href="#2-1、线性群集" class="headerlink" title="2.1、线性群集"></a>2.1、线性群集</h3><p>例如<strong>数组</strong>，数据里面的元素顺次相连，由位置来决定次序。</p>
+<h4 id="2-1-1、直接存取群集"><a href="#2-1-1、直接存取群集" class="headerlink" title="2.1.1、直接存取群集"></a>2.1.1、直接存取群集</h4><h5 id="2-1-1-1、数组"><a href="#2-1-1-1、数组" class="headerlink" title="2.1.1.1、数组"></a>2.1.1.1、数组</h5><p>最常见的就是<strong>数组</strong>，数组是具有相同数据类型的元素的群集，所有元素可以通过整数索引直接存取访问。<br>c#中的数组是通过类实现的。<br>c#中的数组是静态的，初始化后，元素数量是固定的。</p>
+<h6 id="数组的数据结构"><a href="#数组的数据结构" class="headerlink" title="数组的数据结构"></a>数组的数据结构</h6><p>|0|1|2|3|4|5|</p>
+<h6 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h6><p>把新元素放置在数组尾部的第一个空位上</p>
+<h6 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h6><p>需要顺序向后移动一些元素，为新元素腾出空位</p>
+<h6 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h6><p>如果是尾部元素，直接移除。如果是其它位置的元素，为了保持数组中元素的连续性，需要调整一些数组元素的位置。</p>
+<h6 id="ArrayList类"><a href="#ArrayList类" class="headerlink" title="ArrayList类"></a>ArrayList类</h6><p>用于简化线性群集操作所提供的<strong>数组类</strong>。</p>
+<h5 id="2-1-1-2、字符串"><a href="#2-1-1-2、字符串" class="headerlink" title="2.1.1.2、字符串"></a>2.1.1.2、字符串</h5><p>字符串是自负的群集，可以基于字符的索引对其进行存取。<br>c#中的字符串是通过类实现的。<br>c#中字符串是不可变的，一旦初始化，就不能改变它。修改字符串，实际上是创建了一个字符串的副本，可能导致性能下降。</p>
+<h6 id="StringBuilder类"><a href="#StringBuilder类" class="headerlink" title="StringBuilder类"></a>StringBuilder类</h6><p>处理可变字符串的类。</p>
+<h5 id="2-1-1-3、结构"><a href="#2-1-1-3、结构" class="headerlink" title="2.1.1.3、结构"></a>2.1.1.3、结构</h5><p>结构是一种复合数据类型，可以拥有不同数据类型的数据。例如一名雇员的纪录，包含姓名，薪水，工号等。<br>c#中的结构是增强后的版本，可以定义方法，来操作数据，看起来很像是一个类。与类不同的是，结构不能用于继承。<br>c#中很多元素都是用类来实现的，但是主要的几个基本元素，还是通过结构来实现的，如Int32 。</p>
+<h4 id="2-1-2、顺序存储群集"><a href="#2-1-2、顺序存储群集" class="headerlink" title="2.1.2、顺序存储群集"></a>2.1.2、顺序存储群集</h4><p><strong>顺序存储群集</strong>中的元素是按顺序存储的，这类群集也称为线性表。<br>它可以动态扩展和收缩。   </p>
+<h5 id="2-1-2-1、线性表的数据结构"><a href="#2-1-2-1、线性表的数据结构" class="headerlink" title="2.1.2.1、线性表的数据结构"></a>2.1.2.1、线性表的数据结构</h5><p>|0|    |1|    |2|    |3|    |4|    |5|</p>
+<h5 id="2-1-2-2、线性表的遍历方法"><a href="#2-1-2-2、线性表的遍历方法" class="headerlink" title="2.1.2.2、线性表的遍历方法"></a>2.1.2.2、线性表的遍历方法</h5><p>线性表的元素不支持直接存取访问，而是通过数据项的位置对其进行存取。要访问某个元素，就要遍历线性表，直到达到要找的元素的位置为止。通常线性表允许两种遍历表的方法：</p>
+<ol>
+<li>单向从前往后遍历</li>
+<li>双向遍历</li>
+</ol>
+<p><strong>购物清单</strong>就是一个简单的线性表，顺次记录着要购买的商品，一旦找到一个，就把它从清单上划掉。<br>线性表按顺序存储的元素，既可以是有序元素，也可以是无序元素。</p>
+<h5 id="2-1-2-3、限制元素访问的线性表"><a href="#2-1-2-3、限制元素访问的线性表" class="headerlink" title="2.1.2.3、限制元素访问的线性表"></a>2.1.2.3、限制元素访问的线性表</h5><p>有些特殊的线性表，会限制访问数据元素。</p>
+<h6 id="2-1-2-3-1、栈"><a href="#2-1-2-3-1、栈" class="headerlink" title="2.1.2.3.1、栈"></a>2.1.2.3.1、栈</h6><p>元素只能从顶端<strong>入栈</strong>（push），也只能从顶端<strong>出栈</strong>（pop），是后进先出的。常用于算术表达式的计算，和平衡符号。</p>
+<h6 id="2-1-2-3-2、队列"><a href="#2-1-2-3-2、队列" class="headerlink" title="2.1.2.3.2、队列"></a>2.1.2.3.2、队列</h6><p>元素只能在表尾<strong>入队</strong>，在表头<strong>出队</strong>，是先进先出的。<br>有一种特殊的队列叫做<strong>优先队列</strong>，队列中的元素拥有不同的优先级，允许优先级最高的元素最先出队。例如医院急诊室，会先救护心脏病突发患者，再处理手臂骨折患者。</p>
+<h5 id="2-1-2-4、索引群集"><a href="#2-1-2-4、索引群集" class="headerlink" title="2.1.2.4、索引群集"></a>2.1.2.4、索引群集</h5><h6 id="2-1-2-4-1、散列表"><a href="#2-1-2-4-1、散列表" class="headerlink" title="2.1.2.4.1、散列表"></a>2.1.2.4.1、散列表</h6><p><strong>散列表的数据结构</strong>  </p>
+<table>
+<thead>
+<tr>
+<th>Reinhard Hsu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101163</td>
+</tr>
+<tr>
+<td>5</td>
+</tr>
+<tr>
+<td>“IT Dept”</td>
+</tr>
+</tbody>
+</table>
+<p>拥有一个键，和与该键相关联的一组数据值。<br>散列表中有一个特殊函数，叫做散列函数，可以把键，转换成用来检索数据的整数索引。用这个索引，访问与键相关联的数据。<br>C#中的HashTable类，就是存储散列表的数据的。</p>
+<h6 id="2-1-2-4-2、字典"><a href="#2-1-2-4-2、字典" class="headerlink" title="2.1.2.4.2、字典"></a>2.1.2.4.2、字典</h6><p>它由一系列<strong>键值对</strong>构成，就像英文词典一样，单词就是键，单词的定义就是值。虽然键不一定是整数，但是采用了这种索引方案，所以还是将字典称为<strong>联合数组</strong>。<br>C#中的几种Dictionary类，就是这类字典。</p>
+<h3 id="2-2、非线性群集"><a href="#2-2、非线性群集" class="headerlink" title="2.2、非线性群集"></a>2.2、非线性群集</h3><p>例如<strong>树</strong>，<strong>堆</strong>，<strong>图</strong>，和<strong>集</strong>，群集内的元素没有次序之分。</p>
+<h4 id="2-2-1、层次群集"><a href="#2-2-1、层次群集" class="headerlink" title="2.2.1、层次群集"></a>2.2.1、层次群集</h4><p>层次群集，是一组划分了层次的数据项集合，位于某一层的数据项，可能会友位于下一较低层上的后继数据项。</p>
+<h5 id="2-2-1-1、树"><a href="#2-2-1-1、树" class="headerlink" title="2.2.1.1、树"></a>2.2.1.1、树</h5><p>树是一种常见的层次群集。它有一个数据项作为根，其他数据值作为叶子挂在根下面。树的元素叫做节点，某一个节点下面的元素叫做它的子节点。<br>操作系统的文件系统，是采用树型群集设计，其中一个目录作为根，其他子目录作为根的孩子。</p>
+<h6 id="2-2-1-1-1、二叉树"><a href="#2-2-1-1-1、二叉树" class="headerlink" title="2.2.1.1.1、二叉树"></a>2.2.1.1.1、二叉树</h6><p>二叉树是树群集的一种特殊类型，树中每个节点最多只有两个孩子。<br><strong>二叉查找树</strong>，又称<strong>二叉搜索树</strong>，它可以极大提高查找大量数据的效率，它的定义如下：</p>
+<blockquote>
+<p>它或者是一棵空树，或者是具有下列性质的二叉树： 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值； 它的左、右子树也分别为二叉排序树。</p>
+</blockquote>
+<h6 id="2-2-1-1-2、堆"><a href="#2-2-1-1-2、堆" class="headerlink" title="2.2.1.1.2、堆"></a>2.2.1.1.2、堆</h6><p>堆也是树的一种类型，它总是把最小数据值放置在根节点上。我们经常用堆来排序，被称作堆排序。堆的插入和删除操作总是会导致堆的重组。</p>
+<h4 id="2-2-2、组群集"><a href="#2-2-2、组群集" class="headerlink" title="2.2.2、组群集"></a>2.2.2、组群集</h4><p><strong>无序</strong>的数据项，组成的<strong>非线性群集</strong>，被称为组。主要由三种类型：<strong>集合</strong>，<strong>图</strong>，<strong>和网络</strong>。</p>
+<h5 id="2-2-2-1、集合"><a href="#2-2-2-1、集合" class="headerlink" title="2.2.2.1、集合"></a>2.2.2.1、集合</h5><p>集合是一种无序数据值的群集，并且集合中每一个数据值都是唯一的。例如，一个班级的学生的列表，就是一个集合的实例。<br>集合的操作包括联合和交叉。</p>
+<h5 id="2-2-2-2、图"><a href="#2-2-2-2、图" class="headerlink" title="2.2.2.2、图"></a>2.2.2.2、图</h5><p>图，是由节点集合，以及与节点相连的边集合组成的。<br>图在物流管理，和作业调度方面广泛应用。“旅行商”问题，就是要求在旅行预算允许的条件下，为商人确定最有效的完整旅行路线，使其走遍要去的所有城市。<br>如果有10个城市，就要检查10的阶乘条路线，有100座城市，就要检查100的阶乘条路线，只能找到一种近似的解决方案。</p>
+<h5 id="2-2-2-3、网络"><a href="#2-2-2-3、网络" class="headerlink" title="2.2.2.3、网络"></a>2.2.2.3、网络</h5><p>网络，是一种特殊类型的图，它的每一条边，都被赋予了权。权，代表了从一个节点移动到另一个节点所花费的代价。</p>
+<h2 id="3、泛型编程"><a href="#3、泛型编程" class="headerlink" title="3、泛型编程"></a>3、泛型编程</h2><p>面向对象编程面临着“代码膨胀”的问题。为了说明方法参数的所有的可能的数据类型，就要覆写某个方法，甚至覆写一套方法集合，这时候就发生了代码膨胀。<br>代码膨胀的一种解决方案，是使某个值具有多种数据类型，同时仅提供此值的一种定义，这种方法就叫泛型编程。<br>泛型编程提供数据类型的占位符，在编译时会由特定的数据类型来填充。<br>比如Swap函数：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Swap&lt;T&gt;(<span class="keyword">ref</span> T val1,<span class="keyword">ref</span> T val2)</span><br><span class="line">&#123;</span><br><span class="line">	T temp;</span><br><span class="line">	temp=val1;</span><br><span class="line">	val1=val2;</span><br><span class="line">	val2=temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4、DotNet运行环境"><a href="#4、DotNet运行环境" class="headerlink" title="4、DotNet运行环境"></a>4、DotNet运行环境</h2><p>DotNet环境中，需要考虑程序运行的线程，和随时都有可能发生的垃圾回收。</p>
+<h3 id="4-1、DotNet的垃圾回收机制"><a href="#4-1、DotNet的垃圾回收机制" class="headerlink" title="4.1、DotNet的垃圾回收机制"></a>4.1、DotNet的垃圾回收机制</h3><p>C#用<strong>堆</strong>内存来给<strong>引用类型</strong>（例如，字符串、数组，类实例对象）分配存储空间。<br><strong>值类型</strong>（例如，普通变量），存储在<strong>栈</strong>内存区域中。<br><strong>对引用类型的引用</strong>也存储在栈中，但实际的数据则以<strong>引用类型</strong>的形式存储在<strong>堆</strong>中。<br>存储在<strong>栈</strong>中的<strong>值类型</strong>变量，在子程序完全执行结束时，就可以释放掉。而存储在<strong>堆</strong>中的<strong>引用类型</strong>变量，一直到没有引用堆数据的行为时，才能通过调用<strong>资源回收</strong>来移除。<br>在程序执行过程中，<strong>资源回收</strong>会在任何时候发生。如果你需要强制调用资源回收，可以使用：</p>
+<pre><code>GC.Collect();
+</code></pre><p>存储在堆中的每个对象，都有一个finalizer的方法，它是删除对象前执行的最后一步。执行完上面的强制资源回收的代码后，也不能确信对象已经被立即删除了。如果你想等待堆上的所有对象的finalizer方法都执行完毕之后，再做别的事，可以执行下面等待代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GC.Collect();</span><br><span class="line">GC.WaitForPendingFinalizers();</span><br></pre></td></tr></table></figure>
+<h3 id="4-2、程序的线程"><a href="#4-2、程序的线程" class="headerlink" title="4.2、程序的线程"></a>4.2、程序的线程</h3><p>DotNet环境中，程序是运行在<strong>应用程序域</strong>中。一个进程里，可以有多个应用程序域，也可以有多个线程。线程可以在多个应用程序域之间穿梭，但同一时刻，只能处于一个应用程序域内。具体可以查看<a href="http://www.cnblogs.com/leslies2/archive/2012/03/06/2379235.html" title="C#综合揭秘——细说进程、应用程序域与上下文之间的关系" target="_blank" rel="noopener">C#综合揭秘——细说进程、应用程序域与上下文之间的关系</a>。</p>
+<p>要获取程序消耗的CPU时间，需要确保获取时间的代码只存在于自身程序分配的进程中，而不在操作系统执行的其他任务里。可以使用下面的代码：</p>
+<pre><code>Process.GetCurrentProcess().TotalProcessorTime;
+</code></pre><p>这与Stopwatch有什么区别呢？区别是，Stopwatch除了统计程序自身的CPU消耗时间外，还会统计操作系统执行的其它任务所消耗的时间，例如将程序运行结果打印到屏幕的I/O消耗的时间。  </p>
+<h2 id="5、性能测试"><a href="#5、性能测试" class="headerlink" title="5、性能测试"></a>5、性能测试</h2><p>写入1亿个数字</p>
+<h3 id="5-1、数组"><a href="#5-1、数组" class="headerlink" title="5.1、数组"></a>5.1、数组</h3><pre><code>834.277ms
+</code></pre><h3 id="5-2、ArrayList"><a href="#5-2、ArrayList" class="headerlink" title="5.2、ArrayList"></a>5.2、ArrayList</h3><pre><code>13701.914ms
+</code></pre><h3 id="5-3、List"><a href="#5-3、List" class="headerlink" title="5.3、List"></a>5.3、List</h3><pre><code>2194.376ms
+</code></pre><h3 id="5-4、总结"><a href="#5-4、总结" class="headerlink" title="5.4、总结"></a>5.4、总结</h3><p>可以看出，数组最快，List是数组的2.6倍，ArrayList是数组的16.4倍。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构与算法－1、群集"><span class="toc-text">数据结构与算法－1、群集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、群集的定义"><span class="toc-text">1、群集的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、集群的描述"><span class="toc-text">2、集群的描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、线性群集"><span class="toc-text">2.1、线性群集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1、直接存取群集"><span class="toc-text">2.1.1、直接存取群集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-1、数组"><span class="toc-text">2.1.1.1、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数组的数据结构"><span class="toc-text">数组的数据结构</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#添加"><span class="toc-text">添加</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#插入"><span class="toc-text">插入</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ArrayList类"><span class="toc-text">ArrayList类</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-2、字符串"><span class="toc-text">2.1.1.2、字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#StringBuilder类"><span class="toc-text">StringBuilder类</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-3、结构"><span class="toc-text">2.1.1.3、结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2、顺序存储群集"><span class="toc-text">2.1.2、顺序存储群集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-1、线性表的数据结构"><span class="toc-text">2.1.2.1、线性表的数据结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-2、线性表的遍历方法"><span class="toc-text">2.1.2.2、线性表的遍历方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-3、限制元素访问的线性表"><span class="toc-text">2.1.2.3、限制元素访问的线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-2-3-1、栈"><span class="toc-text">2.1.2.3.1、栈</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-2-3-2、队列"><span class="toc-text">2.1.2.3.2、队列</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-4、索引群集"><span class="toc-text">2.1.2.4、索引群集</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-2-4-1、散列表"><span class="toc-text">2.1.2.4.1、散列表</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-2-4-2、字典"><span class="toc-text">2.1.2.4.2、字典</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、非线性群集"><span class="toc-text">2.2、非线性群集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1、层次群集"><span class="toc-text">2.2.1、层次群集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-1、树"><span class="toc-text">2.2.1.1、树</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-1-1-1、二叉树"><span class="toc-text">2.2.1.1.1、二叉树</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-1-1-2、堆"><span class="toc-text">2.2.1.1.2、堆</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2、组群集"><span class="toc-text">2.2.2、组群集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-1、集合"><span class="toc-text">2.2.2.1、集合</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-2、图"><span class="toc-text">2.2.2.2、图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-3、网络"><span class="toc-text">2.2.2.3、网络</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、泛型编程"><span class="toc-text">3、泛型编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、DotNet运行环境"><span class="toc-text">4、DotNet运行环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1、DotNet的垃圾回收机制"><span class="toc-text">4.1、DotNet的垃圾回收机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2、程序的线程"><span class="toc-text">4.2、程序的线程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、性能测试"><span class="toc-text">5、性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1、数组"><span class="toc-text">5.1、数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2、ArrayList"><span class="toc-text">5.2、ArrayList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3、List"><span class="toc-text">5.3、List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4、总结"><span class="toc-text">5.4、总结</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../data_structures_and_algorithms_dotnet_3_basic_sorting_algorithms/" class="prev">&larr; Prev post Data Structures and Algorithms DotNet － 3、基础排序算法</a>
+  
+
+  
+
+  
+    <a href="../data_structures_and_algorithms_python_3_sequences/" class="next">Next post Data Structures and Algorithms Python － 3、序列 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

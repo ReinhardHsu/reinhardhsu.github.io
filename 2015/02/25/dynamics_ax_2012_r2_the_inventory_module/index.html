@@ -1,0 +1,418 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="理解主要的类层次结构InventMovement类InventMovement类用于验证和准备数据，这些数据用于生成库存交易记录。在这个层次结构中，Super类是叫做InventMovement的抽象类。在这个层次结构中的所有其他类，都以InventMov_前缀开头。
+例如，在处理Sales line transactions时，InventMov_Sales类用于验证和准备库存。在处理库存...">
+  
+  <title>Dynamics AX 2012 R2 The Inventory module - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../03/12/dynamics_ax_2012_r2_execute_stored_procedure_with_parameters/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Execute Stored Procedure with Parameters
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../10/dynamics_ax_2012_r2_setup_reporting_server/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 设置报表服务器
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 The Inventory module</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-02-25</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="理解主要的类层次结构"><a href="#理解主要的类层次结构" class="headerlink" title="理解主要的类层次结构"></a>理解主要的类层次结构</h2><h3 id="InventMovement类"><a href="#InventMovement类" class="headerlink" title="InventMovement类"></a>InventMovement类</h3><p><strong>InventMovement</strong>类用于验证和准备数据，这些数据用于生成库存交易记录。在这个层次结构中，<strong>Super</strong>类是叫做<strong>InventMovement</strong>的抽象类。在这个层次结构中的所有其他类，都以InventMov_前缀开头。</p>
+<p>例如，在处理<strong>Sales line transactions</strong>时，<strong>InventMov_Sales</strong>类用于验证和准备库存。在处理库存转移日记账时，使用<strong>InventMov_Transfer</strong>。</p>
+<h3 id="InventUpdate类"><a href="#InventUpdate类" class="headerlink" title="InventUpdate类"></a>InventUpdate类</h3><p><strong>InventUpdate</strong>类用于插入和更新库存交易。每当一个交易应该被过账时，<strong>InventUpdate</strong>相应的子类的<strong>updateNow()</strong>方法都会执行。在这个层次结构中，<strong>Super</strong>类是<strong>InventUpdate</strong>类，这个结构中的其他类是以<strong>InventUpd_</strong>前缀开头。</p>
+<p>例如，每当在系统中输入一个物料行，代表着将来会生成一个物理交易，都会使用<strong>InventUpd_Estimated</strong>类。它可以是，例如，一个销售订单行，有在单销售状态。当一个这样的行在<strong>AX</strong>中被输入或生成，<strong>InventUpd_Estimated</strong>类会被触发，库存交易。。。</p>
+<h3 id="InventAdj类"><a href="#InventAdj类" class="headerlink" title="InventAdj类"></a>InventAdj类</h3><p>每当库存交易调整时，会使用<strong>InventAdj</strong>类。典型的调整发生在，你关闭库存时。</p>
+<h3 id="InventSum类"><a href="#InventSum类" class="headerlink" title="InventSum类"></a>InventSum类</h3><p><strong>InventSum</strong>类用于查看特定物料在特定日期的现有量信息。<strong>InventOnHand</strong>类用于查看当前的现有量信息。<strong>InventSum</strong>类不像之前的类，它没有在一个层次结构中。</p>
+<h2 id="使用Inventory-dimensions"><a href="#使用Inventory-dimensions" class="headerlink" title="使用Inventory dimensions"></a>使用Inventory dimensions</h2><p>你马上不得不学的，是库存维度如何工作。基本的，<strong>InventDim</strong>表持有与一个物料相关联的所有不同维度的信息。这些维度可以被派生为三个类型：<strong>Item</strong>，<strong>Storage</strong>，和<strong>Tracking</strong>维度。默认地，<strong>AX</strong>有下面的维度：</p>
+<ul>
+<li>四个<strong>Item</strong>维度：这些维度是<strong>Color</strong>,<strong>Size</strong>,<strong>Style</strong>和<strong>Configuration</strong>。</li>
+<li>六个<strong>Storage</strong>维度：这些维度是<strong>Size</strong>,<strong>Warehouse</strong>,<strong>Location</strong>,<strong>Pallet</strong>（托盘）,<strong>Inventory status</strong>,和<strong>License plate</strong>(号码牌，车辆的牌照)。</li>
+<li>五个<strong>Tracking</strong>维度：分别是<strong>Batch</strong>,<strong>Serial</strong>,<strong>Owner</strong>,<strong>Inventory Profile</strong>,和<strong>GTD</strong>号码。</li>
+</ul>
+<p>基于配置键的启用，系统中会看到大量的维度编号。</p>
+<h3 id="查找库存维度"><a href="#查找库存维度" class="headerlink" title="查找库存维度"></a>查找库存维度</h3><p>当在日记账中或交易中需要这些维度的结合时，我们总是查看是否已经存在该结合。如果有，我们将该日记账或交易记录连接到<strong>InventDim</strong>表。如果它不存在，就在<strong>InventDim</strong>新建一个，接着，我们连接到新纪录。这是通过使用<strong>InventDim</strong>表中的一个叫做<strong>findOrCreate</strong>的方法做的。你可以看看在下面的代码中是如何使用它的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">static void MSDynAX.Net_ReinhardTestJob1(Args _args)</span><br><span class="line">&#123;</span><br><span class="line">    InventDim inventDim;</span><br><span class="line">    inventDim.InventLocationId=&apos;01&apos;;</span><br><span class="line">    inventDim.InventColorId=&apos;02&apos;;</span><br><span class="line">    inventDim=InventDim::findOrCreate(inventDim);</span><br><span class="line">    info(inventDim.inventDimId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查找当前现有量信息"><a href="#查找当前现有量信息" class="headerlink" title="查找当前现有量信息"></a>查找当前现有量信息</h3><p>你要知道的另一个事情，是如何查找在一个特定<strong>InventDim</strong>范围里，有多少物料可用。你可以通过将<strong>InventDim</strong>字段转换成一个<strong>InventDim</strong>变量，然后指定要使用哪个维度字段或维度字段的结合，用于获取现有量信息。在下面的例子中，我们搜索一个特定颜色的物料的现有量信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">static void MSDynAX.Net_ReinhardTestJob1(Args _args)</span><br><span class="line">&#123;</span><br><span class="line">    ItemId          itemId;</span><br><span class="line">    InventDim       inventDimCriteria;</span><br><span class="line">    InventDimParm   inventDimParm;</span><br><span class="line">    InventOnhand    inventOnhand;</span><br><span class="line">    itemId=&apos;10001&apos;;</span><br><span class="line">    //inventdimcriteria.InventColorId=&amp;#8217;02&amp;#8217;;</span><br><span class="line">    //inventdimparm.initFromInventDim(inventDimCriteria);</span><br><span class="line">    inventOnhand=inventOnhand::newItemId(itemId);</span><br><span class="line">    inventOnhand.parmInventDim(inventDimCriteria);</span><br><span class="line">    //inventOnhand.parmInventDimParm(inventDimParm);</span><br><span class="line">    inventOnhand.parmItemId(itemId);</span><br><span class="line">    info(strfmt(&apos;Available Physical:%1&apos;,inventOnhand.availPhysical()));</span><br><span class="line">    info(strfmt(&apos;On order:%1&apos;,inventonhand.onOrder()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你也可以在<strong>inventDimCriteria</strong>的<strong>InventLocationId</strong>指定仓库。</p>
+<h3 id="查找特定日期的现有量信息"><a href="#查找特定日期的现有量信息" class="headerlink" title="查找特定日期的现有量信息"></a>查找特定日期的现有量信息</h3><p>下面的例子让你可以查看特定颜色的特定物料，在特定日期的现有量信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">static void MSDynAX.Net_ReinhardTestJob1(Args _args)</span><br><span class="line">&#123;</span><br><span class="line">    ItemId          itemId;</span><br><span class="line">    InventDim       inventDimCriteria;</span><br><span class="line">    InventDimParm   inventDimParm;</span><br><span class="line">    InventSumDateDim    inventSumDateDim;</span><br><span class="line">    </span><br><span class="line">    itemId=&apos;10001’;</span><br><span class="line">    //inventdimcriteria.InventColorId=&amp;#8217;02&amp;#8217;;</span><br><span class="line">    //inventdimparm.initFromInventDim(inventDimCriteria);</span><br><span class="line">    inventSumDateDim = InventSumDateDim::newParameters(mkDate(01,01,2015), </span><br><span class="line">                                                       itemId, </span><br><span class="line">                                                       inventDimCriteria,</span><br><span class="line">                                                       inventDimParm);</span><br><span class="line">    info(strfmt(&apos;PostedQty:%1&apos;,inventSumDateDim.postedQty()));</span><br><span class="line">    info(strfmt(&apos;DeductedQty:%1&apos;,inventSumDateDim.deductedQty()));</span><br><span class="line">    info(strfmt(&apos;ReceivedQty:%1&apos;,inventSumDateDim.receivedQty()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="从代码中创建并过账一个库存日记账"><a href="#从代码中创建并过账一个库存日记账" class="headerlink" title="从代码中创建并过账一个库存日记账"></a>从代码中创建并过账一个库存日记账</h3><p>下面，要学习如何自动创建并过账日记账。典型的，当执行数据迁移时，可以使用该方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">static void MSDynAX.Net_ReinhardTestJob1(Args _args)</span><br><span class="line">&#123;</span><br><span class="line">    InventJournalName  inventJournalName;</span><br><span class="line">    InventJournalTable inventJournalTable;</span><br><span class="line">    InventJournalTrans inventJournalTrans;</span><br><span class="line">    InventJournalTableData inventJournalTableData;</span><br><span class="line">    inventJournalTransData inventJournalTransData;</span><br><span class="line">    InventTable            inventTable;</span><br><span class="line">    InventDim              inventDim;</span><br><span class="line">    </span><br><span class="line">    select firstonly inventTable;</span><br><span class="line">    select firstOnly inventJournalName</span><br><span class="line">    	where inventJournalName.JournalType==InventJournalType::Movement;</span><br><span class="line">    </span><br><span class="line">    inventJournalTable.clear();</span><br><span class="line">    inventJournalTable.initValue();</span><br><span class="line">    inventJournalTable.initFromInventJournalName(inventJournalName);</span><br><span class="line">    inventJournalTable.insert();</span><br><span class="line">    inventJournalTableData=JournalTableData::newTable(inventJournalTable);</span><br><span class="line">    inventJournalTrans.clear();</span><br><span class="line">    inventJournalTrans.initFromInventJournalTable(inventJournalTable);</span><br><span class="line">    inventJournalTrans.TransDate=systemDateGet();</span><br><span class="line">    inventJournalTrans.initFromInventTable(inventTable);</span><br><span class="line">    inventJournalTrans.Qty=3;</span><br><span class="line">    inventDim.initFromInventTable(inventJournalTrans.inventMovement()</span><br><span class="line">                                  .inventTable(),</span><br><span class="line">                                  InventItemOrderSetupType::Invent,inventDim);</span><br><span class="line">    inventDim=InventDim::findOrCreate(inventDim);</span><br><span class="line">    inventJournalTrans.InventDimId=inventDim.inventDimId;</span><br><span class="line">    inventJournalTransData=inventJournalTableData.journalStatic()</span><br><span class="line">        .newJournalTransData(inventJournalTrans,inventJournalTableData);</span><br><span class="line">    inventJournalTransData.create();</span><br><span class="line">    if(InventJournalCheckPost::newPostJournal(inventJournalTable).validate())</span><br><span class="line">    	InventJournalCheckPost::newPostJournal(inventJournalTable).run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解主要的类层次结构"><span class="toc-text">理解主要的类层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InventMovement类"><span class="toc-text">InventMovement类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InventUpdate类"><span class="toc-text">InventUpdate类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InventAdj类"><span class="toc-text">InventAdj类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InventSum类"><span class="toc-text">InventSum类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Inventory-dimensions"><span class="toc-text">使用Inventory dimensions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查找库存维度"><span class="toc-text">查找库存维度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找当前现有量信息"><span class="toc-text">查找当前现有量信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找特定日期的现有量信息"><span class="toc-text">查找特定日期的现有量信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从代码中创建并过账一个库存日记账"><span class="toc-text">从代码中创建并过账一个库存日记账</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../03/12/dynamics_ax_2012_r2_execute_stored_procedure_with_parameters/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Execute Stored Procedure with Parameters</a>
+  
+
+  
+
+  
+    <a href="../../10/dynamics_ax_2012_r2_setup_reporting_server/" class="next">Next post Dynamics AX 2012 R2 设置报表服务器 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

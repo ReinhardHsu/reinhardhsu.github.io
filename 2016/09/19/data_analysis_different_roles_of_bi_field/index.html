@@ -1,0 +1,449 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="商业智能领域里的不同角色这是一个金字塔。
+业务分析师使用的工具
+Excel
+Microstrategy / Tableau / QlikView
+SQL browser 如 SQuirreL
+
+需要的技能
+Numerate Analysis
+SQL
+VBA
+最佳可视化实践
+
+主要的任务报表和指标
+业务分析师定义关键绩效指标，确保这些计算出的数据在整个组织内都有一致性，可以进行比较。业务分析师...">
+  
+  <title>Data Analysis 商业智能领域里的不同角色 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../24/data_analysis_numpy_and_pandas/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis NumPy和Pandas
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../15/data_structures_and_algorithms_python_1_overview/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms Python － 1、概览
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis 商业智能领域里的不同角色</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-19</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="商业智能领域里的不同角色"><a href="#商业智能领域里的不同角色" class="headerlink" title="商业智能领域里的不同角色"></a>商业智能领域里的不同角色</h1><p><code>这是一个金字塔。</code></p>
+<h2 id="业务分析师"><a href="#业务分析师" class="headerlink" title="业务分析师"></a>业务分析师</h2><h3 id="使用的工具"><a href="#使用的工具" class="headerlink" title="使用的工具"></a>使用的工具</h3><ul>
+<li>Excel</li>
+<li>Microstrategy / Tableau / QlikView</li>
+<li>SQL browser 如 SQuirreL</li>
+</ul>
+<h3 id="需要的技能"><a href="#需要的技能" class="headerlink" title="需要的技能"></a>需要的技能</h3><ul>
+<li>Numerate Analysis</li>
+<li>SQL</li>
+<li>VBA</li>
+<li>最佳可视化实践</li>
+</ul>
+<h3 id="主要的任务"><a href="#主要的任务" class="headerlink" title="主要的任务"></a>主要的任务</h3><p><code>报表和指标</code></p>
+<p>业务分析师定义关键绩效指标，确保这些计算出的数据在整个组织内都有一致性，可以进行比较。<br>业务分析师设计和实现报表和仪表板，让组织的KPI变得可视化。<br>业务分析师直接和管理者对接，来收集报表需求。<br>业务分析师直接和数据工程师对接，来确保数据被正确地收集和存储。<br>业务分析师需要直接查询数据，但通常仅仅需要查看聚合过的数据。</p>
+<h2 id="数据工程师"><a href="#数据工程师" class="headerlink" title="数据工程师"></a>数据工程师</h2><h3 id="使用的工具-1"><a href="#使用的工具-1" class="headerlink" title="使用的工具"></a>使用的工具</h3><ul>
+<li>一些SQL 环境，如MSSQL / SSAS / SSIS</li>
+<li>一个编程IDE，如Eclipse</li>
+</ul>
+<h3 id="需要的技能-1"><a href="#需要的技能-1" class="headerlink" title="需要的技能"></a>需要的技能</h3><ul>
+<li>编程，如Java / Python</li>
+<li>MapReduce 框架</li>
+<li>ETL 框架</li>
+</ul>
+<h3 id="主要的任务-1"><a href="#主要的任务-1" class="headerlink" title="主要的任务"></a>主要的任务</h3><p><code>架构和收集</code></p>
+<p>数据工程师负责构建和维护一个组织的数据传输和存储的基础设施。<br>这就需要数据工程师来构建储栈，写数据传输包（如用于从生产环境接收数据的事件包），设计聚合过程，优化存储。<br>数据工程师将生产环境产生的原始数据，转换为业务分析师可以用来制作报表的格式化的数据。数据工程师是他们中间的桥梁。  </p>
+<h2 id="数据科学家"><a href="#数据科学家" class="headerlink" title="数据科学家"></a>数据科学家</h2><h3 id="使用的工具-2"><a href="#使用的工具-2" class="headerlink" title="使用的工具"></a>使用的工具</h3><ul>
+<li>R / MatLab / SPSS</li>
+<li>一个编程IDE，如 Eclipse</li>
+<li>一个SQL浏览器，如SQuirreLSQL</li>
+</ul>
+<h3 id="需要的技能-2"><a href="#需要的技能-2" class="headerlink" title="需要的技能"></a>需要的技能</h3><ul>
+<li>编程，尤其是 Python，C/C++，Ruby</li>
+<li>MapReduce 框架</li>
+<li>Hadoop scripting，如 PigLating 或 HiveQL</li>
+<li>算法开发</li>
+<li>机器学习</li>
+<li>线性代数和统计方法</li>
+</ul>
+<h3 id="主要的任务-2"><a href="#主要的任务-2" class="headerlink" title="主要的任务"></a>主要的任务</h3><p><code>预测和优化</code></p>
+<p>数据科学家负责构建预测算法：提升用户体验，最终增加参与度、留存率、收益 。例如 推荐引擎，复杂的用户细分的过程。<br>数据科学家可能位于产品团队中，也能位于专业见解团队中，主要负责数据驱动的产品的改进和建议。<br>与业务分析师相比，较少碰组织级别的指标。  </p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#商业智能领域里的不同角色"><span class="toc-text">商业智能领域里的不同角色</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#业务分析师"><span class="toc-text">业务分析师</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用的工具"><span class="toc-text">使用的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要的技能"><span class="toc-text">需要的技能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要的任务"><span class="toc-text">主要的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据工程师"><span class="toc-text">数据工程师</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用的工具-1"><span class="toc-text">使用的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要的技能-1"><span class="toc-text">需要的技能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要的任务-1"><span class="toc-text">主要的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据科学家"><span class="toc-text">数据科学家</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用的工具-2"><span class="toc-text">使用的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要的技能-2"><span class="toc-text">需要的技能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要的任务-2"><span class="toc-text">主要的任务</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../24/data_analysis_numpy_and_pandas/" class="prev">&larr; Prev post Data Analysis NumPy和Pandas</a>
+  
+
+  
+
+  
+    <a href="../../15/data_structures_and_algorithms_python_1_overview/" class="next">Next post Data Structures and Algorithms Python － 1、概览 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

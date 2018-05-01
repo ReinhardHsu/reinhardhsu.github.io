@@ -1,0 +1,415 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="在这个系列里，Reinhard将和大家一起探索在AX的窗体上执行操作时，都会触发窗体、窗体数据源和表上的哪些方法，并且是以怎样的顺序触发的。
+    这次，我们来看看在窗体上修改或录入数据的情况。图中所示的流程，是在理想情况下的完整触发过程。如果窗体控件、窗体数据源字段或表的验证方法返回False，也可能会提前结束流程。
+
+
+用户在窗体上修改或录入数据后，首先触发了该字段的Form.Cont...">
+  
+  <title>Dynamics AX 2012 R2 窗体系列 – 在窗体上修改字段时所触发的方法及其顺序 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../04/06/dynamics_ax_2012_r2_aif_exception/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 AIF 内部异常
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../19/dynamics_ax_2012_r2_can_not_create_class_excel_application_com_object/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 无法创建类 Excel.Application 的COM对象
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 窗体系列 – 在窗体上修改字段时所触发的方法及其顺序</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-02-27</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><span style="font-family: '微软雅黑 Light'; font-size: large;">    在这个系列里，<a href="http://reinhardhsu.com">Reinhard</a>将和大家一起探索在AX的窗体上执行操作时，都会触发窗体、窗体数据源和表上的哪些方法，并且是以怎样的顺序触发的。</span></p>
+<p><span style="font-family: '微软雅黑 Light'; font-size: large;">    这次，我们来看看在窗体上修改或录入数据的情况。图中所示的流程，是在理想情况下的完整触发过程。如果窗体控件、窗体数据源字段或表的验证方法返回False，也可能会提前结束流程。</span><span id="more-583"></span></p>
+<p><span style="font-family: '微软雅黑 Light'; font-size: large;"><img src="http://reinhardhsu.com/wp-content/uploads/2016/02/Unnamed-QQ-Screenshot20160226180410.jpg" alt="Unnamed QQ Screenshot20160226180410" title="Unnamed QQ Screenshot20160226180410"></span></p>
+<ol>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">用户在窗体上修改或录入数据后，首先触发了该字段的Form.Control.Validate()方法，如果该方法返回的是False，流程到此结束，用户修改或录入数据失败 。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">如果返回的是True，会触发Form.Control.Modified()方法。如果这个字段是窗体数据源里的字段，那么当执行到Super()时，会调用该字段在窗体数据源中的Form.Datasource.Field.Validate()方法。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">在Form.Datasource.Field.Validate()方法中，执行到Super()时，会调用表的Table.ValidateField()方法。Table.ValidateField()执行完毕后，会返回一个Boolean结果。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">接着继续执行Form.Datasource.Field.Validate()方法中Super()以下的代码。Form.Datasource.Field.Validate()方法执行完毕后，会返回一个Boolean结果。如果返回的是False，则继续执行Form.Control.Modified() 方法中Super()以下的代码。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">如果返回的是True，会调用该字段在窗体数据源中的 Form.Datasource.Field.Modified() 方法。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">在Form.Datasource.Field.Modified() 方法中，执行到Super()时，会调用表的Table.ModifiedField()方法。Table.ModifiedField ()执行完毕后，继续执行Form.Datasource.Field.Modified ()方法中Super()以下的代码。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">Form.Datasource.Field.Modified ()方法执行完毕后，继续执行Form.Control.Modified() 方法中Super()以下的代码。</span></li>
+<li><span style="font-family: '微软雅黑 Light'; font-size: large;">Form.Control.Modified()方法执行完毕后，会返回一个Boolean结果。如果返回的是False，用户修改或录入数据失败。</span></li>
+</ol>
+<p><span style="font-family: '微软雅黑 Light'; font-size: large;">    需要注意的一点是，直到Form.Control.Modified()方法执行结束，修改过的数据，依然在内存中，并未持久化到数据库中。所以在做客制化开发的时候，不应在这个流程中所触发的方法里，直接执行更新数据库的操作。</span></p>
+<p>&nbsp;</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../04/06/dynamics_ax_2012_r2_aif_exception/" class="prev">&larr; Prev post Dynamics AX 2012 R2 AIF 内部异常</a>
+  
+
+  
+
+  
+    <a href="../../19/dynamics_ax_2012_r2_can_not_create_class_excel_application_com_object/" class="next">Next post Dynamics AX 2012 R2 无法创建类 Excel.Application 的COM对象 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

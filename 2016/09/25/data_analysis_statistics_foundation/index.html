@@ -1,0 +1,484 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="直方图和柱状图的区别直方图上X轴上的变量，是数值型的，比如年龄，要么从小到大排序，要么从大到小排序，还可以设置bin的组距。柱状图上放的是分类或定性的，比如国家，排序可以根据需要，按人口排，按字母顺序等。
+正态分布直方图的分布可以是正偏分布，负偏分布，正态分布。中间高，两边低，左右对称的直方图，叫做正态分布。正态分布的中间会有峰值，叫做众数，大量的数据分布在中间位置。
+数据的集中趋势如果用一...">
+  
+  <title>Data Analysis 统计学基础 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../28/data_analysis_python_operate_mongodb/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Python操作MongoDB
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../data_analysis_how_many_and_how_much/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis How Many and How Much
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis 统计学基础</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-25</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/statistics/">Statistics</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="直方图和柱状图的区别"><a href="#直方图和柱状图的区别" class="headerlink" title="直方图和柱状图的区别"></a>直方图和柱状图的区别</h2><p>直方图上X轴上的变量，是数值型的，比如年龄，要么从小到大排序，要么从大到小排序，还可以设置bin的组距。<br>柱状图上放的是分类或定性的，比如国家，排序可以根据需要，按人口排，按字母顺序等。</p>
+<h2 id="正态分布"><a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h2><p>直方图的分布可以是正偏分布，负偏分布，正态分布。<br>中间高，两边低，左右对称的直方图，叫做正态分布。<br>正态分布的中间会有峰值，叫做众数，大量的数据分布在中间位置。</p>
+<h2 id="数据的集中趋势"><a href="#数据的集中趋势" class="headerlink" title="数据的集中趋势"></a>数据的集中趋势</h2><p>如果用一个数，来描述数据的分布，可以选择 Mode 众数（出现频率最高的数），Median 中值，Mean 平均值。</p>
+<h3 id="众数"><a href="#众数" class="headerlink" title="众数"></a>众数</h3><p>正态分布，会有一个众数<br>前倾斜分布或后倾斜分布，也有一个众数，比如人的寿命，属于后倾斜分布，集中在七八十岁<br>驼峰分布，会有两个众数。比如鞋码的分布，女鞋分布在38，男鞋分布在42，会有两个众数<br>如果是一条直线，那么就没有众数  </p>
+<p>众数可以用来描述数字，也可以是其他东西，如性别，水果<br>因为众数虽然很容易从图中找到，但没有什么公式可以得出，所以常用平均值或中值。  </p>
+<h3 id="平均值"><a href="#平均值" class="headerlink" title="平均值"></a>平均值</h3><p>平均值是将所有数据累加，再除以数据的个数。</p>
+<h4 id="平均值的特点"><a href="#平均值的特点" class="headerlink" title="平均值的特点"></a>平均值的特点</h4><p>平均值用于描述数据的分布时，主要有以下特点：</p>
+<ol>
+<li>一个样本的平均值可以用来推论其所在的总体</li>
+<li>同一个总体的多个样本会有相似的平均值</li>
+<li>平均值可以用公式来描述</li>
+<li>分不中的所有值都会影响平均值</li>
+<li>如果有极值，它会导致平均值向极值倾斜，不能很好地描述数据的分布。</li>
+</ol>
+<h4 id="异常数据对平均值的影响"><a href="#异常数据对平均值的影响" class="headerlink" title="异常数据对平均值的影响"></a>异常数据对平均值的影响</h4><p>众数不受极值的影响，但是平均值会收到极值的影响，所以引出了中位数。</p>
+<h3 id="中位数"><a href="#中位数" class="headerlink" title="中位数"></a>中位数</h3><p>中位数需要将数据进行有序排列，然后取出位于中间的数。<br>如果数据的个数是偶数个，那么中间会有两个数，这两个数的平均值，就是中位数。</p>
+<h3 id="Facebook分析"><a href="#Facebook分析" class="headerlink" title="Facebook分析"></a>Facebook分析</h3><ul>
+<li>平均每个人有229个好友  </li>
+<li>22%的好友是高中同学  </li>
+<li>12％是同事  </li>
+<li>9%是大学同学  </li>
+<li>2008年Facebook的平均用户年龄是33</li>
+<li>2010年的平均年龄是38</li>
+<li>52%的用户每天都会访问自己的Facebook</li>
+<li>Zeebly.com/socialme有更多有趣的统计数据</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqw29gaudrj30eq05mglq.jpg" alt=""></p>
+<p>有一个简单的公式：</p>
+<ol>
+<li>平均数有。中位数虽然也有公式，但是不够简单，要分奇偶书的情况。</li>
+</ol>
+<p>总是会根据数据集的变化而变化：</p>
+<ol>
+<li>平均数</li>
+</ol>
+<p>不受bin变化的影响：</p>
+<ol>
+<li>平均数</li>
+<li>中位数</li>
+</ol>
+<p>不受异常值的影响：</p>
+<ol>
+<li>中位数</li>
+<li>众数</li>
+</ol>
+<p>在直方图上容易找到：</p>
+<ol>
+<li>众数</li>
+</ol>
+<h2 id="数据的离散程度"><a href="#数据的离散程度" class="headerlink" title="数据的离散程度"></a>数据的离散程度</h2><p>有的数据集的众数、中位数、平均数都一样，但是离散程度不同。<br>对于离散情况较高的，我们会去掉开头的25%，和尾部的25%，留下中间的部分，进行分析。<br>将数据集对折，可以找到中位数，也就是Q2（第二个四分位）。再将两边的数据进行对折，就找到了Q1和Q3。<br>IQR 四分位距，四分位差，就是Q3-Q1，中间50%的数据的范围。</p>
+<h3 id="盒须图"><a href="#盒须图" class="headerlink" title="盒须图"></a>盒须图</h3><p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqw299ei7fj30f008xjri.jpg" alt="盒须图"></p>
+<p>盒须图可以看出数据的离散分布情况。盒须图可以用几个点来表示：</p>
+<ol>
+<li>上边缘，计算公式是Q1-1.5*IQR</li>
+<li>Q1</li>
+<li>中位数</li>
+<li>Q2</li>
+<li>下边缘，计算公式是Q3+1.5*IQR</li>
+<li>异常值</li>
+</ol>
+<p>异常值应该&lt;上边缘，或者&gt;下边缘。<br>平均值不一定在Q1和Q3之间。  </p>
+<h3 id="偏差"><a href="#偏差" class="headerlink" title="偏差"></a>偏差</h3><p>有时候同样的盒须图，对应的分布情况却不一样，比如正态分布，双峰分布等。这时候引入了离均差的概念，就是每个数据项与平均数之间的距离。<br>为什么是平均数，而不是两个数据项之间的距离呢？因为如果有三个数据项，两两相比较，得出的距离有六个，数据量再大点，会更多。而用平均数比较的话，三个数据项只有三个距离。<br>离均差=数据项-平均数，离均差有些是负数<br>平均偏差=sum(每一项的离均差)/count，平均偏差的问题是，因为离均差是有符号的，所以求和可能为0 。这样就无法描述数据项的分布。方案有两个，一个是忽略离均差的符号，也就是绝对偏差，另一个是方差。<br>VARIANCE，方差。<br>方差最大的问题是符号问题，比如米，平方后就是平方米。如果是人民币，平方后是什么呢？所以还要开平方。方差开完平方后，就叫SD,标准差。      </p>
+<h3 id="标准差的应用"><a href="#标准差的应用" class="headerlink" title="标准差的应用"></a>标准差的应用</h3><p>对于正态分布，也就是Mean=Mode=中位数，它的68%的数据项分布在离中位数一个标准差的距离之内，95%的数据项分布在离中位数两个标准差的距离内。  </p>
+<p>样本的标准差计算方法如上，但是如果要推算整体的标准差，上面除的不是count，而是count-1，也就是整体的标准差要比样本的标准差大。<br><code>样本的标准偏差和总体的标准偏差的区别</code>  整体标准差的最佳期望，是n-1。</p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>一次考试，分数呈正态分布，平均分60，你考了65，标准差是5，那么16%的同学比你考得好。如果标准差是2.5的话，2.5%的同学都比你考得好。。。</p>
+<h2 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h2><p>直方图其实显示的就是百分比的一个对比。整个直方图柱子的面积加起来是1，每根柱子是百分之多少。<br>我们用直方图来看分布时，总是希望bin小点，这样能看到的明细更多。如果bin很小，最后有成百上千根柱子，直方图就会变形了。这时候，我们可以使用曲线图，来描述，比如正态分布图。这个曲线是可以通过函数生成的，所以任意两点之间的面积也能算出来。<br>同样的，正态分布图的面积也是曲线和轴之间的部分，面积也是1 。  </p>
+<h3 id="看一个人是不是受欢迎，就看他的社交网络好友数和被关注数"><a href="#看一个人是不是受欢迎，就看他的社交网络好友数和被关注数" class="headerlink" title="看一个人是不是受欢迎，就看他的社交网络好友数和被关注数"></a>看一个人是不是受欢迎，就看他的社交网络好友数和被关注数</h3><p>Facebook的平均好友数是190，标准差是36。<br>Twitter的平均被关注数是208，标准差是60。<br>比如小明的Facebook好友数是50，比Mean少了140，也就是小明低于Mean 3.9 个标准差。<br>比如小红的Twitter的被关注数量是10，比Mean少了198，也就是小红低于Mean 3.3 个标准差。<br>这里如果小明只用Facebook，小红只用Twitter，那么可以说小红比小明更受欢迎一点，即使小红的被关注数比小明的好友数要少。<br>有了标准差的倍数，就可以将小明和小红放在一个标准正态分布里进行比较。  </p>
+<p>任何正态分布，都能通过归一化的方法，将它变成一个标准正态分布。标准正态分布的Mean是0，标准差是1 。一个数据点，在之前的正态分布里比其他90%的数据都大，那么在标准正态分布里，它依然比90%的数据都大。<br>同样可以推导出来，小红比标准正态分布的Mean低了3.3个标准差，那么小红这10个Twitter被关注数量，相当于Facebook里的71.2个好友。</p>
+<h2 id="正态分布-1"><a href="#正态分布-1" class="headerlink" title="正态分布"></a>正态分布</h2><p>分布的曲线，叫做概率密度曲线，算出这个曲线的函数，叫做PDF 概率密度函数。</p>
+<h2 id="抽样分布"><a href="#抽样分布" class="headerlink" title="抽样分布"></a>抽样分布</h2><p>总体中，不同样本之间比较时，可以比较样本的中值。<br>1，2，3，4这四个数字，是一个总体，中值是2.5，这个数字不存在于总体中，所以称为期望值。<br>数字两两组合，有16种组合，也就是样本总数是16 。<br>所有样本的平均值，是先算出每个样本的平均值，再加在一起算平均值。用 M 表示。在这里 M 也是2.5 。<br>样本平均值的分布，也叫做样本的分布。<br>总体是4个数字的情况下，样本数已经达到了16个，如果总体上亿了，就不能再计算每个样本的平均值的方法。<br>这里我们发现，总体的平均值与M想等。这时候，如果再知道样本的标准差，就能知道样本在总体中的分布位置。  </p>
+<h3 id="总体的标准差，与所有样本均值的标准差，之间的关系"><a href="#总体的标准差，与所有样本均值的标准差，之间的关系" class="headerlink" title="总体的标准差，与所有样本均值的标准差，之间的关系"></a>总体的标准差，与所有样本均值的标准差，之间的关系</h3><p>总体中，每个数与平均值，的距离的平均数，是1.25<br>总体的标准差也即使sigma，是1.19，  </p>
+<p>所有样本中，每个样本的均值与所有样本均值的均值，的距离的平均数，是0.625<br>所有样本均值的标准差，也就是SE，是通过每个样本的均值（1，1.5，2，2.5. …）来计算的，算出来是0.79 。  </p>
+<p>这个例子中，sigma/SE=根号2。通用的公式是，sigma/SE= 对样本中数据项的个数进行开平方。  </p>
+<p>有了这样的公式，总体上亿时，我们就愁算不出SE了。</p>
+<h3 id="中心极限定理"><a href="#中心极限定理" class="headerlink" title="中心极限定理"></a>中心极限定理</h3><p>总体偏差/根号n  =标准误差，它适用于任何分布。</p>
+<h3 id="掷1次骰子，100次的分布"><a href="#掷1次骰子，100次的分布" class="headerlink" title="掷1次骰子，100次的分布"></a>掷1次骰子，100次的分布</h3><p>这时候，样本量n=1，根据上面的公式，sigma=SE=1.708<br>是均匀分布，因为每一面朝上的几率一样。</p>
+<h3 id="掷2次骰子，100次的平均值分布"><a href="#掷2次骰子，100次的平均值分布" class="headerlink" title="掷2次骰子，100次的平均值分布"></a>掷2次骰子，100次的平均值分布</h3><p>这时候，样本量n=2，根据上面的公式，sigma/根号2 =SE=1.208<br>是正态分布</p>
+<h3 id="掷3次骰子，100次的平均值分布"><a href="#掷3次骰子，100次的平均值分布" class="headerlink" title="掷3次骰子，100次的平均值分布"></a>掷3次骰子，100次的平均值分布</h3><p>3次比2次的标准偏差更小，也就是数据分布得更集中，图形会更窄。</p>
+<p>也就是样本量n增加，那么标准差SE会减小，分布也会越瘦。n增大4倍，SE减少二分之一。  </p>
+<p><code>对任何分布的总体进行抽样，样本平均值的分布情况，都是一个正态分布。并且这个正态分布的平均值，与总体的平均值想等。标准误差＝总体偏差/根号n</code>  </p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#直方图和柱状图的区别"><span class="toc-text">直方图和柱状图的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正态分布"><span class="toc-text">正态分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的集中趋势"><span class="toc-text">数据的集中趋势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#众数"><span class="toc-text">众数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平均值"><span class="toc-text">平均值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#平均值的特点"><span class="toc-text">平均值的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异常数据对平均值的影响"><span class="toc-text">异常数据对平均值的影响</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中位数"><span class="toc-text">中位数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Facebook分析"><span class="toc-text">Facebook分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的离散程度"><span class="toc-text">数据的离散程度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒须图"><span class="toc-text">盒须图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#偏差"><span class="toc-text">偏差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差的应用"><span class="toc-text">标准差的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#归一化"><span class="toc-text">归一化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#看一个人是不是受欢迎，就看他的社交网络好友数和被关注数"><span class="toc-text">看一个人是不是受欢迎，就看他的社交网络好友数和被关注数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正态分布-1"><span class="toc-text">正态分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽样分布"><span class="toc-text">抽样分布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总体的标准差，与所有样本均值的标准差，之间的关系"><span class="toc-text">总体的标准差，与所有样本均值的标准差，之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中心极限定理"><span class="toc-text">中心极限定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#掷1次骰子，100次的分布"><span class="toc-text">掷1次骰子，100次的分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#掷2次骰子，100次的平均值分布"><span class="toc-text">掷2次骰子，100次的平均值分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#掷3次骰子，100次的平均值分布"><span class="toc-text">掷3次骰子，100次的平均值分布</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../28/data_analysis_python_operate_mongodb/" class="prev">&larr; Prev post Data Analysis Python操作MongoDB</a>
+  
+
+  
+
+  
+    <a href="../data_analysis_how_many_and_how_much/" class="next">Next post Data Analysis How Many and How Much &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

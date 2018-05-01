@@ -1,0 +1,447 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="# Table Properties [AX 2012]Table Field PropertiesTable Index PropertiesTable Relation PropertiesTable Properties
+
+
+The following table describes the properties of table elements in the AOT.Propert...">
+  
+  <title>Dynamics AX 2012 R2 Table Properties - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../dynamics_ax_2012_r2_table_field_properties/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Table Field Properties
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../dynamics_ax_2012_r2_install_dynamics_ax_aif_iis_web_service/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Install Dynamics AX Aif IIS Web Service
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 Table Properties</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-05</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <div><br><div class="topic"><br><br># Table Properties [AX 2012]<br><br><div id="mainSection"><br><div id="mainBody"><br><div class="introduction"><br><br><a href="http://msdn.microsoft.com/en-us/library/aa577032.aspx" target="_blank" rel="noopener">Table Field Properties</a><br><br><a href="http://msdn.microsoft.com/en-us/library/aa881522.aspx" target="_blank" rel="noopener">Table Index Properties</a><br><br><a href="http://msdn.microsoft.com/en-us/library/hh803130.aspx" target="_blank" rel="noopener">Table Relation Properties</a><br><br></div><br><div><br><div class="LW_CollapsibleArea_TitleDiv"><br><div><br><br><a class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all."><span class="LW_CollapsibleArea_Title">Table Properties</span></a><br><br><div class="LW_CollapsibleArea_HrDiv"></div><br></div><br></div>
+
+<p><span id="more-20"></span></p>
+<div class="sectionblock"><br><br>The following table describes the properties of table elements in the AOT.<br><br><div class="caption"></div><br><div class="tableSection"><br><table style="height: 11985px;" width="659"><br><tbody><br><tr><br><th colspan="1">Property</th><br><th colspan="1">Description</th><br><th colspan="1">New in this version of<br><br>Microsoft Dynamics AX</th><br></tr><br><tr><br><td colspan="1"><span class="label">Abstract(抽象)</span></td><br><td colspan="1">指定该表是否支持继承.默认值是 <span class="label">No </span>. 如果设为 <span class="label">Yes </span>, 不能对该表直接使用 X++ SQL statements ,如 <span class="code">update_recordset </span>和 <span class="code">select </span>.<p></p><br><br>当 <span class="label">SupportInheritance </span>属性设为 <span class="label">No </span>时,该属性不可用. 要了解更多信息, 请看 <a href="http://msdn.microsoft.com/en-us/library/gg881053.aspx" target="_blank" rel="noopener">Table Inheritance Overview </a>.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">AnalysisDimensionType(分析维度类型)</span></td><br><td colspan="1">决定基于 <span class="label">IsLookup </span>属性设置创建的维度的类型. You can specify one of the following values.<span class="label">IsLookup </span>属性设为 <span class="label">Yes </span>时<br><br><em>   <span class="label">Auto </span>-指定 表示表同时包含事实数据和维度数据. BI wizar分别为其创建Measure和维度，父表的attribute（后面说明）被创建为子维度.
+</em>   <span class="label">MasterInner </span>&#8211; 表示该使用full join连接该表和它的子表，join后的结果记录被创建为维度，父表的atrribute则被创建为子维度.<br><em>   <span class="label">MasterLeftOuter </span>&#8211; 使用左外连接关联该表和其子表，得到的维度数据因此可能会包含空值，父表的attribute也同样被创建为子维度.
+</em>   <span class="label">Transaction </span>&#8211; 表示该表只用来生成Measure，只有表中的枚举字段被创建为子维度.<br><br><span class="label">IsLookup </span>属性设为 <span class="label">No </span>时<br><br><em>   <span class="label">Auto </span>&#8211; Specifies that the table may contain factual as well as dimensional data. The BI Wizard will extract dimensional data and create dimensions and attributes while factual data will be extracted to create measures. One parent and child dimension is created.
+</em>   <span class="label">MasterInner </span>&#8211; Not applicable. Same as <span class="label">Auto </span>.<br><em>   <span class="label">MasterLeftOuter </span>&#8211; Not applicable. Same as <span class="label">Auto </span>.
+</em>   <span class="label">Transaction </span>&#8211; Specifies that the table should strictly be used to generate factual data (measures). This setting should be used when a table only contains transactional data. One child dimension is created containing only enumeration values from the table.<br></td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">AnalysisIdentifier(分析标识符)</span></td><br><td colspan="1">指定哪个字段作为SQL Server Analysis Services (SSAS) cube的标识符.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">AOSAuthorization(AOS授权)</span></td><br><td colspan="1">基于用户的权限,指定用户可以在表上执行的操作类型.当该属性设置为 <span class="label">None </span>, 则不执行授权检查.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">CacheLookup(缓存查找)</span></td><br><td colspan="1">确定如何将查找操作中检索到的记录缓存起来.<span class="label">CacheLookup </span>属性只存在于那些不是从其他表继承来的表中.<p></p><br><br>在继承根表中,这个属性不能通过AOT <span class="label">Properties </span>窗体,将其设为 <span class="label">EntireTable(全部表) </span>. 你也不能通过其他技术设置根表的这个属性. 例如, 不能使用 <span class="code">TreeNode </span>类的 <span class="code">AOTsetProperty </span>方法指定这个值.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ClusterIndex(集群索引)</span></td><br><td colspan="1">指定集群索引.这个属性仅用于SQL优化的目的.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ConfigurationKey(配置键)</span></td><br><td colspan="1">为表指定配置键.配置键允许系统管理员启用或禁用程序的某些部分.<br><br>和表关联的配置码,若系统未启用该配置码,则该表不会被创建到数据库,在代码调用该表时,按临时表对待.</td><br><td></td><br></tr><br><tr><br><td><span class="label">CountryRegionCodes(国家区域代码)</span></td><br><td>指定该表适用或有效的国家区域代码. 客户端框架和应用可以利用该属性,启用或禁用国家或区域的特性. 它是通过一串用逗号分隔的ISO国家代码列表的字符串实现的. 该值必须和全局地址薄中的数据匹配.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">CountryRegionContextField(国家代码上下文字段)</span></td><br><td colspan="1">指定用来标识国家上下文的字段. 该属性与 <span class="label">CountryRegionCodes </span>属性相关联.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">CreatedBy</span></td><br><td colspan="1">指示系统是否在表中的记录上,维护 <span class="code">CreatedBy </span>字段. 这个字段包含谁创建了一个特定的记录.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">CreatedDateTime</span></td><br><td colspan="1">指示系统是否在表中的记录上维护 <span class="code">CreationDate </span>和 <span class="label">CreationTime </span>字段.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">CreatedTransactionId</span></td><br><td colspan="1">指示系统是否在该表中的字段上,维护 <span class="code">CreatedTransactionId </span>字段.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">CreateRecIdIndex</span></td><br><td colspan="1">指示是否把Record ID字段设置成索引. 对那些通过RecID进行查找的表,需要把该属性设置为Yes, 比如SalesTable, SalesLine等.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">DeveloperDocumentation</span></td><br><td colspan="1">描述该表的目的,解释怎么在程序中使用它. 描述通常写成一个段落,不超过五句话.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">EntityRelationshipType</span></td><br><td colspan="1">根据common entity relationship (ER) data model表示法,对表进行分类. 一个表被归类成一个实体或关系. 一个实体表示一个对象. 一个关系表示两个对象之间的联系.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">Extends</span></td><br><td colspan="1">从该属性中指定的表,派生.当 <span class="label">SupportInheritance </span>属性设为 <span class="label">Yes </span>时,该属性为null. 要了解更多信息, 请看 <a href="http://msdn.microsoft.com/en-us/library/gg881053.aspx" target="_blank" rel="noopener">Table Inheritance Overview </a>.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">FormRef</span></td><br><td colspan="1">使用Go to main table功能时调用的Display类型的菜单名称. 指定当表被引用时,激活的Display类型的菜单项. 显示菜单项和窗体相关联.当你在报表中使用主索引字段, 该窗体可以做一报表中的一个链接. 主索引通过 <span class="code">PrimaryIndex </span>属性指定.<br><br>如果保留这个字段为空, 系统会试图显示一个和该表拥有相同名字的窗体.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ID</span></td><br><td colspan="1">系统生成的表 <span class="code">ID </span>. 要了解更多信息, 请查看 <a href="http://msdn.microsoft.com/en-us/library/aa601997.aspx" target="_blank" rel="noopener">Application Object IDs </a>.在安装时指定IDs.当模型通过AxUtil tool导入时,指定IDs. 这意味着,相同的类,在不同的安装中,有不同的IDs.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">IsLookup</span></td><br><td colspan="1">对于报表模型, 它指定当一个报表模型生成时,该表的信息是否被合并到其他引用它的表中.对于 OLAP cubes多维数据集, 它决定是否生成一个综合维度或不同维度. 你可以指定下列值之一.<br><br><em>   <span class="label">Yes </span>&#8211; 表示表中的属性可以被合并到父维度 (star schema星型架构).
+</em>   <span class="label">No </span>&#8211; 表示能够为表生成一个单独的维度(snowflake schema雪花型架构).<br><br>更多有关尺寸,星型架构,雪花架构,请看 <a href="http://go.microsoft.com/fwlink/?LinkId=115450" target="_blank" rel="noopener">Introduction to Dimensions (SQL Server 2005 Books Online) </a>.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">Label</span></td><br><td colspan="1">为表指定一个标签.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ListPageRef</span></td><br><td colspan="1">指定一个Display类型的菜单项,它指向一个可以显示该记录类型列表的窗体.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">Model</span></td><br><td colspan="1">指定表所在的模型.模型是层中根据逻辑区分的一组元素. 一个元素可以存在于一个层中的一个合适的模型中. Examples of elements are a table or class. The same element can exist in a customized version in a model in a higher layer.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">ModifiedBy</span></td><br><td colspan="1">指示系统是否在该表中的记录上,维护 <span class="code">ModifiedBy </span>字段. 这个字段记录谁最后修改了该记录.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ModifiedDateTime</span></td><br><td colspan="1">指示系统是否在该表中记录上,维护 <span class="code">ModifiedDate </span>字段. 这个字段记录该记录最后修改的日期.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ModifiedTime</span></td><br><td colspan="1">指示系统是否对该表中的字段上,维护 <span class="code">ModifiedDateTime </span>字段. 这个字段记录最后修改该记录的时间.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">Name</span></td><br><td colspan="1">指定表名.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">OccEnabled(乐观并发启用)</span></td><br><td colspan="1">指定对该表是否启用optimistic concurrency mode乐观并发模式.当该模式启用后, 未来修改数据时, 从数据库中获取的那部分数据不会被锁. 数据只有在实际的update被执行时,数据才会被锁.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">PreviewPartRef</span></td><br><td colspan="1">指定用来增强预览的 <span class="label">Info Part </span>或 <span class="label">Form Part </span>.info part 显示一个从指定query中的返回的数据字段的集合. An info part 使用元数据来描述数据如何呈现. A form part 表示到窗体的指针.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">PrimaryIndex</span></td><br><td colspan="1">指定 primary index.只有唯一的索引可以被选择.<br><br>这个属性用于数据库优化的目的,并指出哪个唯一索引可以用作缓存键caching key. 如果主索引没有指定, 具有最低ID的唯一索引会被用做缓存键caching key.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">ReplacementKey</span></td><br><td colspan="1">指定在一些窗体控件中,那些作为数据的标识符显示的字段.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">ReportRef</span></td><br><td colspan="1">指定当一个表被引用时, 被激活的那个Output类型的菜单项. 一个Output菜单项与一个报表相关联.当你在报表上使用主索引时, 该报表可以作为报表上的一个链接.主索引用 <span class="code">PrimaryIndex </span>属性指定.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">SaveDataPerCompany</span></td><br><td colspan="1">指示是否作为当前公司的数据保存.如果该属性设置为 <span class="label">No </span>, 数据保存时, 不保存公司标识符 ( <span class="code">DataAreaId </span>).<br><br><div class="alert"><br><table><br><tbody><br><tr><br><th align="left"><strong>Note</strong></th><br></tr><br><tr><br><td>如果 <span class="code">SaveDataPerCompany </span>属性设置为 Yes, 那么 form design 上的那个, 将表作为数据源的属性 <span class="code">SetCompany </span>, 也要设为 Yes.</td><br></tr><br></tbody><br></table><br></div><br><div class="alert"><br><table><br><tbody><br><tr><br><th align="left"><strong>Tip</strong></th><br></tr><br><tr><br><td>公司的所以在状态栏显示.双击它,会弹出一个可以切换到其他公司的对话框.</td><br></tr><br></tbody><br></table><br></div><br></td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">SaveDataPerPartition</span></td><br><td colspan="1">显示该表是否有一个叫做 <span class="code">Partition </span>的系统字段. 它是一个只读的系统字段.如果系统有一个 <span class="code">Partition </span>字段, 每条记录会被分配给一个 partition. Each record is kept hidden from data access operations that are run under the context of other partitions.</td><br><td>AX 2012 R2</td><br></tr><br><tr><br><td colspan="1"><span class="label">SearchLinkRefName</span></td><br><td colspan="1">指定 连接到网站上的信息的, 企业门户搜索结果中列出的关于表记录 的菜单项的名称.如果 <span class="code">SearchLinkRefType </span>属性设成一个URL, 从 <span class="code">SearchLinkRefName </span>属相列表中,选择一个连接到显示该表数据的Web part page的菜单项.<p></p><br><br>Web part pages上的窗体和报表可以显示数据.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">SearchLinkRefType</span></td><br><td colspan="1">指定 连接到网站上的信息的, 企业门户搜索结果中列出的关于表记录 的菜单项的类型.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">SingularLabel()</span></td><br><td colspan="1">指定用于在一个报表模型或cube上显示表中存储的项目的singular name.</td><br><td></td><br></tr><br><tr><br><td colspan="1"><span class="label">SupportInheritance</span></td><br><td colspan="1">将属性设为 <span class="label">Yes </span>, 可以启用其他与继承相关的属性, 如 <span class="label">Extends </span>和 <span class="label">Abstract </span>.<br><br><div class="alert"><br><table><br><tbody><br><tr><br><th align="left"><strong>Caution</strong></th><br></tr><br><tr><br><td>当你把这个值设为 <span class="label">Yes </span>, 表上的其他属性都会被丢弃,需要重新创建.</td><br></tr><br></tbody><br></table><br></div>
+
+<p>要了解更多信息, 请参阅 <a href="http://msdn.microsoft.com/en-us/library/gg881053.aspx" target="_blank" rel="noopener">Table Inheritance Overview </a>.</p></td><p></p>
+<p><td>AX 2012</td><br></p></tr><p></p>
+<p><tr></tr></p>
+<p><td colspan="1"><span class="label">SystemTable</span></td></p>
+<p><td colspan="1">指示一个表是否是作为系统表显示.它可以在导入导出过程中过滤.系统表总是在你登录时同步. This may be useful for tables that you use as soon as you log in.</td></p>
+<p><td></td><br></p>
+<p><tr></tr></p>
+<p><td colspan="1"><span class="label">TableContents</span></td></p>
+<p><td colspan="1">指定如何配置参数数据可以被客户们重用.Specifies how setup/parameter data can be reused from one customer to another. The following values are possible:</td></p>
+<ul>
+<li><span class="label">Not specified 未指定 </span>– 对于大多数表.</li>
+<li><span class="label">Default Data(默认数据) </span>– 用于与客户无关的数据,如 ZIP/Postal Codes, units 单位, and time intervals 时间间隔.</li>
+<li><span class="label">Base Data(基本数据) </span>– 用于与客户相关的数据,如 calendars, groups, and parameters.</li>
+<li><p><span class="label">Default+Base data(默认+基本数据) </span>– 用于局部有所不同的数据. 例如, 在德国会计科目表不是基于客户的, 但是在其他国家不是这样.<br><br><td></td><br><br><tr><br><td colspan="1"><span class="label">TableGroup</span></td><br><td colspan="1">决定该表属于哪个组.<a href="http://msdn.microsoft.com/en-us/library/aa623733.aspx" target="_blank" rel="noopener">Table Groups </a>提供了一个根据表包含的数据类型, 对表分类的方法. Table groups 可以用来定义,当用户在使用该表作为数据源的窗体上, 从表中更新或删除操作时, 系统是否应该提示用户. 当导出数据时,可以使用 table groups 来筛选记录.</td><br><td></td><br></tr><br><tr><br><td><span class="label">TableType</span></td><br><td>替代Microsoft Dynamics AX 2009中的 <span class="label">Temporary </span>临时表属性. 要了解更多信息, 请参阅 <a href="http://msdn.microsoft.com/en-us/library/gg863308.aspx" target="_blank" rel="noopener">Temporary Tables and the TableType Property </a>.</td><br><td>AX 2012</td><br></tr><br><tr><br><td colspan="1"><span class="label">TitleField1 </span>, <span class="label">TitleField2</span></td><br><td colspan="1">使你可以执行以下操作:</td></tr></p><p></p>
+</li>
+<li><p>将表字段数据添加到窗体标题.</p>
+</li>
+<li>在查找窗体显示附加字段. For more information, see <a href="http://msdn.microsoft.com/en-us/library/aa592952.aspx" target="_blank" rel="noopener">How to: Add a Control with a Lookup Form </a>. 在窗体上激活一个字段的查找列表时, <span class="code">TitleField1 </span>属性也被使用. 你指定给 <span class="code">TitleField1 </span>and <span class="code">TitleField2 </span>属性的字段,可以合并成键值.</li>
+<li>在tooltip中显示字段信息.<br><br><td></td><br><br><tr><br><td colspan="1"><span class="label">TypicalRowCount</span></td><br><td colspan="1">指定显示在table中的记录数.如果 <span class="code">AnalysisSelection </span>属性没有设置, <span class="code">TypicalRowCount </span>属性决定了报表生成器选择的行数.<p></p></td></tr></li>
+</ul>
+<p><span class="code">TypicalRowCount </span>属性的设置,会影响 drop-down list, list box, or a filtered list box 是否被用来选择表记录. For more information, see<a href="http://msdn.microsoft.com/en-us/library/aa632254.aspx" target="_blank" rel="noopener">Best Practices for Table Properties </a>.</p>
+<p><td></td><br></p>
+<p><tr></tr></p>
+<p><td colspan="1"><span class="label">ValidTimeStateFieldType(有效时间状态字段类型)</span></td></p>
+<p><td colspan="1">指定系统在一定时间跨度内跟踪数据时,所使用的 date-time 字段的类型.</td></p>
+<p><td>AX 2012</td><br></p>
+<p><tr></tr></p>
+<p><td colspan="1"><span class="label">Visible</span></td></p>
+<p><td colspan="1">指定当该表用作窗体或报表的数据源时的访问权.如果该表在窗体中作为数据源, 窗体中的访问权不能超出 为该表定义的访问权.</td></p>
+<p><td></td><br><br></p></tbody><br></table><br></div><br></div><br></div><p></p>
+<div><br><div class="LW_CollapsibleArea_TitleDiv"><br><div><br><p><a class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all."><span class="LW_CollapsibleArea_Title">Tables and Report Models</span></a><br><br><div class="LW_CollapsibleArea_HrDiv"><br><br><em> </em> <em><br><br></em></div><br></p></div><br></div><br><div class="sectionblock"><br><br><a id="sectionToggle1"></a>The following properties are related to report models that are used to add information to a report.
+
+   <span class="code">AnalysisSelection</span><br><em>   <span class="code">AnalysisVisibility</span>
+</em>   <span class="code">IsLookup</span><br><em>   <span class="code">SingularLabel</span>
+</em>   <span class="code">TypicalRowCount</span><br></div><br></div><br><div><br><div class="LW_CollapsibleArea_TitleDiv"><br><div><br><br><a class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all."><span class="LW_CollapsibleArea_Title">See also</span></a><br><br><div class="LW_CollapsibleArea_HrDiv"></div><br></div><br></div><br><div class="sectionblock"><br><div class="seeAlsoStyle"><a href="http://msdn.microsoft.com/en-us/library/gg731859.aspx" target="_blank" rel="noopener">Data Dictionary Node in the AOT</a></div><br></div><br></div><br></div><br></div><br></div><br></div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../dynamics_ax_2012_r2_table_field_properties/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Table Field Properties</a>
+  
+
+  
+
+  
+    <a href="../dynamics_ax_2012_r2_install_dynamics_ax_aif_iis_web_service/" class="next">Next post Dynamics AX 2012 R2 Install Dynamics AX Aif IIS Web Service &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

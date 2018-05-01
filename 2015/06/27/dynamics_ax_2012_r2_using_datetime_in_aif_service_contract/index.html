@@ -1,0 +1,444 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="&nbsp;&nbsp;&nbsp; Reinhard在AIF中使用DateTime作为服务契约的参数，与DotNet程序进行交互时，总是因为时区的问题，导致DotNet提交的System.DateTime与AIF中接收的DateTime 不一致。
+&nbsp;&nbsp;&nbsp; 这个问题着实困扰了Reinhard 许久。为了解决这个问题，Reinhard这次专门写一篇博文，通过一系列...">
+  
+  <title>Dynamics AX 2012 R2 Using DateTime In AIF Service Contract - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../08/06/dynamics_ax_2012_r2_trigger_event_when_save_records_using_datasource/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 通过数据源保存记录时触发的方法
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../22/dynamics_ax_2012_R2_remoteapp_export_project_error/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 RemoteApp导出项目报错
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 Using DateTime In AIF Service Contract</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-06-27</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><a name="5011"></a></p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/Unnamed-QQ-Screenshot201506271033134.jpg" alt="Unnamed QQ Screenshot20150627103313[4]" title="Unnamed QQ Screenshot20150627103313[4]"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com/">Reinhard</a>在AIF中使用DateTime作为服务契约的参数，与DotNet程序进行交互时，总是因为时区的问题，导致DotNet提交的System.DateTime与AIF中接收的DateTime 不一致。</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 这个问题着实困扰了<a href="http://reinhardhsu.com/">Reinhard</a> 许久。为了解决这个问题，<a href="http://reinhardhsu.com/">Reinhard</a>这次专门写一篇博文，通过一系列的实验，找到通过AIF服务契约，对DateTime进行存储、获取、比较的最佳方式。</p>
+<p></p><p><strong>1、DateTime存储实验</strong></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 在AX中，<a href="http://reinhardhsu.com/">Reinhard</a>写了三个存储DateTime方法，分别测试了System.DateTime和UtcDateTime作为服务契约参数的不同情况。这三个服务契约如下：</p>
+<table cellspacing="0" cellpadding="2" width="498" border="5"><br><tbody><br><tr><br><td valign="top" width="488"><br><br>[SysEntryPointAttribute]<br><p><strong>public</strong> <strong>void</strong> saveSystemDateTime(System.DateTime _dt)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsBegin</strong>;<br></p><p>&nbsp;&nbsp;&nbsp; table.UtcDateTime=_dt;<br></p><p>&nbsp;&nbsp;&nbsp; table.insert();<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsCommit</strong>;<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> <strong>void</strong> saveSystemDateTime2(System.DateTime _dt)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsBegin</strong>;<br></p><p>&nbsp;&nbsp;&nbsp; table.UtcDateTime=Global::clrSystemDateTime2UtcDateTime( _dt);<br></p><p>&nbsp;&nbsp;&nbsp; table.insert();<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsCommit</strong>;<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> <strong>void</strong> saveUtcDateTime( <strong>utcDateTime</strong> _utcDateTime)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsBegin</strong>;<br></p><p>&nbsp;&nbsp;&nbsp; table.UtcDateTime=_utcDateTime;<br></p><p>&nbsp;&nbsp;&nbsp; table.insert();<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsCommit</strong>;<br></p><p>}<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p></p><p>&nbsp;&nbsp;&nbsp; 接着，在VS中，<a href="http://reinhardhsu.com/">Reinhard</a>调用这三个服务契约，分别存储三个不同的System.DateTime实例，看哪个服务契约能够正确地存储DateTime。这三个日期分别是：</p>
+<table cellspacing="0" cellpadding="2" width="498" border="5"><br><tbody><br><tr><br><td valign="top" width="488"><br><br>DateTime saveSystemDateTimeDT = new DateTime(2013, 3, 3, 3, 3, 3);<br><p>DateTime saveSystemDateTime2DT = new DateTime(2014, 4, 4, 4, 4, 4);<br></p><p>DateTime saveUtcDateTimeDT = new DateTime(2015, 5, 5, 5, 5, 5);<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p></p><p>&nbsp;&nbsp;&nbsp; 调用完毕后，到AX中，查看ReinhardTest_Table中保存的日期。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/Image4.png" alt="Image[4]" title="Image[4]"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com/">Reinhard</a>发现，只有SaveUtcDateTime这个服务契约，正确保存了DotNet中System.DateTime的值。</p>
+<p></p><p><strong>结论</strong>：正确的日期存储方式是SaveUtcDateTime。</p>
+<p></p><p><strong>2、DateTime对比实验</strong></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 在AX中，<a href="http://reinhardhsu.com/">Reinhard</a>写了两个比较DateTime方法，分别测试了System.DateTime和UtcDateTime作为服务契约参数的不同情况。这两个服务契约如下：</p>
+<table cellspacing="0" cellpadding="2" width="600" border="5"><br><tbody><br><tr><br><td valign="top" width="600"><br><br>[SysEntryPointAttribute]<br><p><strong>public</strong> <strong>boolean</strong> compareUtcDateTime(<strong>utcDateTime</strong> _utcDateTime)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> table.UtcDateTime==_utcDateTime;<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> <strong>boolean</strong> compareSystemDateTime(System.DateTime _dt)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; utcDateTime</strong> dt= Global::clrSystemDateTime2UtcDateTime(_dt);<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> table.UtcDateTime==dt;<br></p><p>}<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p></p><p>&nbsp;&nbsp;&nbsp; 这里，<a href="http://reinhardhsu.com/">Reinhard</a>选择了ReinhardTest_Table表中的最后一条记录，进行比较，也就是2015-05-05 05:05:05那条。</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 接着，在VS中，<a href="http://reinhardhsu.com/">Reinhard</a>调用这两个服务契约，与同一个System.DateTime实例做比较，这个DateTime是：</p>
+<p></p><p>DateTime saveUtcDateTimeDT = new DateTime(2015, 5, 5, 5, 5, 5);</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 这个DateTime其实就是<a href="http://reinhardhsu.com/">Reinhard</a>在第一个实验中，最后一个保存的那个DateTime。不出意外的话，它应该与ReinhardTest_Table表中的最后一条记录是等价的。那么，我们来看看调用的结果吧。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/Image-1.png" alt="Image [1]" title="Image [1]"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com/">Reinhard</a>发现，只有CompareUtcDateTime这个服务契约，正确比较了DotNet中System.DateTime与AX中UtcDateTime的值。</p>
+<p></p><p><strong>&nbsp;&nbsp;&nbsp; 结论</strong>：正确的日期比较方式是CompareUtcDateTime。</p>
+<p></p><p><strong>3、DateTime获取实验</strong></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 在AX中，<a href="http://reinhardhsu.com/">Reinhard</a>写了七个获取DateTime方法，分别测试了System.DateTime和UtcDateTime作为服务契约返回值的不同情况。这七个服务契约如下：</p>
+<table cellspacing="0" cellpadding="2" width="600" border="5"><br><tbody><br><tr><br><td valign="top" width="600"><br><br>[SysEntryPointAttribute]<br><p><strong>public</strong> <strong>utcDateTime</strong> getUtcDateTime()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> table.UtcDateTime;<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> <strong>utcDateTime</strong> getUtcDateTime2()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> DateTimeUtil::applyTimeZoneOffset(table.UtcDateTime ,DateTimeUtil::getUserPreferredTimeZone());<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> <strong>utcDateTime</strong> getUtcDateTime3()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; str</strong> strDT;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> DateTimeUtil::applyTimeZoneOffset(table.UtcDateTime ,DateTimeUtil::getCompanyTimeZone());<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> System.DateTime getSystemDateTime()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> table.UtcDateTime;<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> System.DateTime getSystemDateTime2()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> DateTimeUtil::removeTimeZoneOffset(table.UtcDateTime,DateTimeUtil::getCompanyTimeZone());<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> System.DateTime getSystemDateTime3()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p>&nbsp;&nbsp;&nbsp; System.DateTime dt;<br></p><p><strong>&nbsp;&nbsp;&nbsp; utcDateTime</strong> utcDT;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p>&nbsp;&nbsp;&nbsp; utcDT=DateTimeUtil::removeTimeZoneOffset(table.UtcDateTime,DateTimeUtil::getCompanyTimeZone());<br></p><p>&nbsp;&nbsp;&nbsp; dt=Global::utcDateTime2SystemDateTime(utcDT);<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> dt;<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> System.DateTime getStringDateTime4()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; str</strong> strDT;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p>&nbsp;&nbsp;&nbsp; strDT = DateTimeUtil::toStr(table.UtcDateTime);<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> System.DateTime::Parse(strDT);<br></p><p>}<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p>&nbsp;&nbsp;&nbsp; 这里，<a href="http://reinhardhsu.com/">Reinhard</a>同样选择了ReinhardTest_Table表中的最后一条记录，将其返回给DotNet，也就是2015-05-05 05:05:05那条。</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 接着，在VS中，<a href="http://reinhardhsu.com/">Reinhard</a>调用这七个服务契约，看看他们返回给DotNet的Date<br>Time：</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/Image-2.png" alt="Image [2]" title="Image [2]"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; <a href="http://reinhardhsu.com/">Reinhard</a>发现，只有GetUtcDateTime2和GetUtcDateTime3这个两个服务契约，给DotNet返回了正确的DateTime。</p>
+<p></p><p><strong>结论</strong>：正确的日期获取方式是GetUtcDateTime2和GetUtcDateTime3。</p>
+<p></p><p><strong>4、总结</strong></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 下面，<a href="http://reinhardhsu.com/">Reinhard</a>对通过AIF服务契约，进行DateTime存储、获取、比较的正确方式，进行总结。</p>
+<p></p><p><strong>4.1、DateTime存储</strong></p>
+<table cellspacing="0" cellpadding="2" width="600" border="5"><br><tbody><br><tr><br><td valign="top" width="600"><br><br>[SysEntryPointAttribute]<br><p><strong>public</strong> <strong>void</strong> saveUtcDateTime( <strong>utcDateTime</strong> _utcDateTime)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsBegin</strong>;<br></p><p>&nbsp;&nbsp;&nbsp; table.UtcDateTime=_utcDateTime;<br></p><p>&nbsp;&nbsp;&nbsp; table.insert();<br></p><p><strong>&nbsp;&nbsp;&nbsp; ttsCommit</strong>;<br></p><p>}<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p></p><p><strong>4.2、DateTime对比</strong></p>
+<table cellspacing="0" cellpadding="2" width="600" border="5"><br><tbody><br><tr><br><td valign="top" width="600"><br><br>[SysEntryPointAttribute]<br><p><strong>public</strong> <strong>boolean</strong> compareUtcDateTime( <strong>utcDateTime</strong> _utcDateTime)<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> table.UtcDateTime==_utcDateTime;<br></p><p>}<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p></p><p><strong>4.3、DateTime获取</strong></p>
+<table cellspacing="0" cellpadding="2" width="600" border="5"><br><tbody><br><tr><br><td valign="top" width="600"><br><br>[SysEntryPointAttribute]<br><p><strong>public</strong> <strong>utcDateTime</strong> getUtcDateTime2()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> DateTimeUtil::applyTimeZoneOffset(table.UtcDateTime ,DateTimeUtil::getUserPreferredTimeZone());<br></p><p>}<br></p><p>[SysEntryPointAttribute]<br></p><p><strong>public</strong> <strong>utcDateTime</strong> getUtcDateTime3()<br></p><p>{<br></p><p>&nbsp;&nbsp;&nbsp; ReinhardTest_Table table;<br></p><p><strong>&nbsp;&nbsp;&nbsp; str</strong> strDT;<br></p><p><strong>&nbsp;&nbsp;&nbsp; select</strong> table <strong>order</strong> <strong>by</strong> table.UtcDateTime <strong>desc</strong>;<br></p><p><strong>&nbsp;&nbsp;&nbsp; return</strong> DateTimeUtil::applyTimeZoneOffset(table.UtcDateTime ,DateTimeUtil::getCompanyTimeZone());<br></p><p>}<br><br></p></td><br></tr><br></tbody><br></table>
+
+<p></p><p>&nbsp;&nbsp;&nbsp; 这次，<a href="http://reinhardhsu.com/">Reinhard</a>就分享到这里。如果同学们遇到什么问题，也欢迎和<a href="http://reinhardhsu.com/">Reinhard</a>沟通交流。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../08/06/dynamics_ax_2012_r2_trigger_event_when_save_records_using_datasource/" class="prev">&larr; Prev post Dynamics AX 2012 R2 通过数据源保存记录时触发的方法</a>
+  
+
+  
+
+  
+    <a href="../../22/dynamics_ax_2012_R2_remoteapp_export_project_error/" class="next">Next post Dynamics AX 2012 R2 RemoteApp导出项目报错 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

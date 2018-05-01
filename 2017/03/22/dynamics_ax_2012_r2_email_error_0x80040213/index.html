@@ -1,0 +1,420 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="今天Reinhard在新环境做邮件广播测试时，发现无法发送邮件，并报以下错误：
+类“CDO.Message”的 COM 对象中的方法“send”返回了错误代码 0x80040213 (&lt;未知&gt;)，此错误代码表示: 与服务器的传输连接失败。。
+Reinhard检查了电子邮件参数里的配置，与老环境中的配置一致，并没有问题。电子邮件参数和邮件模板配置方法可以参考Reinhard之前的博...">
+  
+  <title>Dynamics AX 2012 R2 电子邮件广播错误 0x80040213 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../02/09/data_analysis_ssis_package_deploy_error/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis SSIS 包部署错误 0xC0010014
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 电子邮件广播错误 0x80040213</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-03-22</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-02</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><img src="https://images2015.cnblogs.com/blog/453825/201703/453825-20170322094632408-1459031889.png" alt="img"></p>
+<p>今天<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>在新环境做邮件广播测试时，发现无法发送邮件，并报以下错误：</p>
+<p><em>类“CDO.Message”的 COM 对象中的方法“send”返回了错误代码 0x80040213 (&lt;未知&gt;)，此错误代码表示: 与服务器的传输连接失败。。</em></p>
+<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>检查了<strong>电子邮件参数</strong>里的配置，与老环境中的配置一致，并没有问题。<strong>电子邮件参数</strong>和<strong>邮件模板</strong>配置方法可以参考<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>之前的博文 <a href="http://www.cnblogs.com/msdynax/p/set-up-e-mail-for-ax.html" target="_blank" rel="noopener">Dynamics AX 2012 R2 设置E-Mail</a> 和 <a href="http://www.cnblogs.com/msdynax/p/configuring-e-mail-template.html" target="_blank" rel="noopener">Dynamics AX 2012 R2 配置E-Mail模板</a> 。</p>
+<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><h3 id="排除-Dynamics-AX-的影响因素"><a href="#排除-Dynamics-AX-的影响因素" class="headerlink" title="排除 Dynamics AX 的影响因素"></a>排除 Dynamics AX 的影响因素</h3><p>为了排除 Dynamics AX 方面的影响因素，我们用运行Telnet命令来测试下。</p>
+<h4 id="新环境"><a href="#新环境" class="headerlink" title="新环境"></a>新环境</h4><p>没有安装Telnet的可以在<strong>Windows 功能</strong>里添加。</p>
+<p><img src="https://images2015.cnblogs.com/blog/453825/201703/453825-20170322094649518-1604993611.png" alt="img"></p>
+<p>在新环境的终端中，运行telnet，连接邮件服务器的地址和端口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">欢迎使用 Microsoft Telnet Client</span><br><span class="line"></span><br><span class="line">Escape 字符为 &apos;CTRL+]&apos;</span><br><span class="line"></span><br><span class="line">Microsoft Telnet&gt; open mail.msdynax.net 25</span><br><span class="line">正在连接mail.msdynax.net...无法打开到主机的连接。 在端口 25: 连接失败</span><br><span class="line">Microsoft Telnet&gt;</span><br></pre></td></tr></table></figure>
+<p>我们看到，新环境中是连不上的。</p>
+<h4 id="老环境"><a href="#老环境" class="headerlink" title="老环境"></a>老环境</h4><p>在老环境的终端中，执行相同的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">欢迎使用 Microsoft Telnet Client</span><br><span class="line"></span><br><span class="line">Escape 字符为 &apos;CTRL+]&apos;</span><br><span class="line"></span><br><span class="line">Microsoft Telnet&gt; open mail.msdynax.net 25</span><br><span class="line"></span><br><span class="line">220 mail.msdynax.net Microsoft ESMTP MAIL Service ready at Thu, 9 Mar 2</span><br><span class="line">017 15:46:43 +0800</span><br></pre></td></tr></table></figure>
+<p>我们看到，已打开了邮件服务器的地址和端口。</p>
+<p>使用系统的Telnet命令也出现同样的故障，可以排除 Dynamics AX 方面的因素了。</p>
+<h3 id="其它影响因素"><a href="#其它影响因素" class="headerlink" title="其它影响因素"></a>其它影响因素</h3><p>既然相同的配置，在老环境里没问题，在新环境里报错，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>猜可能是以下几个地方出问题了：</p>
+<ul>
+<li>防火墙</li>
+<li>域控策略</li>
+<li>邮件服务器对客户端做了IP限制</li>
+</ul>
+<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>对这几个部分逐一做了确认，没有发现任何限制。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>无奈之下，对新环境重新安装了操作系统。装完后再进行测试，已经可以连上邮件服务器了。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题排查"><span class="toc-text">问题排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#排除-Dynamics-AX-的影响因素"><span class="toc-text">排除 Dynamics AX 的影响因素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新环境"><span class="toc-text">新环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#老环境"><span class="toc-text">老环境</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它影响因素"><span class="toc-text">其它影响因素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-text">解决方法</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/" class="prev">&larr; Prev post Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a>
+  
+
+  
+
+  
+    <a href="../../../02/09/data_analysis_ssis_package_deploy_error/" class="next">Next post Data Analysis SSIS 包部署错误 0xC0010014 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

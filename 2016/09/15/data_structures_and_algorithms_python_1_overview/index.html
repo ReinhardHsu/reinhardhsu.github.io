@@ -1,0 +1,463 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="Python是Reinhard毕业后自学的第一门语言，可是因为工作中用不到，学了忘，忘了又学，断断续续学了很多遍，也没有学好。  
+我们都知道Python在科研领域有很广泛的应用，这次趁着做数据分析的契机，重温下Python，希望是最后一遍。  
+关键概念Python是一门解释型语言。在写完代码后，不用编译，就能直接运行。Python也是动态型的语言。所以在写代码的时候，不会收到任何类型错误...">
+  
+  <title>Data Structures and Algorithms Python － 1、概览 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../19/data_analysis_different_roles_of_bi_field/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis 商业智能领域里的不同角色
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../data_structures_and_algorithms_dotnet_2_array_and_arraylist/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms DotNet － 2、数组和ArrayList
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Structures and Algorithms Python － 1、概览</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-15</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/python/">Python</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>Python是<a href="http://ReinhardHsu.com" title="Reinhard Hsu">Reinhard</a>毕业后自学的第一门语言，可是因为工作中用不到，学了忘，忘了又学，断断续续学了很多遍，也没有学好。  </p>
+<p>我们都知道Python在科研领域有很广泛的应用，这次趁着做数据分析的契机，重温下Python，希望是最后一遍。  </p>
+<h2 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h2><p>Python是一门解释型语言。在写完代码后，不用编译，就能直接运行。<br>Python也是动态型的语言。所以在写代码的时候，不会收到任何类型错误的提示。写代码的时候会收到语法错误。程序运行的时候会收到运行时错误。<br>运行的时候，由Python解释器来解释你写的Python程序。  </p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>Python是面向对象的语言，所有的东西都是对象，并且在Python中，type和class指的是同一种东西。  </p>
+<p>Python中数据的内建类型有：int，float，str，list，dict。</p>
+<h3 id="创建字面值"><a href="#创建字面值" class="headerlink" title="创建字面值"></a>创建字面值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>Python中，<strong>一切都是引用</strong>。上面的代码，会创建一个新的对象，然后将x指向这个对象。如果等号右边是另一个引用的话，会将x指向那个引用。</p>
+<h3 id="创建非字面对象"><a href="#创建非字面对象" class="headerlink" title="创建非字面对象"></a>创建非字面对象</h3><pre><code>variable=type(other_object_values)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y=<span class="string">'6'</span></span><br><span class="line">x=int(y)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<p>这里，y是对str对象A的引用。变量x是一个到对象B的引用，这个对象B是通过使用y指向的对象A来创建的。  </p>
+<h2 id="在对象上调用方法"><a href="#在对象上调用方法" class="headerlink" title="在对象上调用方法"></a>在对象上调用方法</h2><p>对象一般而言，除了保存着数据，还有与其相关的一些行为，这些行为称作<em>方法</em>。<br>面向对象语言当中，有两类方法，分别是：</p>
+<ol>
+<li>赋值方法：会改变已有对象。</li>
+<li>访问方法：访问对象的当前状态，但不能修改它。调用访问方法时，会返回一个新的对象引用。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="string">'how are you'</span></span><br><span class="line">y=x.upper()</span><br></pre></td></tr></table></figure>
+<p>upper方法在x指向的对象上调用，并返回一个新的对象。x的值并没有改变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myList=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">myList.reverse()</span><br></pre></td></tr></table></figure>
+<p>reverse方法会对现有对象A进行赋值，对象A就是myList指向的对象。一旦调用，赋值不能撤销。</p>
+<p>所有的类都包含访问方法。如果一个类没有访问方法，放进去值后，就拿不出来了。<br>有的类是没有赋值方法的。如果一个类不包含赋值方法，这个类就是不可变的。<strong>修改不可变的对象时，修改的不是对象本身，而是改变了引用的指向</strong>。</p>
+<h2 id="实现一个类"><a href="#实现一个类" class="headerlink" title="实现一个类"></a>实现一个类</h2><p>类，就是object的一种特殊类型，这种特殊类型，是对数据和方法的定义。<br>对象本身，其实就是一个集合，这个集合里放着很多引用，这些引用指向对象中存储的信息。<br>每个类都包含一个特殊的方法——constructor。构造器的任务是创建对象的一个实例，设置对象自身内部数据的引用。<br>类中有一个特殊的变量——self，它总是指向当前对象，必须是每个类方法的第一个参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,month,day,year,speakText)</span>:</span></span><br><span class="line">        self.name=name</span><br><span class="line">        self.month=month</span><br><span class="line">        self.day=day</span><br><span class="line">        self.year=year</span><br><span class="line">        self.speakText=speakText</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">speak</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.speakText</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getName</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">birthDate</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> str(self.month)+<span class="string">"/"</span>+str(self.day)+<span class="string">"/"</span>+str(self.year)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">changeBark</span><span class="params">(self,bark)</span>:</span></span><br><span class="line">        self.speakText=bark</span><br><span class="line"></span><br><span class="line">boyDog=Dog(<span class="string">"Mesa"</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">2014</span>, <span class="string">"Wooof"</span>)    </span><br><span class="line">print(boyDog.speak())</span><br><span class="line">boyDog.changeBark(<span class="string">"wofywofy"</span>)</span><br><span class="line">print(boyDog.speak())</span><br></pre></td></tr></table></figure>
+<h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>Python中大量的内建类和类型，都已经有了操作符重载。例如int，就实现了加法操作符。在Python，<strong>add</strong> 方法，可以实现加法操作符。当两个int相加时，会调用该方法，该方法会创建一个新的int对象。  </p>
+<pre><code>x+y  =&gt;  x.__add__(y)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,month,day,year,speakText)</span>:</span></span><br><span class="line">        self.name=name</span><br><span class="line">        self.month=month</span><br><span class="line">        self.day=day</span><br><span class="line">        self.year=year</span><br><span class="line">        self.speakText=speakText</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">speak</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.speakText</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getName</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">birthDate</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> str(self.month)+<span class="string">"/"</span>+str(self.day)+<span class="string">"/"</span>+str(self.year)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">changeBark</span><span class="params">(self,bark)</span>:</span></span><br><span class="line">        self.speakText=bark</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self,otherDog)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Dog(<span class="string">"Puppy of "</span>+self.name+<span class="string">" and "</span>+otherDog.name,</span><br><span class="line">                   self.month,self.day,self.year+<span class="number">1</span>,</span><br><span class="line">                   self.speakText+otherDog.speakText)</span><br><span class="line"></span><br><span class="line">boyDog=Dog(<span class="string">"Mesa"</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">2014</span>, <span class="string">"Wooof"</span>)    </span><br><span class="line">girlDog=Dog(<span class="string">"Seq"</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">2014</span>,<span class="string">"BarkBark"</span>)</span><br><span class="line">puppy=boyDog+girlDog</span><br><span class="line">print(puppy.speak())</span><br><span class="line">print(puppy.name)</span><br></pre></td></tr></table></figure>
+<h2 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h2><p>在Python中导入模块的方式有两种，方便的方式，和安全的方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> *</span><br><span class="line">t=Turtle()</span><br></pre></td></tr></table></figure>
+<p>这是方便的方式，但是不安全。可能你的代码里也有Turtle这个标识符。也可能，Turtle类中的其他标识符跟你的类冲突。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line">t=turtle.Turtle()</span><br></pre></td></tr></table></figure>
+<p>这是安全的方法，因为可以通过命名空间，将你的模块和turtle模块区分开。</p>
+<h2 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h2><p>Python是强制缩进的，多少有点没有个性。</p>
+<h2 id="Main函数"><a href="#Main函数" class="headerlink" title="Main函数"></a>Main函数</h2><p>程序一开始就执行main函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    t=turtle.Turtle()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>有时候我们的模块会独立执行，有时候会导入到其他模块中执行。<br>上面的if语句，可以让我们控制main函数的执行。如果独立执行，就执行main函数，如果是导入到其他模块中，就不会执行main函数。</p>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="一条记录存储在一行的情况"><a href="#一条记录存储在一行的情况" class="headerlink" title="一条记录存储在一行的情况"></a>一条记录存储在一行的情况</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">filename=input(<span class="string">"input the name:"</span>)</span><br><span class="line">file=open(filename,<span class="string">"r"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">  print(line)</span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<h3 id="一条记录存储到多行的情况"><a href="#一条记录存储到多行的情况" class="headerlink" title="一条记录存储到多行的情况"></a>一条记录存储到多行的情况</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">filename=input(<span class="string">"input the name:"</span>)</span><br><span class="line">file=open(filename,<span class="string">"r"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> firstLine!=<span class="string">""</span>:</span><br><span class="line">  secondLine=file.readLine().strip()</span><br><span class="line">  thirdLine=file.readLine().strip()</span><br><span class="line"></span><br><span class="line">  firstLine=file.readLine().strip()</span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><p>多态性的字面意思，就是多种形式。放到计算机编程上，就是一个行为，可以以多种方式实现。  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EndFillCommand</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">draw</span><span class="params">(self,turtle)</span>:</span></span><br><span class="line">        turtle.end_fill()</span><br></pre></td></tr></table></figure>
+<p>这里的pass，是一个占位符，不会做任何事情。</p>
+<h2 id="累加器模式"><a href="#累加器模式" class="headerlink" title="累加器模式"></a>累加器模式</h2><p>之前的方式是loop模式，这次看看accumulator模式，也就是累加器模式。先初始化一个累加器，然后用循环将数据加到累加器中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PyList</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.items=[]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">append</span><span class="params">(self,item)</span>:</span></span><br><span class="line">        self.items=self.items+[item]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> self.items:</span><br><span class="line">            <span class="keyword">yield</span> c</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    list=PyList()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>):</span><br><span class="line">        list.append(i)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> list:</span><br><span class="line">        print(num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这里实现了一个容器类，<strong>iter</strong>  代表这个类是可迭代的。如果需要下个元素时，yield会将下个元素让出。这样的话，需要多少元素，就访问多少元素，不会多访问。</p>
+<h2 id="用Tkinter实现一个GUI"><a href="#用Tkinter实现一个GUI" class="headerlink" title="用Tkinter实现一个GUI"></a>用Tkinter实现一个GUI</h2><p>在窗体上，需要放很多widget，如标签，按钮等。frame也是一种widget，它持有其他的widget。<br>布局，就是向窗体上放widget。Tkinter提供了三种布局：</p>
+<ol>
+<li>pack：类似于WPF中的Stack布局</li>
+<li>grid：类似于WPF中的Grid布局</li>
+<li>place：类似于绝对布局</li>
+</ol>
+<p>有了布局之后，还需要frame widget，来持有其他widget。</p>
+<p>继承，在面向对象里，有时候你要实现一个类，这个类与其他类很像。</p>
+<h2 id="XML文件"><a href="#XML文件" class="headerlink" title="XML文件"></a>XML文件</h2><p>之前读取特定格式文件的弊端，是如果以后结构变动，比如添加了新的属性，调整了属性的顺序，也需要更新程序，然后老的格式的文件就不能用了。这显然是不能接受的。<br>用XML文件，就可以向后兼容。XML文档的第一行是特定的标识：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8" standalone="no" ?&gt;</span><br></pre></td></tr></table></figure>
+<p>接下来是元素或者节点。每个节点通过一个tag或一对闭合的tag来标识。<br>每个XML元素可能有一些属性，比如GoToCommand可能像这样：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Command</span> <span class="attr">x</span>=<span class="string">"1.0"</span> <span class="attr">y</span>=<span class="string">"1.0"</span> <span class="attr">width</span>=<span class="string">"1.0"</span> <span class="attr">color</span>=<span class="string">"#000000"</span>&gt;</span>GoTo<span class="tag">&lt;/<span class="name">Command</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面那个元素的文本是GoTo，有时候文本也叫做子数据。<br>可以用 <strong>str</strong> 给类实现一个生成XML元素的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GoToCommand</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&lt;Command x="'</span>+str(self.x)+<span class="string">'" y="'</span>+str(self.y)+<span class="string">'" width="'</span>+\</span><br><span class="line">            str(self.width)+<span class="string">'" color="'</span>+self.color+<span class="string">'"&gt;GoTo&lt;/Command&gt;'</span></span><br></pre></td></tr></table></figure>
+<h2 id="读取XML文件"><a href="#读取XML文件" class="headerlink" title="读取XML文件"></a>读取XML文件</h2><p>因为XML文件不是面向行的文件，所以要用parser解析。解析，是根据语法规则写的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.dom.minidom</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    filename=<span class="string">"test.xml"</span></span><br><span class="line">    xmldoc=xml.dom.minidom.parse(filename)</span><br><span class="line">    commands=xmldoc.getElementsByTagName(<span class="string">"GraphicsCommands"</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> command <span class="keyword">in</span> commands:</span><br><span class="line">        print(type(command))</span><br><span class="line">        com=command.firstChild.data.strip()</span><br><span class="line">        att=command.attributes</span><br><span class="line">        print(att[<span class="string">"color"</span>].value.strip())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这里attr变量是一个字典。<br>子数据，也就文本，可以用firstChild.data拿到。<br>strip()可以省略任何不想要的空白，tab，和字符串中的newline符号。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关键概念"><span class="toc-text">关键概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建字面值"><span class="toc-text">创建字面值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建非字面对象"><span class="toc-text">创建非字面对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在对象上调用方法"><span class="toc-text">在对象上调用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现一个类"><span class="toc-text">实现一个类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符重载"><span class="toc-text">操作符重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入模块"><span class="toc-text">导入模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缩进"><span class="toc-text">缩进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main函数"><span class="toc-text">Main函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取文件"><span class="toc-text">读取文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一条记录存储在一行的情况"><span class="toc-text">一条记录存储在一行的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一条记录存储到多行的情况"><span class="toc-text">一条记录存储到多行的情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#累加器模式"><span class="toc-text">累加器模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用Tkinter实现一个GUI"><span class="toc-text">用Tkinter实现一个GUI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML文件"><span class="toc-text">XML文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取XML文件"><span class="toc-text">读取XML文件</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../19/data_analysis_different_roles_of_bi_field/" class="prev">&larr; Prev post Data Analysis 商业智能领域里的不同角色</a>
+  
+
+  
+
+  
+    <a href="../data_structures_and_algorithms_dotnet_2_array_and_arraylist/" class="next">Next post Data Structures and Algorithms DotNet － 2、数组和ArrayList &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

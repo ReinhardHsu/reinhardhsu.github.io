@@ -1,0 +1,429 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="在博文Dynamics AX R2 业务系列中，Reinhard对这个系列做了一个规划，下面我们就按照规划开始说业务吧。
+1、销售的主要职责    其实这里说的职责主要是针对销售文员，并非整天外面满世界跑业务的销售业务员。
+    简单点说，销售的主要职责，是为客户提供产品。
+    全面点说，销售负责报价、接单，把客户订单传达给生产计划部门，跟踪订单的生产进度，组织发货，跟客户对账结算，跟...">
+  
+  <title>Dynamics AX 2012 R2 业务系列-销售业务流程 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../../2016/01/28/dynamics_ax_2012_r3_warehouse_and_transportation_management/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R3 仓库和运输管理系列 – 仓库管理模块安装与配置
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../22/dynamics_ax_2012_r2_aif_no_endpoint_behavior_named_clientendpointbehavior/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 AIF No Endpoint Behavior Named clientEndpointBehavior
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 业务系列-销售业务流程</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-12-31</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><a href="http://reinhardhsu.com/wp-content/uploads/2015/12/Image5.png"><span style="font-size: large;"><img src="http://reinhardhsu.com/wp-content/uploads/2015/12/Image5_thumb.png" alt="Image(5)" title="Image(5)"></span></a></p>
+<p><span style="font-size: large;">    在博文</span><a href="http://www.cnblogs.com/msdynax/p/4708147.html" target="_blank" rel="noopener"><span style="font-size: large;">Dynamics AX R2 业务系列</span></a><span style="font-size: large;">中，</span><a href="http://reinhardhsu.com/"><span style="font-size: large;">Reinhard</span></a><span style="font-size: large;">对这个系列做了一个规划，下面我们就按照规划开始说业务吧。</span></p>
+<h2 id="1、销售的主要职责"><a href="#1、销售的主要职责" class="headerlink" title="1、销售的主要职责"></a>1、销售的主要职责</h2><p><span style="font-size: large;">    其实这里说的职责主要是针对销售文员，并非整天外面满世界跑业务的销售业务员。</span></p>
+<p><span style="font-size: large;">    简单点说，销售的主要职责，是为客户提供产品。</span></p>
+<p><span style="font-size: large;">    全面点说，销售负责报价、接单，把客户订单传达给生产计划部门，跟踪订单的生产进度，组织发货，跟客户对账结算，跟催收款，维护好客户关系。</span><span id="more-558"></span></p>
+<h2 id="2、销售的主要工作内容"><a href="#2、销售的主要工作内容" class="headerlink" title="2、销售的主要工作内容"></a>2、销售的主要工作内容</h2><p><span style="font-size: large;">报价</span></p>
+<p><span style="font-size: large;">合同评审</span></p>
+<p><span style="font-size: large;">签订合同</span></p>
+<p><span style="font-size: large;">跟踪采购、生产进度</span></p>
+<p><span style="font-size: large;">组织发货</span></p>
+<p><span style="font-size: large;">月底对账</span></p>
+<p><span style="font-size: large;">跟催收款</span></p>
+<h2 id="3、销售的主要业务流程和系统单据"><a href="#3、销售的主要业务流程和系统单据" class="headerlink" title="3、销售的主要业务流程和系统单据"></a>3、销售的主要业务流程和系统单据</h2><p><a href="http://reinhardhsu.com/wp-content/uploads/2015/12/Image3.png"><span style="font-size: large;"><img src="http://reinhardhsu.com/wp-content/uploads/2015/12/Image_thumb3.png" alt="Image" title="Image"></span></a></p>
+<p><span style="font-size: large;">     我们来看看销售的主要业务流程。</span></p>
+<ol>
+<li><span style="font-size: large;">通过一系列的市场活动，销售人员得到了客户或潜在客户的采购意向。 </span></li>
+<li><span style="font-size: large;">（报价）销售文员创建一个销售报价，发给客户或可能的客户。 </span></li>
+<li><span style="font-size: large;">（签订合同）销售文员创建销售订单，录入物料、价格、交期等信息。（销售报价 其实可以只在线下做，系统里面可以直接从创建销售订单这一步开始） </span></li>
+<li><span style="font-size: large;">（签订合同）销售文员需要做销售订单确认，过账后，把确认单打印出来，发给客户。确认单这个东西，其实是客户对咱们公司的一个订货证明，并且双方都同意订单里的细节。 </span></li>
+<li><span style="font-size: large;">（跟踪采购、生产进度）销售文员跟踪原料的采购进度，和产品的生产进度。 </span></li>
+<li><span style="font-size: large;">（组织发货）销售文员根据交期，创建仓库订单。同时，空卡车停在仓库门口，准备装货。 </span></li>
+<li><span style="font-size: large;">（组织发货）公司的物流人员为卡车分配仓库订单。 </span></li>
+<li><span style="font-size: large;">（组织发货）仓库工人开始领料，装车。 </span></li>
+<li><span style="font-size: large;">（组织发货）装车完毕后，物流人员打印发运清单，随货物一起发给客户。 </span></li>
+<li><span style="font-size: large;">（组织发货）接着，物流人员打印提货单，让卡车司机签字。卡车司机签完字，将提货单还给物流经理。卡车就可以出发了。提货单能够证明货物已经被卡车司机接收，并最终会投递给客户。 </span></li>
+<li><span style="font-size: large;">（组织发货）当货物被接收后，物流人员创建一个装箱单，过账并打印出来，发给客户。装箱单是客户收到货物的证明。 </span></li>
+<li><span style="font-size: large;">（月底对账）销售文员安排财务开票，过账发票，发给客户。发票意味着客户必须为已经收到的货物付钱。 </span></li>
+<li><span style="font-size: large;">（跟催收款）跟催客户的应收账款。 </span></li>
+</ol>
+<p>&nbsp;</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、销售的主要职责"><span class="toc-text">1、销售的主要职责</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、销售的主要工作内容"><span class="toc-text">2、销售的主要工作内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、销售的主要业务流程和系统单据"><span class="toc-text">3、销售的主要业务流程和系统单据</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../../2016/01/28/dynamics_ax_2012_r3_warehouse_and_transportation_management/" class="prev">&larr; Prev post Dynamics AX 2012 R3 仓库和运输管理系列 – 仓库管理模块安装与配置</a>
+  
+
+  
+
+  
+    <a href="../../22/dynamics_ax_2012_r2_aif_no_endpoint_behavior_named_clientendpointbehavior/" class="next">Next post Dynamics AX 2012 R2 AIF No Endpoint Behavior Named clientEndpointBehavior &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

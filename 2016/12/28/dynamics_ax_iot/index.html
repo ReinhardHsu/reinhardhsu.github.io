@@ -1,0 +1,451 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="物联网物联网的概念在这两年非常火，包括近期很火的共享单车初创公司——摩拜单车，在产品中运用了Azure Iot物联网技术。但是，物联网并不是一个新词汇，也没有特别深奥的含义，它的核心就是用网络将物品连接起来。这里的网络，可以是局域网，比如我们身边的公交卡、门禁卡、学校食堂的饭卡。也可以是互联网，比如上面说的摩拜单车。
+这两年政府报告中一直在提互联网+的概念，所以大家印象中物联网就和互联网联系...">
+  
+  <title>Dynamics AX 2012 的工业物联网解决方案 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../../2017/01/04/data_analysis_weekend_project_enron/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Weekend Project 安然事件
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 在BI分析中建立数据仓库的必要性
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 的工业物联网解决方案</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-12-28</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/iot/">IOT</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="物联网"><a href="#物联网" class="headerlink" title="物联网"></a>物联网</h2><p>物联网的概念在这两年非常火，包括近期很火的共享单车初创公司——摩拜单车，在产品中运用了<a href="https://azure.microsoft.com/zh-cn/services/iot-hub/" target="_blank" rel="noopener">Azure Iot物联网</a>技术。但是，物联网并不是一个新词汇，也没有特别深奥的含义，它的核心就是用网络将物品连接起来。这里的网络，可以是局域网，比如我们身边的公交卡、门禁卡、学校食堂的饭卡。也可以是互联网，比如上面说的摩拜单车。</p>
+<p>这两年政府报告中一直在提互联网+的概念，所以大家印象中物联网就和互联网联系得比较紧密。</p>
+<p>另一个在政府报告中常被提到，并且与物联网相关的概念，是工业4.0 ，甚至有人提出要在2025年弯道超车实现工业4.0。我们都知道，工业3.0是自动化、信息化，工业4.0是智能化、物联网。未来十年物联网相关的技术也一定会在工业领域被大量地应用。</p>
+<p>与此同时，Dynamics AX在制造业有着大量的客户，所以，下一个风口浪尖微软自然也不愿错过，早早地就开始布局了。我们看到Dynamics 365的架构中，已经有了<a href="https://azure.microsoft.com/zh-cn/services/iot-hub/" target="_blank" rel="noopener">Azure Iot物联网平台</a>的身影。</p>
+<p><img src="https://images2015.cnblogs.com/blog/453825/201612/453825-20161212112114042-1416242613.png" alt="img"></p>
+<h2 id="Dynamics-AX-当下的工业物联网解决方案"><a href="#Dynamics-AX-当下的工业物联网解决方案" class="headerlink" title="Dynamics AX 当下的工业物联网解决方案"></a>Dynamics AX 当下的工业物联网解决方案</h2><p>这次<a href="http://cnblogs.com/reinhard" target="_blank" rel="noopener">Reinhard</a>先不讲最新的<a href="https://azure.microsoft.com/zh-cn/services/iot-hub/" target="_blank" rel="noopener">Azure Iot</a>，而是讲讲我们Dynamics AX当下的工业物联网解决方案是怎样的。</p>
+<h3 id="需要采集的数据"><a href="#需要采集的数据" class="headerlink" title="需要采集的数据"></a>需要采集的数据</h3><p>生产制造企业里需要采集进Dynamics AX里的数据有很多，比如：</p>
+<ul>
+<li>工序报工</li>
+<li>产品的出入库</li>
+<li>关键机器的传感器产生的数据流</li>
+</ul>
+<p>这些数据可能都要进到Dynamics AX系统中。</p>
+<h3 id="用于采集数据的设备"><a href="#用于采集数据的设备" class="headerlink" title="用于采集数据的设备"></a>用于采集数据的设备</h3><p>用于采集数据的设备更是多种多样的，比如：</p>
+<ul>
+<li>单片机</li>
+<li>工控机</li>
+<li>手持采集终端</li>
+<li>我们的手机</li>
+</ul>
+<p>这些设备都可以用于采集数据。</p>
+<h3 id="项目中面临的挑战"><a href="#项目中面临的挑战" class="headerlink" title="项目中面临的挑战"></a>项目中面临的挑战</h3><p>我们在项目中都面临哪些挑战呢？</p>
+<h4 id="需要对接的设备多种多样，不同设备的系统可能不一样"><a href="#需要对接的设备多种多样，不同设备的系统可能不一样" class="headerlink" title="需要对接的设备多种多样，不同设备的系统可能不一样"></a>需要对接的设备多种多样，不同设备的系统可能不一样</h4><p>比如工控机有Windows和Linux，手机有安卓和iOS。手持采集终端在过去一二十年以WinCE系统的居多，而最近几年安卓系统的手持采集终端也有大量的应用，比如顺丰定制的第五代手持采集终端。<img src="https://img.alicdn.com/imgextra/i2/1330161/TB2q79VX2TJXuFjSspeXXapipXa_!!1330161.jpg" alt="img"></p>
+<h4 id="采集传感器的数据"><a href="#采集传感器的数据" class="headerlink" title="采集传感器的数据"></a>采集传感器的数据</h4><p>即使设备厂商提供了通信协议的细节，也需要花费大量的精力去测试，短则几个月，长则一两年，才能真正稳定下来。在这类项目中，与机器对接的效果，直接影响了项目的成败。</p>
+<h4 id="网络环境不稳定"><a href="#网络环境不稳定" class="headerlink" title="网络环境不稳定"></a>网络环境不稳定</h4><p>断网、丢包等问题，层出不穷，可能会让你焦头烂额。</p>
+<h4 id="现场环境恶劣"><a href="#现场环境恶劣" class="headerlink" title="现场环境恶劣"></a>现场环境恶劣</h4><p>震动、强腐蚀等环境因素，都会缩短设备寿命。</p>
+<h4 id="所依赖的系统的可用性"><a href="#所依赖的系统的可用性" class="headerlink" title="所依赖的系统的可用性"></a>所依赖的系统的可用性</h4><p>如果你的物联网系统严重依赖于其它系统，那么其它系统的可用性，一定程度上也会影响你的物联网系统。</p>
+<h4 id="物联网系统的速度"><a href="#物联网系统的速度" class="headerlink" title="物联网系统的速度"></a>物联网系统的速度</h4><p>以工序报工的场景为例，我们知道车间关心的是完工数量，工人关心的是计件数量（这直接跟工人的收入挂钩）。如果工人报工的时候需要等很长时间，影响了计件数量也就是收入，那就别指望车间能给你这个系统什么好的评价。</p>
+<h3 id="如何应对挑战"><a href="#如何应对挑战" class="headerlink" title="如何应对挑战"></a>如何应对挑战</h3><h4 id="需要对接的设备多种多样"><a href="#需要对接的设备多种多样" class="headerlink" title="需要对接的设备多种多样"></a>需要对接的设备多种多样</h4><ul>
+<li>如果设备是可以选择的，那么可以根据自身的技术栈，选择相应的设备。比如你只会做Windows应用，那么就选个Windows系统的电脑吧。</li>
+<li>如果设备是确定的，那么最好使用跨平台的解决方案，将来万一需要更换设备的时候，选择上更从容一点，移植起来也方便。虽然<a href="http://cnblogs.com/reinhard" target="_blank" rel="noopener">Reinhard</a>可以做iOS、安卓、WinCE、Windows、Linux的原生应用，但是还是会选择一个跨平台的方案，以节省开发和维护的精力。</li>
+</ul>
+<h4 id="采集传感器的数据-1"><a href="#采集传感器的数据-1" class="headerlink" title="采集传感器的数据"></a>采集传感器的数据</h4><p>这部分还是推荐跟设备原厂，或有经验的第三方进行合作，看看有没有现成的东西可以用，花点小钱，却会让你的项目进度突飞猛进。</p>
+<h4 id="网络环境不稳定-1"><a href="#网络环境不稳定-1" class="headerlink" title="网络环境不稳定"></a>网络环境不稳定</h4><p>这部分也是比较关键的部分，因为车间的工作是不能停的，<strong>如果你的方案里，没有离线的解决方案，那么一定会让你焦头烂额</strong>。</p>
+<h4 id="现场环境恶劣-1"><a href="#现场环境恶劣-1" class="headerlink" title="现场环境恶劣"></a>现场环境恶劣</h4><p>在选择设备的时候，这里有两种方案，其实是考虑了成本的。</p>
+<ul>
+<li>用贵的工业级设备。比如<a href="http://cnblogs.com/reinhard" target="_blank" rel="noopener">Reinhard</a>在一个项目里用了价值一万多的工业级设备，共三台其中一台备用，保修2年，总共用了4年，报废了2台，还有一台在苟延残喘。中间过保了还花钱修过几次屏幕和硬盘。平均设备成本不到9000元/年。</li>
+<li>用便宜的易替代的设备，多备几台备用的。<a href="http://cnblogs.com/reinhard" target="_blank" rel="noopener">Reinhard</a>在另一个项目里，换了价值两千的设备，共四台其中两台备用，保修2年，过保后再坏了就不修了。共用了2年，报废了2台，还有2台状况良好。平均设备成本不到4000元/年。</li>
+</ul>
+<h4 id="所依赖的系统的可用性-1"><a href="#所依赖的系统的可用性-1" class="headerlink" title="所依赖的系统的可用性"></a>所依赖的系统的可用性</h4><p><strong>在设计的时候最好能够保证物联网系统的独立性，不要依附于其他系统，而是要在其他系统都挂掉的情况下，依然能够正常工作（至少是一段时间）</strong>。这样做的好处有：</p>
+<ul>
+<li>易于移植。在所依赖的其它系统升级后，甚至被更换掉的时候，只需要做少量的移植工作即可。</li>
+<li>故障影响面小，可以最大程度地将影响控制在物联网系统范围内。毫无疑问，一旦有严重的故障发生，需要停止Dynamics AX生产环境进行修复的话，牵涉面太广，你得给全公司发OA通告或邮件。而物联网系统独立的情况下，只需给相关人员打一个电话，将物联网系统暂停几分钟做修复或升级，影响也不会太大。</li>
+<li>掌控性。保持物联网系统的独立性的一个最大的好处就是感觉一切尽在掌握之中，虽然有点夸张，但事实也确实如此。</li>
+<li>可用性。物联网系统的可用性不再受制于其它系统。</li>
+</ul>
+<h4 id="物联网系统的速度-1"><a href="#物联网系统的速度-1" class="headerlink" title="物联网系统的速度"></a>物联网系统的速度</h4><p>我们知道Dynamics AX里工艺卡过账是需要一些时间的。如果是需要实时报工的场景，那么就应该考虑将创建工艺卡，和过账的流程分开，毕竟工人要做的是如实汇报自己的工作，过账并不是他们关心的，不要让过账的等待影响了他们的工作效率。</p>
+<h3 id="如何设计"><a href="#如何设计" class="headerlink" title="如何设计"></a>如何设计</h3><p>在设计上，<a href="http://cnblogs.com/reinhard" target="_blank" rel="noopener">Reinhard</a>尽量站在更高的抽象层面来讲，这样指导意义更大些。因为内容较多，<a href="http://cnblogs.com/reinhard" target="_blank" rel="noopener">Reinhard</a>后续有机会再讲。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#物联网"><span class="toc-text">物联网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dynamics-AX-当下的工业物联网解决方案"><span class="toc-text">Dynamics AX 当下的工业物联网解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要采集的数据"><span class="toc-text">需要采集的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用于采集数据的设备"><span class="toc-text">用于采集数据的设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目中面临的挑战"><span class="toc-text">项目中面临的挑战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#需要对接的设备多种多样，不同设备的系统可能不一样"><span class="toc-text">需要对接的设备多种多样，不同设备的系统可能不一样</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#采集传感器的数据"><span class="toc-text">采集传感器的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络环境不稳定"><span class="toc-text">网络环境不稳定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#现场环境恶劣"><span class="toc-text">现场环境恶劣</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所依赖的系统的可用性"><span class="toc-text">所依赖的系统的可用性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#物联网系统的速度"><span class="toc-text">物联网系统的速度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何应对挑战"><span class="toc-text">如何应对挑战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#需要对接的设备多种多样"><span class="toc-text">需要对接的设备多种多样</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#采集传感器的数据-1"><span class="toc-text">采集传感器的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络环境不稳定-1"><span class="toc-text">网络环境不稳定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#现场环境恶劣-1"><span class="toc-text">现场环境恶劣</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所依赖的系统的可用性-1"><span class="toc-text">所依赖的系统的可用性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#物联网系统的速度-1"><span class="toc-text">物联网系统的速度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何设计"><span class="toc-text">如何设计</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../../2017/01/04/data_analysis_weekend_project_enron/" class="prev">&larr; Prev post Data Analysis Weekend Project 安然事件</a>
+  
+
+  
+
+  
+    <a href="../../12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/" class="next">Next post Dynamics AX 2012 R2 在BI分析中建立数据仓库的必要性 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

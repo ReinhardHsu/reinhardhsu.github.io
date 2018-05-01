@@ -1,0 +1,588 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="t检验分布比较样本与总体的不同比较两个样本之间的不同  
+
+独立样本
+非独立样本
+
+自由度有三个东西，一次选择一个。第一次选择，可以有三个选项。第二次选择，有两个选项。最后一次选择，其实选项意境确定了，没得选了。这样，只有前两次选择时，可以自由选择。我们说自由度是2 。再比如数独9宫格，3x3的矩阵，每一列上数字的和是9，每一行上数字的和也是9 。它的自由度其实是4，因为填完4个数字后，其他...">
+  
+  <title>Data Analysis t验证 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../22/data_analysis_weekend_project_stroop_effect/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Weekend Project 斯特鲁普效应(Stroop effect)
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../14/data_analysis_hypothesis/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis 假设
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis t验证</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-10-15</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/statistics/">Statistics</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="t检验"><a href="#t检验" class="headerlink" title="t检验"></a>t检验</h1><h2 id="分布"><a href="#分布" class="headerlink" title="分布"></a>分布</h2><p>比较样本与总体的不同<br>比较两个样本之间的不同  </p>
+<ul>
+<li>独立样本</li>
+<li>非独立样本</li>
+</ul>
+<h2 id="自由度"><a href="#自由度" class="headerlink" title="自由度"></a>自由度</h2><p>有三个东西，一次选择一个。第一次选择，可以有三个选项。第二次选择，有两个选项。最后一次选择，其实选项意境确定了，没得选了。<br>这样，只有前两次选择时，可以自由选择。我们说自由度是2 。<br>再比如数独9宫格，3x3的矩阵，每一列上数字的和是9，每一行上数字的和也是9 。它的自由度其实是4，因为填完4个数字后，其他格子的数字就固定了。<br>也就是n*n的矩阵，它的自由度是(n-1)*(n-1)  </p>
+<p>t统计量用自由度描述。比如样本量30，那么自由度是30-1=29，如果t值是0.05，那么单尾验证的t统计量是1.699 。</p>
+<h2 id="决策"><a href="#决策" class="headerlink" title="决策"></a>决策</h2><p>比如以前的均值是$\mu=$ 6.07。我们假设：  </p>
+<ul>
+<li>$H_0:\mu=\bar{x}$，也就是今年的样本与之前相比没有什么显著的不同。</li>
+<li>$H_1:\mu\ne\bar{x}$，也就是今年的样本与之前相比有显著的不同，具体不同的方向是显著变大还是显著变小这里并不关心。</li>
+</ul>
+<p>今年的样本量是n=500，自由度是df=500-1=499 。先算样本的均值$\bar{x}$=6.47，再算出每一项的平方偏差。所有平方偏差的和是SS=78.298，再用SS除以499就是Variance=0.1569，在用Variance开平方，就是样本的标准偏差S是 $S=\sqrt{\frac{\sum{(x_i-\bar{x})}}{n-1}}$  =0.396。那么t统计量是<br>$t=\frac{\bar{x}-\mu}{S/\sqrt{n}}$  ＝22.36。<br>通过查看t值表，可以知道达到这个t统计值的可能性非常小，所以我们这里拒绝$H_0$假设。</p>
+<h2 id="P值"><a href="#P值" class="headerlink" title="P值"></a>P值</h2><p>$H_0:\mu=10$，也就是没有显著不同。<br>$H_A:\mu\ne10$，也就是有显著不同。<br>$\alpha=0.05$</p>
+<p>样本是 5,19,11,23,12,7,3,21<br>t统计量是$t=\frac{\bar{x}-\mu}{S/\sqrt{n}}$ ＝0.9775<br>那么对于双尾验证，在t分布图的左右两侧的区域，标记出$\pm9.775$的区域。<br>我们得到t统计量是0.9775，自由度是7，查看t值表，找到自由度是7的行，在看t统计值是0.9775的列，意味着上尾和下尾的P值都在0.15到0.2之间。也就是下尾$0.15&lt;\frac{1}{2}P&lt;0.2$，上尾$0.15&lt;\frac{1}{2}P&lt;0.2$，那么 0.3&lt;P&lt;0.4 。这里也可以使用<a href="http://www.graphpad.com/quickcalcs/pValue1/" target="_blank" rel="noopener">GraphPad软件</a>进行计算，输入t=0.9775和DF=7，算出双尾P值是0.3609。这个值表示没有显著的不同。因为$p&gt;\alpha$，所以我们不能拒绝零假设。</p>
+<h2 id="租金"><a href="#租金" class="headerlink" title="租金"></a>租金</h2><p>一个地区的公寓的平均租金是1830，一家租赁公司想看自己的公寓的租金是否有明显不同。他们随机选取一个n＝25的样本，样本的平均租金M=1700，样本的标准差S=200，下面为他们进行样本t检验。<br>$H_0:\mu=1830$，也就是没有显著不同。<br>$H_A:\mu\ne1830$，也就是有显著不同。<br>$\alpha=0.05$  </p>
+<p>下面先算出$\alpha$水平是0.05时，双尾检验的t临界值。自由度是24，临界值是$\pm2.064$。<br>接下来再算t，$t=\frac{M-\mu_0}{S/\sqrt{n}}$ ＝-3.25。<br>因为t统计量&lt;t临界值，我们认为样本的租金比整体要显著得低，所以拒绝$H_0$假设，也就是做出接受对立假设的决策。  </p>
+<h3 id="Cohen’s-d"><a href="#Cohen’s-d" class="headerlink" title="Cohen’s d"></a>Cohen’s d</h3><p>$Cohen’s d=\frac{\bar{x}-\mu_0}{S}$，这里除的是标准差，不是标准偏差。<br>这里，房租的$Cohen’s d=\frac{\bar{x}-\mu_0}{S}=-0.65$ ，</p>
+<h3 id="置信区间"><a href="#置信区间" class="headerlink" title="置信区间"></a>置信区间</h3><p>如果样本来自新的总体，需要通过接受或拒绝零假设做出统计决策。除了这以外，我们还想计算总体均值会落入的区间。<br>在这个例子中，我们希望获取一个最有可能包含这家租赁公司所有公寓真实平均租金的区间。<br>这个例子中使用了$\alpha=0.05$级别的双尾验证，所以上尾和下尾分别是0.25% ，那么中间部分就有95% ，所以可以得到95%的置信区间。<br>这里，我们先看看临界值高于或低于平均值多少钱。<br>1个标准误差=$\frac{S}{\sqrt{n}}=\frac{200}{\sqrt{25}}=40$。$\alpha=0.05$级别的双尾验证的临界值是$\pm2.064$个标准误差。所以临界值对应的价格是1617.44和1782.56 。<br>误差界限=t*标准偏差=$t\frac{S}{\sqrt{n}}$=82.56 ，这里t是标准误差数，$\frac{S}{\sqrt{n}}$是标准误差。误差界限是置信区间的一半。<br>如果样本量n=100时，$\alpha=0.05$级别的双尾验证的临界值是1.984个标准误差，这时候1个标准误差是20，误差界限变为39.68  。<em>也就是在增大样本量时，自由度变得更大，误差界限变得更小，分布由之前的宽矮变得瘦高</em>。<br><em>t值表中，95%置信区间对应的每个尾部是0.025</em> 。</p>
+<h2 id="相依样本"><a href="#相依样本" class="headerlink" title="相依样本"></a>相依样本</h2><p>之前看的是某个样本与总体参数的不同，下面对比两个相依样本。如果同一名受试者参加两次测试，则是相依样本，叫做Within-Subject Designs 。</p>
+<h3 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h3><p>一个是qwer键盘，一个是abcd键盘，查看一组受试人员使用两种键盘打错单词的情况。<br>$H_0:\mu_Q=\mu_A$<br>$H_A:\mu_Q\ne\mu_A$</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>qwer</th>
+<th>abcd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n</td>
+<td>25</td>
+<td>25</td>
+</tr>
+<tr>
+<td>$\bar{x}$</td>
+<td>$\bar{x}_Q=5.08$</td>
+<td>$\bar{x}_A=7.8$</td>
+</tr>
+<tr>
+<td>S=3.69</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>t=-3.6856</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$\alpha=0.05,t=\pm2.064$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cohen’s d =-0.737</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>这里差异点的估计即$\mu_Q-\mu_A=5.08-7.8=-2.72$。<br>这里差异的样本标准偏差S，先算出D，即qwer列与abcd列中每一行的差，再用D算标准偏差，S=3.69 。注意这里应该除以n-1 。<br>这里t统计量是$t=\frac{\mu_Q-\mu_A}{S/\sqrt{n}}=\frac{-2.72}{3.69/\sqrt{25}}=-3.6856$ 。<br>这里样本量是25，自由度是24，$\alpha=0.05$级别的双尾验证的临界值是$\pm2.064$。<br>这里t统计量要比$\alpha=0.05$级别的双尾验证的临界值的下尾要小，所以我们认为有显著差异，应该拒绝零假设。<br><em>使用qwer键盘的错误，比abcd键盘显著地要少。并且因为是实验性设计，所以可以做出因果陈述，所以可以说键盘类型和错误数量之间存在因果关系。</em><br>这里，效应量衡量指标$Cohen’s d =\frac{M_D}{S_D}=\frac{\bar{x}_{Q}-\bar{x}_{A}}{S}=\frac{-2.72}{3.69}=-0.737 $<br>这里，置信区间$CI=M_D\pm t_{critical}\frac{S_D}{\sqrt{n}}=-2.72\pm 2.064\frac{3.69}{\sqrt{25}}=(-4.24,1.2)$<br>平均下来，qwer键盘的错误数，要比abcd键盘少1到4个。  </p>
+<h2 id="相依样本t检验（Dependent-samples-t-test）的设计类型"><a href="#相依样本t检验（Dependent-samples-t-test）的设计类型" class="headerlink" title="相依样本t检验（Dependent-samples t-test）的设计类型"></a>相依样本t检验（Dependent-samples t-test）的设计类型</h2><h3 id="重复衡量设计"><a href="#重复衡量设计" class="headerlink" title="重复衡量设计"></a>重复衡量设计</h3><p>在键盘实验中，总体是用户使用不同类型的键盘，在30秒内输入20个单词的错误数量，这种设计叫做重复衡量设计。<br>$H_0:\mu_Q=\mu_A$，即假设两个总体的均值将相同  </p>
+<h3 id="纵向设计"><a href="#纵向设计" class="headerlink" title="纵向设计"></a>纵向设计</h3><p>在一个时间点衡量一个变量，在晚些时候的某个时间点再衡量相同的变量。想知道时间1和时间2的该变量是否有显著差异。<br>$H_0:\mu_{time1}=\mu_{time2}$</p>
+<h3 id="预期检验和后期检验"><a href="#预期检验和后期检验" class="headerlink" title="预期检验和后期检验"></a>预期检验和后期检验</h3><p>先衡量某个变量，再进行某种处理，然后处理后再对同一样本衡量同一变量，看看处理措施是否导致了显著效应。<br>$H_0:\mu_{pre}=\mu_{post}$</p>
+<h3 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h3><p>t分布要比正太分布胖矮一些<br>当知道总体参数时，使用z检验，当不知道总体参数时，使用t检验。  </p>
+<h4 id="词汇量"><a href="#词汇量" class="headerlink" title="词汇量"></a>词汇量</h4><p>随机选取1000名4岁儿童，平均每句使用3个单词，标准偏差1.2。4年后，这些孩子8岁，进行同一实验，平均每句使用12个单词，标准偏差2.7 。<br>这个实验属于因变量样本t检验(Dependent-samples t-test)，也属于纵向试验（Longitudinal）。<br>其中，儿童的年龄时自变量，平均每句使用的单词数是因变量。<br>实验中可能的零假设是从4到8岁，儿童的词汇量不变。可能的对立假设是儿童的词汇量显著增加。根据这些假设，我们应采用单尾检验。<br>样本量为1000，自由度为999，$\alpha=0.05$级别的单尾验证的临界值的1.646。<br>如果从这两个样本抽象出一个新的正太分布，新的平均值是$x_D=\bar{x}_2-\bar{x}_1=12-3=9$，新的标准偏差是$S_D=\sqrt{S_1^2+S_2^2}=\sqrt{1.2^2+2.7^2}=2.955$。<br>使用刚刚计算出来的$\bar{X}_D$和$S_D$，计算t统计量。$t=\frac{\bar{x}_D-0}{S_D/\sqrt{n}}=\frac{9-0}{2.955/\sqrt{1000}}=96.32$。<br>对t统计量和临界值进行比较，我们应该拒绝零假设。</p>
+<h2 id="效应量-Effect-Size"><a href="#效应量-Effect-Size" class="headerlink" title="效应量(Effect Size)"></a>效应量(Effect Size)</h2><p>调查研究的一个重要方面是效应量。<br>在试验研究中，或存在处理变量的研究中，效应量是指处理效应的大小。<br>在非试验研究中，效应量是指变量之间的关系强度。<br>在z检验和t检验中，最简单的效应量衡量是均值差异。<br>在z检验或单样本t检验中，均值差异等于$\bar{x}-\mu$。当变量的含义很容易明白时，均值差异很有用。  </p>
+<h3 id="效应量度量的类型"><a href="#效应量度量的类型" class="headerlink" title="效应量度量的类型"></a>效应量度量的类型</h3><h4 id="差异度量"><a href="#差异度量" class="headerlink" title="差异度量"></a>差异度量</h4><ol>
+<li>均值差异，</li>
+<li>标准化差异。常用的标准化差异度量是Cohen’s d 。</li>
+</ol>
+<h4 id="相关度量"><a href="#相关度量" class="headerlink" title="相关度量"></a>相关度量</h4><ul>
+<li>$r^2$，表示某个变量的变化比例，也就是两个变量的相关性</li>
+</ul>
+<h3 id="统计显著性"><a href="#统计显著性" class="headerlink" title="统计显著性"></a>统计显著性</h3><p>统计显著性，表示我们拒绝零假设，还表示我们的结果不太可能是偶然发生的（或者抽样错误导致的）。  </p>
+<p>在判断某个调查研究结果是否有意义时，我们从下面几方面入手：  </p>
+<ol>
+<li>我们度量什么？</li>
+<li>效应多大？</li>
+<li>在解释时能排除随机因素？</li>
+<li>能排除潜在变量？</li>
+</ol>
+<h3 id="Cohen’s-d-1"><a href="#Cohen’s-d-1" class="headerlink" title="Cohen’s d"></a>Cohen’s d</h3><p>是标准化的均值差异，先算出均值差异，再做一个归一化，即除以样本的标准偏差。<br>$d=\frac{\bar{x}-\mu}{S}$  </p>
+<h3 id="r-2"><a href="#r-2" class="headerlink" title="$r^2$"></a>$r^2$</h3><p>相关度量中的$r^2$，是表示两个变量之间的关系程度，有时也称为确定系数（coefficient of determination）。比例范围从0到1，表示关系强度。0表示完全没有关系，1表示完全相关。<br>$r^2=\frac{t^2}{t^2+df}$，这里的t是从检验中获取的值，不是临界值。  </p>
+<h3 id="报告结果"><a href="#报告结果" class="headerlink" title="报告结果"></a>报告结果</h3><p>依次包含以下内容  </p>
+<h4 id="描述统计量-M-SD"><a href="#描述统计量-M-SD" class="headerlink" title="描述统计量(M,SD)"></a>描述统计量(M,SD)</h4><p>形式可以是</p>
+<ul>
+<li>文本</li>
+<li>图表</li>
+<li>表格</li>
+</ul>
+<h4 id="推论统计量"><a href="#推论统计量" class="headerlink" title="推论统计量"></a>推论统计量</h4><p>可以是假设检验，也可以是置信区间，也可以是两者。  </p>
+<h5 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h5><ul>
+<li>执行的那种检验，例如单样本t检验</li>
+<li>检验的统计值，例如t值</li>
+<li>检验的自由度</li>
+<li>p值</li>
+<li>检验的方向，例如单尾检验，双尾检验</li>
+<li>做出决策时使用的$\alpha$水平</li>
+</ul>
+<p>对于很多学科，我们使用APA(美国心理学会) style来报告假设检验的结果:<br>t(df)=x.xx,p=.xx,direction<br>例如，t(24)=-2.50,p&lt;.05,one-tailed</p>
+<h4 id="置信区间-1"><a href="#置信区间-1" class="headerlink" title="置信区间"></a>置信区间</h4><ul>
+<li>Confidence level，例如95%</li>
+<li>下限</li>
+<li>上限</li>
+<li>是什么的CI，也就是置信区间的用途，能给我们带来什么信息。是单个均值的置信区间还是两个均值之间的差异的置信区间。</li>
+</ul>
+<p>APA style来报告置信区间:<br>关于均值差异的置信区间;95% CI=(4,6)</p>
+<h4 id="度量的效应量"><a href="#度量的效应量" class="headerlink" title="度量的效应量"></a>度量的效应量</h4><p>可以是Cohen’s d，也可以是$r^2$，也可以两者都有。<br>APA style来报告：<br>d=x.xx<br>$r^2=.xx$<br>例如：<br>d=0.25<br>$r^2=.17$  </p>
+<h3 id="一个完整的单样本t检验"><a href="#一个完整的单样本t检验" class="headerlink" title="一个完整的单样本t检验"></a>一个完整的单样本t检验</h3><p>所用到的公式：<br>自由度，df=n-1<br>均值的标准误差，表示样本均值与真实的总体均值平均相差多少。等于样本的标准偏差除以样本量的平方根，$SEM=\frac{S}{\sqrt{n}}$<br>单样本t检验，等于样本均值减去总体均值，再除以均值的标准误差，$t=\frac{\bar{x}-\mu}{SEM}$<br>误差界限，等于t临界值乘以均值的标准误差，Margin of error = t critical * SEM<br>置信区间，等于样本均值加减误差界限，$CI=\bar{x}\pm Margin Of Error $<br>Cohen’s d ，表明对于n的样本来说，d% 的因变量差异是由调整带来的。等于均值差异除以样本的标准偏差，$Cohen’s d=\frac{\bar{x}-\mu}{S}$<br>$r^2=\frac{t^2}{t^2+df}$  </p>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p>研究法律的效力，该法律对开车使用手机进行处罚。统计实施该法律前一年，及实施后一年，开车使用手机引发的交通事故数量。他们预想，该法律会降低开车使用手机所引发的交通事故数量。  </p>
+<h5 id="研究类型"><a href="#研究类型" class="headerlink" title="研究类型"></a>研究类型</h5><p>属于 Dependent-samples t-test 和 Pre-test,post-test</p>
+<h5 id="dependent-variable因变量"><a href="#dependent-variable因变量" class="headerlink" title="dependent variable因变量"></a>dependent variable因变量</h5><p>开车时使用手机引发的交通事故数量</p>
+<h5 id="treatment自变量"><a href="#treatment自变量" class="headerlink" title="treatment自变量"></a>treatment自变量</h5><p>处罚开车时使用手机者的法律</p>
+<h5 id="零假设"><a href="#零假设" class="headerlink" title="零假设"></a>零假设</h5><p>开车时使用手机所引发的交通事故数量没有显著变化</p>
+<h5 id="对立假设"><a href="#对立假设" class="headerlink" title="对立假设"></a>对立假设</h5><p>开车时使用手机所引发的交通事故数量显著降低</p>
+<h5 id="t检验-1"><a href="#t检验-1" class="headerlink" title="t检验"></a>t检验</h5><p>单尾检验，负方向</p>
+<h5 id="误差分数"><a href="#误差分数" class="headerlink" title="误差分数"></a>误差分数</h5><p>这里有两列数字，一列实施法律前一年，10个州因开车使用手机所引发的事故数量。另一列是法律实施后一年，10个州因开车使用手机所引发的事故数量。<br>用后期检验减去预期检验，算出平均值</p>
+<h5 id="t临界值"><a href="#t临界值" class="headerlink" title="t临界值"></a>t临界值</h5><p>在$\alpha=0.05$时的t临界值是-1.833</p>
+<h5 id="标准误差"><a href="#标准误差" class="headerlink" title="标准误差"></a>标准误差</h5><p>Standard deviation of the differences 标准偏差是$S_D=1.33$<br>Standard error of the mean 标准误差是$SEM=\frac{S_D}{\sqrt{n}}=\frac{1.33}{\sqrt{10}}=0.42$</p>
+<h5 id="t统计量"><a href="#t统计量" class="headerlink" title="t统计量"></a>t统计量</h5><p>$t=\frac{\bar{x}-\mu}{SEM}=\frac{-3}{0.42}=-7.13$ </p>
+<h5 id="决策-1"><a href="#决策-1" class="headerlink" title="决策"></a>决策</h5><p>根据t-statistic和t-critical的值，我们认为结果有统计上的显著性。<br>所以我们应该拒绝零假设<br>因为p&lt;0.05  </p>
+<h5 id="Cohen’s-d-2"><a href="#Cohen’s-d-2" class="headerlink" title="Cohen’s d"></a>Cohen’s d</h5><p>$Cohen’s d =\frac{\bar{x}_{pre}-\bar{x}_{post}}{S_{pre-post}}=\frac{-3}{1.33}=-2.26$</p>
+<h5 id="置信区间-2"><a href="#置信区间-2" class="headerlink" title="置信区间"></a>置信区间</h5><p>误差界限=$t critical \times SEM$，这里t临界值要使用95%的区间，自由度是9，t临界值是2.262，$2.262 * 0.42=0.95$<br>$CI: \bar{x}_D\pm 0.95=-3\pm 0.95=(-3.95,-2.05)$</p>
+<h2 id="独立样本"><a href="#独立样本" class="headerlink" title="独立样本"></a>独立样本</h2><h3 id="相依样本（重复测量）"><a href="#相依样本（重复测量）" class="headerlink" title="相依样本（重复测量）"></a>相依样本（重复测量）</h3><p><strong>受试者内的设计</strong></p>
+<ul>
+<li>两种条件，这两种条件可以是对照组和处理组，或两种处理类型</li>
+<li>纵向设计，在一个时间点测量该变量，然后在另一个时间点再次测量该变量，看变量是否有变化</li>
+<li>预期检验，后期检验，</li>
+</ul>
+<h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ul>
+<li>控制个体差异。对某人实施某一处理措施，下次再实施同一处理措施，同一人还是会出现相同的差异<ul>
+<li>使用更少的受试者。</li>
+<li>成本更低</li>
+<li>花费时间更少</li>
+<li>花费更少</li>
+</ul>
+</li>
+</ul>
+<h4 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h4><ul>
+<li>残留效应。第一次测试数学后，学生的数学能力会增强。第二次再次测试数学的时候，就不知道结果是否会受到第一次测试的影响。</li>
+<li>顺序会影响结果。第一次吃了一个药丸，第二次又吃了一个药丸，不知道这两个药丸是否会相互作用，按照这种顺序服用的话会影响结果。</li>
+</ul>
+<h3 id="独立样本-1"><a href="#独立样本-1" class="headerlink" title="独立样本"></a>独立样本</h3><p><strong>受试者之间的测试。需要更多的受试者。优势和劣势刚好和相依样本相反。</strong><br>需要随机选择两组受试者来接受两种处理措施。需要更大的样本量来控制样本差异。</p>
+<ul>
+<li>实验性检验</li>
+<li>观察检验</li>
+</ul>
+<h3 id="样本误差"><a href="#样本误差" class="headerlink" title="样本误差"></a>样本误差</h3><p>$t-statistic=\frac{Difference between means}{standard error}$<br>这里，standard error 标准误差的计算方法变了，是一个正太分布减去另一个正太分布所获得的新的正太分布数据。<br>这里，用均值$\mu_1$和标准偏差$\sigma_1$来表示正太分布数据。<br>$N(\mu_1,\sigma_1)-N(\mu_2,\sigma_2)=N(\mu_1-\mu_2,\sqrt{\sigma_1^2-\sigma_2^2})$<br>新数据集的标准偏差<br>$SD=\sqrt{S_1^2+S_2^2}$<br>我们可以看出，新数据集的标准偏差，要大于单个数据集的标准偏差。<br>对于t检验，标准误差是 $ standard error=\frac{S}{\sqrt{n}}=\frac{\sqrt{S_1^2+S_2^2}}{\sqrt{n}}=\sqrt{\frac{S_1^2+S_2^2}{n}}=\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}$<br>自由度$df=(n_1-1)+(n_2-1)=n_1+n_2-2$  </p>
+<h3 id="例子－餐厅价格"><a href="#例子－餐厅价格" class="headerlink" title="例子－餐厅价格"></a>例子－餐厅价格</h3><p>对比两个地方的餐饮店，看是否有价格差异。</p>
+<h4 id="要比较两个样本，需要哪些数据"><a href="#要比较两个样本，需要哪些数据" class="headerlink" title="要比较两个样本，需要哪些数据"></a>要比较两个样本，需要哪些数据</h4><ul>
+<li>样本的均值</li>
+<li>每个样本的大小</li>
+<li>样本的标准差</li>
+</ul>
+<h4 id="样本的均值"><a href="#样本的均值" class="headerlink" title="样本的均值"></a>样本的均值</h4><p>两个样本的均值是 $\bar{x}_G=8.94,\bar{x}_W=11.14$  </p>
+<h4 id="样本的标准偏差"><a href="#样本的标准偏差" class="headerlink" title="样本的标准偏差"></a>样本的标准偏差</h4><p>两个样本的Sample Standard Deviation标准偏差是 $S_G=2.65,S_W=2.18$ 。这里因为将两家餐厅作为两个样本看待，所以要除以n-1，而不是n。<a href="https://en.wikipedia.org/wiki/Bessel%27s_correction" target="_blank" rel="noopener">Bessel’s correction</a>。电子表格中公式stdev(a1:a11)可以计算样本的标准偏差。  </p>
+<h4 id="均值的标准误差"><a href="#均值的标准误差" class="headerlink" title="均值的标准误差"></a>均值的标准误差</h4><p>Standard Error of the mean 标准误差SEM是 $S_{\bar{x}_G-\bar{x}_W}=\sqrt{\frac{S_G^2}{n_G}+\frac{S_W^2}{n_W}}=0.85$。这个标准误差，是两家餐厅的用餐费用的预期差异，所以写成$S_{\bar{x}_G-\bar{x}_W}$，但是也可以写成SE或SEM。  </p>
+<h4 id="t统计量-1"><a href="#t统计量-1" class="headerlink" title="t统计量"></a>t统计量</h4><p>t统计量，$\frac{\bar{x}_G-\bar{x}_W}{S_{\bar{x}_G-\bar{x}_W}}$ 和 $\frac{\bar{x}_W-\bar{x}_G}{S_{\bar{x}_G-\bar{x}_W}}$ 都是计算t统计量的公式，只是正负数而已。我们这里使用的是双尾检验，所以t统计量是正是负都没关系。上面两个公式算出$t=\pm 2.59$。  </p>
+<h4 id="双尾检验的t临界值"><a href="#双尾检验的t临界值" class="headerlink" title="双尾检验的t临界值"></a>双尾检验的t临界值</h4><p>这里的自由度是 $Degrees of freedom = n_G+n_W-2=30$<br>$\alpha=0.05$级别的双尾检验的t-critical是 $t-critical=\pm 2.042$  </p>
+<h4 id="决策-2"><a href="#决策-2" class="headerlink" title="决策"></a>决策</h4><p>因为t统计量在$\alpha=0.05$级别的双尾检验的上尾和下尾区域内，所以我们认为两家餐厅的价格在统计上有显著差异。所以要拒绝零假设。<br>从t值表中我们可以看出，t=2.58，DF＝30的P值在0.005和0.01之间。从GraphPad上可以算出，P值是0.0150。这个值确实要比$\alpha=0.05$低。  </p>
+<h3 id="例子－药物"><a href="#例子－药物" class="headerlink" title="例子－药物"></a>例子－药物</h3><p>治疗粉刺的药物A，在受试者脸上做实验，四周后统计祛除粉刺的情况。药物B也在另外几个受试者脸上试验。<br>$\bar{x}_A=33.5\%,S_A=8.89\%$<br>$\bar{x}_B=31.2\%,S_B=10.16\%$<br>$H_0:\mu_A=\mu_B$<br>$H_A:\mu_A\ne \mu_B$  </p>
+<h4 id="t统计量-2"><a href="#t统计量-2" class="headerlink" title="t统计量"></a>t统计量</h4><p>$t=\frac{\bar{x}_A-\bar{x}_B}{\sqrt{\frac{S_A^2}{n_A}+\frac{S_B^2}{n_B}}}=0.4$  </p>
+<h4 id="t临界值-1"><a href="#t临界值-1" class="headerlink" title="t临界值"></a>t临界值</h4><p>这里的自由度是 $Degrees of freedom = n_G+n_W-2=6+5-2=9$<br>$\alpha=0.05$级别的双尾检验的t-critical是 $t-critical=\pm 2.262$  </p>
+<h4 id="决策-3"><a href="#决策-3" class="headerlink" title="决策"></a>决策</h4><p>根据我们的t临界值和t统计量，0.4没有落在上尾和下尾的区域中，我们认为在统计上没有显著差异，应该接受零假设。  </p>
+<h3 id="例子－男性鞋子多还是女性鞋子多"><a href="#例子－男性鞋子多还是女性鞋子多" class="headerlink" title="例子－男性鞋子多还是女性鞋子多"></a>例子－男性鞋子多还是女性鞋子多</h3><p>$n_F=7,n_M=11$<br>$\bar{x}_F=33.14,S_F=18$<br>$\bar{x}_M=31.36,S_M=34.27$<br>$H_0:\mu_F=\mu_M$<br>$H_A:\mu_F\ne \mu_M$  </p>
+<h4 id="标准误差-1"><a href="#标准误差-1" class="headerlink" title="标准误差"></a>标准误差</h4><p>$Standard\ Error =\sqrt{\frac{S_F^2}{n_F}+\frac{S_M^2}{n_M}}=15.73 $</p>
+<h4 id="t统计量-3"><a href="#t统计量-3" class="headerlink" title="t统计量"></a>t统计量</h4><p>$t-statistic=\frac{\bar{x}_F-\bar{x}_M}{SE}=0.96$</p>
+<h4 id="决策-4"><a href="#决策-4" class="headerlink" title="决策"></a>决策</h4><p>这里的自由度是 $Degrees of freedom = n_G+n_W-2=7+11-2=16$<br>$\alpha=0.05$级别的双尾检验的t-critical是 $t-critical=\pm 2.12$<br>根据我们的t临界值和t统计量，0.96没有落在上尾和下尾的区域中，我们认为在统计上没有显著差异，应该拒绝零假设。</p>
+<h4 id="置信区间-3"><a href="#置信区间-3" class="headerlink" title="置信区间"></a>置信区间</h4><p>男性和女性拥有鞋子数量的真实差异的置信区间，$CI:\bar{x}\pm t * SE$<br>这里，$\bar{x}$的取值是$\pm15.14$，t临界值的取值是$\pm2.12$，SE的取值是15.73<br>女性减去男性的话，置信区间是(-18.19,48.47)  </p>
+<h4 id="性别与鞋子"><a href="#性别与鞋子" class="headerlink" title="性别与鞋子"></a>性别与鞋子</h4><p>男女所拥有的鞋子数量的差异，有多少比例可以归因于性别？<br>也就是平均只差异15.14中，有多少可以解释为某些人是男性，某些人是女性？用下面的公式<br>$r^2=\frac{t^2}{t^2+df}=0.0548$<br>即5.48%的差异，是由性别造成的，剩下的94.52%可以解释为其它因素，我们不确定是什么，需要展开其它统计学检验才能查明。</p>
+<h4 id="合并方差"><a href="#合并方差" class="headerlink" title="合并方差"></a>合并方差</h4><p>如果两个样本的样本量不同，我们需要通过合并方差，来纠正样本量<br>$S_P^2=\frac{SS_1+SS_2}{df_1+df_2}$<br>比如有两个样本，<br>X=5,6,1,-4<br>Y=3,7,8</p>
+<p>$SS_X=\sum{(x_i-\bar{x})^2}=62$<br>$SS_Y=\sum{(y_i-\bar{y})^2}=14$<br>$Pooled\ variance=S_P^2=\frac{SS_1+SS_2}{df_1+df_2}=\frac{62+14}{5}=15.2$<br>$Standard\ error=S_{\bar{x}-\bar{y}}=\sqrt{\frac{S_p^2}{n_1}+\frac{S_p^2}{n_2}}=\sqrt{\frac{15.2}{4}+\frac{15.2}{3}}=2.98$<br>$t-statistic=\frac{\bar{x}-\bar{y}}{S_{\bar{x}-\bar{y}}}=\frac{2-6}{2.98}=-1.34$  </p>
+<p>$\alpha0.05的t-critical=\pm 2.571$<br>所以我们接受零假设。</p>
+<h3 id="T-test的假设"><a href="#T-test的假设" class="headerlink" title="T-test的假设"></a>T-test的假设</h3><ol>
+<li>X和Y应该是来自两个独立总体的随机样本</li>
+<li>总体的分布应该是正太分布。</li>
+<li>样本数据可以用来估计总体方差</li>
+<li>总体方差应该大概相等</li>
+</ol>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#t检验"><span class="toc-text">t检验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分布"><span class="toc-text">分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自由度"><span class="toc-text">自由度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#决策"><span class="toc-text">决策</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#P值"><span class="toc-text">P值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#租金"><span class="toc-text">租金</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cohen’s-d"><span class="toc-text">Cohen’s d</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#置信区间"><span class="toc-text">置信区间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相依样本"><span class="toc-text">相依样本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#键盘"><span class="toc-text">键盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相依样本t检验（Dependent-samples-t-test）的设计类型"><span class="toc-text">相依样本t检验（Dependent-samples t-test）的设计类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重复衡量设计"><span class="toc-text">重复衡量设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#纵向设计"><span class="toc-text">纵向设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预期检验和后期检验"><span class="toc-text">预期检验和后期检验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#习题"><span class="toc-text">习题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#词汇量"><span class="toc-text">词汇量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效应量-Effect-Size"><span class="toc-text">效应量(Effect Size)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#效应量度量的类型"><span class="toc-text">效应量度量的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#差异度量"><span class="toc-text">差异度量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关度量"><span class="toc-text">相关度量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计显著性"><span class="toc-text">统计显著性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cohen’s-d-1"><span class="toc-text">Cohen’s d</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#r-2"><span class="toc-text">$r^2$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#报告结果"><span class="toc-text">报告结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述统计量-M-SD"><span class="toc-text">描述统计量(M,SD)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#推论统计量"><span class="toc-text">推论统计量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#假设检验"><span class="toc-text">假设检验</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#置信区间-1"><span class="toc-text">置信区间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#度量的效应量"><span class="toc-text">度量的效应量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个完整的单样本t检验"><span class="toc-text">一个完整的单样本t检验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#研究类型"><span class="toc-text">研究类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dependent-variable因变量"><span class="toc-text">dependent variable因变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#treatment自变量"><span class="toc-text">treatment自变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#零假设"><span class="toc-text">零假设</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对立假设"><span class="toc-text">对立假设</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t检验-1"><span class="toc-text">t检验</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#误差分数"><span class="toc-text">误差分数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t临界值"><span class="toc-text">t临界值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#标准误差"><span class="toc-text">标准误差</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t统计量"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#决策-1"><span class="toc-text">决策</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Cohen’s-d-2"><span class="toc-text">Cohen’s d</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#置信区间-2"><span class="toc-text">置信区间</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#独立样本"><span class="toc-text">独立样本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相依样本（重复测量）"><span class="toc-text">相依样本（重复测量）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优势"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#劣势"><span class="toc-text">劣势</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#独立样本-1"><span class="toc-text">独立样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#样本误差"><span class="toc-text">样本误差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子－餐厅价格"><span class="toc-text">例子－餐厅价格</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#要比较两个样本，需要哪些数据"><span class="toc-text">要比较两个样本，需要哪些数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#样本的均值"><span class="toc-text">样本的均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#样本的标准偏差"><span class="toc-text">样本的标准偏差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#均值的标准误差"><span class="toc-text">均值的标准误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t统计量-1"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#双尾检验的t临界值"><span class="toc-text">双尾检验的t临界值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#决策-2"><span class="toc-text">决策</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子－药物"><span class="toc-text">例子－药物</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#t统计量-2"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t临界值-1"><span class="toc-text">t临界值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#决策-3"><span class="toc-text">决策</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子－男性鞋子多还是女性鞋子多"><span class="toc-text">例子－男性鞋子多还是女性鞋子多</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准误差-1"><span class="toc-text">标准误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t统计量-3"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#决策-4"><span class="toc-text">决策</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#置信区间-3"><span class="toc-text">置信区间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性别与鞋子"><span class="toc-text">性别与鞋子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#合并方差"><span class="toc-text">合并方差</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#T-test的假设"><span class="toc-text">T-test的假设</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../22/data_analysis_weekend_project_stroop_effect/" class="prev">&larr; Prev post Data Analysis Weekend Project 斯特鲁普效应(Stroop effect)</a>
+  
+
+  
+
+  
+    <a href="../../14/data_analysis_hypothesis/" class="next">Next post Data Analysis 假设 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

@@ -1,0 +1,482 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="可视化作品链接地址：http://reinhardhsu.com/game.html
+概要最近读了比尔盖茨的夏日书单中的荐书《乡下人的悲歌》，
+书中描述了贫穷、毒品和一系列陋习，像遗传病一样，困扰着一代又一代的美国底层人民，使得他们生活艰辛，充满了各种不幸，并且很难向更高的阶层游动。
+另一个是听到网易蜗牛读书的有声读物《如果不能改变阶层，我们努力是为了什么？》中，北京高考状元对于阶层固化的言...">
+  
+  <title>Data Analysis Weekend Project 残酷的世界 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../12/21/machine_learning_calculating_distance/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Machine Learning - 距离计算
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis Weekend Project 残酷的世界</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-09-17</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-02</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/weekend-project/">Weekend Project</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>可视化作品链接地址：<a href="http://reinhardhsu.com/game.html">http://reinhardhsu.com/game.html</a></p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>最近读了比尔盖茨的夏日书单中的荐书<a href="https://book.douban.com/subject/27007881/" target="_blank" rel="noopener">《乡下人的悲歌》</a>，<br><img src="https://images2017.cnblogs.com/blog/453825/201709/453825-20170917145214938-1843395172.jpg" alt="img"></p>
+<p>书中描述了贫穷、毒品和一系列陋习，像遗传病一样，困扰着一代又一代的美国底层人民，使得他们生活艰辛，充满了各种不幸，并且很难向更高的阶层游动。</p>
+<p>另一个是听到网易蜗牛读书的有声读物<a href="http://music.163.com/#/program?id=908964685" target="_blank" rel="noopener">《如果不能改变阶层，我们努力是为了什么？》</a>中，北京高考状元对于阶层固化的言论。</p>
+<p>这些都让我产生了深深的焦虑，碰巧这时在知乎看到一个热议的游戏，<a href="https://zhuanlan.zhihu.com/p/27797001?group_id=867778281376727040" target="_blank" rel="noopener">《房间内 100 个人，每人有 100 块，每分钟随机给另一个人 1 块，最后这个房间内的财富分布是怎样的？》</a>，来模拟社会财富分配。我觉得很有意思，不妨就来玩一下。</p>
+<p>我初始了100个游戏玩家。从18岁开始，这100个人带着自己的财富，开始各自的人生旅程。每个人每天要随机地找到另一个人，给他一笔钱。到65岁退休时，看看大家的资产情况。</p>
+<p>为了增加游戏的可玩性，让每个观众都能在其中找到自己的位置，我设计了四种角色：</p>
+<ul>
+<li>普通人</li>
+<li>富二代</li>
+<li>努力的人</li>
+<li>有钱又努力的人</li>
+</ul>
+<p>观众还自己可以调整一些参数，以模拟他所认为的这个世界。这些参数包括：</p>
+<ul>
+<li>各角色所占的比例</li>
+<li>各角色的初始财富</li>
+<li>各角色每轮游戏相对普通人的收支系数</li>
+<li>每轮游戏要给别人的钱数</li>
+<li>是否允许负资产</li>
+</ul>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><h3 id="主要的变量及其类型："><a href="#主要的变量及其类型：" class="headerlink" title="主要的变量及其类型："></a>主要的变量及其类型：</h3><ol>
+<li>玩家年龄，时间维度</li>
+<li>玩家的财富值，定量变量</li>
+<li>玩家财富的标准差，定量变量</li>
+</ol>
+<p>因为这个游戏的结果最终是要通过对比的形式进行解读，比如不同角色的玩家的财富值对比，某一特定角色的玩家在不同特定阶层的占比多少等等。而对人的视觉处理系统而言，更善于量化刻度上的位置差异，所以我选择在坐标轴上进行可视化。</p>
+<h3 id="主要变量的可视化形式"><a href="#主要变量的可视化形式" class="headerlink" title="主要变量的可视化形式"></a>主要变量的可视化形式</h3><p>其中，玩家的年龄是时间维度，我用动画的形式逐年递增，来看另外两个变量如何随着年龄的增长而变化。</p>
+<p>这里有100个玩家，我们要看每一年不同玩家间财富的对比，所以我用条形图来展示玩家的财富值。X轴是玩家的索引，Y轴是玩家的的财富值。</p>
+<p>因为每年都会计算出一个标准差，所以它是一个时序数据，我用折线图，来查看它的走势。X轴是时间，Y轴是玩家财富的标准差。</p>
+<h3 id="可视化要传达的主要观点"><a href="#可视化要传达的主要观点" class="headerlink" title="可视化要传达的主要观点"></a>可视化要传达的主要观点</h3><p>通过这个可视化，我们简单地模拟了在一个封闭环境中，人群的财富分配。</p>
+<p>这个封闭环境中有100个游戏玩家，从18岁开始，每人带着100块钱，开始各自的人生旅程。每个人每天要随机地找到另一个人，给他1块钱，可以理解为每天的生活成本。</p>
+<p>如果不允许负债，那么玩家资产变为0时，就不用给钱，但是可以收钱，可以理解为社会基本保障吧。</p>
+<p>到65岁退休时，看看大家的资产情况。</p>
+<h4 id="Round-One：100个普通人，不允许负债"><a href="#Round-One：100个普通人，不允许负债" class="headerlink" title="Round One：100个普通人，不允许负债"></a>Round One：100个普通人，不允许负债</h4><p>游戏一开始，我放了100个普通人。</p>
+<p><img src="https://images2017.cnblogs.com/blog/453825/201709/453825-20170917145233563-1991440822.png" alt="img"></p>
+<p>我们可以看到，30岁之前，人与人之间的差距已经完全拉开了。到65岁退休时，有一半的人资产缩水到100以下，有6个人的资产已经翻倍。最富有的人的资产接近初始值的4倍。</p>
+<h4 id="Round-Two：100个普通人，允许负债"><a href="#Round-Two：100个普通人，允许负债" class="headerlink" title="Round Two：100个普通人，允许负债"></a>Round Two：100个普通人，允许负债</h4><p>如果允许负债，会不会让情况变得更好呢？</p>
+<p><img src="https://images2017.cnblogs.com/blog/453825/201709/453825-20170917145255032-1247022082.png" alt="img"></p>
+<p>我们可以看到，借债虽然能让我们在走投无路时多一些周转余地，但最终会让穷人变得更穷。</p>
+<h4 id="Round-Three：10个富二代，90个普通人"><a href="#Round-Three：10个富二代，90个普通人" class="headerlink" title="Round Three：10个富二代，90个普通人"></a>Round Three：10个富二代，90个普通人</h4><p>如果加入富二代，情况会是怎样的呢？富人初始资产500，每天要支付的钱是普通人的2倍，但是获得收入的几率也是普通人的2倍。</p>
+<p><img src="https://images2017.cnblogs.com/blog/453825/201709/453825-20170917145314266-1565331238.png" alt="img"></p>
+<p>我们可以看到，富二代的财富有一部分已经流动到了普通人那里，但是大部分富二代依然位于财富排名前10%的位置。普通人要有极好的运气，才能到达与富二代相同的高度。</p>
+<h4 id="Round-Four：5个努力的普通人，10个富二代，85个普通人"><a href="#Round-Four：5个努力的普通人，10个富二代，85个普通人" class="headerlink" title="Round Four：5个努力的普通人，10个富二代，85个普通人"></a>Round Four：5个努力的普通人，10个富二代，85个普通人</h4><p>如果我们加入一些努力的普通人，会是怎样的呢？通过自己的努力，这部分人获得收入的几率是是普通人的1.01倍。</p>
+<p><img src="https://images2017.cnblogs.com/blog/453825/201709/453825-20170917145341922-1039291218.png" alt="img"></p>
+<p>我们看到，努力的普通人仅仅是每天多付出一点点汗水，比普通人多了0.01的获得收入的几率，经过时间的发酵，有2个人已经跻身资产排名前10%的位置。另外3个人位于资产排名中上的位置。</p>
+<p>富二代中，有1个败家子已经破产，1个败家子将要破产，5个败家子成为了普通人，只有3个守住了财富，依然位于富豪的行列。</p>
+<p>有的同学可能觉得不对，富二代中除了败家子，还有努力的富二代。</p>
+<h4 id="Round-Five：5个努力的富二代，5个努力的普通人，5个富二代，85个普通人"><a href="#Round-Five：5个努力的富二代，5个努力的普通人，5个富二代，85个普通人" class="headerlink" title="Round Five：5个努力的富二代，5个努力的普通人，5个富二代，85个普通人"></a>Round Five：5个努力的富二代，5个努力的普通人，5个富二代，85个普通人</h4><p>努力的富二代，每天付出多一点的汗水，获得收入的几率是普通人的2.02倍。</p>
+<p><img src="https://images2017.cnblogs.com/blog/453825/201709/453825-20170917145400688-1004123422.png" alt="img"></p>
+<p>我们可以看到，努力的富二代全部位于资产排名前10%的位置，其中3个不仅守住了财富，而且创下新高。</p>
+<p>其它的富二代中，有4个位于资产排名前20%的位置，只有1个挣扎在破产的边缘。</p>
+<p>努力的普通人依然混得还不错，有1个跻身资产排名前5%，还有3个位于资产排名中上位置。</p>
+<p>这个故事告诉我们，这个世界虽然很残酷，但是努力的人一般运气还不错。</p>
+<h2 id="用户们的反馈"><a href="#用户们的反馈" class="headerlink" title="用户们的反馈"></a>用户们的反馈</h2><h3 id="可视化反馈"><a href="#可视化反馈" class="headerlink" title="可视化反馈"></a>可视化反馈</h3><h4 id="靖靖："><a href="#靖靖：" class="headerlink" title="@靖靖："></a>@靖靖：</h4><p><em>从这个可视化中注意到的是，富二代基本上稳居上位的，不会掉下来，努力的富二代更是在最前端，从年龄上来看他们享受的是当下的。而普通人也有，也是可以晋升为顶级的人物，但是他们消耗的时间是非常长的，富二代已经享受完了人生，普通人才能晋升到顶级，这时看他们的年龄已经65岁，请问还能活多久呢？</em></p>
+<p><em>在这个可视化中我看到的是一个轮回，富二代已经享受完了人生，即使最后败了，也是他的下一代败了。普通人拼尽一生，即使拼到最顶层，也来不及享受，但是他的子孙会成为富二代。</em></p>
+<p><em>为什么最后资产最高的是个普通人？有点想不通？普通人为什么会成功？觉得数据有问题。</em></p>
+<p><em>既然是随机，为什么会形成这样的差距呢？</em></p>
+<h4 id="芒果ʕ-•ᴥ•ʔ-兔："><a href="#芒果ʕ-•ᴥ•ʔ-兔：" class="headerlink" title="@芒果ʕ •ᴥ•ʔ 兔："></a>@芒果ʕ •ᴥ•ʔ 兔：</h4><p><em>我调整了上面“每天支付5块”，但是主界面显示好像还是1块。</em></p>
+<p><em>观察到的信息是：允许负债的情况下，资产的标准差随时间逐渐增大；如果不允许负债，贫富不均的情况仍然会出现，但没有那么大，标准差会增加，但会趋向于平稳。每天支付的钱越多，标准差越大。</em></p>
+<h4 id="lemontechmaster："><a href="#lemontechmaster：" class="headerlink" title="@lemontechmaster："></a>@lemontechmaster：</h4><p><em>赞~ 界面炫酷</em></p>
+<p><em>观察到的结论：在默认参数下。随着时间增长，每个人的资产标准差在扩大。但是修改了每天的支付金额后，标准差的变化就一波动，并没有明显趋势。</em><br><em>问题：我点击更多参数，发现程序对人数百分比并没有做检验，,然后就显示不太正常了。还有一点是运行时间偏长，开头有点长，我一会就不记得开始的字幕了。</em><br><em>不明白：虽说标题是残酷的世界，我以为模拟出来的结果只有富二代等可以生存，但最后显示普通人和努力的普通人居然资产挺高的。。。</em></p>
+<h4 id="xujunwei1879"><a href="#xujunwei1879" class="headerlink" title="@xujunwei1879"></a>@xujunwei1879</h4><p><em>厉害，膜拜。</em><br><em>我不明白的是四种身份的划分，为什么每次都不一样，是每次运行后都随机按比例重新设定身份吗？ 或许是我不明白你的意图，我觉得是不是这种身份固定下来比较好？</em><br><em>还一个小小的意见是，面向大众的话，我想大部分人可能不明白标准差是什么含义，做个注释类似于贫富差距是不是更好。</em><br><em>再次膜拜，看了你的我有种绝望的感觉。</em></p>
+<h3 id="反馈问题汇总与修改"><a href="#反馈问题汇总与修改" class="headerlink" title="反馈问题汇总与修改"></a>反馈问题汇总与修改</h3><h4 id="1、游戏运行时间过长，和每次运行结果都不一样？"><a href="#1、游戏运行时间过长，和每次运行结果都不一样？" class="headerlink" title="1、游戏运行时间过长，和每次运行结果都不一样？"></a>1、游戏运行时间过长，和每次运行结果都不一样？</h4><p>因为每次运行都是实实在在地运行了一万七千多轮 x 100个人，所以快慢跟设备性能也有关系，两次运行的结果也应该不会相同。</p>
+<h4 id="2、大多数人不明白标准差的含义？"><a href="#2、大多数人不明白标准差的含义？" class="headerlink" title="2、大多数人不明白标准差的含义？"></a>2、大多数人不明白标准差的含义？</h4><p>是的，我会将 标准差 改成 人跟人之间的财富差距。</p>
+<h4 id="3、对不同角色的人数占比合计超过100-没有做校验？"><a href="#3、对不同角色的人数占比合计超过100-没有做校验？" class="headerlink" title="3、对不同角色的人数占比合计超过100%没有做校验？"></a>3、对不同角色的人数占比合计超过100%没有做校验？</h4><p>是的，我会添加这个校验。</p>
+<h4 id="4、调整成每天支付5块，但是主界面显示好像还是1块"><a href="#4、调整成每天支付5块，但是主界面显示好像还是1块" class="headerlink" title="4、调整成每天支付5块，但是主界面显示好像还是1块"></a>4、调整成每天支付5块，但是主界面显示好像还是1块</h4><p>经过确认发现，用户是在播放开场字幕的时候调整的，发现字幕的内容没有变化。</p>
+<p>这是因为，参数控件是设计用来控制游戏图表的，对字幕没有作用。</p>
+<p>所以为了避免用户的困惑，我决定在播放开场字幕的时候，先隐藏掉参数控件。</p>
+<h4 id="5、为什么普通人会成功？"><a href="#5、为什么普通人会成功？" class="headerlink" title="5、为什么普通人会成功？"></a>5、为什么普通人会成功？</h4><p>富人只是初始财富高，按照游戏规则他们每天收入多，但是支出也同样多。他们在游戏的一开始会快速成长，并占据优势。</p>
+<p>但是因为游戏充满了随机性，普通人在一系列好运的眷顾之下，后期也有逆袭的可能。</p>
+<p>我重新看了知乎上的游戏规则，发现我的规则和原游戏规则有出入。原游戏规则是，富人单笔支出多，单比收入和普通人一样，但是获得收入的概率比普通人高。我的规则是富人单笔支出多，单比收入也多，但是获得收入的概率与普通人一样。可能是这个细微的差异，产生了不同的结果。</p>
+<p>我将按照原游戏的规则，使用带权重的随机算法。</p>
+<h4 id="6、每人每天支付1块钱的这个拖动条是什么含义？数值是多少？"><a href="#6、每人每天支付1块钱的这个拖动条是什么含义？数值是多少？" class="headerlink" title="6、每人每天支付1块钱的这个拖动条是什么含义？数值是多少？"></a>6、每人每天支付1块钱的这个拖动条是什么含义？数值是多少？</h4><p>每轮游戏需要支付给另一个人的钱数。数值显示在Slider下面的文字描述中。</p>
+<h4 id="7、是否允许负债这个选项，我分别对两个情况进行了尝试，最后的图形中100个人均没有出现资产为负的情况，请确认一下是否正常工作。"><a href="#7、是否允许负债这个选项，我分别对两个情况进行了尝试，最后的图形中100个人均没有出现资产为负的情况，请确认一下是否正常工作。" class="headerlink" title="7、是否允许负债这个选项，我分别对两个情况进行了尝试，最后的图形中100个人均没有出现资产为负的情况，请确认一下是否正常工作。"></a>7、是否允许负债这个选项，我分别对两个情况进行了尝试，最后的图形中100个人均没有出现资产为负的情况，请确认一下是否正常工作。</h4><p>负资产滑块开关开启后，会出现负资产的现象，没有问题。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://www.zhihu.com/question/62250384/answer/201726206" target="_blank" rel="noopener">[1].房间内有 100 人，每人有 100 块，每分钟随机给另一个人 1 块，最后这个房间内的财富分布怎样？</a></p>
+<p><a href="http://codetheory.in/weighted-biased-random-number-generation-with-javascript-based-on-probability/" target="_blank" rel="noopener">[2].Weighted/Biased Random Number Generation with JavaScript based on Probability</a></p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计"><span class="toc-text">设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要的变量及其类型："><span class="toc-text">主要的变量及其类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要变量的可视化形式"><span class="toc-text">主要变量的可视化形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可视化要传达的主要观点"><span class="toc-text">可视化要传达的主要观点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-One：100个普通人，不允许负债"><span class="toc-text">Round One：100个普通人，不允许负债</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-Two：100个普通人，允许负债"><span class="toc-text">Round Two：100个普通人，允许负债</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-Three：10个富二代，90个普通人"><span class="toc-text">Round Three：10个富二代，90个普通人</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-Four：5个努力的普通人，10个富二代，85个普通人"><span class="toc-text">Round Four：5个努力的普通人，10个富二代，85个普通人</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-Five：5个努力的富二代，5个努力的普通人，5个富二代，85个普通人"><span class="toc-text">Round Five：5个努力的富二代，5个努力的普通人，5个富二代，85个普通人</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户们的反馈"><span class="toc-text">用户们的反馈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可视化反馈"><span class="toc-text">可视化反馈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#靖靖："><span class="toc-text">@靖靖：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#芒果ʕ-•ᴥ•ʔ-兔："><span class="toc-text">@芒果ʕ •ᴥ•ʔ 兔：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lemontechmaster："><span class="toc-text">@lemontechmaster：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xujunwei1879"><span class="toc-text">@xujunwei1879</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反馈问题汇总与修改"><span class="toc-text">反馈问题汇总与修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、游戏运行时间过长，和每次运行结果都不一样？"><span class="toc-text">1、游戏运行时间过长，和每次运行结果都不一样？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、大多数人不明白标准差的含义？"><span class="toc-text">2、大多数人不明白标准差的含义？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、对不同角色的人数占比合计超过100-没有做校验？"><span class="toc-text">3、对不同角色的人数占比合计超过100%没有做校验？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、调整成每天支付5块，但是主界面显示好像还是1块"><span class="toc-text">4、调整成每天支付5块，但是主界面显示好像还是1块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、为什么普通人会成功？"><span class="toc-text">5、为什么普通人会成功？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、每人每天支付1块钱的这个拖动条是什么含义？数值是多少？"><span class="toc-text">6、每人每天支付1块钱的这个拖动条是什么含义？数值是多少？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、是否允许负债这个选项，我分别对两个情况进行了尝试，最后的图形中100个人均没有出现资产为负的情况，请确认一下是否正常工作。"><span class="toc-text">7、是否允许负债这个选项，我分别对两个情况进行了尝试，最后的图形中100个人均没有出现资产为负的情况，请确认一下是否正常工作。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../12/21/machine_learning_calculating_distance/" class="prev">&larr; Prev post Machine Learning - 距离计算</a>
+  
+
+  
+
+  
+    <a href="../../../07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/" class="next">Next post Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

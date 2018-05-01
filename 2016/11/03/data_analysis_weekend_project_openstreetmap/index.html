@@ -1,0 +1,454 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="OpenStreetMap Project Data Wrangling with MongoDBReinhard使用OpenStreetMap的开放地图数据作为本次数据分析的数据源，使用Python进行数据清洗，使用MongoDB进行数据探索和分析。这里先看看什么是OpenStreetMap：
+
+开放街道地图（英语：OpenStreetMap，缩写为OSM）目标是创造一个内容自由且能让所有...">
+  
+  <title>Data Analysis Weekend Project 开放街道地图(OpenStreetMap) - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../09/data_analysis_using_r_language_to_research_data/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis 使用R研究和总结数据
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../02/data_analysis_data_clean/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis 数据清理
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis Weekend Project 开放街道地图(OpenStreetMap)</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-11-03</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/weekend-project/">Weekend Project</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="OpenStreetMap-Project-Data-Wrangling-with-MongoDB"><a href="#OpenStreetMap-Project-Data-Wrangling-with-MongoDB" class="headerlink" title="OpenStreetMap Project Data Wrangling with MongoDB"></a>OpenStreetMap Project Data Wrangling with MongoDB</h1><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>使用OpenStreetMap的开放地图数据作为本次数据分析的数据源，使用Python进行数据清洗，使用MongoDB进行数据探索和分析。<br>这里先看看什么是OpenStreetMap：</p>
+<blockquote>
+<p>开放街道地图（英语：OpenStreetMap，缩写为OSM）目标是创造一个内容自由且能让所有人编辑的世界地图，并且让一般便宜的移动设备有方便的导航方案。</p>
+</blockquote>
+<h2 id="在地图中遇到的问题"><a href="#在地图中遇到的问题" class="headerlink" title="在地图中遇到的问题"></a>在地图中遇到的问题</h2><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>下载了台北市的地图数据后，对地址进行审查时，主要发现存在以下几个问题：</p>
+<ol>
+<li>有些数据过于明细，不仅写出了街道地址，还将单位名称写在后面，如：“235新北市中和區中山路三段122號、中和環球購物中心”。</li>
+<li>有些英文地址中，存在过度简写的情况。比如：“Ln 26 Taishun St.”。</li>
+<li>有些地址中即包含中文地址，又包含英文地址，比如：“台北市市民大道四段207號/ English: No. 207, Section 4, Civic Blvd, Songshan District, Taipei City, Taiwan 105”。</li>
+<li>这里将node和way作为文档的type的值，但是会被地址描述tag中的值替换。比如：<code>&lt;tag k=&quot;type&quot; v=&quot;multipolygon&quot; /&gt;</code>，会将文档的type变成multipolygon 。</li>
+<li>地址的邮政编码和台北市的邮政编码不一致。比如：<code>&lt;tag k=&quot;addr:city&quot; v=&quot;桃園市龜山區&quot; /&gt;&lt;tag k=&quot;addr:postcode&quot; v=&quot;333&quot; /&gt;</code>。</li>
+</ol>
+<h3 id="地址过于明细的情况"><a href="#地址过于明细的情况" class="headerlink" title="地址过于明细的情况"></a>地址过于明细的情况</h3><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>通过定位到问题地址中的分隔符，将单位名称从地址信息中去除。比如将“235新北市中和區中山路三段122號、中和環球購物中心”，转换成“235新北市中和區中山路三段122號”。</p>
+<h4 id="改进的益处和预期的问题"><a href="#改进的益处和预期的问题" class="headerlink" title="改进的益处和预期的问题"></a>改进的益处和预期的问题</h4><p>经过这样的清洗，使得地址的格式更加一致。<br><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>仅仅是通过分隔符将单位名称从地址信息中去除，但是因为分隔符的多样性，甚至压根就没有分隔符，所以清洗过的数据中，依然可能存在地址过于明细的情况。</p>
+<h3 id="英文地址中有过度简写的情况"><a href="#英文地址中有过度简写的情况" class="headerlink" title="英文地址中有过度简写的情况"></a>英文地址中有过度简写的情况</h3><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>用全称，替换问题地址中的简称，比如将“Ln 26 Taishun St.”，转换成“Lane 26 Taishun Street”。</p>
+<h4 id="改进的益处和预期的问题-1"><a href="#改进的益处和预期的问题-1" class="headerlink" title="改进的益处和预期的问题"></a>改进的益处和预期的问题</h4><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>将数据导入到数据库中后，是通过地址关键字进行查询的。<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>将关键字进行统一后，便于今后的使用。<br><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>仅仅是用有限的几个特定简写，定位到问题数据，并进行处理。但是因为英文简写的多样性，很难进行穷举。所以清洗过的数据中，依然可能存在英文地址中有过度简写的情况。</p>
+<h3 id="即包含中文地址，又包含英文地址的情况"><a href="#即包含中文地址，又包含英文地址的情况" class="headerlink" title="即包含中文地址，又包含英文地址的情况"></a>即包含中文地址，又包含英文地址的情况</h3><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>定位到问题地址中的分隔符，只保留分隔符前面的地址。比如将“台北市市民大道四段207號/ English: No. 207, Section 4, Civic Blvd, Songshan District, Taipei City, Taiwan 105”，转换成“台北市市民大道四段207號”。</p>
+<h4 id="改进的益处和预期的问题-2"><a href="#改进的益处和预期的问题-2" class="headerlink" title="改进的益处和预期的问题"></a>改进的益处和预期的问题</h4><p>经过这样的清洗，使得地址的格式更加一致。<br><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>这里仅仅是通过分隔符将英文地址从地址信息中去除，但是因为分隔符的多样性，甚至压根就没有分隔符，所以清洗过的数据中，依然可能存在即包含中文地址，又包含英文地址的情况。</p>
+<h3 id="文档的type被替换的情况"><a href="#文档的type被替换的情况" class="headerlink" title="文档的type被替换的情况"></a>文档的type被替换的情况</h3><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>这里在生成json文档的时候，会判断node和way节点下的tag的键，如果键是type或某些关键字，就不将tag的值添加到json文档中，防止文档的type被替换。</p>
+<h4 id="改进的益处和预期的问题-3"><a href="#改进的益处和预期的问题-3" class="headerlink" title="改进的益处和预期的问题"></a>改进的益处和预期的问题</h4><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>这里通过一些关键字，对address中的数据进行了过滤，排除了文档关键信息被替换掉的可能。<br>但是这样的过滤方式，可能会损失一些有用的信息。</p>
+<h3 id="地址的邮政编码和台北市的邮政编码不一致"><a href="#地址的邮政编码和台北市的邮政编码不一致" class="headerlink" title="地址的邮政编码和台北市的邮政编码不一致"></a>地址的邮政编码和台北市的邮政编码不一致</h3><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>这里主要通过邮政编码对地址进行过滤。<br>台湾的邮政编码是5位，其中前3位是投递区号，只写3位也能投递。<br>在数据探索的过程中，通过将邮政编码前3位的邮递区号提取出来，发现了以下两个问题：</p>
+<ul>
+<li>一些不属于台北市范围的数据。包括新北、基隆、桃源的数据。</li>
+<li>还有一些邮政编码长度不足3位的。  </li>
+</ul>
+<p>在台湾的行政区划中，台北市只包含城市范围，周围的郊区是归台北县的。台北县与基隆、桃源相邻。后来台北县提升为新北市，成为与台北市一样的直辖市。<br>所以，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>需要使用台北市12个区的邮递区号，将台北市以外的数据，和邮政编码长度不足3位的数据，全部过滤掉。  </p>
+<h4 id="改进的益处和预期的问题-4"><a href="#改进的益处和预期的问题-4" class="headerlink" title="改进的益处和预期的问题"></a>改进的益处和预期的问题</h4><p>这样的过滤方式，显然可以过滤掉一部分有问题的数据。<br>我这里只通过邮政编码进行过滤，但是并非所有的文档都提供了邮政编码信息，所以清洗过的数据中，依然可能存在地址超出台北市范围的情况。  </p>
+<h2 id="数据概览"><a href="#数据概览" class="headerlink" title="数据概览"></a>数据概览</h2><p>这里，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>使用了台北市的地图数据，清洗后转换为json格式，导入到MongoDB中。</p>
+<h3 id="文件大小"><a href="#文件大小" class="headerlink" title="文件大小"></a>文件大小</h3><p>taipei_taiwan.osm ……… 167.6 MB  </p>
+<p>taipei_taiwan.osm.json …. 182.8 MB</p>
+<h3 id="文档的数量"><a href="#文档的数量" class="headerlink" title="文档的数量"></a>文档的数量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_num</span><span class="params">(query)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> db.test_collection.find(query).count()</span><br><span class="line"></span><br><span class="line">print_doc_num(&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">826198</span></span><br></pre></td></tr></table></figure>
+<h3 id="node的数量"><a href="#node的数量" class="headerlink" title="node的数量"></a>node的数量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_num</span><span class="params">(query)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> db.test_collection.find(query).count()</span><br><span class="line"></span><br><span class="line">print_doc_num(&#123;<span class="string">"type"</span>:<span class="string">"node"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">732147</span></span><br></pre></td></tr></table></figure>
+<h3 id="way的数量"><a href="#way的数量" class="headerlink" title="way的数量"></a>way的数量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_num</span><span class="params">(query)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> db.test_collection.find(query).count()</span><br><span class="line"></span><br><span class="line">print_doc_num(&#123;<span class="string">"type"</span>:<span class="string">"way"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">94051</span></span><br></pre></td></tr></table></figure>
+<h3 id="用户的数量"><a href="#用户的数量" class="headerlink" title="用户的数量"></a>用户的数量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result= db.test_collection.distinct(<span class="string">"created.user"</span>)</span><br><span class="line"><span class="keyword">print</span> len(result)</span><br><span class="line"></span><br><span class="line"><span class="number">1566</span></span><br></pre></td></tr></table></figure>
+<h3 id="贡献最多的用户"><a href="#贡献最多的用户" class="headerlink" title="贡献最多的用户"></a>贡献最多的用户</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_aggregate</span><span class="params">(query)</span>:</span></span><br><span class="line">    result=db.test_collection.aggregate(query)</span><br><span class="line">    pprint.pprint(list(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print_doc_aggregate([</span><br><span class="line">        &#123;<span class="string">"$group"</span>:&#123;<span class="string">"_id"</span>:<span class="string">"$created.user"</span>,<span class="string">"count"</span>:&#123;<span class="string">"$sum"</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">"$sort"</span>:&#123;<span class="string">"count"</span>:<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">"$limit"</span>:<span class="number">1</span>&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">[&#123;<span class="string">u'count'</span>: <span class="number">180515</span>, <span class="string">u'_id'</span>: <span class="string">u'Supaplex'</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h3 id="只贡献过一次的用户"><a href="#只贡献过一次的用户" class="headerlink" title="只贡献过一次的用户"></a>只贡献过一次的用户</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_aggregate</span><span class="params">(query)</span>:</span></span><br><span class="line">    result=db.test_collection.aggregate(query)</span><br><span class="line">    pprint.pprint(list(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print_doc_aggregate([</span><br><span class="line">        &#123;<span class="string">"$group"</span>:&#123;<span class="string">"_id"</span>:<span class="string">"$created.user"</span>,<span class="string">"count"</span>:&#123;<span class="string">"$sum"</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">"$match"</span>:&#123;<span class="string">"count"</span>:<span class="number">1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">"$group"</span>:&#123;<span class="string">"_id"</span>:<span class="string">"$count"</span>,<span class="string">"num_users"</span>:&#123;<span class="string">"$sum"</span>:<span class="number">1</span>&#125;&#125;&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">[&#123;<span class="string">u'num_users'</span>: <span class="number">314</span>, <span class="string">u'_id'</span>: <span class="number">1</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="额外的想法"><a href="#额外的想法" class="headerlink" title="额外的想法"></a>额外的想法</h2><h3 id="贡献者的统计信息"><a href="#贡献者的统计信息" class="headerlink" title="贡献者的统计信息"></a>贡献者的统计信息</h3><p>用户的贡献呈现出非常严重的倾斜。少量的用户贡献了绝大多数的地图信息。这里，有一些关于用户贡献的统计信息：  </p>
+<ul>
+<li>贡献最多的用户（Supaplex），占全部贡献的21.8% 。</li>
+<li>贡献最多的前10个用户（占全部用户的0.6%），合计占全部贡献的57.8% 。</li>
+<li>贡献最多的前100个用户（占全部用户的6.4%），他们的贡献占全部贡献的94.3% 。</li>
+<li>贡献最少的前1200个用户（占全部用户的76.6%），他们的贡献只占全部贡献的1% 。</li>
+</ul>
+<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>认为贡献度高的用户，提供的数据可能在一致性和可靠性上更好一些。而那些贡献度低的用户，可能并不是很熟悉OpenStreetMap地图的使用方法，他们的数据的一致性和可靠性可能会差一些。所以可以考虑删除掉这部分数据，以提高数据的一致性和可靠性。</p>
+<h4 id="改进的益处和预期的问题-5"><a href="#改进的益处和预期的问题-5" class="headerlink" title="改进的益处和预期的问题"></a>改进的益处和预期的问题</h4><p>删除贡献度低的用户所提供的数据后，数据集更一致和可靠。<br>与此同时，可能会损失一些有用的信息，并且数据集会变小。但是因为这部分用户所提供的数据相对来说非常少，所以只会删除很少的数据。<br>总的来说，删除这部分数据比保留要好。</p>
+<h3 id="使用MongoDB进行额外的数据探索"><a href="#使用MongoDB进行额外的数据探索" class="headerlink" title="使用MongoDB进行额外的数据探索"></a>使用MongoDB进行额外的数据探索</h3><h4 id="出现次数最多的便利设施"><a href="#出现次数最多的便利设施" class="headerlink" title="出现次数最多的便利设施"></a>出现次数最多的便利设施</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_aggregate</span><span class="params">(query)</span>:</span></span><br><span class="line">    result=db.test_collection.aggregate(query)</span><br><span class="line">    pprint.pprint(list(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print_doc_aggregate([</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:<span class="string">'$amenity'</span>,<span class="string">'count'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'count'</span>:<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$limit'</span>:<span class="number">10</span>&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">[&#123;<span class="string">u'_id'</span>: <span class="string">u'restaurant'</span>, <span class="string">u'count'</span>: <span class="number">4729</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'parking'</span>, <span class="string">u'count'</span>: <span class="number">1553</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'place_of_worship'</span>, <span class="string">u'count'</span>: <span class="number">1129</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'cafe'</span>, <span class="string">u'count'</span>: <span class="number">878</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'bank'</span>, <span class="string">u'count'</span>: <span class="number">698</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'bench'</span>, <span class="string">u'count'</span>: <span class="number">540</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'drinking_water'</span>, <span class="string">u'count'</span>: <span class="number">529</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'toilets'</span>, <span class="string">u'count'</span>: <span class="number">518</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'bicycle_rental'</span>, <span class="string">u'count'</span>: <span class="number">491</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'shelter'</span>, <span class="string">u'count'</span>: <span class="number">489</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h4 id="出现最多的餐厅"><a href="#出现最多的餐厅" class="headerlink" title="出现最多的餐厅"></a>出现最多的餐厅</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_aggregate</span><span class="params">(query)</span>:</span></span><br><span class="line">    result=db.test_collection.aggregate(query)</span><br><span class="line">    pprint.pprint(list(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print_doc_aggregate([</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:<span class="string">'restaurant'</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'name'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:<span class="string">'$name'</span>,<span class="string">'count'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'count'</span>:<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$limit'</span>:<span class="number">3</span>&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">[&#123;<span class="string">u'_id'</span>: <span class="string">u'八方雲集'</span>, <span class="string">u'count'</span>: <span class="number">65</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'永和豆漿'</span>, <span class="string">u'count'</span>: <span class="number">32</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'吉野家'</span>, <span class="string">u'count'</span>: <span class="number">20</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h4 id="出现最多的咖啡店"><a href="#出现最多的咖啡店" class="headerlink" title="出现最多的咖啡店"></a>出现最多的咖啡店</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_aggregate</span><span class="params">(query)</span>:</span></span><br><span class="line">    result=db.test_collection.aggregate(query)</span><br><span class="line">    pprint.pprint(list(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print_doc_aggregate([</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:<span class="string">'cafe'</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'name'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:<span class="string">'$name'</span>,<span class="string">'count'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'count'</span>:<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$limit'</span>:<span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line">[&#123;<span class="string">u'_id'</span>: <span class="string">u'星巴克'</span>, <span class="string">u'count'</span>: <span class="number">39</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'85度C'</span>, <span class="string">u'count'</span>: <span class="number">38</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'Starbucks'</span>, <span class="string">u'count'</span>: <span class="number">34</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h4 id="出现最多的宗教场所"><a href="#出现最多的宗教场所" class="headerlink" title="出现最多的宗教场所"></a>出现最多的宗教场所</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_doc_aggregate</span><span class="params">(query)</span>:</span></span><br><span class="line">    result=db.test_collection.aggregate(query)</span><br><span class="line">    pprint.pprint(list(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print_doc_aggregate([</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'amenity'</span>:<span class="string">'place_of_worship'</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$match'</span>:&#123;<span class="string">'name'</span>:&#123;<span class="string">'$exists'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:<span class="string">'$name'</span>,<span class="string">'count'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'count'</span>:<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="string">'$limit'</span>:<span class="number">3</span>&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">[&#123;<span class="string">u'_id'</span>: <span class="string">u'福德宮'</span>, <span class="string">u'count'</span>: <span class="number">38</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'土地公廟'</span>, <span class="string">u'count'</span>: <span class="number">12</span>&#125;,</span><br><span class="line"> &#123;<span class="string">u'_id'</span>: <span class="string">u'福興宮'</span>, <span class="string">u'count'</span>: <span class="number">7</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>经过本次清洗，数据在一致性和完整性上有了一定的提升。虽然清洗过的数据中，依然可能存在数据一致性和完整性的问题，但是<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>相信这次数据清洗已经很好地达到了本次练习的目的。<br>本次清洗让<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>注意到，OpenStreetMap可以让所有人都参与编辑地图、提供数据，这种形式能够提升数据的准确性、增加多样性，但是也带来了数据一致性和完整性上的问题。因为数据的质量会影响分析的结果，所以在使用此类数据进行分析前，要进行必要的数据清洗。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenStreetMap-Project-Data-Wrangling-with-MongoDB"><span class="toc-text">OpenStreetMap Project Data Wrangling with MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在地图中遇到的问题"><span class="toc-text">在地图中遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#地址过于明细的情况"><span class="toc-text">地址过于明细的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#改进的益处和预期的问题"><span class="toc-text">改进的益处和预期的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#英文地址中有过度简写的情况"><span class="toc-text">英文地址中有过度简写的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#改进的益处和预期的问题-1"><span class="toc-text">改进的益处和预期的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#即包含中文地址，又包含英文地址的情况"><span class="toc-text">即包含中文地址，又包含英文地址的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#改进的益处和预期的问题-2"><span class="toc-text">改进的益处和预期的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档的type被替换的情况"><span class="toc-text">文档的type被替换的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#改进的益处和预期的问题-3"><span class="toc-text">改进的益处和预期的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地址的邮政编码和台北市的邮政编码不一致"><span class="toc-text">地址的邮政编码和台北市的邮政编码不一致</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#改进的益处和预期的问题-4"><span class="toc-text">改进的益处和预期的问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据概览"><span class="toc-text">数据概览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件大小"><span class="toc-text">文件大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档的数量"><span class="toc-text">文档的数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node的数量"><span class="toc-text">node的数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#way的数量"><span class="toc-text">way的数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户的数量"><span class="toc-text">用户的数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#贡献最多的用户"><span class="toc-text">贡献最多的用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#只贡献过一次的用户"><span class="toc-text">只贡献过一次的用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#额外的想法"><span class="toc-text">额外的想法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#贡献者的统计信息"><span class="toc-text">贡献者的统计信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#改进的益处和预期的问题-5"><span class="toc-text">改进的益处和预期的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用MongoDB进行额外的数据探索"><span class="toc-text">使用MongoDB进行额外的数据探索</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#出现次数最多的便利设施"><span class="toc-text">出现次数最多的便利设施</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#出现最多的餐厅"><span class="toc-text">出现最多的餐厅</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#出现最多的咖啡店"><span class="toc-text">出现最多的咖啡店</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#出现最多的宗教场所"><span class="toc-text">出现最多的宗教场所</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-text">结论</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../09/data_analysis_using_r_language_to_research_data/" class="prev">&larr; Prev post Data Analysis 使用R研究和总结数据</a>
+  
+
+  
+
+  
+    <a href="../../02/data_analysis_data_clean/" class="next">Next post Data Analysis 数据清理 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

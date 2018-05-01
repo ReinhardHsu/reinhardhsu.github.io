@@ -1,0 +1,423 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="操作数据文件csv文件我们操作csv文件时，可能会遇到不同的分隔符分隔，如逗号，冒号等。如果字段值里也含有这样的符号，就非常不好处理了。这时，我们可以使用csv模块12345678import csvdata=[]with open(filepath,'rb') as sd:  r=csv.DictReader(sd)  for line in r:    data.append(line)...">
+  
+  <title>Data Analysis Python 操作数据文件 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../14/data_analysis_hypothesis/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis 假设
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../09/28/data_analysis_python_operate_mongodb/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Python操作MongoDB
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis Python 操作数据文件</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-10-12</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/python/">Python</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="操作数据文件"><a href="#操作数据文件" class="headerlink" title="操作数据文件"></a>操作数据文件</h1><h2 id="csv文件"><a href="#csv文件" class="headerlink" title="csv文件"></a>csv文件</h2><p>我们操作csv文件时，可能会遇到不同的分隔符分隔，如逗号，冒号等。如果字段值里也含有这样的符号，就非常不好处理了。这时，我们可以使用csv模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">data=[]</span><br><span class="line"><span class="keyword">with</span> open(filepath,<span class="string">'rb'</span>) <span class="keyword">as</span> sd:</span><br><span class="line">  r=csv.DictReader(sd)</span><br><span class="line">  <span class="keyword">for</span> line <span class="keyword">in</span> r:</span><br><span class="line">    data.append(line)</span><br><span class="line"><span class="keyword">return</span> data</span><br></pre></td></tr></table></figure></p>
+<p>这里的DictReader，会自动用第一行的列名，作为字典的键。  </p>
+<h2 id="excel文件"><a href="#excel文件" class="headerlink" title="excel文件"></a>excel文件</h2><p>可以使用xlrd模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"></span><br><span class="line">workbook = xlrd.open_workbook(datafile)</span><br><span class="line">sheet = workbook.sheet_by_index(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">data = [[sheet.cell_value(r, col)</span><br><span class="line">            <span class="keyword">for</span> col <span class="keyword">in</span> range(sheet.ncols)]</span><br><span class="line">                <span class="keyword">for</span> r <span class="keyword">in</span> range(sheet.nrows)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\nList Comprehension"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"data[3][2]:"</span>,</span><br><span class="line"><span class="keyword">print</span> data[<span class="number">3</span>][<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\nCells in a nested loop:"</span>    </span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> range(sheet.nrows):</span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> range(sheet.ncols):</span><br><span class="line">        <span class="keyword">if</span> row == <span class="number">50</span>:</span><br><span class="line">            <span class="keyword">print</span> sheet.cell_value(row, col),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### other useful methods:</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\nROWS, COLUMNS, and CELLS:"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Number of rows in the sheet:"</span>,</span><br><span class="line"><span class="keyword">print</span> sheet.nrows</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Type of data in cell (row 3, col 2):"</span>,</span><br><span class="line"><span class="keyword">print</span> sheet.cell_type(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Value in cell (row 3, col 2):"</span>,</span><br><span class="line"><span class="keyword">print</span> sheet.cell_value(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Get a slice of values in column 3, from rows 1-3:"</span></span><br><span class="line"><span class="keyword">print</span> sheet.col_values(<span class="number">3</span>, start_rowx=<span class="number">1</span>, end_rowx=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\nDATES:"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Type of data in cell (row 1, col 0):"</span>,</span><br><span class="line"><span class="keyword">print</span> sheet.cell_type(<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">exceltime = sheet.cell_value(<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Time in Excel format:"</span>,</span><br><span class="line"><span class="keyword">print</span> exceltime</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Convert time to a Python datetime tuple, from the Excel float:"</span>,</span><br><span class="line"><span class="keyword">print</span> xlrd.xldate_as_tuple(exceltime, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> data[<span class="number">3</span>][<span class="number">2</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="json文件"><a href="#json文件" class="headerlink" title="json文件"></a>json文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_from_file</span><span class="params">(kind, period)</span>:</span></span><br><span class="line">    filename = <span class="string">"popular-&#123;0&#125;-&#123;1&#125;.json"</span>.format(kind, period)</span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> json.loads(f.read())</span><br><span class="line"></span><br><span class="line">data = get_from_file(kind, period)</span><br></pre></td></tr></table></figure>
+<p>还可以使用requests模块，从web api中获取json</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">query_site</span><span class="params">(url, params, uid=<span class="string">""</span>, fmt=<span class="string">"json"</span>)</span>:</span></span><br><span class="line">    <span class="comment"># This is the main function for making queries to the musicbrainz API.</span></span><br><span class="line">    <span class="comment"># A json document should be returned by the query.</span></span><br><span class="line">    params[<span class="string">"fmt"</span>] = fmt</span><br><span class="line">    r = requests.get(url + uid, params=params)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"requesting"</span>, r.url</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> r.status_code == requests.codes.ok:</span><br><span class="line">        <span class="keyword">return</span> r.json()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r.raise_for_status()</span><br></pre></td></tr></table></figure>
+<h2 id="xml文件"><a href="#xml文件" class="headerlink" title="xml文件"></a>xml文件</h2><p>xml文件设计的目的，是不依赖于平台的数据转移。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_author</span><span class="params">(root)</span>:</span></span><br><span class="line">    authors = []</span><br><span class="line">    <span class="keyword">for</span> author <span class="keyword">in</span> root.findall(<span class="string">'./fm/bibl/aug/au'</span>):</span><br><span class="line">        data = &#123;</span><br><span class="line">                <span class="string">"fnm"</span>: <span class="keyword">None</span>,</span><br><span class="line">                <span class="string">"snm"</span>: <span class="keyword">None</span>,</span><br><span class="line">                <span class="string">"email"</span>: <span class="keyword">None</span></span><br><span class="line">        &#125;</span><br><span class="line">        data[<span class="string">"fnm"</span>] = author.find(<span class="string">'./fnm'</span>).text</span><br><span class="line">        data[<span class="string">"snm"</span>] = author.find(<span class="string">'./snm'</span>).text</span><br><span class="line">        data[<span class="string">"email"</span>] = author.find(<span class="string">'./email'</span>).text</span><br><span class="line"></span><br><span class="line">        authors.append(data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> authors</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_authors</span><span class="params">(root)</span>:</span></span><br><span class="line">    authors = []</span><br><span class="line">    <span class="keyword">for</span> author <span class="keyword">in</span> root.findall(<span class="string">'./fm/bibl/aug/au'</span>):</span><br><span class="line">        data = &#123;</span><br><span class="line">                <span class="string">"fnm"</span>: <span class="keyword">None</span>,</span><br><span class="line">                <span class="string">"snm"</span>: <span class="keyword">None</span>,</span><br><span class="line">                <span class="string">"email"</span>: <span class="keyword">None</span>,</span><br><span class="line">                <span class="string">"insr"</span>: []</span><br><span class="line">        &#125;</span><br><span class="line">        data[<span class="string">"fnm"</span>] = author.find(<span class="string">'./fnm'</span>).text</span><br><span class="line">        data[<span class="string">"snm"</span>] = author.find(<span class="string">'./snm'</span>).text</span><br><span class="line">        data[<span class="string">"email"</span>] = author.find(<span class="string">'./email'</span>).text</span><br><span class="line">        insr = author.findall(<span class="string">'./insr'</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> insr:</span><br><span class="line">            data[<span class="string">"insr"</span>].append(i.attrib[<span class="string">"iid"</span>])</span><br><span class="line">        authors.append(data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> authors</span><br></pre></td></tr></table></figure>
+<p>如果attrib不存在，可能会引发KeyError异常，可以先判断attrib是否存在</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'username'</span> <span class="keyword">in</span> element.attrib:</span><br><span class="line">	username=element.attrib[<span class="string">'username'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="迭代解析"><a href="#迭代解析" class="headerlink" title="迭代解析"></a>迭代解析</h3><p>之前说的解析方式是树型解析，就是先把xml文件整个加载到内存后进行解析。如果文件非常大，2G大小，那就需要一行一行地解析了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> event,elem <span class="keyword">in</span> ET.iterparse(filepath):</span><br><span class="line">	<span class="keyword">if</span> elem.tag==<span class="string">'tag'</span> <span class="keyword">and</span> elem.attrib[<span class="string">'ss'</span>]==<span class="string">'vvv'</span>:</span><br><span class="line">		<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="html文件"><a href="#html文件" class="headerlink" title="html文件"></a>html文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract_data</span><span class="params">(page)</span>:</span></span><br><span class="line">    data = &#123;<span class="string">"eventvalidation"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"viewstate"</span>: <span class="string">""</span>&#125;</span><br><span class="line">    <span class="keyword">with</span> open(page, <span class="string">"r"</span>) <span class="keyword">as</span> html:</span><br><span class="line">        soup = BeautifulSoup(html, <span class="string">"lxml"</span>)</span><br><span class="line">        ev = soup.find(id=<span class="string">"__EVENTVALIDATION"</span>)</span><br><span class="line">        data[<span class="string">"eventvalidation"</span>] = ev[<span class="string">"value"</span>]</span><br><span class="line"></span><br><span class="line">        vs = soup.find(id=<span class="string">"__VIEWSTATE"</span>)</span><br><span class="line">        data[<span class="string">"viewstate"</span>] = vs[<span class="string">"value"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+<p>不同的会话，可能会导致提交失败。如果要使用相同的会话，那么需要开启session。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s=requests.Session()</span><br><span class="line"></span><br><span class="line">r=s.get(<span class="string">''</span>)</span><br><span class="line">soup=BeautifulSoup(r.text)</span><br><span class="line">xx=soup.find(id=<span class="string">''</span>)[<span class="string">'value'</span>]</span><br><span class="line"></span><br><span class="line">r=s.post(<span class="string">''</span>,data=&#123;<span class="string">'xx'</span>:xx&#125;)</span><br><span class="line"></span><br><span class="line">f=open(<span class="string">'filepath'</span>,<span class="string">'w'</span>)</span><br><span class="line">f.write(r.text)</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作数据文件"><span class="toc-text">操作数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#csv文件"><span class="toc-text">csv文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#excel文件"><span class="toc-text">excel文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#json文件"><span class="toc-text">json文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xml文件"><span class="toc-text">xml文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代解析"><span class="toc-text">迭代解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html文件"><span class="toc-text">html文件</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../14/data_analysis_hypothesis/" class="prev">&larr; Prev post Data Analysis 假设</a>
+  
+
+  
+
+  
+    <a href="../../../09/28/data_analysis_python_operate_mongodb/" class="next">Next post Data Analysis Python操作MongoDB &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

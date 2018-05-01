@@ -1,0 +1,396 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="表组提供一种根据表所含数据的类型进行分类的方法. Determining group membership is not an exact science but more of a conceptual definition. When determining group membership for your own tables, follow the standards in the...">
+  
+  <title>Dynamics AX 2012 R2 Table Groups - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../dynamics_ax_2012_r2_temporary_inmemory_tables/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Temporary InMemory Tables
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../dynamics_ax_2012_r2_aot_overview/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 AOT Overview
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 Table Groups</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-05</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <div class="introduction"><br><br>表组提供一种根据表所含数据的类型进行分类的方法. Determining group membership is not an exact science but more of a conceptual definition. When determining group membership for your own tables, follow the standards in the Microsoft Dynamics AX application.<br><br>导出数据时, 你可以使用表组来过滤记录. 例如, 如果你想指定可以导出客户,但不能导出客户交易. 一个表属于哪个组, 由该表上的 by the <span class="code">TableGroup </span>属性定义.<br><br><span id="more-33"></span><br><br>The available table group values are listed in the following table.<br><br><div class="caption"></div><br><div class="tableSection"><br><table><br><tbody><br><tr><br><th colspan="1">Table group</th><br><th colspan="1">使用该组的表,应具有以下特征的表,</th><br><th colspan="1">Examples</th><br></tr><br><tr><br><td colspan="1">Parameter</td><br><td colspan="1">这个表,包含的数据,主要用作一个主表的参数或装配信息(a table that has a <span class="code">TableGroup </span>property of <span class="code">Main </span>).这种表通常每家公司只有一条记录.</td><br><td colspan="1"><span class="code">CustParameters </span>, <span class="code">VendParameters</span></td><br></tr><br><tr><br><td colspan="1">Group</td><br><td colspan="1">该表包含的数据,主要用来对主表进行分类 (a table that has a <span class="code">TableGroup </span>property of <span class="code">Main </span>).在 <span class="code">Group </span>table and a <span class="code">Main </span>table之间是一对多关系.</td><br><td colspan="1"><span class="code">CustGroup </span>, <span class="code">VendGroup</span></td><br></tr><br><tr><br><td colspan="1">Main</td><br><td colspan="1">该表是应用程序中的主表中的一个, 并包含以数据为中心的业务对象.该表一般持有静态的,基础的信息.<p></p><br><br>这是 <span class="code">Main </span>table and a <span class="code">Transaction </span>table之间一对多的关系.</td><br><td colspan="1"><span class="code">CustTable </span>, <span class="code">VendTable</span></td><br></tr><br><tr><br><td colspan="1">Transaction</td><br><td colspan="1">表中包含交易数据.该表一般不直接用做数据输入.</td><br><td colspan="1"><span class="code">CustTrans </span>, <span class="code">VendTrans</span></td><br></tr><br><tr><br><td colspan="1">WorksheetHeader(工作表头)</td><br><td colspan="1">该表一般用于对 <span class="code">WorkSheetLine </span>tables中的信息进行分类.在 <span class="code">WorkSheetHeader </span>table and a <span class="code">WorkSheetLine </span>table之间是一对多关系.</td><br><td colspan="1"><span class="code">SalesTable</span></td><br></tr><br><tr><br><td colspan="1">WorksheetLine</td><br><td colspan="1">该表包含的信息是待验证的, 将要进入交易表的.相比于 <span class="code">Transaction </span>表中包含的数据, <span class="code">WorkSheetLine </span>表中的数据是临时的, 并且删除后不会影响系统稳定.</td><br><td colspan="1"><span class="code">SalesLine</span></td><br></tr><br><tr><br><td colspan="1">Miscellaneous(杂项)</td><br><td colspan="1">该表不适合任何其他的类别.这是新表的默认值.</td><br><td colspan="1"><span class="code">TableExpImpDef</span></td><br></tr><br></tbody><br></table><br></div><br><p>一般地, table groups <span class="code">Miscellaneous </span>, <span class="code">Transaction </span>, <span class="code">WorksheetHeader </span>, and <span class="code">WorksheetLine </span>用于大表. 如果在服务器配置里选择了 <span class="label">Use literals in complex joins from X++ </span>or <span class="label">Use literals in join queries from forms and reports </span>, 在两个或多个大表被join时, 系统会为sql查询添加查询关键字 <span class="code">forceliterals </span>.<br><br>The groups available are defined by the system enum <span class="code">TableGroup </span>.<br><br></p></div><br><div><br><div class="LW_CollapsibleArea_TitleDiv"><br><div><a class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all."><span class="LW_CollapsibleArea_Title">Table Prompts</span></a><p></p><br><div class="LW_CollapsibleArea_HrDiv"><br><br><em> </em> *<br><br></div><br></div><br></div><br><div class="sectionblock"><a id="sectionToggle0"></a>You can specify by table group whether a prompt is displayed when records are deleted or updated in a table. These prompts are defined by navigating to <span class="label">Tools </span>&gt; <span class="label">Options </span>&gt; <span class="label">Confirmation</span>.<p></p><br><div class="alert"><br><table><br><tbody><br><tr><br><th align="left"><strong>Note</strong></th><br></tr><br><tr><br><td>Regardless of what table group prompts you define, explicitly defined delete actions are respected.</td><br></tr><br></tbody><br></table><br></div><br></div><br></div>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../dynamics_ax_2012_r2_temporary_inmemory_tables/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Temporary InMemory Tables</a>
+  
+
+  
+
+  
+    <a href="../dynamics_ax_2012_r2_aot_overview/" class="next">Next post Dynamics AX 2012 R2 AOT Overview &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

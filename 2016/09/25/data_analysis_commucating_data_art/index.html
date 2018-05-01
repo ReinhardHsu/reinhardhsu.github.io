@@ -1,0 +1,413 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="数据交流的艺术在当今社会有一个巨大的机会，那就是查找和分享数据中包含的价值。并且，还要融入数据沟通的艺术，同时要包含分析、艺术、创造。这就是说，结果会是数字，文字，和图片的结合。人们在沟通时，必须理解听众：什么东西对他们有意义，什么东西能够激励他们，他们关心什么。
+数据交流设计精良的可视化数据分析当你看到一份设计精良的可视化数据分析时，是怎么一种心情。当数据能够很好地传达时，能同时轻松地欣赏...">
+  
+  <title>Data Analysis 数据交流的艺术 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../data_analysis_how_many_and_how_much/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis How Many and How Much
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../24/data_analysis_numpy_and_pandas/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis NumPy和Pandas
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis 数据交流的艺术</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-25</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="数据交流的艺术"><a href="#数据交流的艺术" class="headerlink" title="数据交流的艺术"></a>数据交流的艺术</h1><p>在当今社会有一个巨大的机会，那就是查找和分享数据中包含的价值。并且，还要融入数据沟通的艺术，同时要包含分析、艺术、创造。这就是说，结果会是数字，文字，和图片的结合。<br>人们在沟通时，必须理解听众：什么东西对他们有意义，什么东西能够激励他们，他们关心什么。</p>
+<h2 id="数据交流"><a href="#数据交流" class="headerlink" title="数据交流"></a>数据交流</h2><h3 id="设计精良的可视化数据分析"><a href="#设计精良的可视化数据分析" class="headerlink" title="设计精良的可视化数据分析"></a>设计精良的可视化数据分析</h3><p>当你看到一份设计精良的可视化数据分析时，是怎么一种心情。当数据能够很好地传达时，能同时轻松地欣赏到数据和数据所要表达的东西。这两个元素可以一起塑造成一个整体的体验，让你觉得自己更好地理解了这个世界，并且想用你理解的过程中新发现的东西去做些什么。</p>
+<h3 id="设计糟糕的数据分析"><a href="#设计糟糕的数据分析" class="headerlink" title="设计糟糕的数据分析"></a>设计糟糕的数据分析</h3><p>当你遇到一个包含了设计不当的图表和包含无关的信息图形，甚至所有这些信息图表你这辈子都不愿再看一眼。</p>
+<p>数据交流，只是一般意义上的交流中的很简单的一种特定类型。</p>
+<h3 id="处理步骤"><a href="#处理步骤" class="headerlink" title="处理步骤"></a>处理步骤</h3><p>提出问题：我们可以从产品的历史销售中学到什么？哪些产品的组合最常见？<br>搜集数据<br>结构化数据<br>探索数据：从不同的角度去查看数据和分析数据，直到收集到多个见解。<br>数据交流：将上面的见解表达出来，也是这里最关注的一步。</p>
+<h3 id="交流的三种类型的问题"><a href="#交流的三种类型的问题" class="headerlink" title="交流的三种类型的问题"></a>交流的三种类型的问题</h3><p>技术问题：<br>语义问题：<br>效率问题：</p>
+<h3 id="数据交流的6个原则"><a href="#数据交流的6个原则" class="headerlink" title="数据交流的6个原则"></a>数据交流的6个原则</h3><p>为了定位上面的三种问题，这里介绍6个原则。</p>
+<h4 id="了解你的目标"><a href="#了解你的目标" class="headerlink" title="了解你的目标"></a>了解你的目标</h4><p>你要和谁进行交流（目标听众）<br>你想让他们知道什么（本意）<br>为什么？ 你想让他们为它做些什么？（预期效果）</p>
+<p>没有搞清楚这三个问题，不要往下继续。</p>
+<h4 id="使用恰当的数据"><a href="#使用恰当的数据" class="headerlink" title="使用恰当的数据"></a>使用恰当的数据</h4><p>俗话说，少就是多。<br>但有时候，少就是少。<br>又有时候，多也是少。</p>
+<h4 id="选择合适的可视化"><a href="#选择合适的可视化" class="headerlink" title="选择合适的可视化"></a>选择合适的可视化</h4><p>一旦确定了要用这些数据表达什么观点，下一步就是决定如何将数据值，转换为抽象的图形展示，像大小，颜色，形状。<br>要知道人们常用什么图形，来表达什么信息。避免语义问题。</p>
+<h4 id="设计的美学"><a href="#设计的美学" class="headerlink" title="设计的美学"></a>设计的美学</h4><p>美学元素，能够引起兴趣，增强记忆。</p>
+<p>大家常犯的错误：<br>贫乏的配色方案<br>令人分心的字体<br>许多不同的字体<br>马虎的对齐<br>垂直或倾斜标签<br>深色的背景颜色<br>粗的边框或网格线<br>没用的图片和剪贴画<br>懒洋洋地接受了多数软件默认主题</p>
+<h4 id="选择一个有效的媒介和渠道"><a href="#选择一个有效的媒介和渠道" class="headerlink" title="选择一个有效的媒介和渠道"></a>选择一个有效的媒介和渠道</h4><p>信息的形式（媒介），和如何投递给听众（渠道），是任何数据交流的关键要素。在渠道上，选择好how，when，where 。</p>
+<p>我们可以发现，越左边，范围越广，但是影响较浅。越往右，范围越窄，但是影响较深。<br>例如，创建一个静态图表，群发邮件，或发到网上。这样做很简单很容易，但是对目标听众来说，没有深远的影响。同时这样做的时间成本和付出也很低。<br>如果将静态和动态图形，以个人的名义，实时地发给一个听众，会需要更多的努力。当下来看，这种形式可能限制了听众的人数，但是影响是巨大。这样做的付出也很大。<br>如果你的目标听众是一个小公司，并且你有很高的把握，亲自过去见面，聊一聊数据，会是个很好的投资。</p>
+<h4 id="检查结果"><a href="#检查结果" class="headerlink" title="检查结果"></a>检查结果</h4><p>当你检查结果时，问自己：<br>Reach：目标听众收到了你的信息了吗？谁收到了，谁没有？<br>Understanding：目标听众按照你希望的方式，解释信息中的数据吗？<br>Impact：听众的反应是你希望的么？</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据交流的艺术"><span class="toc-text">数据交流的艺术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据交流"><span class="toc-text">数据交流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计精良的可视化数据分析"><span class="toc-text">设计精良的可视化数据分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计糟糕的数据分析"><span class="toc-text">设计糟糕的数据分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理步骤"><span class="toc-text">处理步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交流的三种类型的问题"><span class="toc-text">交流的三种类型的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据交流的6个原则"><span class="toc-text">数据交流的6个原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#了解你的目标"><span class="toc-text">了解你的目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用恰当的数据"><span class="toc-text">使用恰当的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择合适的可视化"><span class="toc-text">选择合适的可视化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设计的美学"><span class="toc-text">设计的美学</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择一个有效的媒介和渠道"><span class="toc-text">选择一个有效的媒介和渠道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检查结果"><span class="toc-text">检查结果</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../data_analysis_how_many_and_how_much/" class="prev">&larr; Prev post Data Analysis How Many and How Much</a>
+  
+
+  
+
+  
+    <a href="../../24/data_analysis_numpy_and_pandas/" class="next">Next post Data Analysis NumPy和Pandas &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

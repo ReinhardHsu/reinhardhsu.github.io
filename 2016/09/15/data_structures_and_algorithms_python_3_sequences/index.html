@@ -1,0 +1,545 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="问题数据序列是如何维护的，哪个组织方案最合适为何在不同类型的序列中，选择了这个，而没有选那个列表，链表，栈，队列的有趣算法哪个排序算法更常用哪个查找算法更合适
+列表无论列表有多大，访问列表中每个位置的时间是一样的。RAM的全称是Random Access Memory，所谓的随机存取，是指存储器中的数据被读取或写入时，所需要的时间与这段信息所在的位置或所写的位置无关。如果是Sequentia...">
+  
+  <title>Data Structures and Algorithms Python － 3、序列 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../data_structures_and_algorithms_dotnet_1_collection/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms DotNet－ 1、群集
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../data_structures_and_algorithms_python_2_Recursion/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms Python － 2、递归
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Structures and Algorithms Python － 3、序列</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-15</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/python/">Python</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>数据序列是如何维护的，哪个组织方案最合适<br>为何在不同类型的序列中，选择了这个，而没有选那个<br>列表，链表，栈，队列的有趣算法<br>哪个排序算法更常用<br>哪个查找算法更合适</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>无论列表有多大，访问列表中每个位置的时间是一样的。RAM的全称是Random Access Memory，所谓的随机存取，是指存储器中的数据被读取或写入时，所需要的时间与这段信息所在的位置或所写的位置无关。如果是Sequential Access设备，那么所需的时间就与位置有关。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PyList</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,contents=[],size=<span class="number">10</span>)</span>:</span></span><br><span class="line">        self.items=[<span class="keyword">None</span>]*size</span><br><span class="line">        self.numItems=<span class="number">0</span>;</span><br><span class="line">        self.size=size</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> e <span class="keyword">in</span> contents:</span><br><span class="line">            self.append(e)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self,index)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> index&gt;=<span class="number">0</span> <span class="keyword">and</span> index &lt; self.numItems:</span><br><span class="line">            <span class="keyword">return</span> self.items[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">raise</span> IndexError(<span class="string">"PyList index out of range"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span><span class="params">(self,index,val)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> index&gt;=<span class="number">0</span> <span class="keyword">and</span> index &lt;self.numItems:</span><br><span class="line">            self.items[index]=val</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">raise</span> IndexError(<span class="string">"PyList assignment index out of range"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self,other)</span>:</span></span><br><span class="line">        result=PyList(size=self.numItems+other.numItems)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            result.append(self.items[i])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(other.numItems):</span><br><span class="line">            result.append(other.items[i])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delitem__</span><span class="params">(self,index)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(index,self.numItems<span class="number">-1</span>):</span><br><span class="line">            self.items[i]=self.items[i+<span class="number">1</span>]</span><br><span class="line">        self.numItems-=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self,other)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> type(other)!=type(self):</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">if</span> self.numItems!=other.numItems:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            <span class="keyword">if</span> self.items[i]!=other.items[i]:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            <span class="keyword">yield</span> self.items[i]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.numItems</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__contains__</span><span class="params">(self,item)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            <span class="keyword">if</span> self.items[i]==item:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        s=<span class="string">"["</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            s=s+repr(self.items[i])</span><br><span class="line">            <span class="keyword">if</span> i&lt; self.numItems<span class="number">-1</span>:</span><br><span class="line">                s=s+<span class="string">", "</span></span><br><span class="line">        s=s+<span class="string">"]"</span></span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        s=<span class="string">"PyList(["</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            s=s+repr(self.items[i])</span><br><span class="line">            <span class="keyword">if</span> i&lt;self.numItems<span class="number">-1</span>:</span><br><span class="line">                s=s+<span class="string">", "</span></span><br><span class="line">        s=s+<span class="string">"])"</span></span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__makeroom</span><span class="params">(self)</span>:</span></span><br><span class="line">        newlen=(self.size//<span class="number">4</span>)+self.size+<span class="number">1</span></span><br><span class="line">        newlst=[<span class="keyword">None</span>]*newlen</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.numItems):</span><br><span class="line">            newlst[i]=self.items[i]</span><br><span class="line">        self.items=newlst</span><br><span class="line">        self.size=newlen</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">append</span><span class="params">(self,item)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.numItems==self.size:</span><br><span class="line">            self.__makeroom()</span><br><span class="line"></span><br><span class="line">        self.items[self.numItems]=item</span><br><span class="line">        self.numItems+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self,i,e)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.numItems==self.size:</span><br><span class="line">            self.__makeroom()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i&lt;self.numItems:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.numItems<span class="number">-1</span>,i<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">                self.items[j+<span class="number">1</span>]=self.items[j]</span><br><span class="line">            self.items[i]=e</span><br><span class="line">            self.numItems+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.append(e)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    listA=PyList([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</span><br><span class="line">    listB=PyList([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">    print( listA)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这里构建了一个列表，它有10个None值。None代表这个引用指向nothing。<br>实现了加法操作符，可以将两个PyList连接在一起。<br>append方法，会在容量不够的时候增加容量，每次增加25% 。Python 中的List的容量也是这样增加的，4，8,16,25,35,46,58,72,88<br>insert方法，会在容量不够的时候增加容量。会导致指定索引之后的数字，往后移动。<br>delitem方法，可以通过 del list[10] 这样的方法，删除元素。该元素之后的元素统统往前移动，中间不能留空隙。在Python解释器中，为了节省空间，如果删除后，元素的个数比容量小一半，那么会从可用空间中减少一半的容量。<br>contains中的查找算法，叫做线性查找。<br>Python中有两个方法可以将对象转换为字符串，一个是str，一个是repr。<br>Python中有一个evaluate函数，可以评估字符串表达式，例如  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(<span class="string">"1+2"</span>)</span><br></pre></td></tr></table></figure>
+<p>它的结果是3。repr方法就是将对象呈现为适用eval函数的版本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">listA=PyList([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</span><br><span class="line">strA=repr(listA)</span><br><span class="line">print(strA)</span><br><span class="line"></span><br><span class="line">listC= eval(strA)</span><br><span class="line">print( repr(listC))</span><br><span class="line"></span><br><span class="line"><span class="comment">#PyList(['a', 'b', 'c'])</span></span><br><span class="line"><span class="comment">#PyList(['a', 'b', 'c'])</span></span><br></pre></td></tr></table></figure>
+<p>这里，我们注意到str和repr方法中，repr是作用到每个元素身上了。这一点非常必要。不然的话，str或repr会将[“a”,”b”]表示为[a,b]</p>
+<h3 id="克隆对象"><a href="#克隆对象" class="headerlink" title="克隆对象"></a>克隆对象</h3><p>可以看到listA被克隆了，eval(repr(x))这样的克隆，被叫做对对象x的deep clone或deep copy。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#浅拷贝</span></span><br><span class="line">x=PyList([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y=PyList(x)</span><br></pre></td></tr></table></figure>
+<p>有deep copy，当然也有shallow copy。浅拷贝，是指x和y这两个对象，共享着item1，item2，item3。<br>多数情况下，元素是不是共享的，都不是太重要。就像上面的例子中，1,2,3是integer，integer是不可变的。<br>如果共享的是可变元素，那就要非常小心了。在shallow clone中，如果集合的元素是可变的，那么对克隆对象的元素的更改，也会影响到该集合。这种情况在deep clone中就不会发生。<br>Shallow clone和deep clone不能简单地说哪一个更好，都要取决于应用。deep clone需要额外的性能和存储，但是更安全。  </p>
+<h3 id="元素排序"><a href="#元素排序" class="headerlink" title="元素排序"></a>元素排序</h3><p>通过实现lessthen方法，可以调用sort进行排序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list1=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">list2=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line">list3=[<span class="number">1</span>,<span class="number">1</span>,<span class="string">'a'</span>]</span><br></pre></td></tr></table></figure>
+<p>list1和list3没法比较，因为一个是integer，一个是string。<br>list1和list3可以比较，因为还没比到3和’a’，就已经分出大小了。</p>
+<p>内建的int，float，str都已经实现了lessthen，我们可以直接用。而像dict类型，就没有，需要自己去定义。</p>
+<h3 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h3><p>选择排序就是做线性搜索，找到最小的元素，把它放到开始的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select</span><span class="params">(seq,start)</span>:</span></span><br><span class="line">    minIndex=start</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(start+<span class="number">1</span>,len(seq)):</span><br><span class="line">        <span class="keyword">if</span> seq[minIndex]&gt;seq[j]:</span><br><span class="line">            minIndex=j</span><br><span class="line">    <span class="keyword">return</span> minIndex</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selSort</span><span class="params">(seq)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(seq)<span class="number">-1</span>):</span><br><span class="line">        minIndex=select(seq,i)</span><br><span class="line">        tmp=seq[i]</span><br><span class="line">        seq[i]=seq[minIndex]</span><br><span class="line">        seq[minIndex]=tmp</span><br></pre></td></tr></table></figure>
+<h3 id="Merge-Sort，归并排序"><a href="#Merge-Sort，归并排序" class="headerlink" title="Merge Sort，归并排序"></a>Merge Sort，归并排序</h3><p>Divide and Conquer，分而治之。将一个问题分成两部分，分别处理每一部分。因为每一小部分比整体更小，所以更易于处理。归并算法可以这样理解：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#待排序数组：</span></span><br><span class="line">List([<span class="number">1</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#第一次分割（其实分割的只是索引，比如 0-2一组,3-5一组，并非将原数组变成了2个新的数组。  </span></span><br><span class="line"><span class="comment">#这里为了可视化效果，把索引范围对应的元素，列为一个单独的数组）：</span></span><br><span class="line"><span class="comment">#索引分割为：</span></span><br><span class="line">[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],    [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#可视化效果</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">6</span>,<span class="number">4</span>],    [<span class="number">3</span>,<span class="number">5</span>,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二次分割：</span></span><br><span class="line"><span class="comment">#对应的索引分割为：</span></span><br><span class="line">[<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>],  [<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#可视化效果</span></span><br><span class="line">[<span class="number">1</span>],[<span class="number">6</span>,<span class="number">4</span>],  [<span class="number">3</span>][<span class="number">5</span>,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#全部分割成含有1个元素或2个元素的数组，分割的工作就完成了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#对每个数据内部的元素进行排序。排序的方法同下面数组间排序的方法一样，可视化效果：</span></span><br><span class="line">[<span class="number">1</span>],[<span class="number">4</span>,<span class="number">6</span>],  [<span class="number">3</span>],[<span class="number">2</span>,<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#到这里，原数组变为</span></span><br><span class="line">List([<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接着，排序索引为[0,1,2]的两个数组。</span></span><br><span class="line"><span class="comment">#分别从[1]  和[4,6] 这两个数组中，取出第一个元素，进行比较，把小的元素拷贝到一个新的数组中，直到有一个数组先到头</span></span><br><span class="line">min(1,4)=&gt;  newList([1])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接着，把新生成的数组中的元素，从开始位置，依次替换原数组中的元素</span></span><br><span class="line">List[<span class="number">0</span>]=newList[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#原数组的可视化效果变为</span></span><br><span class="line">List([<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接着，排序索引为[3,4,5]的两个数组。</span></span><br><span class="line"><span class="comment">#也就是[3] 和 [2,5]</span></span><br><span class="line">min(3,2)=&gt; newList([2])</span><br><span class="line">min(3,5)=&gt; newList([2,3])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接着，把新生成的数组中的元素，从开始位置，依次替换原数组中的元素</span></span><br><span class="line">List[<span class="number">3</span>]=newList[<span class="number">0</span>]</span><br><span class="line">List[<span class="number">4</span>]=newList[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#原数组的可视化效果变为</span></span><br><span class="line">List([<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接着，排序索引为[0,1,2,3,4,5]的两个数组。</span></span><br><span class="line"><span class="comment">#也就是[1,4,6] 和 [2,3,5]</span></span><br><span class="line">min(1,2)=&gt; newList([1])</span><br><span class="line">min(4,2)=&gt; newList([1,2])</span><br><span class="line">min(4,3)=&gt; newList([1,2,3])</span><br><span class="line">min(4,5)=&gt; newList([1,2,3,4])</span><br><span class="line">min(6,5)=&gt; newList([1,2,3,4,5])</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果比较完，左边的数组中还有元素，就把左边数组中的元素全部加入到newList中</span></span><br><span class="line">[6]=&gt; newList([1,2,3,4,5,6])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接着，把新生成的数组中的元素，从开始位置，依次替换原数组中的元素</span></span><br><span class="line">List[<span class="number">0</span>]=newList[<span class="number">0</span>]</span><br><span class="line">List[<span class="number">1</span>]=newList[<span class="number">1</span>]</span><br><span class="line">List[<span class="number">2</span>]=newList[<span class="number">2</span>]</span><br><span class="line">List[<span class="number">3</span>]=newList[<span class="number">3</span>]</span><br><span class="line">List[<span class="number">4</span>]=newList[<span class="number">4</span>]</span><br><span class="line">List[<span class="number">5</span>]=newList[<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#原数组的可视化效果变为</span></span><br><span class="line">List([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br></pre></td></tr></table></figure></p>
+<p>算法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(seq,start,mid,stop)</span>:</span></span><br><span class="line">    lst=[]</span><br><span class="line">    i=start</span><br><span class="line">    j=mid</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> i&lt;mid <span class="keyword">and</span> j&lt;stop:</span><br><span class="line">        <span class="keyword">if</span> seq[i]&lt;seq[j]:</span><br><span class="line">            lst.append(seq[i])</span><br><span class="line">            i+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lst.append(seq[j])</span><br><span class="line">            j+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i&lt;mid:</span><br><span class="line">        lst.append(seq[i])</span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(lst)):</span><br><span class="line">        seq[start+i]=lst[i]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSortRecursively</span><span class="params">(seq,start,stop)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> start&gt;=stop<span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    mid=(start+stop)//<span class="number">2</span></span><br><span class="line"></span><br><span class="line">    mergeSortRecursively(seq,start,mid)</span><br><span class="line">    mergeSortRecursively(seq,mid,stop)</span><br><span class="line">    merge(seq,start,mid,stop)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span><span class="params">(seq)</span>:</span></span><br><span class="line">    mergeSortRecursively(seq,<span class="number">0</span>,len(seq))</span><br></pre></td></tr></table></figure>
+<h3 id="Quicksort，快速排序"><a href="#Quicksort，快速排序" class="headerlink" title="Quicksort，快速排序"></a>Quicksort，快速排序</h3><p><a href="http://rafekettler.com/magicmethods.html" target="_blank" rel="noopener">Python 2中的魔法代码</a></p>
+<table>
+<thead>
+<tr>
+<th>Magic Method</th>
+<th>When it gets invoked (example)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__new__(cls [,…])</td>
+<td>instance = MyClass(arg1, arg2)</td>
+<td>__new__ is called on instance creation</td>
+</tr>
+<tr>
+<td>__init__(self [,…])</td>
+<td>instance = MyClass(arg1, arg2)</td>
+<td>__init__ is called on instance creation</td>
+</tr>
+<tr>
+<td>__cmp__(self, other)</td>
+<td>self == other, self &gt; other, etc.</td>
+<td>Called for any comparison</td>
+</tr>
+<tr>
+<td>__pos__(self)</td>
+<td>+self</td>
+<td>Unary plus sign</td>
+</tr>
+<tr>
+<td>__neg__(self)</td>
+<td>-self</td>
+<td>Unary minus sign</td>
+</tr>
+<tr>
+<td>__invert__(self)</td>
+<td>~self</td>
+<td>Bitwise inversion</td>
+</tr>
+<tr>
+<td>__index__(self)</td>
+<td>x[self]</td>
+<td>Conversion when object is used as index</td>
+</tr>
+<tr>
+<td>__nonzero__(self)</td>
+<td>bool(self)</td>
+<td>Boolean value of the object</td>
+</tr>
+<tr>
+<td>__getattr__(self, name)</td>
+<td>self.name # name doesn’t exist</td>
+<td>Accessing nonexistent attribute</td>
+</tr>
+<tr>
+<td>__setattr__(self, name, val)</td>
+<td>self.name = val</td>
+<td>Assigning to an attribute</td>
+</tr>
+<tr>
+<td>__delattr__(self, name)</td>
+<td>del self.name</td>
+<td>Deleting an attribute</td>
+</tr>
+<tr>
+<td>__getattribute__(self, name)</td>
+<td>self.name</td>
+<td>Accessing any attribute</td>
+</tr>
+<tr>
+<td>__getitem__(self, key)</td>
+<td>self[key]</td>
+<td>Accessing an item using an index</td>
+</tr>
+<tr>
+<td>__setitem__(self, key, val)</td>
+<td>self[key] = val</td>
+<td>Assigning to an item using an index</td>
+</tr>
+<tr>
+<td>__delitem__(self, key)</td>
+<td>del self[key]</td>
+<td>Deleting an item using an index</td>
+</tr>
+<tr>
+<td>__iter__(self)</td>
+<td>for x in self</td>
+<td>Iteration</td>
+</tr>
+<tr>
+<td>__contains__(self, value)</td>
+<td>value in self, value not in self</td>
+<td>Membership tests using in</td>
+</tr>
+<tr>
+<td>__call__(self [,…])</td>
+<td>self(args)</td>
+<td>“Calling” an instance</td>
+</tr>
+<tr>
+<td>__enter__(self)</td>
+<td>with self as x:</td>
+<td>with statement context managers</td>
+</tr>
+<tr>
+<td>__exit__(self, exc, val, trace)</td>
+<td>with self as x:</td>
+<td>with statement context managers</td>
+</tr>
+<tr>
+<td>__getstate__(self)</td>
+<td>pickle.dump(pkl_file, self)</td>
+<td>Pickling</td>
+</tr>
+<tr>
+<td>__setstate__(self)</td>
+<td>data = pickle.load(pkl_file)</td>
+<td>Pickling</td>
+</tr>
+</tbody>
+</table>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#克隆对象"><span class="toc-text">克隆对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元素排序"><span class="toc-text">元素排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Sort"><span class="toc-text">Selection Sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge-Sort，归并排序"><span class="toc-text">Merge Sort，归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quicksort，快速排序"><span class="toc-text">Quicksort，快速排序</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../data_structures_and_algorithms_dotnet_1_collection/" class="prev">&larr; Prev post Data Structures and Algorithms DotNet－ 1、群集</a>
+  
+
+  
+
+  
+    <a href="../data_structures_and_algorithms_python_2_Recursion/" class="next">Next post Data Structures and Algorithms Python － 2、递归 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

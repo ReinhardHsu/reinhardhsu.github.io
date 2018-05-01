@@ -1,0 +1,422 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="当我们在使用RDP报表时，AX会根据Data Contract，自动生成报表参数对话框上的字段控件。一般情况下，该对话框能够满足我们的需求，但是如果有较为复杂或特殊的需求，就要我们对该对话框进行客制化。
+Reinhard这里就有一张报表，需要使用员工编号作为参数。但是AX系统中默认的员工编号EDT，没有提供lookup方法。Reinhard将该员工编号EDT放在报表参数窗体上后，只能手工录入...">
+  
+  <title>Dynamics AX 2012 R2 客制化RDP报表参数对话框 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../29/dynamics_ax_co_products_and_by_products/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 联产品和副产品
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../23/dynamics_ax_2012_r2_setup_email_templete/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 配置E-Mail模板
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 客制化RDP报表参数对话框</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-27</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>当我们在使用<strong>RDP报表</strong>时，<strong>AX</strong>会根据<strong>Data Contract</strong>，自动生成<strong>报表参数对话框</strong>上的<strong>字段控件</strong>。一般情况下，该对话框能够满足我们的需求，但是如果有较为复杂或特殊的需求，就要我们对该对话框进行客制化。</p>
+<p><strong>Reinhard</strong>这里就有一张报表，需要使用<strong>员工编号</strong>作为参数。但是<strong>AX</strong>系统中默认的<strong>员工编号EDT</strong>，没有提供<strong>lookup方法</strong>。<strong>Reinhard</strong>将该<strong>员工编号EDT</strong>放在报表参数窗体上后，只能手工录入员工编号，不能通过下拉框进行选择。</p>
+<p>默认效果是这样：</p>
+<p><a href="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150127160448.jpg"><img src="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150127160448.jpg" alt="Screenshot20150127160448"></a></p>
+<p>但是<strong>Reinhard</strong>想要的效果是这样：</p>
+<p><a href="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150127160544.jpg"><img src="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150127160544.jpg" alt="Screenshot20150127160544"></a></p>
+<p><strong>Reinhard</strong>经过不断地研究，发现<strong>AX</strong>提供了一种可以<strong>客制化报表参数对话框字段控件</strong>的技术——<strong>SysOperation Framework</strong>。如果你也和<strong>Reinhard</strong>一样，想要改变自动生成的对话框上的字段，就可以使用该框架。</p>
+<p><strong>SysOperation Framework</strong>提供了一个<strong>SysOperationAutomaticUIBuilder</strong>类，通过继承该类，可以在系统基于我们<strong>服务操作</strong>的<strong>数据契约</strong>来生成对话框的过程中，添加自己的逻辑。一般包括以下业务逻辑：</p>
+<ul>
+<li>设置字段控件的属性，如<strong>强制</strong>和<strong>启用</strong></li>
+<li>覆盖字段控件的方法，如<strong>lookup()</strong>和<strong>modifiedField()</strong></li>
+<li>覆盖<strong>addDialogField()</strong>方法，阻止控件被添加</li>
+</ul>
+<p>如果你有大量的控件要使用<strong>UI Builder</strong>添加到对话框中，取而代之，可以考虑在<strong>控制器</strong>中使用<strong>模板窗体</strong>。</p>
+<p>如果你在<strong>UI Builder</strong>中有大量的验证代码，取而代之，可以考虑在<strong>数据契约</strong>中实现验证。这样做，是为了遵循<strong>MVC</strong>哲学。</p>
+<p>先来看看<strong>Reinhard</strong>的<strong>DataContract</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[DataContractAttribute]</span><br><span class="line">public class Reinhard@reinhardhsu.com_DataContract</span><br><span class="line">&#123;</span><br><span class="line">    HcmPersonnelNumberId hcmPersonnelNumberId;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[DataMemberAttribute(&apos;HcmPersonnelNumberId&apos;)]</span><br><span class="line">public HcmPersonnelNumberId parmHcmPersonnelNumberId(HcmPersonnelNumberId </span><br><span class="line">	_hcmPersonnelNumberId=hcmPersonnelNumberId)</span><br><span class="line">&#123;</span><br><span class="line">    hcmPersonnelNumberId=_hcmPersonnelNumberId;</span><br><span class="line">    return HcmPersonnelNumberId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Reinhard</strong>的<strong>DataContract</strong>中，只有一个属性——<strong>员工编号</strong>。想在报表参数对话框中，为该字段控件添加<strong>lookup方法</strong>。下面创建<strong>UI Builder</strong>类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Reinhard@reinhardhsu.com_UIBuilder extends SysOperationAutomaticUIBuilder</span><br><span class="line">&#123;</span><br><span class="line">    DialogField hcmPersonnelNumberIdField;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void hcmPersonnelNumberIdLookUp(FormStringControl _control)</span><br><span class="line">&#123;</span><br><span class="line">    HcmWorkerLookup lookup=HcmWorkerLookup::newWorkersInCurrentCompany();</span><br><span class="line">    lookup.lookupWorker(_control);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void build()</span><br><span class="line">&#123;</span><br><span class="line">    super();</span><br><span class="line">    hcmPersonnelNumberIdField=this.bindInfo().getDialogField(</span><br><span class="line">    	this.dataContractObject(),</span><br><span class="line">    	methodStr(HPRN_1416_DC,parmHcmPersonnelNumberId)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void postRun()</span><br><span class="line">&#123;</span><br><span class="line">    super();</span><br><span class="line">    hcmPersonnelNumberIdField.registerOverrideMethod(</span><br><span class="line">    methodStr(FormStringControl,lookup),</span><br><span class="line">        methodStr(HPRN_1416_UIBuilder,hcmPersonnelNumberIdLookUp),</span><br><span class="line">    this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，<strong>Reinhard</strong>的<strong>UI Builder</strong>中的第一个方法，是用于覆盖<strong>员工编号字段控件</strong>的<strong>lookup()方法</strong>。</p>
+<p>第二个方法，获取到<strong>员工编号字段控件</strong>。</p>
+<p>第三个方法，将我们的第一个方法，<strong>注册</strong>到字段控件的<strong>lookup()方法</strong>上。</p>
+<p>最后，<strong>Reinhard</strong>修改<strong>Data Contract</strong>的声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[DataContractAttribute,</span><br><span class="line">SysOperationContractProcessingAttribute(</span><br><span class="line">classStr(Reinhard@reinhardhsu.com_UIBuilder))]</span><br><span class="line">public class Reinhard@reinhardhsu.com_DataContract</span><br><span class="line">&#123;</span><br><span class="line">    HcmPersonnelNumberId hcmPersonnelNumberId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他部分依然遵循<strong>RDP</strong>报表的开发方式，不变。至此，打开报表参数对话框上的员工编号字段控件，已经有了下拉效果。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../29/dynamics_ax_co_products_and_by_products/" class="prev">&larr; Prev post Dynamics AX 联产品和副产品</a>
+  
+
+  
+
+  
+    <a href="../../23/dynamics_ax_2012_r2_setup_email_templete/" class="next">Next post Dynamics AX 2012 R2 配置E-Mail模板 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

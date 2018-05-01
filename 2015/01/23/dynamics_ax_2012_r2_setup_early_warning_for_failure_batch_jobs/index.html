@@ -1,0 +1,421 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="我们主要有两种类型的系统监视：环境健康监视和性能监视。
+环境健康监视一般对系统性能影响非常小，是为了提醒潜在的问题。
+性能监视通常更有侵入性。监视期间，添加一个负载到环境。因此，它可以回答特定的问题或真正用户的抱怨。这不同于性能测试那样，主动地改变基础架构，或模拟增加用户负载。
+
+我们关心那些对业务操作非常重要的反复出现的Batch Job，例如过账销售发票，所以要为他们设置Alert。
+A...">
+  
+  <title>Dynamics-AX-2012-R2-为运行失败的批处理任务设置预警 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../dynamics_ax_2012_r2_setup_track_for_database_change/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 为数据库配置变更跟踪
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../22/dynamics_ax_2012_r2_drain_users/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Drain Users
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics-AX-2012-R2-为运行失败的批处理任务设置预警</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-23</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>我们主要有两种类型的系统监视：环境健康监视和性能监视。</p>
+<p>环境健康监视一般对系统性能影响非常小，是为了提醒潜在的问题。</p>
+<p>性能监视通常更有侵入性。监视期间，添加一个负载到环境。因此，它可以回答特定的问题或真正用户的抱怨。这不同于性能测试那样，主动地改变基础架构，或模拟增加用户负载。</p>
+<p><span id="more-199"></span></p>
+<p>我们关心那些对业务操作非常重要的反复出现的<strong>Batch Job</strong>，例如过账销售发票，所以要为他们设置<strong>Alert</strong>。</p>
+<p><strong>Alert</strong>会配置到你的账户中。所以你必须用自己的账户登录，并且有充分的权限来管理<strong>Batch Job</strong>。</p>
+<p>1、进入<strong>System Administration&gt;Inquiries&gt;Batch Jobs</strong></p>
+<p>2、选择一个<strong>Batch Job</strong>，确保它的<strong>Status</strong>不是将被执行。</p>
+<p>3、点击行动面板的按钮<strong>Function&gt;Change Status</strong>。</p>
+<p>4、选择<strong>Withhold</strong>，这会将<strong>Job</strong>挂起。当我们进行配置期间，它不会执行。</p>
+<p><a href="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot201501230845556.jpg"><img src="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot201501230845556.jpg" alt="Screenshot201501230845556"></a></p>
+<p>5、点击<strong>预警</strong>，在弹出窗口中，选择表要的选项。</p>
+<p>6、典型地，一个管理员仅仅希望看到错误消息，所以可以选择<strong>Error</strong>。</p>
+<p>7、如果想让预警以弹出窗口的形式显示，可以选择<strong>Show pop-ups</strong>。</p>
+<p>8、如果希望预警通过邮件的形式发送，可以选择<strong>E-mail</strong>。</p>
+<p><a href="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150123085548.jpg"><img src="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150123085548.jpg" alt="Screenshot20150123085548"></a></p>
+<p>9、点击确定，关闭窗体。回到<strong>Batch Job</strong>窗体，进入<strong>General</strong>面板。</p>
+<p>10、将<strong>Save Job To History</strong>设为<strong>Errors Only</strong>。这样可以减少存储不必要的信息。</p>
+<p><a href="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150123090910.jpg"><img src="http://reinhardhsu.com/wp-content/uploads/2015/01/Screenshot20150123090910.jpg" alt="Screenshot20150123090910"></a></p>
+<p>11、这个<strong>Job</strong>还处于<strong>挂起</strong>状态，我们要将它重新启用。点击<strong>Functions&gt;Change Status</strong>，选择<strong>Waiting</strong>。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../dynamics_ax_2012_r2_setup_track_for_database_change/" class="prev">&larr; Prev post Dynamics AX 2012 R2 为数据库配置变更跟踪</a>
+  
+
+  
+
+  
+    <a href="../../22/dynamics_ax_2012_r2_drain_users/" class="next">Next post Dynamics AX 2012 R2 Drain Users &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

@@ -1,0 +1,446 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="&nbsp;&nbsp;&nbsp; 上一节中，Reinhard主要讲解了怎么配置安装环境，尤其是域控制器，并在域中添加了一个管理员账户 reinhardhsu.com\Reinhard ，以后的安装配置，均在该账户下进行。
+&nbsp;&nbsp;&nbsp; 现在运行 AX 2012 R3 的安装程序，选择安装组件。
+
+&nbsp;&nbsp;&nbsp; 选择安装AX，点击下一步。
+
+...">
+  
+  <title>Dynamics AX 2012 R3 Demo 安装与配置 – 安装数据服务器、AOS和客户端 (Step 2) - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../09/dynamics_ax_2012_r3_demo_installation_step_3/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R3 Demo 安装与配置 – 编译和配置 (Step 3)
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../05/30/dynamics_ax_2012_r3_demo_installation_step_1/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R3 Demo 安装与配置 – 配置安装环境 (Step 1)
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R3 Demo 安装与配置 – 安装数据服务器、AOS和客户端 (Step 2)</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-06-02</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_23-25-53.png" alt="2015-05-27_23-25-53" title="2015-05-27_23-25-53"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 上一节中，Reinhard主要讲解了怎么配置安装环境，尤其是域控制器，并在域中添加了一个管理员账户 reinhardhsu.com\Reinhard ，以后的安装配置，均在该账户下进行。</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 现在运行 AX 2012 R3 的安装程序，选择安装组件。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-46-53.png" alt="2015-05-27_21-46-53" title="2015-05-27_21-46-53"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 选择安装AX，点击下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-47-32.png" alt="2015-05-27_21-47-32" title="2015-05-27_21-47-32"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 选择自定义安装，点击下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-47-59.png" alt="2015-05-27_21-47-59" title="2015-05-27_21-47-59"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 我们先安装数据库服务器，点击下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-48-31.png" alt="2015-05-27_21-48-31" title="2015-05-27_21-48-31"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 安装程序会检查必要的组件是否安装完毕。安装完毕后，点击下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-48-54.png" alt="2015-05-27_21-48-54" title="2015-05-27_21-48-54"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 选择船舰数据库，点击下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-49-14.png" alt="2015-05-27_21-49-14" title="2015-05-27_21-49-14"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 因为我们将数据库服务器安装到本机，所以保持默认即可。如果要安装到其他机器，可以输入其他机器的名称。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-49-39.png" alt="2015-05-27_21-49-39" title="2015-05-27_21-49-39"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 依然保持默认即可，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-50-29.png" alt="2015-05-27_21-50-29" title="2015-05-27_21-50-29"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 安装程序检查必须的组件是否安装完毕，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-51-07.png" alt="2015-05-27_21-51-07" title="2015-05-27_21-51-07"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 开始安装数据库服务器。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_21-51-31.png" alt="2015-05-27_21-51-31" title="2015-05-27_21-51-31"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 稍等片刻，数据库服务器就已经安装完毕。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-12-41.png" alt="2015-05-27_22-12-41" title="2015-05-27_22-12-41"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 接着，我们安装AOS和客户端。在此选择安装组件，选中AOS和客户端的CheckBox，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-15-07.png" alt="2015-05-27_22-15-07" title="2015-05-27_22-15-07"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 安装程序会检查必要的组件是否安装完毕，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-15-42.png" alt="2015-05-27_22-15-42" title="2015-05-27_22-15-42"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 因为我们要在本机安装AOS，所以保持默认即可。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-16-05.png" alt="2015-05-27_22-16-05" title="2015-05-27_22-16-05"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 依然保持默认，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-16-35.png" alt="2015-05-27_22-16-35" title="2015-05-27_22-16-35"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 输入上一节中，创建的域账号。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-17-52.png" alt="2015-05-27_22-17-52" title="2015-05-27_22-17-52"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 选中在桌面创建客户端快捷方式，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-18-24.png" alt="2015-05-27_22-18-24" title="2015-05-27_22-18-24"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 安装程序再次检查必要的组件是否安装完毕，进入下一步。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-18-56.png" alt="2015-05-27_22-18-56" title="2015-05-27_22-18-56"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 终于开始安装了。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-19-16.png" alt="2015-05-27_22-19-16" title="2015-05-27_22-19-16"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; AOS的安装也是分分钟就安装好了，点击完成。</p>
+<p></p><p><img src="http://reinhardhsu.com/wp-content/uploads/2015/06/2015-05-27_22-21-43.png" alt="2015-05-27_22-21-43" title="2015-05-27_22-21-43"></p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 安装完毕后，重启下服务器。</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 本节Reinhard主要讲解了如何安装数据库服务器，AOS和客户端，因为前期准备工作已经做好，到这里已经相当简单，只需保持默认安装即可。在下一节中，Reinhard要讲解如何做安装后的编译和配置工作。</p>
+<p></p><p>&nbsp;&nbsp;&nbsp; 喜欢本系列的同学，请点个赞哦。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../09/dynamics_ax_2012_r3_demo_installation_step_3/" class="prev">&larr; Prev post Dynamics AX 2012 R3 Demo 安装与配置 – 编译和配置 (Step 3)</a>
+  
+
+  
+
+  
+    <a href="../../../05/30/dynamics_ax_2012_r3_demo_installation_step_1/" class="next">Next post Dynamics AX 2012 R3 Demo 安装与配置 – 配置安装环境 (Step 1) &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

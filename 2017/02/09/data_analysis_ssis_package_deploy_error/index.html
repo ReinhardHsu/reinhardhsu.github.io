@@ -1,0 +1,441 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="Reinhard 在部署 SSIS 包时，提示如下错误。
+由于错误 0xC0010014“发生了一个或多个错误。在此消息之前应有更为具体的错误消息，对这些错误进行详细说明。此消息用作遇到错误的函数的返回值。”，无法加载包。当 CPackage::LoadFromXML 失败时，会出现这种情况。
+程序位置:
+在 Microsoft.DataTransformationServices.DTSE...">
+  
+  <title>Data Analysis SSIS 包部署错误 0xC0010014 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../03/22/dynamics_ax_2012_r2_email_error_0x80040213/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 电子邮件广播错误 0x80040213
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../06/dynamics_ax_sql_server_replication/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 性能优化之 SQL Server 复制
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis SSIS 包部署错误 0xC0010014</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-02-09</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-02</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/ssis/">SSIS</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><a href="http://www.cnblogs.com/msdynax/p/cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 在部署 SSIS 包时，提示如下错误。</p>
+<p><em>由于错误 0xC0010014“发生了一个或多个错误。在此消息之前应有更为具体的错误消息，对这些错误进行详细说明。此消息用作遇到错误的函数的返回值。”，无法加载包。当 CPackage::LoadFromXML 失败时，会出现这种情况。</em></p>
+<p><em>程序位置:</em></p>
+<p>在 Microsoft.DataTransformationServices.DTSExecUI.Controls.GeneralViewCtrl.GetPackage()</p>
+<p><em>由于错误 0xC0010014“发生了一个或多个错误。在此消息之前应有更为具体的错误消息，对这些错误进行详细说明。此消息用作遇到错误的函数的返回值。”，无法加载包。当 CPackage::LoadFromXML 失败时，会出现这种情况。</em></p>
+<p><em>程序位置:</em></p>
+<p><em>在 Microsoft.SqlServer.Dts.Runtime.Wrapper.ApplicationClass.LoadPackage(String FileName, Boolean loadNeutral, IDTSEvents100 pEvents)</em><br><em>在 Microsoft.SqlServer.Dts.Runtime.Application.LoadPackage(String fileName, IDTSEvents events, Boolean loadNeutral)</em></p>
+<p>从网上的资料可以知道，应该是SSDT与SSIS的版本兼容问题。</p>
+<p><a href="http://www.cnblogs.com/msdynax/p/cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 使用的是SQL Server 2016 提供的 <a href="https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt" target="_blank" rel="noopener">SQL Server Data Tools (16.5)</a> ，而 SSIS 环境还是 SQL Server 2008 R2。从微软文档上得知，SSDT 16.5 开发的 SSIS 包，是不支持在 SSIS 2008 上部署的。</p>
+<h2 id="SQL-Server-Data-Tools-16-5-Supported-SQL-versions"><a href="#SQL-Server-Data-Tools-16-5-Supported-SQL-versions" class="headerlink" title="SQL Server Data Tools (16.5) Supported SQL versions"></a>SQL Server Data Tools (16.5) Supported SQL versions</h2><table>
+<thead>
+<tr>
+<th>Project Templates</th>
+<th>SQL Platforms Supported</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Relational databases</td>
+<td>SQL Server 2005<em> - SQL Server 2016 Azure SQL DatabaseAzure SQL Data Warehouse (supports queries only; database projects are not yet supported)</em> SQL Server 2005 support is deprecated,please move to an officially supported SQL version</td>
+</tr>
+<tr>
+<td>Analysis Services modelsReporting Services reports</td>
+<td>SQL Server 2008 – SQL Server 2016</td>
+</tr>
+<tr>
+<td>Integration Services packages</td>
+<td>SQL Server 2012 – SQL Server 2016</td>
+</tr>
+</tbody>
+</table>
+<p>既然如此，选择下列方案中的一个，即可解决：</p>
+<ol>
+<li>升级SSIS环境</li>
+<li>或者降级SSDT。</li>
+</ol>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Server-Data-Tools-16-5-Supported-SQL-versions"><span class="toc-text">SQL Server Data Tools (16.5) Supported SQL versions</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../03/22/dynamics_ax_2012_r2_email_error_0x80040213/" class="prev">&larr; Prev post Dynamics AX 2012 R2 电子邮件广播错误 0x80040213</a>
+  
+
+  
+
+  
+    <a href="../../06/dynamics_ax_sql_server_replication/" class="next">Next post Dynamics AX 2012 性能优化之 SQL Server 复制 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

@@ -1,0 +1,449 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="阿尔法级别对于一个主观预测的值35%，有人形容它为完全不可能，有人形容它为很有可能。统计学家定义了可能和不可能的三个级别，即阿尔法级别。
+
+0.05 小于5% 叫做不太可能
+0.01
+0.001 ，小于0.1%叫非常不可能
+
+距离均值1.65个标准差的数据不太可能发生，可能是哪里出了什么问题。
+零假设是假设不会有显著变化，即预测结果不在阿尔法级别临界值范围内。
+对立假设是假设有显著变化，比如...">
+  
+  <title>Data Analysis 假设 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../15/data_analysis_t_test/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis t验证
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../12/data_analysis_python_operate_data_file/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Python 操作数据文件
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis 假设</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-10-14</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/statistics/">Statistics</a>
+      
+      </span>
+      
+    </p>
+    
+    <h3 id="阿尔法级别"><a href="#阿尔法级别" class="headerlink" title="阿尔法级别"></a>阿尔法级别</h3><p>对于一个主观预测的值35%，有人形容它为完全不可能，有人形容它为很有可能。<br>统计学家定义了可能和不可能的三个级别，即阿尔法级别。</p>
+<ul>
+<li>0.05 小于5% 叫做不太可能</li>
+<li>0.01</li>
+<li>0.001 ，小于0.1%叫非常不可能</li>
+</ul>
+<p>距离均值1.65个标准差的数据不太可能发生，可能是哪里出了什么问题。</p>
+<h3 id="零假设"><a href="#零假设" class="headerlink" title="零假设"></a>零假设</h3><p>是假设不会有显著变化，即预测结果不在阿尔法级别临界值范围内。</p>
+<h3 id="对立假设"><a href="#对立假设" class="headerlink" title="对立假设"></a>对立假设</h3><p>是假设有显著变化，比如多了，少了，或不等于，即预测结果在阿尔法级别临界值范围内。但具体是显著好了，还是显著坏了，要用单尾验证。</p>
+<h3 id="单尾验证"><a href="#单尾验证" class="headerlink" title="单尾验证"></a>单尾验证</h3><p>当需要方向性验证，比如显著地多了还是少了，就用单尾验证。均值小于或大于阿尔法级别临界值。</p>
+<h3 id="双尾验证"><a href="#双尾验证" class="headerlink" title="双尾验证"></a>双尾验证</h3><p>当不需要方向性验证，比如显著地不等于，就用双尾验证。均值或者小于阿尔法级别临界值，或者大于阿尔法级别临界值。</p>
+<h3 id="拒绝零假设"><a href="#拒绝零假设" class="headerlink" title="拒绝零假设"></a>拒绝零假设</h3><p>样本均值在临界区域内<br>样本均值的Z值大于临界值的Z值<br>得到样本的概率小于阿尔法级别</p>
+<h3 id="决策失误"><a href="#决策失误" class="headerlink" title="决策失误"></a>决策失误</h3><p>零假设：饮料现在温度刚刚好<br>对立假设：饮料现在太烫了</p>
+<table>
+<thead>
+<tr>
+<th>现实状况</th>
+<th>决策</th>
+<th>决策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>拒绝零假设</td>
+<td>接受零假设</td>
+</tr>
+<tr>
+<td>零假设为真</td>
+<td>你认为饮料很烫要过会儿喝，但其实温度刚刚好。过会儿等你喝时，已经凉了。决策失误。</td>
+<td>你认为饮料温度刚好，并且确实如此。</td>
+</tr>
+<tr>
+<td>零假设为假</td>
+<td>你认为饮料太烫了，实际上确实很烫。过会儿等你喝时，温度刚刚好。</td>
+<td>你认为饮料温度刚好，但实际上太烫了，烫到了舌头。决策失误。</td>
+</tr>
+</tbody>
+</table>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#阿尔法级别"><span class="toc-text">阿尔法级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#零假设"><span class="toc-text">零假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对立假设"><span class="toc-text">对立假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单尾验证"><span class="toc-text">单尾验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双尾验证"><span class="toc-text">双尾验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拒绝零假设"><span class="toc-text">拒绝零假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#决策失误"><span class="toc-text">决策失误</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../15/data_analysis_t_test/" class="prev">&larr; Prev post Data Analysis t验证</a>
+  
+
+  
+
+  
+    <a href="../../12/data_analysis_python_operate_data_file/" class="next">Next post Data Analysis Python 操作数据文件 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

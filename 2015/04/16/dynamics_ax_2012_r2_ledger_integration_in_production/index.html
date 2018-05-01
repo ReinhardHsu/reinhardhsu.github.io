@@ -1,0 +1,435 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="不像采购、销售和库存中的总账交易，生产中的总账交易必须包含字资源工序的成本，该成本用于计算成品物料的库存价值。
+
+1、生产控制参数在生产参数的Ledger posting字段控制着总账集成，包含下面的选项：
+
+Item and resource
+Item and category
+Production groups
+
+1.1、Item and  Resource如果选中该项，库存记账设置中的...">
+  
+  <title>Dynamics AX 2012 R2 Ledger Integration in Production - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../29/dynamics_ax_2012_r2_distribution_and_trade/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Distribution And Trade
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../03/30/dynamics_ax_2012_r2_accounts_payable_modules/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Accounts Payable modules
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Dynamics AX 2012 R2 Ledger Integration in Production</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-04-16</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/microsoft-dynamics-ax/">Microsoft Dynamics AX</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>不像采购、销售和库存中的总账交易，生产中的总账交易必须包含字资源工序的成本，该成本用于计算成品物料的库存价值。</p>
+<p><span id="more-288"></span></p>
+<h2 id="1、生产控制参数"><a href="#1、生产控制参数" class="headerlink" title="1、生产控制参数"></a>1、生产控制参数</h2><p>在生产参数的<strong>Ledger posting</strong>字段控制着总账集成，包含下面的选项：</p>
+<ul>
+<li><strong>Item and resource</strong></li>
+<li><strong>Item and category</strong></li>
+<li><strong>Production groups</strong></li>
+</ul>
+<h3 id="1-1、Item-and-Resource"><a href="#1-1、Item-and-Resource" class="headerlink" title="1.1、Item and  Resource"></a>1.1、Item and  Resource</h3><p>如果选中该项，库存记账设置中的指定的主要科目，会应用到物料交易。对于资源工序，主要的科目设置在资源的总账标签页。</p>
+<h3 id="1-2、物料和分类"><a href="#1-2、物料和分类" class="headerlink" title="1.2、物料和分类"></a>1.2、物料和分类</h3><p>如果选中了该项，库存记账设置中指定的主要科目，会应用到物料交易。对于资源工序，在成本分类中设置。（Production control&gt;Setup&gt;Routes&gt;Cost categories,tab Ledger-resources）。</p>
+<h3 id="1-3、生产组"><a href="#1-3、生产组" class="headerlink" title="1.3、生产组"></a>1.3、生产组</h3><p>如果选中了该项，会应用记账组中的主要会计科目。（Production control&gt;Setup&gt;Production&gt;Production groups）。</p>
+<p>生产组在生产订单和会计科目之间建立了一种关系。将每个生产组附加到默认的过账模板。默认的过账模板决定如何将该组中的生产订单的交易记录过账到分类账。</p>
+<h4 id="1-3-1、生产池"><a href="#1-3-1、生产池" class="headerlink" title="1.3.1、生产池"></a>1.3.1、生产池</h4><p>还有一个叫做生产池的概念。生产池是一种为生产订单分组的方式。例如，可以通过以下方式使用这些类别：</p>
+<ul>
+<li>作为内部批注系统</li>
+<li>创建包含紧急或优先级最高的生产订单池</li>
+<li>对生产信息进行排序或筛选</li>
+</ul>
+<h2 id="2、生产中的总账交易"><a href="#2、生产中的总账交易" class="headerlink" title="2、生产中的总账交易"></a>2、生产中的总账交易</h2><p>当处理一个生产订单时，下面的总账交易会被过账给主要的科目（基于上面的总账过账参数）：</p>
+<ul>
+<li><strong>Picking list</strong></li>
+<li><strong>Resource operation</strong></li>
+<li><strong>Report as finished</strong></li>
+</ul>
+<h3 id="2-1、关于生产日志"><a href="#2-1、关于生产日志" class="headerlink" title="2.1、关于生产日志"></a>2.1、关于生产日志</h3><p>生产订单日志记录了在使用生产订单时发生的不同物料交易记录。这些物料交易记录对公司的财务记录具有直接影响。当过账某一生产日志时，所有物料交易记录都将自动转移到总账中。</p>
+<ul>
+<li><strong>领料单</strong>：该日志用于记录从库存取出的原材料</li>
+<li><strong>工艺卡</strong>：该日志记录工艺路线消耗量</li>
+<li><strong>作业卡</strong>：该日志用于记录，在使用作业卡时，消耗的运营资源。</li>
+<li><strong>完工入库</strong>：该日志是所有已完成的物料的记录。</li>
+</ul>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、生产控制参数"><span class="toc-text">1、生产控制参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、Item-and-Resource"><span class="toc-text">1.1、Item and  Resource</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、物料和分类"><span class="toc-text">1.2、物料和分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、生产组"><span class="toc-text">1.3、生产组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1、生产池"><span class="toc-text">1.3.1、生产池</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、生产中的总账交易"><span class="toc-text">2、生产中的总账交易</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、关于生产日志"><span class="toc-text">2.1、关于生产日志</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../29/dynamics_ax_2012_r2_distribution_and_trade/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Distribution And Trade</a>
+  
+
+  
+
+  
+    <a href="../../../03/30/dynamics_ax_2012_r2_accounts_payable_modules/" class="next">Next post Dynamics AX 2012 R2 Accounts Payable modules &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

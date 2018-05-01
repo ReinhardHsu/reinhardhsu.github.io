@@ -1,0 +1,513 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="什么是探索数据分析探索性数据分析简单来说，就是实用可视化和统计工具，来理解数据的一种方法。  
+EDA的第一个目标变量之间的关联度
+EDA的第二个目标评估和验证假设，基于这些假设将得到未来的推理。
+总结通过研究，我们生成更好的假说，确定哪些变量有最大的预测力，然后选择相应的统计工具，来建立我们的预测模型。
+电视的发展R基本操作设置工作路径12getwd()setwd('~/Downloads...">
+  
+  <title>Data Analysis 使用R研究和总结数据 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../12/12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 在BI分析中建立数据仓库的必要性
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../03/data_analysis_weekend_project_openstreetmap/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Weekend Project 开放街道地图(OpenStreetMap)
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Data Analysis 使用R研究和总结数据</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-11-09</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="什么是探索数据分析"><a href="#什么是探索数据分析" class="headerlink" title="什么是探索数据分析"></a>什么是探索数据分析</h2><p><a href="http://en.wikipedia.org/wiki/Exploratory_data_analysis" target="_blank" rel="noopener">探索性数据分析</a><br>简单来说，就是实用可视化和统计工具，来理解数据的一种方法。  </p>
+<h3 id="EDA的第一个目标"><a href="#EDA的第一个目标" class="headerlink" title="EDA的第一个目标"></a>EDA的第一个目标</h3><p>变量之间的关联度</p>
+<h3 id="EDA的第二个目标"><a href="#EDA的第二个目标" class="headerlink" title="EDA的第二个目标"></a>EDA的第二个目标</h3><p>评估和验证假设，基于这些假设将得到未来的推理。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过研究，我们生成更好的假说，确定哪些变量有最大的预测力，然后选择相应的统计工具，来建立我们的预测模型。</p>
+<h2 id="电视的发展"><a href="#电视的发展" class="headerlink" title="电视的发展"></a>电视的发展</h2><h2 id="R基本操作"><a href="#R基本操作" class="headerlink" title="R基本操作"></a>R基本操作</h2><h3 id="设置工作路径"><a href="#设置工作路径" class="headerlink" title="设置工作路径"></a>设置工作路径</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getwd()</span><br><span class="line">setwd(<span class="string">'~/Downloads/R'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">statesInfo &lt;- read.csv(<span class="string">'xxx.csv'</span>)</span><br><span class="line">View(statesInfo)</span><br><span class="line">subset(statesInfo,state.region==<span class="number">1</span>)</span><br><span class="line">statesInfo[statesInfo$state.region==<span class="number">1</span>,]</span><br><span class="line">head(statesInfo,<span class="number">2</span>)</span><br><span class="line">dim(statesInfo)</span><br></pre></td></tr></table></figure>
+<p>方括号中，第一个参数是row，第二个参数是column。<br>head函数用于取出数据的前几行<br>dim函数，输出数据的dimension，在这里就是50行，12列<br>更多关于子集操作的<a href="http://www.statmethods.net/management/subset.html" target="_blank" rel="noopener">文档</a></p>
+<h3 id="R-Markdown文件"><a href="#R-Markdown文件" class="headerlink" title="R Markdown文件"></a>R Markdown文件</h3><p><a href="https://www.youtube.com/watch?v=6A5EpqqDOdk" target="_blank" rel="noopener">Markdown教程</a><br>可以通过Knit导出到html或pdf</p>
+<h3 id="探索数据"><a href="#探索数据" class="headerlink" title="探索数据"></a>探索数据</h3><h4 id="数据概览"><a href="#数据概览" class="headerlink" title="数据概览"></a>数据概览</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str(data)</span><br><span class="line">summary(data)</span><br></pre></td></tr></table></figure>
+<p>在操作一个新数据框时，str用于看变量名和类型<br>summary用于看变量值的统计信息，如最大，中值等  </p>
+<h4 id="逻辑操作"><a href="#逻辑操作" class="headerlink" title="逻辑操作"></a>逻辑操作</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subset(mtcars,mpg&gt;<span class="number">30</span> &amp; hp&gt;<span class="number">100</span>)</span><br><span class="line">subset(mtcars,mpg&lt;<span class="number">14</span> | disp&gt;<span class="number">390</span>)</span><br></pre></td></tr></table></figure>
+<p>这里注意r中的逻辑或，是一个竖线  </p>
+<h4 id="添加删除列"><a href="#添加删除列" class="headerlink" title="添加删除列"></a>添加删除列</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mtcars$year&lt;-<span class="number">1974</span></span><br><span class="line">mtcars&lt;-subset(mtcars,select=-year)</span><br><span class="line">mtcars$year &lt;- c(<span class="number">1973</span>,<span class="number">1974</span>)</span><br></pre></td></tr></table></figure>
+<p>第一行代码添加了year列，值是1974<br>第二行代码将year列删除了  </p>
+<h4 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cond&lt;-mtcars$wt&lt;<span class="number">3</span></span><br><span class="line">mtcars$weight_class&lt;-ifelse(cond,<span class="string">'light'</span>,<span class="string">'average'</span>)</span><br><span class="line">cond&lt;-mtcars$wt&gt;<span class="number">3.5</span></span><br><span class="line">mtcars$weight_class&lt;-ifelse(cond,<span class="string">'heavy'</span>,mtcars$weight_class)</span><br></pre></td></tr></table></figure>
+<p>cond是布尔型，如果这一行满足条件则为ture，不满足就是false 。<br>然后用ifelse，将分类结果写入weight_class列。  </p>
+<h4 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h4><p>R将所有数据都加载到内存中，如果不需要了，可以删掉</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm(cond)</span><br></pre></td></tr></table></figure>
+<h3 id="Reddit"><a href="#Reddit" class="headerlink" title="Reddit"></a>Reddit</h3><p>一个社交和娱乐网站，用户可以发表热门话题的链接及评论。</p>
+<h4 id="因数变量"><a href="#因数变量" class="headerlink" title="因数变量"></a>因数变量</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reddit &lt;- read.csv(<span class="string">'reddit.csv'</span>)</span><br><span class="line">table(reddit$employment.status)</span><br><span class="line">str(reddit)</span><br><span class="line">levels(reddit<span class="comment">#age.range)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line">qplot(data=reddit,x=age.range)</span><br></pre></td></tr></table></figure>
+<h5 id="有序因子"><a href="#有序因子" class="headerlink" title="有序因子"></a>有序因子</h5><p>年龄和收入，可以按照由低到高，或由高到低有序排列。<a href="http://statistics.ats.ucla.edu/stat/r/modules/factor_variables.htm" target="_blank" rel="noopener">参考文档</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reddit$age.range &lt;- ordered(reddit$age.range,levels=c(<span class="string">'Under 18'</span>,<span class="string">'18-24'</span>))</span><br><span class="line">qplot(data=reddit,x=age.range)</span><br></pre></td></tr></table></figure>
+<h3 id="给数据科学家的建议"><a href="#给数据科学家的建议" class="headerlink" title="给数据科学家的建议"></a>给数据科学家的建议</h3><p><a href="http://www-personal.umich.edu/~ebakshy/" target="_blank" rel="noopener">Eytan Bakshy</a>找到感兴趣的数据集，操作数据，把玩数据。通过把玩数据来积累经验。<br><a href="http://seanjtaylor.com/" target="_blank" rel="noopener">Sean Taylor</a>好的数据科学院子好的问题，而不是花哨的方法。好的数据，是你关心的，或他人也会关心的这种理念来驱动你的研究。你要像记者那样进行思考，你的听众，将消费你产生的结果。</p>
+<h2 id="探索单一变量"><a href="#探索单一变量" class="headerlink" title="探索单一变量"></a>探索单一变量</h2><h3 id="首先该做什么"><a href="#首先该做什么" class="headerlink" title="首先该做什么"></a>首先该做什么</h3><h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getwd()</span><br><span class="line">list.files()</span><br><span class="line">pf &lt;- read.csv(<span class="string">'xx.tsv'</span>,sep=<span class="string">'\t'</span>)</span><br><span class="line">pf &lt;- read.delim(<span class="string">'xx.tsv'</span>)</span><br><span class="line">names(pf)</span><br></pre></td></tr></table></figure>
+<p>这里要注意分隔符，是制表符。read.csv默认是逗号，read.delim默认是制表符。  </p>
+<h3 id="创建直方图"><a href="#创建直方图" class="headerlink" title="创建直方图"></a>创建直方图</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(ggthemes)</span><br><span class="line">theme_set(theme_minimal())</span><br><span class="line"></span><br><span class="line">qplot(data = pf,x=dob_day)+</span><br><span class="line">  scale_x_continuous(breaks = <span class="number">1</span>:<span class="number">31</span>)</span><br></pre></td></tr></table></figure>
+<p>qplot默认并未将31天都显示出来，所以，后面又加了个端点涂层。<br>然后再添加图层，将每个月的情况显示出来。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = pf,x=dob_day)+</span><br><span class="line">  scale_x_continuous(breaks = <span class="number">1</span>:<span class="number">31</span>)+</span><br><span class="line">    facet_wrap(~dob_month,ncol=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>facet_wrap(~variable)叫琢面包裹，用来创建类似的图形。这里，列数设置为3列。<br>facet_grid(vertical~horizontal)包含要在垂直方向分割的变量，波浪号后面，是水平方向分割的变量。<br>在传递1个变量时，用facet_wrap，传递2个时，用facet_grid 。</p>
+<h3 id="过滤异常值"><a href="#过滤异常值" class="headerlink" title="过滤异常值"></a>过滤异常值</h3><p>极端情况下的坏数据<br>非极端情况下的话数据<br>极端情况下的好数据  </p>
+<p>数据集中分布在一侧，另一侧的数据很少，但是分布得非常广，这种数据叫做长尾数据。<br>可以使用限制轴，来进行过滤</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = pf,x=friend_count,xlim = c(<span class="number">0</span>,<span class="number">1000</span>))</span><br><span class="line"></span><br><span class="line">qplot(data = pf,x=friend_count)+</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">0</span>,<span class="number">1000</span>))</span><br><span class="line"></span><br><span class="line">ggplot(aes(x = friend_count), data = pf) +</span><br><span class="line">  geom_histogram() +</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">0</span>, <span class="number">1000</span>))</span><br></pre></td></tr></table></figure>
+<p><a href="http://docs.ggplot2.org/current/scale_continuous.html" target="_blank" rel="noopener">标尺</a></p>
+<h3 id="设置组宽"><a href="#设置组宽" class="headerlink" title="设置组宽"></a>设置组宽</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = pf,x=friend_count,binwidth=<span class="number">25</span>)+</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">0</span>,<span class="number">1000</span>),breaks=seq(<span class="number">0</span>,<span class="number">1000</span>,<span class="number">50</span>))</span><br></pre></td></tr></table></figure>
+<p>binwidth设置了数据桶的大小，breaks设置了下标50一标记。</p>
+<h3 id="忽略NA值"><a href="#忽略NA值" class="headerlink" title="忽略NA值"></a>忽略NA值</h3><p><a href="http://www.statmethods.net/input/missingdata.html" target="_blank" rel="noopener">缺失值</a><br><a href="http://english.stackexchange.com/questions/62918/why-is-the-exclamation-mark-called-a-bang" target="_blank" rel="noopener">感叹号为何称为bang</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">qplot(x = friend_count, data =subset( pf,!is.na(gender)), binwidth = <span class="number">10</span>) +</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">0</span>, <span class="number">1000</span>),</span><br><span class="line">                     breaks = seq(<span class="number">0</span>, <span class="number">1000</span>, <span class="number">50</span>))+</span><br><span class="line">  facet_wrap(~gender)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">qplot(x = friend_count, data =na.omit( pf), binwidth = <span class="number">10</span>) +</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">0</span>, <span class="number">1000</span>),</span><br><span class="line">                     breaks = seq(<span class="number">0</span>, <span class="number">1000</span>, <span class="number">50</span>))+</span><br><span class="line">  facet_wrap(~gender)</span><br></pre></td></tr></table></figure>
+<p>na.omit，会忽略所有列的na值。</p>
+<h3 id="划分"><a href="#划分" class="headerlink" title="划分"></a>划分</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">by(pf$friend_count,pf$gender,summary)</span><br></pre></td></tr></table></figure>
+<h3 id="填充颜色"><a href="#填充颜色" class="headerlink" title="填充颜色"></a>填充颜色</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = pf,x=tenure,binwidth=<span class="number">30</span>,</span><br><span class="line">      color=I(<span class="string">'black'</span>),fill=I(<span class="string">'#099DD9'</span>))</span><br></pre></td></tr></table></figure>
+<p>color是线框的颜色，fill是填充的颜色。<br>这里的组距是30，因为30天是一个月，所以每根柱子都代表一个月。如果要以年来看，将组距设置为365 。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = pf,x=tenure/<span class="number">365</span>,binwidth=<span class="number">.25</span>,</span><br><span class="line">      color=I(<span class="string">'black'</span>),fill=I(<span class="string">'#099DD9'</span>))+</span><br><span class="line">  scale_x_continuous(breaks = seq(<span class="number">1</span>,<span class="number">7</span>,<span class="number">1</span>),limits = c(<span class="number">0</span>,<span class="number">7</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="设置标签"><a href="#设置标签" class="headerlink" title="设置标签"></a>设置标签</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = pf,x=tenure/<span class="number">365</span>,</span><br><span class="line">      xlab = <span class="string">'Number of years using Facebook'</span>,</span><br><span class="line">      ylab = <span class="string">'Number of users in sample'</span>,</span><br><span class="line">      color=I(<span class="string">'black'</span>),fill=I(<span class="string">'#099DD9'</span>))+</span><br><span class="line">  scale_x_continuous(breaks = seq(<span class="number">1</span>,<span class="number">7</span>,<span class="number">1</span>),limits = c(<span class="number">0</span>,<span class="number">7</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>好友数、点赞数、评论数、涂鸦墙有些变量，都有很长的尾巴，有的用户的数据甚至是中位数的10倍100倍，我们称为约束变量。这些用户比其它用户高出一个量级，在统计学中，我们称为数据过离散，通常要对这些值进行变换，才能看到标准偏差或者量级，也就是在缩短尾巴。  </p>
+<h4 id="对数"><a href="#对数" class="headerlink" title="对数"></a>对数</h4><p>使用自然对数，或者以2为底，以10为底，可以帮助我们看清模式，不被长尾分散注意。<br>很多常见的统计方法，比如线性递归，都是基于变量是正太分布的假设。<br>通过取对数，将变量转换为正太分布，或非常接近正太分布。<br>有的好友数为0，取0的对数，会出现未定义，或无穷大。这里需要将好友数加上1 。</p>
+<h4 id="平方根"><a href="#平方根" class="headerlink" title="平方根"></a>平方根</h4><p>另一种方法是对好友数取平方根，</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">summary(pf$friend_count)</span><br><span class="line">summary(log10(pf$friend_count+<span class="number">1</span>))</span><br><span class="line">summary(sqrt(pf$friend_count))</span><br><span class="line"></span><br><span class="line">qplot(data = pf,x=friend_count)</span><br><span class="line">qplot(data=pf,x=log10(friend_count+<span class="number">1</span>))</span><br><span class="line">qplot(data=pf,x=sqrt(friend_count))</span><br><span class="line"></span><br><span class="line">p1 &lt;- ggplot(aes(x=friend_count),data=pf)+geom_histogram()</span><br><span class="line">p2 &lt;- p1+scale_x_log10()</span><br><span class="line">p3 &lt;- p1+scale_x_sqrt()</span><br><span class="line"></span><br><span class="line"><span class="keyword">library</span>(gridExtra)</span><br><span class="line"></span><br><span class="line">grid.arrange(p1,p2,p3,ncol=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>这里，ggplot与qplot最大的不同，是将x轴和y轴放在了aes美学包中。</p>
+<h4 id="频率多边形"><a href="#频率多边形" class="headerlink" title="频率多边形"></a>频率多边形</h4><p>频率多边形类似于直方图，但是可以更清晰地看出分布的形状和峰值，可以立即比较两个或多个分布。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">qplot(data=subset(pf,!is.na(gender)),x=friend_count,</span><br><span class="line">      y=..count../sum(..count..),</span><br><span class="line">      binwidth=<span class="number">10</span>,geom = <span class="string">'freqpoly'</span>,color=gender)+</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">800</span>,<span class="number">1200</span>),breaks = seq(<span class="number">0</span>,<span class="number">1000</span>,<span class="number">50</span>))</span><br><span class="line"></span><br><span class="line">ggplot(aes(x=friend_count,y=..count../sum(..count..)),data = subset(pf,!is.na(gender)))+</span><br><span class="line">  geom_freqpoly(aes(color=gender),binwidth=<span class="number">10</span>)+</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">0</span>,<span class="number">1000</span>),breaks = seq(<span class="number">0</span>,<span class="number">1000</span>,<span class="number">50</span>))+</span><br><span class="line">  xlab(<span class="string">'friend count'</span>)+</span><br><span class="line">  ylab(<span class="string">'percentage of users with that friend count'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">qplot(data=subset(pf,!is.na(gender)),x=www_likes,</span><br><span class="line">      geom=<span class="string">'freqpoly'</span>,color=gender)+</span><br><span class="line">  scale_x_continuous()+</span><br><span class="line">  scale_x_log10()</span><br></pre></td></tr></table></figure>
+<p>对于峰值，可能很容易比较，但是对于尾部，就很难比较了。所以对长尾数据，要用对数变换，来获得一个含有更多信息的图形。<br>两个条线，一个前面高，一个后面高，那究竟哪个更多呢？可以用汇总信息来回答。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">by(pf$www_likes,pf$gender,sum)</span><br></pre></td></tr></table></figure>
+<p>这样可以看到男性和女性的点赞总数。虽然男性有少数人的点赞量很高，但是总体上，女性的点赞数要高于男性。  </p>
+<h4 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h4><p>另一种观察变量分布的图形，是箱线图，可以看出中位数的差异。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qplot(data=subset(pf,!is.na(gender)),x=gender,y=friend_count,</span><br><span class="line">      geom=<span class="string">'boxplot'</span>)+</span><br><span class="line">  scale_y_continuous(limits = c(<span class="number">0</span>,<span class="number">500</span>))</span><br></pre></td></tr></table></figure>
+<p>当使用ylim或scale_y_continuouse图层时，我们实际上从计算中删除了一些数据点。更好的方法是使用cord_cartesian图层来设置y轴的限制。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qplot(data=subset(pf,!is.na(gender)),x=gender,y=friend_count,</span><br><span class="line">      geom=<span class="string">'boxplot'</span>)+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">0</span>,<span class="number">1000</span>))</span><br></pre></td></tr></table></figure>
+<p>箱线图中间的黑线，代表了中位数。中位数接近，说明对于男性中间50%和女性中间50%是相似的。女性的中位数比男性的中位数稍高一些，说明女性的好友数稍多一些。<br>这里用by看下数据</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">by(pf$friend_count,pf$gender,summary)</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，25%的女性好友数高于244个，25%的男性好友数高于182个。<br>使用coord_cartesian的目的，是让我们的箱线图与表输出一致。直接在qplot中使用ylim参数，会得到不同的四分位，与图形不符。  </p>
+<p>如果要看谁主动添加的好友最多，可以使用names看看都有哪些变量</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">names(pf)</span><br><span class="line"></span><br><span class="line">qplot(data = subset(pf,!is.na(gender)),x=gender,y=friendships_initiated,</span><br><span class="line">      geom = <span class="string">'boxplot'</span>)+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">0</span>,<span class="number">150</span>))</span><br></pre></td></tr></table></figure>
+<p>如果用by summary就能回答这些问题，为何还要创建箱线图呢？因为箱线图可以让帮助我们理解数据的分布，中间50%的值，感知异常值，内容要比summary丰富。</p>
+<h4 id="逻辑转换"><a href="#逻辑转换" class="headerlink" title="逻辑转换"></a>逻辑转换</h4><p>除了平方根、对数，还可以使用新的二进制变量，仅包含真或假。比如，我们想知道某用户是否使用过某个功能，而不是使用次数。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">summary(pf$mobile_likes)</span><br><span class="line"></span><br><span class="line">summary(pf$mobile_likes&gt;<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">pf$mobile_check_in &lt;- <span class="literal">NA</span></span><br><span class="line">pf$mobile_check_in &lt;- ifelse(pf$mobile_likes&gt;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>)</span><br><span class="line">pf$mobile_check_in &lt;- factor(pf$mobile_check_in)</span><br><span class="line">summary(pf$mobile_check_in)</span><br></pre></td></tr></table></figure>
+<p>使用factor将其转换成因素变量</p>
+<h4 id="分析单一变量的总结"><a href="#分析单一变量的总结" class="headerlink" title="分析单一变量的总结"></a>分析单一变量的总结</h4><ul>
+<li>仔细观察数据集中单个变量的重要性</li>
+<li>了解数据的类型，及其分布形式</li>
+<li>是否有缺失值或异常值</li>
+<li>主要通过直方图、箱线图、频数多边形的可视化，了解单个变量</li>
+<li>根据情况对图形进行调整，调整组距，轴的极限</li>
+<li>用对数对变量进行变换，或将其变成二进制，来发现数据后面隐藏的模式</li>
+</ul>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><h4 id="过滤数据求行数"><a href="#过滤数据求行数" class="headerlink" title="过滤数据求行数"></a>过滤数据求行数</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">price &lt;- subset(diamonds,price&gt;=<span class="number">15000</span>)</span><br><span class="line">nrow(price)</span><br></pre></td></tr></table></figure>
+<h4 id="查看直方图"><a href="#查看直方图" class="headerlink" title="查看直方图"></a>查看直方图</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = diamonds,x=price,binwidth=<span class="number">25</span>)+</span><br><span class="line">  scale_x_continuous(limits = c(<span class="number">300</span>,<span class="number">2000</span>),breaks = seq(<span class="number">300</span>,<span class="number">2000</span>,<span class="number">100</span>))</span><br><span class="line">ggsave(<span class="string">'priceHistogram.png'</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="按照切割工艺分割直方图"><a href="#按照切割工艺分割直方图" class="headerlink" title="按照切割工艺分割直方图"></a>按照切割工艺分割直方图</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = diamonds,x=price)+</span><br><span class="line">  facet_wrap(~cut,ncol=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">by(diamonds$price,diamonds$cut,summary,digits=max(getOption(<span class="string">'digits'</span>)))</span><br></pre></td></tr></table></figure>
+<p>summary默认会四舍五入，在by中指定digits参数，可以显示小数。</p>
+<p>我们看到，价格最高的钻石，有高级切割工艺。<br>价格最低的钻石，有高级或完美的切割工艺。<br>中位数价格最低的钻石，有着完美的切割工艺。<br>为什么会出现这样的情况呢？完美切割工艺的钻石，不是才拥有最高的价格么？其实钻石的价格还跟其它因素有关，比如克拉。  </p>
+<h4 id="每克拉钻石的价格，按切割工艺分割的直方图"><a href="#每克拉钻石的价格，按切割工艺分割的直方图" class="headerlink" title="每克拉钻石的价格，按切割工艺分割的直方图"></a>每克拉钻石的价格，按切割工艺分割的直方图</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">diamonds$unit_price &lt;- diamonds$price/diamonds$carat</span><br><span class="line">summary(diamonds$unit_price)</span><br><span class="line"></span><br><span class="line">qplot(data = diamonds,x=unit_price)+</span><br><span class="line">  scale_x_continuous()+</span><br><span class="line">  scale_x_log10()+</span><br><span class="line">  facet_wrap(~cut,scales = <span class="string">'free_y'</span>)</span><br><span class="line"></span><br><span class="line">by(diamonds$unit_price,diamonds$cut,summary,digits=max(getOption(<span class="string">'digits'</span>)))</span><br></pre></td></tr></table></figure>
+<h4 id="透明度、颜色、切割工艺的箱线图"><a href="#透明度、颜色、切割工艺的箱线图" class="headerlink" title="透明度、颜色、切割工艺的箱线图"></a>透明度、颜色、切割工艺的箱线图</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = diamonds,y=price,x=clarity,</span><br><span class="line">      geom=<span class="string">'boxplot'</span>)+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">0</span>,<span class="number">7000</span>))</span><br><span class="line"></span><br><span class="line">by(diamonds$price,diamonds$clarity,summary,digits=max(getOption(<span class="string">'digits'</span>)))</span><br><span class="line"></span><br><span class="line">qplot(data = diamonds,y=price,x=color,</span><br><span class="line">      geom=<span class="string">'boxplot'</span>)+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">0</span>,<span class="number">8000</span>))</span><br><span class="line"></span><br><span class="line">by(diamonds$price,diamonds$color,summary,digits=max(getOption(<span class="string">'digits'</span>)))</span><br><span class="line">IQR(subset(diamonds,color==<span class="string">'J'</span>)$price)</span><br><span class="line">IQR(subset(diamonds,color==<span class="string">'D'</span>)$price)</span><br><span class="line"></span><br><span class="line">qplot(data = diamonds,y=price,x=cut,</span><br><span class="line">      geom=<span class="string">'boxplot'</span>)+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">0</span>,<span class="number">7000</span>))</span><br><span class="line"></span><br><span class="line">by(diamonds$price,diamonds$cut,summary,digits=max(getOption(<span class="string">'digits'</span>)))</span><br></pre></td></tr></table></figure>
+<p>这里IQR可以求四分位差，因为subset返回的是一个数据框，所以用$price来访问价格变量。<br>我们看到，颜色最差的钻石的价格四分位差是5834.5，颜色最好的钻石的价格四分位差是3302.5 。</p>
+<h4 id="每克拉钻石不同颜色的价格"><a href="#每克拉钻石不同颜色的价格" class="headerlink" title="每克拉钻石不同颜色的价格"></a>每克拉钻石不同颜色的价格</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = diamonds,y=unit_price,x=color,</span><br><span class="line">      geom=<span class="string">'boxplot'</span>)+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">0</span>,<span class="number">8000</span>))</span><br><span class="line"></span><br><span class="line">by(diamonds$unit_price,diamonds$color,summary,digits=max(getOption(<span class="string">'digits'</span>)))</span><br></pre></td></tr></table></figure>
+<h4 id="颜色价格的频数多变型"><a href="#颜色价格的频数多变型" class="headerlink" title="颜色价格的频数多变型"></a>颜色价格的频数多变型</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">qplot(data = diamonds,x=carat,binwidth=<span class="number">0.1</span>,</span><br><span class="line">      geom=<span class="string">'freqpoly'</span>)+</span><br><span class="line">  scale_x_continuous(breaks = seq(<span class="number">0</span>,<span class="number">2.25</span>,<span class="number">0.1</span>))+</span><br><span class="line">  coord_cartesian(ylim = c(<span class="number">1000</span>,<span class="number">3000</span>),xlim =c(<span class="number">0</span>,<span class="number">2.25</span>) )</span><br></pre></td></tr></table></figure>
+<p>这里通过调整binwidth，可以查看价格高于2000的克拉都有哪些。</p>
+<p><a href="用于重塑数据布局的包">tidyr</a><br><a href="用于帮助转换整洁的表格数据的包">dplyr</a>  </p>
+<h3 id="观察两个变量"><a href="#观察两个变量" class="headerlink" title="观察两个变量"></a>观察两个变量</h3><p>同时观察两个变量要用散点图。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pf &lt;- read.csv(file = 'pseudo_facebook.tsv',sep='\t',header = TRUE)</span></span><br><span class="line">pf &lt;- read.delim(<span class="string">'pseudo_facebook.tsv'</span>)</span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line">ggplot(aes(x=age,y=friend_count),data=pf)+</span><br><span class="line">  geom_point()</span><br><span class="line"></span><br><span class="line">qplot(data=pf,x=age,y=friend_count)</span><br></pre></td></tr></table></figure>
+<p>这里可以看到，30岁以下的年轻人的好友数很高。但是有几个超过60岁的年龄的好友数也很好，很有可能是谎报年龄的青少年。</p>
+<h4 id="设置点的透明度"><a href="#设置点的透明度" class="headerlink" title="设置点的透明度"></a>设置点的透明度</h4><p>在图标底部，很多点是重合的。这里设着透明度为现在的1/20 。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ggplot(aes(x=age,y=friend_count),data=pf)+</span><br><span class="line">  geom_point(alpha=<span class="number">1</span>/<span class="number">20</span>)+</span><br><span class="line">  xlim(<span class="number">13</span>,<span class="number">90</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="设置抖动"><a href="#设置抖动" class="headerlink" title="设置抖动"></a>设置抖动</h4><p>将geom_point 换成geom_jitter。年龄是连续变量，但实际上只有整数值。所以散点图的年龄，完美地排成一列一列。抖动，可以向每个年龄添加一些噪音，使得结果更离散。这样可以得到更清晰的年龄与好友数关系的图像。</p>
+<p>设置抖动后，我们发现大多数年轻用户的好友数低于1000。其中，大约69岁左右有一个峰值，看起来和年轻人很相似。</p>
+<h4 id="变换轴"><a href="#变换轴" class="headerlink" title="变换轴"></a>变换轴</h4><p>使用coord_trans</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ggplot(aes(x=age,y=friend_count),data=pf)+</span><br><span class="line">  geom_point(alpha=<span class="number">1</span>/<span class="number">20</span>)+</span><br><span class="line">  xlim(<span class="number">13</span>,<span class="number">90</span>)+</span><br><span class="line">  coord_trans(y=<span class="string">'sqrt'</span>)</span><br></pre></td></tr></table></figure>
+<p>添加噪音时，正负数都有可能添加。如果添加了负数的噪音，有可能导致值为负，没法开平方根。所以添加</p>
+<h4 id="dplyr"><a href="#dplyr" class="headerlink" title="dplyr"></a>dplyr</h4><p>有些时候，我们除了看单个的点外，还想问平均好友数随年龄如何变化。这就需要dplyr。这个包可以让我们分割数据帧，然后向数据的某些部分应用某个函数，如filter()，group_by()，mutate()，arrange()。  </p>
+<p>常规的方法是：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line">age_groups &lt;- group_by(pf,age)</span><br><span class="line">pf.fc_by_age &lt;- summarise(age_groups,</span><br><span class="line">                          friend_count_mean=mean(friend_count),</span><br><span class="line">                          friend_count_median=mean(friend_count),</span><br><span class="line">                          n=n())</span><br><span class="line">pf.fc_by_age &lt;- arrange(pf.fc_by_age,age)</span><br><span class="line">head(pf.fc_by_age)</span><br></pre></td></tr></table></figure>
+<p>另一种方法是：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pf.fc_by_age &lt;- pf %&gt;%</span><br><span class="line">  group_by(age) %&gt;%</span><br><span class="line">  summarise(friend_count_mean=mean(friend_count),</span><br><span class="line">            friend_count_median=median(friend_count),</span><br><span class="line">            n=n()) %&gt;%</span><br><span class="line">  arrange(age)</span><br><span class="line"></span><br><span class="line">head(pf.fc_by_age)</span><br></pre></td></tr></table></figure>
+<p>最后，用直线把各个点连接起来</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ggplot(data=pf.fc_by_age,aes(x=age,y=friend_count_mean)) +</span><br><span class="line">         geom_line()</span><br></pre></td></tr></table></figure>
+<h4 id="叠加摘要和原始数据"><a href="#叠加摘要和原始数据" class="headerlink" title="叠加摘要和原始数据"></a>叠加摘要和原始数据</h4><p>ggplot可以轻松创建各种汇总，并进行绘图，方便快速地进行数据探索。  </p>
+<p>有时候想把摘要图形显示在原始图形上</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ggplot(aes(x=age,y=friend_count),data=pf)+</span><br><span class="line">  geom_point(alpha=<span class="number">1</span>/<span class="number">20</span>,position = position_jitter(h=<span class="number">0</span>),color=<span class="string">'orange'</span>)+</span><br><span class="line">  coord_cartesian( xlim(<span class="number">13</span>,<span class="number">90</span>))+</span><br><span class="line">  coord_trans(y=<span class="string">'sqrt'</span>)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=mean)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=quantile,fun.args=list(probs=<span class="number">.1</span>),linetype=<span class="number">2</span>,color=<span class="string">'blue'</span>)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=quantile,fun.args=list(probs=<span class="number">.9</span>),linetype=<span class="number">2</span>,color=<span class="string">'blue'</span>)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=quantile,fun.args=list(probs=<span class="number">.5</span>),color=<span class="string">'blue'</span>)</span><br></pre></td></tr></table></figure>
+<p>我们从图中可以看到，即使是青少年，也很少有好友数超过1000的。数据会不会受平方根的影响呢？我们把平方根去掉看看。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ggplot(aes(x=age,y=friend_count),data=pf)+</span><br><span class="line">  geom_point(alpha=<span class="number">1</span>/<span class="number">20</span>,position = position_jitter(h=<span class="number">0</span>),color=<span class="string">'orange'</span>)+</span><br><span class="line">  coord_cartesian( xlim=c(<span class="number">13</span>,<span class="number">70</span>),ylim=c(<span class="number">0</span>,<span class="number">1000</span>) )+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=mean)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=quantile,fun.args=list(probs=<span class="number">.1</span>),linetype=<span class="number">2</span>,color=<span class="string">'blue'</span>)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=quantile,fun.args=list(probs=<span class="number">.9</span>),linetype=<span class="number">2</span>,color=<span class="string">'blue'</span>)+</span><br><span class="line">  geom_line(stat = <span class="string">'summary'</span>,fun.y=quantile,fun.args=list(probs=<span class="number">.5</span>),color=<span class="string">'blue'</span>)</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，青少年的好友数大多数依然低于1000，在30岁到60岁之间的人，好友数大多低于250个。</p>
+<h4 id="相关性"><a href="#相关性" class="headerlink" title="相关性"></a>相关性</h4><p>现在来看看年龄与好友数之间的相关性。使用Pearson相关系数，来衡量年龄与好友数之间的线形关系。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cor.test(pf$age,pf$friend_count,method=<span class="string">'pearson'</span>)</span><br><span class="line"></span><br><span class="line">with(pf,cor.test(age,friend_count,method=<span class="string">'pearson'</span>))</span><br></pre></td></tr></table></figure>
+<p>我们得到相关系数是-0.0274 。相关系数小于0.3或大于-0.3时，我们认为没有意义。大于0.3或小于-0.3时，我们认为有意义但相关性较小。0.5附近为中等，0.7以上为很大。</p>
+<h4 id="子集相关性"><a href="#子集相关性" class="headerlink" title="子集相关性"></a>子集相关性</h4><p>通过上面的系数，我们发现年龄和好友数之间不存在线形关系。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是探索数据分析"><span class="toc-text">什么是探索数据分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EDA的第一个目标"><span class="toc-text">EDA的第一个目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EDA的第二个目标"><span class="toc-text">EDA的第二个目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电视的发展"><span class="toc-text">电视的发展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#R基本操作"><span class="toc-text">R基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置工作路径"><span class="toc-text">设置工作路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取文件"><span class="toc-text">读取文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-Markdown文件"><span class="toc-text">R Markdown文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#探索数据"><span class="toc-text">探索数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据概览"><span class="toc-text">数据概览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑操作"><span class="toc-text">逻辑操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加删除列"><span class="toc-text">添加删除列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加分类"><span class="toc-text">添加分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除变量"><span class="toc-text">删除变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reddit"><span class="toc-text">Reddit</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#因数变量"><span class="toc-text">因数变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#有序因子"><span class="toc-text">有序因子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给数据科学家的建议"><span class="toc-text">给数据科学家的建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#探索单一变量"><span class="toc-text">探索单一变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先该做什么"><span class="toc-text">首先该做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建直方图"><span class="toc-text">创建直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤异常值"><span class="toc-text">过滤异常值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置组宽"><span class="toc-text">设置组宽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略NA值"><span class="toc-text">忽略NA值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#划分"><span class="toc-text">划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#填充颜色"><span class="toc-text">填充颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置标签"><span class="toc-text">设置标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据"><span class="toc-text">数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对数"><span class="toc-text">对数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#平方根"><span class="toc-text">平方根</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#频率多边形"><span class="toc-text">频率多边形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#箱线图"><span class="toc-text">箱线图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑转换"><span class="toc-text">逻辑转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析单一变量的总结"><span class="toc-text">分析单一变量的总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#过滤数据求行数"><span class="toc-text">过滤数据求行数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看直方图"><span class="toc-text">查看直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#按照切割工艺分割直方图"><span class="toc-text">按照切割工艺分割直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#每克拉钻石的价格，按切割工艺分割的直方图"><span class="toc-text">每克拉钻石的价格，按切割工艺分割的直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#透明度、颜色、切割工艺的箱线图"><span class="toc-text">透明度、颜色、切割工艺的箱线图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#每克拉钻石不同颜色的价格"><span class="toc-text">每克拉钻石不同颜色的价格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#颜色价格的频数多变型"><span class="toc-text">颜色价格的频数多变型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#观察两个变量"><span class="toc-text">观察两个变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置点的透明度"><span class="toc-text">设置点的透明度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置抖动"><span class="toc-text">设置抖动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变换轴"><span class="toc-text">变换轴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dplyr"><span class="toc-text">dplyr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#叠加摘要和原始数据"><span class="toc-text">叠加摘要和原始数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关性"><span class="toc-text">相关性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#子集相关性"><span class="toc-text">子集相关性</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../12/12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/" class="prev">&larr; Prev post Dynamics AX 2012 R2 在BI分析中建立数据仓库的必要性</a>
+  
+
+  
+
+  
+    <a href="../../03/data_analysis_weekend_project_openstreetmap/" class="next">Next post Data Analysis Weekend Project 开放街道地图(OpenStreetMap) &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+
