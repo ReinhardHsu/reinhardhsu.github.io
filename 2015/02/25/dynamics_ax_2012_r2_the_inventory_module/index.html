@@ -134,12 +134,12 @@
   <article id="post">
     <h1>Dynamics AX 2012 R2 The Inventory module</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2015-02-25</span>
+      <span id = "post-title-date">Created at 2015-02-25</span>
       
-        <span id = "post-title-updated">修改于 2018-05-01</span>
+        <span id = "post-title-updated">Updated at 2018-05-01</span>
       
       
-      <span id = "post-title-categories">分类
+      <span id = "post-title-categories">Category
       
       
         
@@ -150,7 +150,7 @@
       
       
       <span id = "post-title-tags">
-      标签
+      Tag
       
       
         
@@ -185,10 +185,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">static void MSDynAX.Net_ReinhardTestJob1(Args _args)</span><br><span class="line">&#123;</span><br><span class="line">    InventJournalName  inventJournalName;</span><br><span class="line">    InventJournalTable inventJournalTable;</span><br><span class="line">    InventJournalTrans inventJournalTrans;</span><br><span class="line">    InventJournalTableData inventJournalTableData;</span><br><span class="line">    inventJournalTransData inventJournalTransData;</span><br><span class="line">    InventTable            inventTable;</span><br><span class="line">    InventDim              inventDim;</span><br><span class="line">    </span><br><span class="line">    select firstonly inventTable;</span><br><span class="line">    select firstOnly inventJournalName</span><br><span class="line">    	where inventJournalName.JournalType==InventJournalType::Movement;</span><br><span class="line">    </span><br><span class="line">    inventJournalTable.clear();</span><br><span class="line">    inventJournalTable.initValue();</span><br><span class="line">    inventJournalTable.initFromInventJournalName(inventJournalName);</span><br><span class="line">    inventJournalTable.insert();</span><br><span class="line">    inventJournalTableData=JournalTableData::newTable(inventJournalTable);</span><br><span class="line">    inventJournalTrans.clear();</span><br><span class="line">    inventJournalTrans.initFromInventJournalTable(inventJournalTable);</span><br><span class="line">    inventJournalTrans.TransDate=systemDateGet();</span><br><span class="line">    inventJournalTrans.initFromInventTable(inventTable);</span><br><span class="line">    inventJournalTrans.Qty=3;</span><br><span class="line">    inventDim.initFromInventTable(inventJournalTrans.inventMovement()</span><br><span class="line">                                  .inventTable(),</span><br><span class="line">                                  InventItemOrderSetupType::Invent,inventDim);</span><br><span class="line">    inventDim=InventDim::findOrCreate(inventDim);</span><br><span class="line">    inventJournalTrans.InventDimId=inventDim.inventDimId;</span><br><span class="line">    inventJournalTransData=inventJournalTableData.journalStatic()</span><br><span class="line">        .newJournalTransData(inventJournalTrans,inventJournalTableData);</span><br><span class="line">    inventJournalTransData.create();</span><br><span class="line">    if(InventJournalCheckPost::newPostJournal(inventJournalTable).validate())</span><br><span class="line">    	InventJournalCheckPost::newPostJournal(inventJournalTable).run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解主要的类层次结构"><span class="toc-text">理解主要的类层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InventMovement类"><span class="toc-text">InventMovement类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InventUpdate类"><span class="toc-text">InventUpdate类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InventAdj类"><span class="toc-text">InventAdj类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InventSum类"><span class="toc-text">InventSum类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Inventory-dimensions"><span class="toc-text">使用Inventory dimensions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查找库存维度"><span class="toc-text">查找库存维度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找当前现有量信息"><span class="toc-text">查找当前现有量信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找特定日期的现有量信息"><span class="toc-text">查找特定日期的现有量信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从代码中创建并过账一个库存日记账"><span class="toc-text">从代码中创建并过账一个库存日记账</span></a></li></ol></li></ol>
   </div>
 </div>
@@ -196,13 +196,13 @@
   
 <nav id="pagination">
   
-    <a href="../../../03/12/dynamics_ax_2012_r2_execute_stored_procedure_with_parameters/" class="prev">&larr; 上一篇 Dynamics AX 2012 R2 Execute Stored Procedure with Parameters</a>
+    <a href="../../../03/12/dynamics_ax_2012_r2_execute_stored_procedure_with_parameters/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Execute Stored Procedure with Parameters</a>
   
 
   
 
   
-    <a href="../../10/dynamics_ax_2012_r2_setup_reporting_server/" class="next">下一篇 Dynamics AX 2012 R2 设置报表服务器 &rarr;</a>
+    <a href="../../10/dynamics_ax_2012_r2_setup_reporting_server/" class="next">Next post Dynamics AX 2012 R2 设置报表服务器 &rarr;</a>
   
 </nav>
 
@@ -240,8 +240,8 @@ new Valine({
     el: '#uyan_frame' ,
     notify:false, 
     verify:false, 
-    appId: 'h4spxrf9innflm3sgvfxhcq8bbk9gpu4fh80aux7gakcioy0',
-    appKey: 'natrdexxr65lycvupbglrxtry5xiq0a8bm9a3mx0gw5mrf18',
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
     placeholder: 'just go go',
     path:window.location.pathname, 
     avatar:'mm' 
