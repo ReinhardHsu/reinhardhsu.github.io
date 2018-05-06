@@ -140,12 +140,12 @@ Perceptron感知机input是多个二进制，output是一个二进制。
   <article id="post">
     <h1>Deep Learning - 1 神经网络</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2018-04-28</span>
+      <span id = "post-title-date">Created at 2018-04-28</span>
       
-        <span id = "post-title-updated">修改于 2018-05-05</span>
+        <span id = "post-title-updated">Updated at 2018-05-05</span>
       
       
-      <span id = "post-title-categories">分类
+      <span id = "post-title-categories">Category
       
       
         
@@ -156,7 +156,7 @@ Perceptron感知机input是多个二进制，output是一个二进制。
       
       
       <span id = "post-title-tags">
-      标签
+      Tag
       
       
         
@@ -329,10 +329,10 @@ Perceptron感知机input是多个二进制，output是一个二进制。
 
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Artificial-Neuron"><span class="toc-text">Artificial Neuron</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Perceptron"><span class="toc-text">Perceptron</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#感知机规则"><span class="toc-text">感知机规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sigmoid-Neurons"><span class="toc-text">Sigmoid Neurons</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Activation-Function-主要有："><span class="toc-text">Activation Function 主要有：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Loss-Function-主要有："><span class="toc-text">Loss Function 主要有：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经网络的结构"><span class="toc-text">神经网络的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Normalization"><span class="toc-text">Normalization</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#好处有"><span class="toc-text">好处有</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法有"><span class="toc-text">方法有</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FeedForward-Neural-Networks"><span class="toc-text">FeedForward Neural Networks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用简单的网络结构去识别手写数字"><span class="toc-text">用简单的网络结构去识别手写数字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#神经网络从根本原理上在做什么？"><span class="toc-text">神经网络从根本原理上在做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#隐藏层在做什么？"><span class="toc-text">隐藏层在做什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出层在做什么？"><span class="toc-text">输出层在做什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Descent"><span class="toc-text">Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降法"><span class="toc-text">梯度下降法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#梯度下降法工作原理"><span class="toc-text">梯度下降法工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-Gradient-Descent"><span class="toc-text">Stochastic Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SGD工作原理"><span class="toc-text">SGD工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Online-Learning"><span class="toc-text">Online Learning</span></a></li></ol></li></ol></li></ol>
   </div>
 </div>
@@ -340,13 +340,13 @@ Perceptron感知机input是多个二进制，output是一个二进制。
   
 <nav id="pagination">
   
-    <a href="../../../05/03/deep_learning_2_backpropagation/" class="prev">&larr; 上一篇 Deep Learning - 2 反向传播</a>
+    <a href="../../../05/03/deep_learning_2_backpropagation/" class="prev">&larr; Prev post Deep Learning - 2 反向传播</a>
   
 
   
 
   
-    <a href="../../../../2017/12/26/data_analysis_weekend_project_personal_loans_risk_score_of_prosper/" class="next">下一篇 Data Analysis Weekend Project 美国金融科技公司Prosper的风险评分分析 &rarr;</a>
+    <a href="../../../../2017/12/26/data_analysis_weekend_project_personal_loans_risk_score_of_prosper/" class="next">Next post Data Analysis Weekend Project 美国金融科技公司Prosper的风险评分分析 &rarr;</a>
   
 </nav>
 
