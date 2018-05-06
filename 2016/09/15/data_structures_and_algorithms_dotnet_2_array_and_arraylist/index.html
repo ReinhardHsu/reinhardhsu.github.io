@@ -47,21 +47,21 @@
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="../data_structures_and_algorithms_dotnet_1_collection/">
+      <a href="../data_structures_and_algorithms_dotnet_3_basic_sorting_algorithms/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        Data Structures and Algorithms DotNet－ 1、群集
+        Data Structures and Algorithms DotNet － 3、基础排序算法
       </div>
     </div>
   
   
     <div class="item next">
-      <a href="../data_structures_and_algorithms_dotnet_7_string_and_stringbuilder_class/">
+      <a href="../data_structures_and_algorithms_dotnet_5_stacks_and_queues/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        Data Structures and Algorithms DotNet － 7、String类和StringBuilder类
+        Data Structures and Algorithms DotNet － 5、栈和队列
       </div>
     </div>
   
@@ -205,27 +205,27 @@
 <h3 id="2-5、装箱-拆箱操作对性能的影响"><a href="#2-5、装箱-拆箱操作对性能的影响" class="headerlink" title="2.5、装箱/拆箱操作对性能的影响"></a>2.5、装箱/拆箱操作对性能的影响</h3><p>那我们再来测试下，对1亿个整数进行装箱，看看耗时多少。</p>
 <pre><code>2.5s
 </code></pre><p>而给整数赋值的耗时，和给数组赋值耗时是一样的。<br><strong>装箱</strong>，是把一个<strong>值类型</strong>，放在一个未确定类型的<strong>引用对象</strong>中。这个新的<strong>引用类型</strong>（就是箱子），将存储于<strong>堆</strong>上，并且，值类型的一个副本，会存放在引用类型的内部。箱子里包含了值类型的副本，并且提供了值类型公有接口的功能。<br><strong>拆箱</strong>，是从箱中取出值类型的副本。<strong>这个副本，是值类型的另一个副本</strong>。<br>也就是，<strong>关键之处在于，装箱时存放的是值类型的副本，获取箱中数据时，返回的是值类型的另一个副本</strong>。  </p>
-
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2016/10/12/data_analysis_python_operate_data_file/">Data Analysis Python 操作数据文件</a></li><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_1_collection/">Data Structures and Algorithms DotNet－ 1、群集</a></li><li><a href="http://reinhardhsu.com/2013/02/26/data_structures_and_algorithms_dotnet_1_sort_and_search/">Data Structures and Algorithms DotNet － 1、排序和查找</a></li></ul></div>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构与算法－2、数组和ArrayList"><span class="toc-text">数据结构与算法－2、数组和ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、数组"><span class="toc-text">1、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、数组元素的设置和存取访问"><span class="toc-text">1.1、数组元素的设置和存取访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、检索数数组元数据的方法和属性"><span class="toc-text">1.2、检索数数组元数据的方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、多维数组"><span class="toc-text">1.3、多维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、参数数组"><span class="toc-text">1.4、参数数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、锯齿数组"><span class="toc-text">1.5、锯齿数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、ArrayList类"><span class="toc-text">2、ArrayList类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、Capacity的初始值真的是16吗？"><span class="toc-text">2.1、Capacity的初始值真的是16吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、ArrayList的内部实现"><span class="toc-text">2.2、ArrayList的内部实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？"><span class="toc-text">2.3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？"><span class="toc-text">2.4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、装箱-拆箱操作对性能的影响"><span class="toc-text">2.5、装箱/拆箱操作对性能的影响</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构与算法－2、数组和ArrayList"><span class="toc-text">数据结构与算法－2、数组和ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、数组"><span class="toc-text">1、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、数组元素的设置和存取访问"><span class="toc-text">1.1、数组元素的设置和存取访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、检索数数组元数据的方法和属性"><span class="toc-text">1.2、检索数数组元数据的方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、多维数组"><span class="toc-text">1.3、多维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、参数数组"><span class="toc-text">1.4、参数数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、锯齿数组"><span class="toc-text">1.5、锯齿数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、ArrayList类"><span class="toc-text">2、ArrayList类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、Capacity的初始值真的是16吗？"><span class="toc-text">2.1、Capacity的初始值真的是16吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、ArrayList的内部实现"><span class="toc-text">2.2、ArrayList的内部实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？"><span class="toc-text">2.3、将ArrayList的Capacity设为1亿，性能会不会有所提升呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？"><span class="toc-text">2.4、同样都是自动调整自身大小，List为什么就比ArraList快6倍？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、装箱-拆箱操作对性能的影响"><span class="toc-text">2.5、装箱/拆箱操作对性能的影响</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="../data_structures_and_algorithms_dotnet_1_collection/" class="prev">&larr; Prev post Data Structures and Algorithms DotNet－ 1、群集</a>
+    <a href="../data_structures_and_algorithms_dotnet_3_basic_sorting_algorithms/" class="prev">&larr; Prev post Data Structures and Algorithms DotNet － 3、基础排序算法</a>
   
 
   
 
   
-    <a href="../data_structures_and_algorithms_dotnet_7_string_and_stringbuilder_class/" class="next">Next post Data Structures and Algorithms DotNet － 7、String类和StringBuilder类 &rarr;</a>
+    <a href="../data_structures_and_algorithms_dotnet_5_stacks_and_queues/" class="next">Next post Data Structures and Algorithms DotNet － 5、栈和队列 &rarr;</a>
   
 </nav>
 

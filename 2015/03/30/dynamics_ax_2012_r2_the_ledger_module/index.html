@@ -182,14 +182,14 @@
 <p>使用LedgerVoucher类过账总账交易，意味着你首先要创建凭证，然后过账他们。这是处理总账交易过账的传统方式。</p>
 <p>你可以给LedgerVoucher对象添加多个凭证（LedgerVoucherObject）。对于每个凭证，你典型的有两个交易（LedgerVoucherTransObject），一个是debit（借方、收方），一个是credit（贷方）。在一个凭证中，你当然可以有多个交易，但他们必须兼容。这意味着如果你添加的所有的借方交易的金额和所有的贷方交易的金额，结果必须是0。</p>
 <p>当所有的交易都已经添加到一个凭证中，并且所有的凭证都已经被添加到LedgerVoucher对象，你可以简单地钓友ledgerVoucher.end()方法，来验证并过账凭证。代码如下：</p>
-
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2015/06/22/dynamics_ax_2012_R2_remoteapp_export_project_error/">Dynamics AX 2012 R2 RemoteApp导出项目报错</a></li><li><a href="http://reinhardhsu.com/2015/06/12/dynamics_ax_2012_R3_demo_installation_step_4/">Dynamics AX 2012 R3 Demo 安装与配置 – 导入测试数据 (Step 4)</a></li><li><a href="http://reinhardhsu.com/2015/03/30/dynamics_ax_2012_r2_accounts_payable_modules/">Dynamics AX 2012 R2 Accounts Payable modules</a></li></ul></div>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#过账分类账交易"><span class="toc-text">过账分类账交易</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#录入并过账一个LedgerJournal类"><span class="toc-text">录入并过账一个LedgerJournal类</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#过账分类账交易"><span class="toc-text">过账分类账交易</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#录入并过账一个LedgerJournal类"><span class="toc-text">录入并过账一个LedgerJournal类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
 
