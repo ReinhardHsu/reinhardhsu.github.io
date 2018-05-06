@@ -1,0 +1,579 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="jquery.ui.all.css1.所有主题必须的文件都包含在这个文件中。它由ui.base.css和ui.them.css两个文件中拉入的@import执行构成。
+jquery.ui.base.css1.这个文件被ui.all.css文件引用。它依然由ui.core.css文件中拉入的@import指令构成,像每个控件一样。但是，它不包含控制每个控件显示的主题样式。
+jquery.ui....">
+  
+  <title>Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.1.CSS框架和其他功能 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../software_development_fontend_jquery_ui_2_theme/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.2.更换主题
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../04/14/software_development_dotnet_json_net/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development DotNet 使用 Newtonsoft.Json 序列化正常，但是反序列化异常的一点思考
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.1.CSS框架和其他功能</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2013-08-13</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-03</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/software-development/">Software Development</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/software-development/">Software Development</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/jquery/">jQuery</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/javascript/">JavaScript</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/fontend/">FontEnd</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="jquery-ui-all-css"><a href="#jquery-ui-all-css" class="headerlink" title="jquery.ui.all.css"></a>jquery.ui.all.css</h2><p>1.所有主题必须的文件都包含在这个文件中。它由ui.base.css和ui.them.css两个文件中拉入的@import执行构成。</p>
+<h2 id="jquery-ui-base-css"><a href="#jquery-ui-base-css" class="headerlink" title="jquery.ui.base.css"></a>jquery.ui.base.css</h2><p>1.这个文件被ui.all.css文件引用。它依然由ui.core.css文件中拉入的@import指令构成,像每个控件一样。但是，它不包含控制每个控件显示的主题样式。</p>
+<h2 id="jquery-ui-core-css"><a href="#jquery-ui-core-css" class="headerlink" title="jquery.ui.core.css"></a>jquery.ui.core.css</h2><p>1.这个文件提供CSS框架的核心样式，诸如clear-fix helper和generic overlay，被所有的组件引用。包含以下样式：</p>
+<table>
+<thead>
+<tr>
+<th>.ui-helper-hidden</th>
+<th>使用 display:none 隐藏元素</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.ui.helper-hidden-accessible</td>
+<td>将元素的位置设置到屏幕之外，使其看不见</td>
+</tr>
+<tr>
+<td>.ui-helper-reset</td>
+<td>清除一些基本的样式，如padding 等被浏览器应用于公共元素的公共默认style</td>
+</tr>
+<tr>
+<td>.ui-helper-clearfix:after</td>
+<td>这个calsses提供一种自动清理浮动的跨浏览器解决方案。每当一个元素浮动了，.ui-helper-clearfix class就被加在浮动元素的容器上。当父容器自动清除浮动后，ui.helper-clearfix:after styles被 添加。</td>
+</tr>
+<tr>
+<td>.ui-helper-clearfix</td>
+<td>被用在容器自身，适用于浮动包裹父元素的属性。</td>
+</tr>
+<tr>
+<td>.ui-helper-zfix</td>
+<td>提供规则，适用于修复iframe元素覆盖的问题。</td>
+</tr>
+<tr>
+<td>.ui-state-disabled</td>
+<td>应用于那些被禁用的用户界面元素</td>
+</tr>
+<tr>
+<td>.ui-icon</td>
+<td>用于设置ui.theme.css文件中的背景图片。</td>
+</tr>
+<tr>
+<td>.ui-widget-overlay</td>
+<td>设置页面上覆盖层出现时的基本样式，</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jquery-ui-theme-css"><a href="#jquery-ui-theme-css" class="headerlink" title="jquery.ui.theme.css"></a>jquery.ui.theme.css</h2><p>1.这个文件包含完整的可视化主题和所有 库中被装扮起来的可视化元素的触发器。</p>
+<p>2.被框架大量使用的style sheet和包含大量classes</p>
+<table>
+<thead>
+<tr>
+<th>容器</th>
+<th>为widget,heading,content容器设置style属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交互状态</td>
+<td>这个classes为任何可以点击的元素，设置默认,鼠标位于上方(hover),活动时的状态</td>
+</tr>
+<tr>
+<td>交互提示</td>
+<td>这个类别为元素应用高亮,错误,禁用,主要的(primary),次要(secondary)样式的可视化提示</td>
+</tr>
+<tr>
+<td>状态图片</td>
+<td>这个classes为content,heading容器的图标设置图片。像任何可以点击的元素，包括默认，鼠标位于上方，活动，高亮，focus，错误的状态。</td>
+</tr>
+<tr>
+<td>图片位置</td>
+<td>主题使用的所有图标的图片，都存储在同一个文件中，通过background-position属性单独显示个体。这个类别为所有图标个体设置background-position属性。</td>
+</tr>
+<tr>
+<td>圆角半径</td>
+<td>CSS3</td>
+</tr>
+<tr>
+<td>遮罩层</td>
+<td>这个图片定义在core.css文件中，用在一般的遮罩层上。这个类产生一个半透明的遮罩层盖在指定的元素上。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS Framework - Containers<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"development-bundle/themes/base/jquery.ui.all.css"</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget-header ui-corner-top"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is a .ui-widget-header container<span class="tag">&lt;/<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget-content ui-corner-bottom"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a .ui-widget-content container<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>外层容器使用 ui-widget 样式。</p>
+<p>里层有两个容器，一个 ui-widget-heading ，一个 ui-widget-content 。并通过 ui-corner-top 和ui-corner-bottom 设置各自的圆角属性。</p>
+<h2 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS Framework - Interaction states<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"development-bundle/themes/base/jquery.ui.all.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/jquery-1.4.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">(function($) &#123;</span></span><br><span class="line"><span class="undefined">        $(".ui-widget a").hover(function() &#123;</span></span><br><span class="line"><span class="undefined">          $(this).parent().addClass("ui-state-hover");</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="undefined">        function() &#123;</span></span><br><span class="line"><span class="undefined">          $(this).parent().removeClass("ui-state-hover");</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">      &#125;)(jQuery);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-state-default ui-state-active ui-corner-all"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>I am clickable and selected<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-state-default ui-corner-all"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>I am clickable but not selected<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们定义了两个可以点击的元素，他们都有 ui-state-default 样式，第一个还有ui-state-active样式。</p>
+<p>当鼠标放在 div 的 a 上时，该 div 应用 ui-state-hover ,反之 移除。</p>
+<h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-state-default ui-state-active ui-corner-all"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-icon ui-icon-circle-plus"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>I am clickable and selected<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-state-default ui-corner-all"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-icon ui-icon-circle-plus"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>I am clickable but not selected<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="交互提示"><a href="#交互提示" class="headerlink" title="交互提示"></a>交互提示</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS Framework - Interaction cues<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"development-bundle/themes/base/jquery.ui.all.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/jquery.ui.form.css"</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget ui-form"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget-header ui-corner-all"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Login Form<span class="tag">&lt;/<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-widget-content ui-corner-all"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"ui-helper-clearfix"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">label</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-state-error ui-corner-all"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-icon ui-icon-alert"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"ui-helper-reset ui-state-error-text"</span>&gt;</span>Required field<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .ui-form .ui-widget-content &#123; padding:20px;&#125; </span></span><br><span class="line"><span class="undefined">        .ui-form label, .ui-form input, .ui-form .ui-state-error, .ui-form .ui-icon, .ui-form .ui-state-error p &#123; float:left;&#125; </span></span><br><span class="line"><span class="undefined">        .ui-form label, .ui-state-error p &#123; font-size:12px; padding:10px 10px 0 0; &#125; </span></span><br><span class="line"><span class="undefined">        .ui-form .ui-state-error &#123; padding:4px;&#125; </span></span><br><span class="line"><span class="undefined">        .ui-form .ui-state-error p &#123; font-weight:bold; padding-top:5px; &#125; </span></span><br><span class="line"><span class="undefined">        .ui-form .ui-state-error .ui-icon &#123; margin:5px 3px 0 4px;&#125;</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="位置功能"><a href="#位置功能" class="headerlink" title="位置功能"></a>位置功能</h2><p>1.位置功能是一个强大的单独的功能，用来设置任何元素相对于窗口，文件，指定的元素或鼠标的位置。它是组件库中独一无二的，不需要jquery.ui.core.js或者jquery.effects.core.js文件支持的。我们可以通过一系列的配置选项来使用它。</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Format</th>
+<th>Used to..</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>at</td>
+<td>string</td>
+<td>指定元素被放置冲突时的边缘，比如 left bottom</td>
+</tr>
+<tr>
+<td>collision(冲突)</td>
+<td>string</td>
+<td>当被移动的元素溢出它的容器，将其移动到另一个供选择的位置。</td>
+</tr>
+<tr>
+<td>my</td>
+<td>sting</td>
+<td>预计在位置冲突的时候，指定用于对齐的边缘。比如 right top</td>
+</tr>
+<tr>
+<td>of</td>
+<td>selector,jQuery,object,event object</td>
+<td>指定位置冲突时，被放置的元素。</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>string</td>
+<td>移动被放置的元素到指定像素。例如，10,20 x,y</td>
+</tr>
+<tr>
+<td>using</td>
+<td>function</td>
+<td>接收一个函数，查看被放置元素的实际位置。这个函数接收一个包含top和left值新位置的对象</td>
+</tr>
+</tbody>
+</table>
+<p>2.使用位置功能</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position Utility - position<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .ui-positioning-element &#123; width:200px; height:200px; border:1px solid #000;&#125; </span></span><br><span class="line"><span class="undefined">        .ui-positioned-element &#123; width:100px; height:100px; border:1px solid #ff0000;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-positioning-element"</span>&gt;</span>I am being positioned against<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui-positioned-element"</span>&gt;</span>I am being positioned<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/jquery-1.4.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.position.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">(function($) &#123;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        $(".ui-positioned-element").position(&#123;</span></span><br><span class="line"><span class="undefined">          of: ".ui-positioning-element",</span></span><br><span class="line"><span class="undefined">          my: "right",</span></span><br><span class="line"><span class="undefined">          at: "left"</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">      &#125;)(jQuery);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此处样式一定要定义在元素之前，不然显示不正常。这样设置后，两个元素的右下角相交。</p>
+<p>2.避免冲突</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".ui-positioned-element"</span>).position(&#123;</span><br><span class="line">    <span class="keyword">of</span>: <span class="string">".ui-positioning-element"</span>,</span><br><span class="line">    my: <span class="string">"right"</span>,</span><br><span class="line">    at: <span class="string">"left"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>设置一个元素的右边缘与另一个元素的左边缘对齐。此时两个元素相弹(flip)，不会重合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".ui-positioned-element"</span>).position(&#123;</span><br><span class="line">    collision: <span class="string">"fit"</span>,</span><br><span class="line">    <span class="keyword">of</span>: <span class="string">".ui-positioning-element"</span>,</span><br><span class="line">    my: <span class="string">"right"</span>,</span><br><span class="line">    at: <span class="string">"left"</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当添加 collision:”fit” 选项时，两个元素内相交。</p>
+<p>3.使用函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".ui-positioned-element"</span>).position(&#123;</span><br><span class="line">    <span class="keyword">of</span>: <span class="string">".ui-positioning-element"</span>,</span><br><span class="line">    my: <span class="string">"right bottom"</span>,</span><br><span class="line">    at: <span class="string">"right bottom"</span>,</span><br><span class="line">    using: <span class="function"><span class="keyword">function</span>(<span class="params">pos</span>) </span>&#123;</span><br><span class="line">        $(<span class="keyword">this</span>).css(&#123;</span><br><span class="line">            backgroundColor: <span class="string">"#fc7676"</span>,</span><br><span class="line">            top: pos.top,</span><br><span class="line">            left: pos.left</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>此时pos为positioned的左定点。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery-ui-all-css"><span class="toc-text">jquery.ui.all.css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery-ui-base-css"><span class="toc-text">jquery.ui.base.css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery-ui-core-css"><span class="toc-text">jquery.ui.core.css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery-ui-theme-css"><span class="toc-text">jquery.ui.theme.css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器"><span class="toc-text">容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交互"><span class="toc-text">交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图标"><span class="toc-text">图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交互提示"><span class="toc-text">交互提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位置功能"><span class="toc-text">位置功能</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../software_development_fontend_jquery_ui_2_theme/" class="prev">&larr; Prev post Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.2.更换主题</a>
+  
+
+  
+
+  
+    <a href="../../../04/14/software_development_dotnet_json_net/" class="next">Next post Software Development DotNet 使用 Newtonsoft.Json 序列化正常，但是反序列化异常的一点思考 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

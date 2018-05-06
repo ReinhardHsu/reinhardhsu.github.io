@@ -1,0 +1,479 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="1、行删除HTML版
+
+新建一般处理页面，取得传入参数
+
+
+
+12string name = context.Request["Name"];context.Response.Write(name);
+
+
+Get超链接方式：
+
+
+
+12345&lt;form id="form1" action="Shanchu.ashx"&gt;&lt;input id="Name" type="hidde...">
+  
+  <title>Software Development DotNet ASP.NET - 9、请求响应模型 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../software_development_dot_net_asp_net_10_basic_principles_of_web_development_1/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development DotNet ASP.NET - 10、Web开发的一些基本原则1
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../07/software_development_dot_net_asp_net_8_http_protocol/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development DotNet ASP.NET - 8、HTTP协议
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Software Development DotNet ASP.NET - 9、请求响应模型</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2013-01-08</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-03</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/software-development/">Software Development</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/dotnet/">DotNet</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/software-development/">Software Development</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/asp-net/">ASP.NET</a>
+      
+      </span>
+      
+    </p>
+    
+    <h6 id="1、行删除HTML版"><a href="#1、行删除HTML版" class="headerlink" title="1、行删除HTML版"></a>1、行删除HTML版</h6><ul>
+<li><ul>
+<li>新建一般处理页面，取得传入参数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> name = context.Request[<span class="string">"Name"</span>];</span><br><span class="line">context.Response.Write(name);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li>Get超链接方式：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form1"</span> <span class="attr">action</span>=<span class="string">"Shanchu.ashx"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"Name"</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"Name"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>Get超链接方式<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"Shanchu.ashx?Name=tom"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li>Post提交表单方式：设置一隐藏字段，点击按钮，为字段赋值，提交</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form1"</span> <span class="attr">action</span>=<span class="string">"Shanchu.ashx"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"Name"</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"Name"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>tom<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"删除"</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('Name').value='tom';document.getElementById('form1').submit()"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li>Post LinkButton：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form1"</span> <span class="attr">action</span>=<span class="string">"Shanchu.ashx"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"Name"</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"Name"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>Post LinkButton<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:document.getElementById('Name').value='tom';document.getElementById('form1').submit();"</span>&gt;</span>删除（submit）<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="2、行删除aspx版"><a href="#2、行删除aspx版" class="headerlink" title="2、行删除aspx版"></a>2、行删除aspx版</h6><ul>
+<li>新建Shanchu.aspx页面，判断是否是IsPostBack进来</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> name = Request[<span class="string">"Name"</span>];</span><br><span class="line">Response.Write(name + <span class="string">"欢迎你&lt;br/&gt;"</span>);</span><br><span class="line"><span class="keyword">if</span> (IsPostBack)</span><br><span class="line">&#123;</span><br><span class="line">    Response.Write(name + <span class="string">"删除成功&lt;br/&gt;"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form1"</span> <span class="attr">action</span>=<span class="string">"Shanchu.aspx"</span> <span class="attr">runat</span>=<span class="string">"server"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"Name"</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"Name"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>Get超链接方式<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"Shanchu.aspx?Name=tom"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>tom<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"删除"</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('Name').value='tom';document.getElementById('form1').submit()"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>Post LinkButton<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:document.getElementById('Name').value='tom';document.getElementById('form1').submit();"</span>&gt;</span>删除（submit）<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Get方式只传递了特定的参数值，因为没有传递IsPostBack的载体ViewSate，故不认为IsPostBack;</li>
+<li>Post方式传递了表单上的值。</li>
+</ul>
+<h6 id="3、RunAtServer-网页默认为Post，若改为Get方式，则ViewState会通过超链接中传输。一般不能使用超链接传输ViewState。"><a href="#3、RunAtServer-网页默认为Post，若改为Get方式，则ViewState会通过超链接中传输。一般不能使用超链接传输ViewState。" class="headerlink" title="3、RunAtServer 网页默认为Post，若改为Get方式，则ViewState会通过超链接中传输。一般不能使用超链接传输ViewState。"></a>3、RunAtServer 网页默认为Post，若改为Get方式，则ViewState会通过超链接中传输。一般不能使用超链接传输ViewState。</h6><h6 id="4、客户端，服务端犹豫在两台计算机上，所以无法做到两边变量互读，函数互调。必须通过提交的方式将客户端的变量作为一个表单字段提交到服务器，或者服务器将服务端变量打印到客户端代码中。"><a href="#4、客户端，服务端犹豫在两台计算机上，所以无法做到两边变量互读，函数互调。必须通过提交的方式将客户端的变量作为一个表单字段提交到服务器，或者服务器将服务端变量打印到客户端代码中。" class="headerlink" title="4、客户端，服务端犹豫在两台计算机上，所以无法做到两边变量互读，函数互调。必须通过提交的方式将客户端的变量作为一个表单字段提交到服务器，或者服务器将服务端变量打印到客户端代码中。"></a>4、客户端，服务端犹豫在两台计算机上，所以无法做到两边变量互读，函数互调。必须通过提交的方式将客户端的变量作为一个表单字段提交到服务器，或者服务器将服务端变量打印到客户端代码中。</h6>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#1、行删除HTML版"><span class="toc-text">1、行删除HTML版</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2、行删除aspx版"><span class="toc-text">2、行删除aspx版</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3、RunAtServer-网页默认为Post，若改为Get方式，则ViewState会通过超链接中传输。一般不能使用超链接传输ViewState。"><span class="toc-text">3、RunAtServer 网页默认为Post，若改为Get方式，则ViewState会通过超链接中传输。一般不能使用超链接传输ViewState。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4、客户端，服务端犹豫在两台计算机上，所以无法做到两边变量互读，函数互调。必须通过提交的方式将客户端的变量作为一个表单字段提交到服务器，或者服务器将服务端变量打印到客户端代码中。"><span class="toc-text">4、客户端，服务端犹豫在两台计算机上，所以无法做到两边变量互读，函数互调。必须通过提交的方式将客户端的变量作为一个表单字段提交到服务器，或者服务器将服务端变量打印到客户端代码中。</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../software_development_dot_net_asp_net_10_basic_principles_of_web_development_1/" class="prev">&larr; Prev post Software Development DotNet ASP.NET - 10、Web开发的一些基本原则1</a>
+  
+
+  
+
+  
+    <a href="../../07/software_development_dot_net_asp_net_8_http_protocol/" class="next">Next post Software Development DotNet ASP.NET - 8、HTTP协议 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

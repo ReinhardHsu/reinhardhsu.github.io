@@ -137,7 +137,7 @@ Reinhard检查了电子邮件参数里的配置，与老环境中的配置一致
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2017-03-22</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-02</span>
+        <span id = "post-title-updated">Updated at 2018-05-06</span>
       
       
       <span id = "post-title-categories">Category
@@ -162,13 +162,13 @@ Reinhard检查了电子邮件参数里的配置，与老环境中的配置一致
       
     </p>
     
-    <p><img src="https://images2015.cnblogs.com/blog/453825/201703/453825-20170322094632408-1459031889.png" alt="img"></p>
-<p>今天<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>在新环境做邮件广播测试时，发现无法发送邮件，并报以下错误：</p>
+    <p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fr1f5g6a15j309w0cmjrv.jpg" alt="img"></p>
+<p>今天<a href="http://reinhardhsu.com/">Reinhard</a>在新环境做邮件广播测试时，发现无法发送邮件，并报以下错误：</p>
 <p><em>类“CDO.Message”的 COM 对象中的方法“send”返回了错误代码 0x80040213 (&lt;未知&gt;)，此错误代码表示: 与服务器的传输连接失败。。</em></p>
-<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>检查了<strong>电子邮件参数</strong>里的配置，与老环境中的配置一致，并没有问题。<strong>电子邮件参数</strong>和<strong>邮件模板</strong>配置方法可以参考<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>之前的博文 <a href="http://www.cnblogs.com/msdynax/p/set-up-e-mail-for-ax.html" target="_blank" rel="noopener">Dynamics AX 2012 R2 设置E-Mail</a> 和 <a href="http://www.cnblogs.com/msdynax/p/configuring-e-mail-template.html" target="_blank" rel="noopener">Dynamics AX 2012 R2 配置E-Mail模板</a> 。</p>
+<p><a href="http://reinhardhsu.com/">Reinhard</a>检查了<strong>电子邮件参数</strong>里的配置，与老环境中的配置一致，并没有问题。<strong>电子邮件参数</strong>和<strong>邮件模板</strong>配置方法可以参考<a href="http://reinhardhsu.com/">Reinhard</a>之前的博文 <a href="http://reinhardhsu.com/p/set-up-e-mail-for-ax.html">Dynamics AX 2012 R2 设置E-Mail</a> 和 <a href="http://reinhardhsu.com/p/configuring-e-mail-template.html">Dynamics AX 2012 R2 配置E-Mail模板</a> 。</p>
 <h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><h3 id="排除-Dynamics-AX-的影响因素"><a href="#排除-Dynamics-AX-的影响因素" class="headerlink" title="排除 Dynamics AX 的影响因素"></a>排除 Dynamics AX 的影响因素</h3><p>为了排除 Dynamics AX 方面的影响因素，我们用运行Telnet命令来测试下。</p>
 <h4 id="新环境"><a href="#新环境" class="headerlink" title="新环境"></a>新环境</h4><p>没有安装Telnet的可以在<strong>Windows 功能</strong>里添加。</p>
-<p><img src="https://images2015.cnblogs.com/blog/453825/201703/453825-20170322094649518-1604993611.png" alt="img"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fr1f5hn640j30ll0fvjrv.jpg" alt="img"></p>
 <p>在新环境的终端中，运行telnet，连接邮件服务器的地址和端口。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">欢迎使用 Microsoft Telnet Client</span><br><span class="line"></span><br><span class="line">Escape 字符为 &apos;CTRL+]&apos;</span><br><span class="line"></span><br><span class="line">Microsoft Telnet&gt; open mail.msdynax.net 25</span><br><span class="line">正在连接mail.msdynax.net...无法打开到主机的连接。 在端口 25: 连接失败</span><br><span class="line">Microsoft Telnet&gt;</span><br></pre></td></tr></table></figure>
 <p>我们看到，新环境中是连不上的。</p>
@@ -176,14 +176,14 @@ Reinhard检查了电子邮件参数里的配置，与老环境中的配置一致
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">欢迎使用 Microsoft Telnet Client</span><br><span class="line"></span><br><span class="line">Escape 字符为 &apos;CTRL+]&apos;</span><br><span class="line"></span><br><span class="line">Microsoft Telnet&gt; open mail.msdynax.net 25</span><br><span class="line"></span><br><span class="line">220 mail.msdynax.net Microsoft ESMTP MAIL Service ready at Thu, 9 Mar 2</span><br><span class="line">017 15:46:43 +0800</span><br></pre></td></tr></table></figure>
 <p>我们看到，已打开了邮件服务器的地址和端口。</p>
 <p>使用系统的Telnet命令也出现同样的故障，可以排除 Dynamics AX 方面的因素了。</p>
-<h3 id="其它影响因素"><a href="#其它影响因素" class="headerlink" title="其它影响因素"></a>其它影响因素</h3><p>既然相同的配置，在老环境里没问题，在新环境里报错，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>猜可能是以下几个地方出问题了：</p>
+<h3 id="其它影响因素"><a href="#其它影响因素" class="headerlink" title="其它影响因素"></a>其它影响因素</h3><p>既然相同的配置，在老环境里没问题，在新环境里报错，<a href="http://reinhardhsu.com/">Reinhard</a>猜可能是以下几个地方出问题了：</p>
 <ul>
 <li>防火墙</li>
 <li>域控策略</li>
 <li>邮件服务器对客户端做了IP限制</li>
 </ul>
-<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>对这几个部分逐一做了确认，没有发现任何限制。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a>无奈之下，对新环境重新安装了操作系统。装完后再进行测试，已经可以连上邮件服务器了。</p>
+<p><a href="http://reinhardhsu.com/">Reinhard</a>对这几个部分逐一做了确认，没有发现任何限制。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><a href="http://reinhardhsu.com/">Reinhard</a>无奈之下，对新环境重新安装了操作系统。装完后再进行测试，已经可以连上邮件服务器了。</p>
 
   </article>
   <div class="random-toc-area">

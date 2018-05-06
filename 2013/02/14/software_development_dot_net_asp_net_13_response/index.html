@@ -1,0 +1,490 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="1、响应的缓冲输出
+
+为了提高服务器的性能，Asp.net向浏览器输出的时候，默认并不会每Write一次都立即输出到浏览器，而是会缓存数据，到合适的时机（比如满了）或者响应结束才会将缓冲区中的数据一起发送到浏览器。
+
+2、Response.Buffer/BufferOutPut
+
+是否采用响应缓存，默认为True
+
+3、Response.Flash()
+
+立即将缓冲区的数据发给浏览器。例如：...">
+  
+  <title>Software Development DotNet ASP.NET - 13、Response - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../software_development_dot_net_asp_net_14_server/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development DotNet ASP.NET - 14、Server
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../01/18/data_structures_and_algorithms_dotnet_read_windows_event_xml/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Structures and Algorithms DotNet 读取Windows事件XML日志
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Software Development DotNet ASP.NET - 13、Response</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2013-02-14</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-03</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/software-development/">Software Development</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/dotnet/">DotNet</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/software-development/">Software Development</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/asp-net/">ASP.NET</a>
+      
+      </span>
+      
+    </p>
+    
+    <p><strong>1、响应的缓冲输出</strong></p>
+<ul>
+<li>为了提高服务器的性能，Asp.net向浏览器输出的时候，默认并不会每Write一次都立即输出到浏览器，而是会缓存数据，到合适的时机（比如满了）或者响应结束才会将缓冲区中的数据一起发送到浏览器。</li>
+</ul>
+<p><strong>2、Response.Buffer/BufferOutPut</strong></p>
+<ul>
+<li>是否采用响应缓存，默认为True</li>
+</ul>
+<p><strong>3、Response.Flash()</strong></p>
+<ul>
+<li>立即将缓冲区的数据发给浏览器。<br>例如：大批量数据导入，显示正在导入第几条数据<br>用Thread.Sleep模拟耗时</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">20</span>;i++) </span><br><span class="line">&#123;</span><br><span class="line">	System.Threading.Thread.Sleep(<span class="number">5000</span>);</span><br><span class="line">	Context.Response.Write(<span class="string">"第"</span>+i+<span class="string">"步执行完毕"</span>);</span><br><span class="line">    Context.Response.Flash();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4、Response.Clear()</strong></p>
+<ul>
+<li>清空缓冲区，不发送给浏览器</li>
+<li>非Html内容用ashx，Html内容用aspx。aspx的父类会写一些专门为Html准备的东西，所以有些人用aspx生成Jpeg时（输出非Html时），用Clear清楚HttpModule等附加内容。</li>
+</ul>
+<p><strong>5、Response.ContentEncoding</strong></p>
+<ul>
+<li>输出流的编码</li>
+</ul>
+<p><strong>6、Response.ContentType</strong></p>
+<ul>
+<li>输出流的内容类型 文本（text/plain）</li>
+</ul>
+<p><strong>7、Response.Cookies</strong></p>
+<ul>
+<li>返回浏览器的Cookies集合</li>
+</ul>
+<p><strong>8、Response.OutputStream</strong></p>
+<ul>
+<li>输出流（图片，Excel等非文本信息。文本信息用Response.Write），用二进制流读写</li>
+</ul>
+<p><strong>9、Response.End()</strong></p>
+<ul>
+<li>终止响应。End之前发给客户端，End之后不发。</li>
+</ul>
+<p><strong>10、Response.Redirect</strong></p>
+<ul>
+<li>重定向，实际上向服务器发出了两次请求。报文中302 Found重定向，地址栏为新的地址。<br>可用于避免Post刷新，提交之后立即进入帖子查看页面</li>
+</ul>
+<p><strong>11、Response.SetCookie(HttpCookie cookie)</strong></p>
+<ul>
+<li>向输出流中更新写到浏览器的Coolie，不存在就添加。</li>
+</ul>
+<p><strong>12、Response.WriteFile(filename)</strong></p>
+<ul>
+<li>向浏览器输出文件，大文件输出很耗资源</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Context.Response.ContentType=<span class="string">"Image/JPEG"</span>; </span><br><span class="line"><span class="keyword">string</span> fullPath=context.server.MapPath(<span class="string">"...Jpg"</span>);</span><br><span class="line">Context.Response.WriteFile(fullPath);</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../software_development_dot_net_asp_net_14_server/" class="prev">&larr; Prev post Software Development DotNet ASP.NET - 14、Server</a>
+  
+
+  
+
+  
+    <a href="../../../01/18/data_structures_and_algorithms_dotnet_read_windows_event_xml/" class="next">Next post Data Structures and Algorithms DotNet 读取Windows事件XML日志 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

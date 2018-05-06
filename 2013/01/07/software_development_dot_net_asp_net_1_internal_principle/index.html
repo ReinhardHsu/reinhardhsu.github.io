@@ -1,0 +1,459 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="1、WebApplication 与 WebSite 区别WebSite 不需要创建空间名，CS代码修改后不需要重启就能看到变化，但不利于工程化开发。
+2、Asp.net 生命周期
+当用户请求访问ashx页面时，ProcessRequest方法就被调用，其通过Context.Request获得访问者的请求参数等，然后在ProcessRequest中通过Context.Response向浏览器...">
+  
+  <title>Software Development DotNet ASP.NET - 1、内部原理 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../software_development_dot_net_asp_net_2_viewstate/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development DotNet ASP.NET - 2、ViewState
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../../2001/10/19/life_legend_of_sword_and_fairy/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        E海拾贝 仙剑情缘
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Software Development DotNet ASP.NET - 1、内部原理</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2013-01-07</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-03</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/software-development/">Software Development</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/dotnet/">DotNet</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/software-development/">Software Development</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/asp-net/">ASP.NET</a>
+      
+      </span>
+      
+    </p>
+    
+    <h6 id="1、WebApplication-与-WebSite-区别"><a href="#1、WebApplication-与-WebSite-区别" class="headerlink" title="1、WebApplication 与 WebSite 区别"></a>1、WebApplication 与 WebSite 区别</h6><p>WebSite 不需要创建空间名，CS代码修改后不需要重启就能看到变化，但不利于工程化开发。</p>
+<h6 id="2、Asp-net-生命周期"><a href="#2、Asp-net-生命周期" class="headerlink" title="2、Asp.net 生命周期"></a>2、Asp.net 生命周期</h6><ul>
+<li>当用户请求访问ashx页面时，ProcessRequest方法就被调用，其通过Context.Request获得访问者的请求参数等，然后在ProcessRequest中通过Context.Response向浏览器发回数据。</li>
+<li>控件ID是给JS操作Dom用的，Name 才是提交给服务器用的。</li>
+<li>在服务器端用Context.Request[“UserName”]来获取传递给服务器的参数的属性值。</li>
+<li>用Context.Response.Write向浏览器输出处理后的HTML内容。</li>
+</ul>
+<h6 id="3、将虚拟路径转换为文件全路径"><a href="#3、将虚拟路径转换为文件全路径" class="headerlink" title="3、将虚拟路径转换为文件全路径"></a>3、将虚拟路径转换为文件全路径</h6><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> fullpath=context.Server.MapPath(<span class="string">"Hello.Html"</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="4、读取文件"><a href="#4、读取文件" class="headerlink" title="4、读取文件"></a>4、读取文件</h6><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> content=System.IO.File.ReadAllText(fullpath);</span><br></pre></td></tr></table></figure>
+<h6 id="5、IsPostBack"><a href="#5、IsPostBack" class="headerlink" title="5、IsPostBack"></a>5、IsPostBack</h6><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"Hidden"</span> name=<span class="string">"IsPostBack"</span> <span class="keyword">value</span>=<span class="string">"true"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过表单提交给服务器，来区分是否是提交进入。</li>
+</ul>
+<h6 id="6、替换传递参数的值，html模板文件中的占位符"><a href="#6、替换传递参数的值，html模板文件中的占位符" class="headerlink" title="6、替换传递参数的值，html模板文件中的占位符"></a>6、替换传递参数的值，html模板文件中的占位符</h6><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> <span class="keyword">value</span>=<span class="string">"@value"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content=content.Replace(<span class="string">"@value"</span>,username);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>模板页禁止访问</li>
+<li>在ProcessRequest中，首先从Request中读取IsPostBack，如果读到True，则说明是提交进入。就加载模板，用计算后的值替换占位符。否则将模板中的占位符清空。输出。</li>
+</ul>
+<h6 id="7、Form-的Method"><a href="#7、Form-的Method" class="headerlink" title="7、Form 的Method"></a>7、Form 的Method</h6><ul>
+<li>Get通过Url传递表单值，不能传递大数据量和密码等。</li>
+<li>Post通过Http报文传递表单值，浏览器刷新后有重新提交的提示。</li>
+<li>Get方式Url数据格式：服务器端文件名后跟“?”，键值对用“&amp;”分割，汉字、特殊字符用Http Encode。</li>
+<li>表单域中，只有设定了Name的控件值，才会被提交到服务器，如果Submit有Name,也会提交其Value。</li>
+</ul>
+<h6 id="8、请求"><a href="#8、请求" class="headerlink" title="8、请求"></a>8、请求</h6><ul>
+<li>并非服务器来读取客户的网页，而是浏览器手机用户在表单中输入的字段，然后形成请求参数，发送给服务器处理程序。只有设定了Name的Input，TextArea，Select的Value属性值，才会被提交给服务器。</li>
+</ul>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#1、WebApplication-与-WebSite-区别"><span class="toc-text">1、WebApplication 与 WebSite 区别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2、Asp-net-生命周期"><span class="toc-text">2、Asp.net 生命周期</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3、将虚拟路径转换为文件全路径"><span class="toc-text">3、将虚拟路径转换为文件全路径</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4、读取文件"><span class="toc-text">4、读取文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5、IsPostBack"><span class="toc-text">5、IsPostBack</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#6、替换传递参数的值，html模板文件中的占位符"><span class="toc-text">6、替换传递参数的值，html模板文件中的占位符</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#7、Form-的Method"><span class="toc-text">7、Form 的Method</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#8、请求"><span class="toc-text">8、请求</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../software_development_dot_net_asp_net_2_viewstate/" class="prev">&larr; Prev post Software Development DotNet ASP.NET - 2、ViewState</a>
+  
+
+  
+
+  
+    <a href="../../../../2001/10/19/life_legend_of_sword_and_fairy/" class="next">Next post E海拾贝 仙剑情缘 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

@@ -139,7 +139,7 @@
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2017-02-06</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-01</span>
+        <span id = "post-title-updated">Updated at 2018-05-06</span>
       
       
       <span id = "post-title-categories">Category
@@ -170,23 +170,23 @@
       
     </p>
     
-    <h2 id="分析数据滞后"><a href="#分析数据滞后" class="headerlink" title="分析数据滞后"></a>分析数据滞后</h2><p>在博文 <a href="http://www.cnblogs.com/msdynax/p/6163773.html" target="_blank" rel="noopener">Dynamics AX 2012 在BI分析中建立数据仓库的必要性</a> 里，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 阐述了在 AX 的 BI 分析过程中，建立数据仓库的必要性。</p>
+    <h2 id="分析数据滞后"><a href="#分析数据滞后" class="headerlink" title="分析数据滞后"></a>分析数据滞后</h2><p>在博文 <a href="http://reinhardhsu.com/p/6163773.html">Dynamics AX 2012 在BI分析中建立数据仓库的必要性</a> 里，<a href="http://reinhardhsu.com/">Reinhard</a> 阐述了在 AX 的 BI 分析过程中，建立数据仓库的必要性。</p>
 <p><em>数据仓库将分析的工作负载，从事务的工作负载中分离出来，让企业能够整合来自多个数据源的数据</em>。</p>
-<p>但是从 AX 数据库中抽取数据到数据仓库的时候，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 发现耗时非常长。<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 认为主要有三个原因：</p>
+<p>但是从 AX 数据库中抽取数据到数据仓库的时候，<a href="http://reinhardhsu.com/">Reinhard</a> 发现耗时非常长。<a href="http://reinhardhsu.com/">Reinhard</a> 认为主要有三个原因：</p>
 <ul>
 <li>我们不敢贸然在AX生产环境的数据库层面做优化</li>
 <li>数据基数大</li>
 <li>需要新增和更新的数据多</li>
 </ul>
 <p>因为数据抽取<strong>对正式环境的性能影响非常大，并且耗时长</strong>，所以我们只能选择在下班后去执行ETL作业。这样做的缺点也是显而易见的，<strong>无论我们的报表跑得多快，但是展示的数据总是滞后的</strong>。</p>
-<h2 id="SQL-Server-复制"><a href="#SQL-Server-复制" class="headerlink" title="SQL Server 复制"></a>SQL Server 复制</h2><p>有没有什么方案，能够实时地展示数据，又对正式环境的性能影响小呢？这就是 <a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 在本文中要说的<a href="https://msdn.microsoft.com/en-us/library/ms151198.aspx" target="_blank" rel="noopener">SQL Server 复制</a>。</p>
+<h2 id="SQL-Server-复制"><a href="#SQL-Server-复制" class="headerlink" title="SQL Server 复制"></a>SQL Server 复制</h2><p>有没有什么方案，能够实时地展示数据，又对正式环境的性能影响小呢？这就是 <a href="http://reinhardhsu.com/">Reinhard</a> 在本文中要说的<a href="https://msdn.microsoft.com/en-us/library/ms151198.aspx" target="_blank" rel="noopener">SQL Server 复制</a>。</p>
 <p><a href="https://msdn.microsoft.com/en-us/library/ms151198.aspx" target="_blank" rel="noopener">SQL Server 复制</a> 是一项非常成熟的技术，它主要应用在以下几个场景中：</p>
 <ol>
 <li>负载转移。将数据复制到其他数据库服务器，来减少当前服务器的负载。比如创建只读的报表环境。</li>
 <li>合并数据。有多个门店，每个门店的数据库服务器都维护着自己的数据。总部需要将所有门店的数据合并到一起。</li>
 <li>故障转移。</li>
 </ol>
-<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 这里的应用场景其实就是负载转移。将所需的数据从生产库发布到只读的复制库中，然后在复制库上执行数据抽取作业，这样就将一部分工作负载，从事务的工作负载中分离出来。</p>
+<p><a href="http://reinhardhsu.com/">Reinhard</a> 这里的应用场景其实就是负载转移。将所需的数据从生产库发布到只读的复制库中，然后在复制库上执行数据抽取作业，这样就将一部分工作负载，从事务的工作负载中分离出来。</p>
 <h3 id="复制的类型"><a href="#复制的类型" class="headerlink" title="复制的类型"></a>复制的类型</h3><p>在 <a href="https://technet.microsoft.com/en-us/library/ms152531.aspx" target="_blank" rel="noopener">复制类型</a> 中，微软介绍了三种复制类型，分别是：</p>
 <ul>
 <li>事务复制</li>
@@ -199,8 +199,8 @@
 <li>订阅服务器上的数据是只读的，还是可以更新的</li>
 <li>涉及到的计算机的数量和位置</li>
 </ul>
-<p><a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 这里简单说说不同复制类型的特点，详细信息还请参考微软官方文档<a href="https://msdn.microsoft.com/en-us/library/ms151198.aspx" target="_blank" rel="noopener">SQL Server 复制</a> 。</p>
-<h3 id="快照复制"><a href="#快照复制" class="headerlink" title="快照复制"></a>快照复制</h3><p><img src="https://images2015.cnblogs.com/blog/453825/201702/453825-20170206181041026-1218732503.jpg" alt="img"></p>
+<p><a href="http://reinhardhsu.com/">Reinhard</a> 这里简单说说不同复制类型的特点，详细信息还请参考微软官方文档<a href="https://msdn.microsoft.com/en-us/library/ms151198.aspx" target="_blank" rel="noopener">SQL Server 复制</a> 。</p>
+<h3 id="快照复制"><a href="#快照复制" class="headerlink" title="快照复制"></a>快照复制</h3><p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fr1f81x9w9g30880gzglw.gif" alt="img"></p>
 <h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>不跟踪数据更改，每次应用快照都完全覆盖现有数据。</li>
 <li>过程不一致，结果一致。</li>
@@ -208,7 +208,7 @@
 <h4 id="适合场景"><a href="#适合场景" class="headerlink" title="适合场景"></a>适合场景</h4><p>数据更改量大，但很少更改，允许一定时间的滞后。</p>
 <h4 id="资源占用"><a href="#资源占用" class="headerlink" title="资源占用"></a>资源占用</h4><p>因为不跟踪数据更改，所以连续开销比事务复制低。但是如果数据集非常大，也需要使用大量资源生成和应用快照。</p>
 <h4 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h4><p>整个快照生成过程中都是用<a href="https://msdn.microsoft.com/en-us/library/ms175519.aspx#Shared%20Locks" target="_blank" rel="noopener">共享锁</a>。</p>
-<h3 id="事务复制"><a href="#事务复制" class="headerlink" title="事务复制"></a>事务复制</h3><p><img src="https://images2015.cnblogs.com/blog/453825/201702/453825-20170206181050213-1859810466.jpg" alt="img"></p>
+<h3 id="事务复制"><a href="#事务复制" class="headerlink" title="事务复制"></a>事务复制</h3><p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fr1f829y1eg309e0iaaaj.gif" alt="img"></p>
 <h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>通过SQL Server事务日志跟踪更改。</li>
 <li>过程一致，结果一致。</li>
@@ -224,7 +224,7 @@
 </ul>
 <h4 id="资源占用-1"><a href="#资源占用-1" class="headerlink" title="资源占用"></a>资源占用</h4><p>连续开销比快照复制高。</p>
 <h4 id="表锁-1"><a href="#表锁-1" class="headerlink" title="表锁"></a>表锁</h4><p>事务复制默认使用并发快照处理，在整个初始化快照生成过程中并不保留共享锁，期间用户可以继续工作。</p>
-<h3 id="合并复制"><a href="#合并复制" class="headerlink" title="合并复制"></a>合并复制</h3><p><img src="https://images2015.cnblogs.com/blog/453825/201702/453825-20170206181058182-1841974860.jpg" alt="img"></p>
+<h3 id="合并复制"><a href="#合并复制" class="headerlink" title="合并复制"></a>合并复制</h3><p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fr1f837ujrg309t0emmxh.gif" alt="img"></p>
 <h4 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>通过触发器和源数据表跟踪数据更改。</li>
 <li>过程不一致。</li>
@@ -243,7 +243,7 @@
 <p>主数据库可用的时候，辅助数据库是不支持写数据。</p>
 <h3 id="AlwaysOn高可用性组"><a href="#AlwaysOn高可用性组" class="headerlink" title="AlwaysOn高可用性组"></a>AlwaysOn高可用性组</h3><p>在SQL server 2012后，新增了AlwaysOn高可用性组特性。</p>
 <p>辅助副本复制的是主体节点的完整数据库，不能选择复制部分数据到辅助节点。它的辅助副本可以用于报表和备份，但是不支持写数据。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从上面的对比中，<a href="http://www.cnblogs.com/msdynax" target="_blank" rel="noopener">Reinhard</a> 认为，事务复制更适合我们的应用场景。它能够在企业层构建可扩展、高可用、松耦合的集成生态系统。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从上面的对比中，<a href="http://reinhardhsu.com/">Reinhard</a> 认为，事务复制更适合我们的应用场景。它能够在企业层构建可扩展、高可用、松耦合的集成生态系统。</p>
 
   </article>
   <div class="random-toc-area">

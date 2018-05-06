@@ -1,0 +1,583 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="Artificial Neuron人工神经元有：
+
+Perceptrons（感知机）
+Sigmoid
+
+Perceptron感知机input是多个二进制，output是一个二进制。
+12345graph LRx1((x1))--&gt;B((perceptron))x2((x2))--&gt;Bx3((x3))--&gt;BB--&gt;output((output))
+感知机规则$$out...">
+  
+  <title>Deep Learning - 1 神经网络 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../05/03/deep_learning_2_backpropagation/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Deep Learning - 2 反向传播
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../../../../2017/12/26/data_analysis_weekend_project_personal_loans_risk_score_of_prosper/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Data Analysis Weekend Project 美国金融科技公司Prosper的风险评分分析
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Deep Learning - 1 神经网络</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2018-04-28</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-05</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/deep-learning/">Deep Learning</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/machine-learning/">Machine Learning</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/deep-learning/">Deep Learning</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/neural-networks/">Neural Networks</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/artificial-neuron/">Artificial Neuron</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/perceptron/">Perceptron</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/sigmoid/">Sigmoid</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/feedforward/">FeedForward</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/normalization/">Normalization</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/stochastic-gradient-descent/">Stochastic Gradient Descent</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/gradient-descent/">Gradient Descent</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="Artificial-Neuron"><a href="#Artificial-Neuron" class="headerlink" title="Artificial Neuron"></a>Artificial Neuron</h2><p>人工神经元有：</p>
+<ul>
+<li>Perceptrons（感知机）</li>
+<li>Sigmoid</li>
+</ul>
+<h3 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h3><p>感知机<strong>input是多个二进制</strong>，<strong>output是一个二进制</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">x1((x1))--&gt;B((perceptron))</span><br><span class="line">x2((x2))--&gt;B</span><br><span class="line">x3((x3))--&gt;B</span><br><span class="line">B--&gt;output((output))</span><br></pre></td></tr></table></figure>
+<h4 id="感知机规则"><a href="#感知机规则" class="headerlink" title="感知机规则"></a>感知机规则</h4><p>$$<br>output=<br>\begin{cases}<br>0&amp; \text{if } \sum_{j}w_{j}x_{j}\le \text{threshold}\<br>1&amp; \text{if } \sum_{j}w_{j}x_{j}\gt \text{threshold}<br>\end{cases}<br>$$</p>
+<ul>
+<li>x是evidence</li>
+<li>w是weight权值</li>
+<li>threshold是阈值</li>
+</ul>
+<p>感知机通过赋予不同evidence权值，升高或降低threshold来达到作出决策的目的。</p>
+<ul>
+<li>其中，$\sum_{j}w_{j}x_{j}$可以用向量点积表示为${w}\cdot{x}$</li>
+<li>threshold从不等式右侧移至左侧，并用bias（偏置）表示，${b}\equiv{-threshold}$</li>
+</ul>
+<p>更新后的感知机规则：<br>$$<br>output=<br>\begin{cases}<br>0&amp; {w}\cdot{x}+b\le0\<br>1&amp; {w}\cdot{x}+b\gt0<br>\end{cases}<br>$$<br>bias可以理解为使神经元被激活的容易度的度量。</p>
+<p>我们通过设计 Learning Algorithm 去自动地调整 Network of Artificial Neuron 的 Weights 和 Biases。这种调整，可以对外部刺激作出响应。</p>
+<h3 id="Sigmoid-Neurons"><a href="#Sigmoid-Neurons" class="headerlink" title="Sigmoid Neurons"></a>Sigmoid Neurons</h3><p>网络通过学习 Weights 和 Biases 以便最终正确地分类。我们希望在网络的 Weights 和 Biases 上作出一些小的改变时，只会引起输出上的小幅变化。只有这样，学习才变得可能。通过不断地修改 Weights 和Biases 来产生越来越好的结果。</p>
+<p>如果网络中包含感知机的话，轻微的改变甚至会导致感知机的输出完全翻转，很难实现逐步改变 Weights 和 Biases 来使网络行为更加接近预期。</p>
+<p>Sigmoid 神经元在轻微改变 Weights 和 Biases 时只会引起小幅的输出变化。这是由于 Sigmoid 神经元构成的网络能够学习的关键因素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">x1((x1))--&gt;S((Sigmoid))</span><br><span class="line">x2((x2))--&gt;S</span><br><span class="line">x3((x3))--&gt;S</span><br><span class="line">S--&gt;O((Output))</span><br></pre></td></tr></table></figure>
+<p>输入和输出都是介于0到1之间的浮点数。<br>$$<br>\sigma(z)=\frac{1}{1+e^{-z}}<br>$$<br>将 Evidence，Weight，Bias 代入$\sigma$，输入是${w}\cdot{x}+b$，输出是<br>$$<br>\sigma({w}\cdot{x}+b)=\frac{1}{1+exp^{(-{w}\cdot{x}-b)}}<br>$$<br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqzpz4ahd4j30bs07uglo.jpg" alt="sigmoid function"></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqzpzyj12tj30bi07qaa1.jpg" alt="step function"></p>
+<p>Sigmoid 神经元使用 $\sigma$ 函数，如果将 $\sigma$ 函数换成 Setp（阶跃） 函数，就变成了感知机。</p>
+<p>$\sigma$ 函数的平滑属性，让我们在 $\triangle w_{j}$ 和 $\triangle b$ 轻微改变时，神经元的输出也只是轻微地变化 $\triangle output$。</p>
+<p>$\sigma$ 有时也被称作 Logistic Function，对应的神经元被称为 Logistic Neurons。</p>
+<h4 id="Activation-Function-主要有："><a href="#Activation-Function-主要有：" class="headerlink" title="Activation Function 主要有："></a>Activation Function 主要有：</h4><ul>
+<li>Sigmoid</li>
+<li>Maxout</li>
+<li>ReLu</li>
+</ul>
+<h4 id="Loss-Function-主要有："><a href="#Loss-Function-主要有：" class="headerlink" title="Loss Function 主要有："></a>Loss Function 主要有：</h4><ul>
+<li>Mean Squared Error（均方误差）</li>
+<li>Cross Entropy（交叉熵）</li>
+</ul>
+<h2 id="神经网络的结构"><a href="#神经网络的结构" class="headerlink" title="神经网络的结构"></a>神经网络的结构</h2><p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqzqgvj2twj30gc09bgm4.jpg" alt="神经网络的结构"></p>
+<ul>
+<li>一个神经元只有一个输出，多个输出箭头仅表示它的输出被用作其它几个神经元的输入。</li>
+<li>这个网络有4层，2个隐藏层。</li>
+<li>Hidden Layers 的第1层通过赋予输入的 evidence 权重，做出了3个非常简单的决策。第2层赋权重给第1层的决策结果，来作出决策。通过这种形式，一个多层网络可以作出更加复杂精细的决策。</li>
+<li>出于历史原因，这样的多层网络又叫做 Multilayer Perception（MLP）多层感知机。但是构成网络的并非感知机，而是 Sigmoid 神经元。</li>
+</ul>
+<p>对于判断一个手写数字是不是9这个问题，我们使用$64\times64$的灰度图像。</p>
+<p>输入层需要4096个神经元，每个神经元接收<strong>标准化</strong>的0-1之间的灰度值。</p>
+<p>输出层需要一个神经元，用于分类。</p>
+<h3 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h3><p>标准化是将数据按比例缩放，使之落入一个小的特定区间。</p>
+<h5 id="好处有"><a href="#好处有" class="headerlink" title="好处有"></a>好处有</h5><ul>
+<li>提升模型的收敛速度</li>
+<li>可能提高模型的精度</li>
+</ul>
+<h5 id="方法有"><a href="#方法有" class="headerlink" title="方法有"></a>方法有</h5><p>Min-Max Normalization 线性归一化<br>$$<br>x’=\frac{x-min(x)}{max(x)-min(x)}<br>$$<br>Z-Score Standardization<br>$$<br>x’=\frac{x-\mu}{\sigma}<br>$$<br>非线性归一化<br>$$<br>x’=\frac{ln(x)}{ln(max(x))}<br>$$</p>
+<h3 id="FeedForward-Neural-Networks"><a href="#FeedForward-Neural-Networks" class="headerlink" title="FeedForward Neural Networks"></a>FeedForward Neural Networks</h3><p>前馈神经网络，是把上一层的输出，作为下一层的输入。信息总是向前传播，从不反向回馈。</p>
+<h2 id="用简单的网络结构去识别手写数字"><a href="#用简单的网络结构去识别手写数字" class="headerlink" title="用简单的网络结构去识别手写数字"></a>用简单的网络结构去识别手写数字</h2><p>数据是$28\times28$的灰度图像</p>
+<ol>
+<li>输入层要784个神经元，接收0-1之间的标准化灰度值。</li>
+<li>输出层要10个神经元，哪个神经元的激活值最高，我们认为数字是哪个。</li>
+<li>隐藏层设置n个神经元，实验不同的n的取值。</li>
+</ol>
+<h3 id="神经网络从根本原理上在做什么？"><a href="#神经网络从根本原理上在做什么？" class="headerlink" title="神经网络从根本原理上在做什么？"></a>神经网络从根本原理上在做什么？</h3><p>为什么输出层用10个神经元？神经元输出二进制的话，$2^4=16$，用4个神经元就足够了。</p>
+<h4 id="隐藏层在做什么？"><a href="#隐藏层在做什么？" class="headerlink" title="隐藏层在做什么？"></a>隐藏层在做什么？</h4><p>隐藏层的第1个神经元用于检测图像中是否存在特定模式。如果有，它会对特定模式在图像中对应部分的像素赋予较大的权重，对其它部分赋予较小的权重。</p>
+<p>隐藏层的第2个神经元会检测另一种模式。如果有，也会给对应部分的像素较大权重，其它像素较小权重。</p>
+<h4 id="输出层在做什么？"><a href="#输出层在做什么？" class="headerlink" title="输出层在做什么？"></a>输出层在做什么？</h4><p>输出层有10个神经元，它的第1个神经元通过权衡从隐藏层得到的信息，告诉我们这个数字是不是0。如果输出层的第1个神经元检测到隐藏层的某几个神经元被激活，那么可以推断这个数字是0。</p>
+<h2 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h2><h3 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h3><p>代价函数，有的地方也叫</p>
+<ul>
+<li>Loss Function，损失函数</li>
+<li>Objective Function，目标函数</li>
+</ul>
+<p>我们训练神经网络的目的，是寻找合适的 Weights 和 Biases 来最小化代价函数。</p>
+<p>MSE代价函数：<br>$$<br>C(w,b)=\frac{1}{2n}\sum_{x}||y(x)-a||^2<br>$$</p>
+<ul>
+<li>y(x)是预期的输出结果</li>
+<li>a是激活函数的输出结果</li>
+</ul>
+<h3 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><p>梯度下降法，是一种可以解决最小化问题的技术。</p>
+<p>在$v_{1}$方向上移动很小的量$\triangle v_{1}$，在$v_{2}$方向移动很小的量$\triangle v_{2}$，C将会发生如下变化：<br>$$<br>\triangle C \approx \frac{\partial C}{\partial v_{1}}\triangle v_{1}+\frac{\partial C}{\partial v_{2}}\triangle v_{2}<br>$$</p>
+<ul>
+<li>$\triangle C$是C的变化</li>
+<li>$\triangle v_{1}$是$v_{1}$的变化</li>
+<li>$\triangle v_{2}$是$v_{2}$的变化</li>
+</ul>
+<p>我们用$\triangle v$来描述v的变化<br>$$<br>\triangle v \equiv (\triangle v_{1},\triangle v_{2})^T<br>$$<br>用$\nabla C$表示梯度向量<br>$$<br>\nabla C=\left(\frac{\partial C}{\partial v_{1}},\frac{\partial C}{\partial v_{2}}\right)^T<br>$$<br>这样，C发生的变化可以表示为<br>$$<br>\triangle C\approx \nabla C \cdot \triangle v<br>$$<br>如果想让C一直降低，$\triangle C$就得是负的。</p>
+<p>我们可以这样选取$\triangle v$，以确保$\triangle C$为负数：<br>$$<br>\triangle v= - \eta \nabla C<br>$$<br>$\eta$是很小的正数，也就是 Learning Rate。这样，<br>$$<br>\triangle C \approx - \eta || \nabla C ||^2<br>$$<br>从而保证$\triangle C \le 0$。</p>
+<p>如果从为止v移动到v’，变化$\triangle v$为<br>$$<br>v \rightarrow v’ = v - \eta \nabla C<br>$$<br>然后反复迭代地更新，C会一直降低到我们想要寻找的全局最小值。</p>
+<h4 id="梯度下降法工作原理"><a href="#梯度下降法工作原理" class="headerlink" title="梯度下降法工作原理"></a>梯度下降法工作原理</h4><p>梯度下降算法工作的方式是重复计算梯度$\nabla C$，然后沿着梯度的反方向运动，即下山坡。</p>
+<p>同时，梯度下降法也被视为一种通过在C下降最快的方向上做微小变化，来使得C立即下降的方法。</p>
+<h3 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h3><p>Cost Function可以这样写：<br>$$<br>C_{x} = \frac{||y(x)-a||^2}{2}<br>$$</p>
+<p>$$<br>C = \frac{1}{n} \sum_x C_x<br>$$</p>
+<ul>
+<li>$C_x$是每个独立训练样本的代价函数</li>
+<li>C是每个样本代价的平均值</li>
+</ul>
+<p>这样，我们要为每个样本x单独计算梯度值$\nabla C_x$，然后求和再求平均值<br>$$<br>\nabla C = \frac{1}{n} \sum_x \nabla C_x<br>$$<br>梯度下降可能会花费大量时间，学习缓慢。</p>
+<p>SGD随机梯度下降，每次<strong>随机</strong>选取<strong>少量</strong>输入样本来计算$\nabla C_x$和$\nabla C$，少量样本可以快速得到梯度$\nabla C$，加快梯度下降过程，进而加速学习过程。</p>
+<h4 id="SGD工作原理"><a href="#SGD工作原理" class="headerlink" title="SGD工作原理"></a>SGD工作原理</h4><p>SGD将训练数据随机打散，然后划分为多个大小为m的 mini-batch 。</p>
+<p>通过计算随机选取的mini-batch的梯度来估计整体的 Gradient ，更新 Weights 和 Biases 。<br>$$<br>w_k \rightarrow w_k’ = w_k - \eta \nabla C = w_k - \frac{\eta}{m} \sum_x \nabla C_x \<br>b_l \rightarrow b_l’ = b_l - \eta \nabla C = b_l - \frac{\eta}{m} \sum_x \nabla C_x<br>$$<br>用这个 mini-batch 更新完 Weights 和 Biases 后，再选取另一个 mini-batch去训练，直到我们用完所有训练数据，就完成了一个 epoch 训练。</p>
+<h4 id="Online-Learning"><a href="#Online-Learning" class="headerlink" title="Online Learning"></a>Online Learning</h4><p>也叫 Incremental Learning ，是 mini-batch=1 时的梯度下降极端版本。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Artificial-Neuron"><span class="toc-text">Artificial Neuron</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Perceptron"><span class="toc-text">Perceptron</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#感知机规则"><span class="toc-text">感知机规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sigmoid-Neurons"><span class="toc-text">Sigmoid Neurons</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Activation-Function-主要有："><span class="toc-text">Activation Function 主要有：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Loss-Function-主要有："><span class="toc-text">Loss Function 主要有：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经网络的结构"><span class="toc-text">神经网络的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Normalization"><span class="toc-text">Normalization</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#好处有"><span class="toc-text">好处有</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法有"><span class="toc-text">方法有</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FeedForward-Neural-Networks"><span class="toc-text">FeedForward Neural Networks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用简单的网络结构去识别手写数字"><span class="toc-text">用简单的网络结构去识别手写数字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#神经网络从根本原理上在做什么？"><span class="toc-text">神经网络从根本原理上在做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#隐藏层在做什么？"><span class="toc-text">隐藏层在做什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出层在做什么？"><span class="toc-text">输出层在做什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Descent"><span class="toc-text">Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降法"><span class="toc-text">梯度下降法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#梯度下降法工作原理"><span class="toc-text">梯度下降法工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-Gradient-Descent"><span class="toc-text">Stochastic Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SGD工作原理"><span class="toc-text">SGD工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Online-Learning"><span class="toc-text">Online Learning</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../05/03/deep_learning_2_backpropagation/" class="prev">&larr; Prev post Deep Learning - 2 反向传播</a>
+  
+
+  
+
+  
+    <a href="../../../../2017/12/26/data_analysis_weekend_project_personal_loans_risk_score_of_prosper/" class="next">Next post Data Analysis Weekend Project 美国金融科技公司Prosper的风险评分分析 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

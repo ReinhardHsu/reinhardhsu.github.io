@@ -1,0 +1,507 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="深度神经网络的学习基于两个关键技术：
+
+Stochastic Gradient Descent
+Backpropagation
+
+利用 SGD 算法学习 Weights 和 Biases，利用 Backpropagation 算法来快速计算 Cost Function 的 Gradient 。
+反向传播是一种快速的学习算法，能够让我们深入地了解改变 Weights 和 Biases 的值，是...">
+  
+  <title>Deep Learning - 2 反向传播 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="../../../04/28/deep_learning_1_neural_networks/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Deep Learning - 1 神经网络
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Deep Learning - 2 反向传播</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2018-05-03</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-06</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/deep-learning/">Deep Learning</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/data-analysis/">Data Analysis</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/machine-learning/">Machine Learning</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/deep-learning/">Deep Learning</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/neural-networks/">Neural Networks</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/backpropagation/">Backpropagation</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>深度神经网络的学习基于两个关键技术：</p>
+<ul>
+<li>Stochastic Gradient Descent</li>
+<li>Backpropagation</li>
+</ul>
+<p>利用 SGD 算法学习 Weights 和 Biases，利用 Backpropagation 算法来快速计算 Cost Function 的 Gradient 。</p>
+<p>反向传播是一种快速的学习算法，能够让我们深入地了解改变 Weights 和 Biases 的值，是如何改变整个网络的行为的。</p>
+<h2 id="Weights"><a href="#Weights" class="headerlink" title="Weights"></a>Weights</h2><p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fr09c43bcqj30gz076jrp.jpg" alt="Weights"></p>
+<ul>
+<li>$W_{jk}^{l}$表示从第 $l-1$ 层的第 k 个神经元，到第 $l$ 层的第 $j$ 个神经元的<strong>连接</strong>的权重。</li>
+</ul>
+<h2 id="Biases-and-Activations"><a href="#Biases-and-Activations" class="headerlink" title="Biases and Activations"></a>Biases and Activations</h2><p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fr09gjqhsmj308l071aa5.jpg" alt="Biases and Activations"></p>
+<ul>
+<li>$b_j^l$ 表示第 $l$ 层第 $j$ 个<strong>神经元的 Biases</strong></li>
+<li>$a_j^l$ 表示第 $l$ 层第 $j$ 个<strong>神经元的 Activations（激活值）</strong></li>
+</ul>
+<h2 id="神经元的视角"><a href="#神经元的视角" class="headerlink" title="神经元的视角"></a>神经元的视角</h2><p>每个神经元的激活值可以这样表示：<br>$$<br>a_j^l = \sigma \left(\sum_k w_{jk}^{l} a_{k}^{l-1}+b_{j}^{l}\right)<br>$$</p>
+<h2 id="层视角"><a href="#层视角" class="headerlink" title="层视角"></a>层视角</h2><p>通过使用矩阵：</p>
+<ul>
+<li>每一层 $l$ 定义一个权重矩阵 $w^l$ ，$w^l$ 中的第 $j$ 行第 $k$ 列的元素就是 $w_{jk}^{l}$  。</li>
+<li>$b^l$ 代表第 $l$ 层的 Biases 向量。</li>
+<li>将 $\sigma$ 函数向量化，即对向量 $v$ 中的每一项，都单独地应用 $\sigma$ 函数，记为 $\sigma(v)$ 。</li>
+<li>$a^l$代表第 $l$ 层的神经元的激活值向量。</li>
+</ul>
+<p>每层的激活值可以这样表示：<br>$$<br>a^l = \sigma ( w^l a^{l-1} + b^l )<br>$$</p>
+<ol>
+<li>将权值矩阵作用于上一层的激活值</li>
+<li>然后加上偏置向量</li>
+<li>最后用 $\sigma$ 函数作用于这个结果</li>
+<li>就得到了本层的激活值</li>
+</ol>
+<h3 id="Weighted-Input"><a href="#Weighted-Input" class="headerlink" title="Weighted Input"></a>Weighted Input</h3><p>$z^l \equiv w^l a^{l-1} + b^l$ ，$z^l$ 成为对第 $l$ 层神经元激活函数的加权输入。<br>$$<br>a^l = \sigma (z^l)<br>$$</p>
+<h2 id="Cost-Function-的两个假设"><a href="#Cost-Function-的两个假设" class="headerlink" title="Cost Function 的两个假设"></a>Cost Function 的两个假设</h2><p>MSE代价函数：<br>$$<br>C = \frac{1}{2n} \sum_x ||y(x)-a^L(x)||^2<br>$$</p>
+<ul>
+<li>n是训练样本数量</li>
+<li>$\sum_x$是对每个独立训练样本 $x$ 求和</li>
+<li>$y=y(x)$ 是每个独立训练样本 $x$ 的预期输出结果</li>
+<li>$L$ 是神经网络的层数</li>
+<li>$a^L = a^L (x)$是输入为 $x$ 时网络的激活函数的输出向量</li>
+</ul>
+<p>为了能够使用反向传播，我们需要对代价函数C进行两个假设。</p>
+<h3 id="假设一"><a href="#假设一" class="headerlink" title="假设一"></a>假设一</h3><p>假设代价函数能够写成这样的形式<br>$$<br>C = \frac{1}{n} \sum_x C_x<br>$$</p>
+<ul>
+<li>$C_x$ 是每个独立训练样本 $x$ 的代价函数。</li>
+</ul>
+<p>当代价函数是MSE时，$C_x = \frac{1}{2} ||y-a||^2$ 。</p>
+<h3 id="假设二"><a href="#假设二" class="headerlink" title="假设二"></a>假设二</h3><p>假设代价函数可以<strong>写成关于神经网络输出结果的函数</strong>。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fr0affaln8j30dx06f0sv.jpg" alt=""></p>
+<p>MSE代价函数满足这个要求，因为单一训练样本x的二次代价可以表示为：<br>$$<br>C = \frac{1}{2} ||y-a^L||^2 = \frac{1}{2} \sum_j ( y_j - a_j^L )^2<br>$$<br>因为输入的训练样本 x 是固定的，所以期望的输出 y 也是固定的。x 和 y 不是神经网络所学习的东西，我们不能通过改变 Weights 和 Biases 来修改它。</p>
+<p>所以这里可以把 C 视为是只关于输出 $a^L$ 的函数。</p>
+<h2 id="Hadamard-Product"><a href="#Hadamard-Product" class="headerlink" title="Hadamard Product"></a>Hadamard Product</h2><p>反向传播会用到 Hadamard Product ，假设 s 和 t 两个向量有相同的维数<br>$$<br>( s \odot t )_j = s_j t_j<br>$$<br>其中，$s \odot t$ 表示两个向量的对应元素相乘</p>
+<h2 id="反向传播背后的四个基本等式"><a href="#反向传播背后的四个基本等式" class="headerlink" title="反向传播背后的四个基本等式"></a>反向传播背后的四个基本等式</h2><p>$$<br>\delta^L = \nabla a C \odot \sigma’(z^L) \<br>\delta^l = ((w^{l+1})^T \delta^{l+1}) \odot \sigma’ (z^l) \<br>\frac{\partial C}{\partial b_j^l} = \delta_j^l \<br>\frac{\partial C}{\partial w_{jk}^l} = a_{k}^{l-1} \delta_j^l<br>$$</p>
+<h2 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h2><h3 id="输入一组训练数据"><a href="#输入一组训练数据" class="headerlink" title="输入一组训练数据"></a>输入一组训练数据</h3><h3 id="对于训练数据中的每个样本-x"><a href="#对于训练数据中的每个样本-x" class="headerlink" title="对于训练数据中的每个样本 x"></a>对于训练数据中的每个样本 x</h3><p>计算输入层的激活函数值 $a^{x,1}$，并执行下面的步骤：</p>
+<h4 id="Feedforward（正向传播）"><a href="#Feedforward（正向传播）" class="headerlink" title="Feedforward（正向传播）"></a>Feedforward（正向传播）</h4><p>计算样本x在每一层的激活函数值 $a^{x,l}$<br>$$<br>l=2,3,\dots ,L \<br>z^{x,l} = w^l a^{x,l-1} + b^l \<br>a^{x,l} = \sigma ( z^{x,l} )<br>$$</p>
+<h4 id="输出层的误差"><a href="#输出层的误差" class="headerlink" title="输出层的误差"></a>输出层的误差</h4><p>计算样本x在输出层的误差向量<br>$$<br>\delta^{x,L} = \nabla_a C_x \odot \sigma’ ( z^{x,L} )<br>$$</p>
+<h4 id="将误差反向传播"><a href="#将误差反向传播" class="headerlink" title="将误差反向传播"></a>将误差反向传播</h4><p>使用输出层的误差，计算样本x在之前每一层的误差<br>$$<br>l = L-1,L-2,\dots ,2 \<br>\delta^{x,l} = (( w^{l+1} )^T \delta^{x,l+1} ) \odot \sigma’( z^{x,l} )<br>$$</p>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>使用样本x在每一层的误差，更新 Weights 和 Biases<br>$$<br>l = L,L-1,\dots,2 \<br>w^l \rightarrow w^l - \frac{\eta}{m} \sum_x \delta^{x,l} (a^{x,l-1})^T\<br>b^l \rightarrow b^l - \frac{\eta}{m} \sum_x \delta^{x,l}<br>$$</p>
+<h2 id="反向传播算法的实现"><a href="#反向传播算法的实现" class="headerlink" title="反向传播算法的实现"></a>反向传播算法的实现</h2><h3 id="初始化网络"><a href="#初始化网络" class="headerlink" title="初始化网络"></a>初始化网络</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.num_layers = len(sizes)</span><br><span class="line">self.sizes = sizes</span><br><span class="line">self.biases = [np.random.randn(y, <span class="number">1</span>) <span class="keyword">for</span> y <span class="keyword">in</span> sizes[<span class="number">1</span>:]]</span><br><span class="line">self.weights = [np.random.randn(y, x)</span><br><span class="line">                <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(sizes[:<span class="number">-1</span>], sizes[<span class="number">1</span>:])]</span><br></pre></td></tr></table></figure>
+<p>对于5层的神经网络，初始化后 Weights 和 Biases 的结构如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">size = [<span class="number">748</span>, <span class="number">40</span>, <span class="number">30</span>, <span class="number">20</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">biases  [(<span class="number">40</span>, <span class="number">1</span>), (<span class="number">30</span>, <span class="number">1</span>), (<span class="number">20</span>, <span class="number">1</span>), (<span class="number">10</span>, <span class="number">1</span>)]</span><br><span class="line">weights [(<span class="number">40</span>, <span class="number">784</span>), (<span class="number">30</span>, <span class="number">40</span>), (<span class="number">20</span>, <span class="number">30</span>), (<span class="number">10</span>, <span class="number">20</span>)]</span><br></pre></td></tr></table></figure>
+<h3 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h3><h4 id="随机"><a href="#随机" class="headerlink" title="随机"></a>随机</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">SGD</span><span class="params">(self, training_data, epochs, mini_batch_size, eta,</span></span></span><br><span class="line"><span class="function"><span class="params">            test_data=None)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(epochs):</span><br><span class="line">        <span class="comment"># 随机打散</span></span><br><span class="line">        random.shuffle(training_data)</span><br><span class="line">        <span class="comment"># 分批</span></span><br><span class="line">        mini_batches = [</span><br><span class="line">            training_data[k:k+mini_batch_size]</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>, n, mini_batch_size)]</span><br><span class="line">        <span class="keyword">for</span> mini_batch <span class="keyword">in</span> mini_batches:</span><br><span class="line">            <span class="comment"># 使用小批样本快速学习</span></span><br><span class="line">            self.update_mini_batch(mini_batch, eta)</span><br><span class="line">            <span class="keyword">if</span> test_data:</span><br><span class="line">                print(<span class="string">"Epoch &#123;&#125; : &#123;&#125; / &#123;&#125;"</span></span><br><span class="line">                    .format(j,self.evaluate(test_data),n_test));</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">"Epoch &#123;&#125; complete"</span>.format(j))</span><br></pre></td></tr></table></figure>
+<h4 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_mini_batch</span><span class="params">(self, mini_batch, eta)</span>:</span></span><br><span class="line">    <span class="comment"># 每一层每个神经元的偏置和权值</span></span><br><span class="line">    nabla_b = [np.zeros(b.shape) <span class="keyword">for</span> b <span class="keyword">in</span> self.biases]</span><br><span class="line">    nabla_w = [np.zeros(w.shape) <span class="keyword">for</span> w <span class="keyword">in</span> self.weights]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> mini_batch:</span><br><span class="line">        <span class="comment"># 对于每一个样本x，反向传播，计算每一层每个神经元的梯度</span></span><br><span class="line">        delta_nabla_b, delta_nabla_w = self.backprop(x, y)</span><br><span class="line">        <span class="comment"># 将样本x的误差梯度汇总到批次梯度上</span></span><br><span class="line">        nabla_b = [nb+dnb <span class="keyword">for</span> nb, dnb </span><br><span class="line">                   <span class="keyword">in</span> zip(nabla_b, delta_nabla_b)]</span><br><span class="line">        nabla_w = [nw+dnw <span class="keyword">for</span> nw, dnw </span><br><span class="line">                   <span class="keyword">in</span> zip(nabla_w, delta_nabla_w)]</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 使用批次梯度更新权值和偏置</span></span><br><span class="line">	self.weights = [w-(eta/len(mini_batch))*nw</span><br><span class="line">                        <span class="keyword">for</span> w, nw <span class="keyword">in</span> zip(self.weights, nabla_w)]</span><br><span class="line">	self.biases = [b-(eta/len(mini_batch))*nb</span><br><span class="line">                       <span class="keyword">for</span> b, nb <span class="keyword">in</span> zip(self.biases, nabla_b)]</span><br></pre></td></tr></table></figure>
+<h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backprop</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">    <span class="comment"># 每一层的偏置向量和权值矩阵</span></span><br><span class="line">    nabla_b = [np.zeros(b.shape) <span class="keyword">for</span> b <span class="keyword">in</span> self.biases]</span><br><span class="line">    nabla_w = [np.zeros(w.shape) <span class="keyword">for</span> w <span class="keyword">in</span> self.weights]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 正向传播</span></span><br><span class="line">    activation = x</span><br><span class="line">    activations = [x] <span class="comment"># 样本x在每一层的激活值向量</span></span><br><span class="line">    zs = [] <span class="comment"># 样本x在每一层的加权输入向量</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 逐层计算样本x在加权输入向量和激活值向量</span></span><br><span class="line">    <span class="keyword">for</span> b, w <span class="keyword">in</span> zip(self.biases, self.weights):</span><br><span class="line">        z = np.dot(w, activation)+b</span><br><span class="line">        zs.append(z)</span><br><span class="line">        activation = sigmoid(z)</span><br><span class="line">        activations.append(activation)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 反向传播</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算样本x在输出层的误差和梯度</span></span><br><span class="line">    delta = self.cost_derivative(activations[<span class="number">-1</span>], y) * \</span><br><span class="line">    sigmoid_prime(zs[<span class="number">-1</span>])</span><br><span class="line">    nabla_b[<span class="number">-1</span>] = delta</span><br><span class="line">    nabla_w[<span class="number">-1</span>] = np.dot(delta, activations[<span class="number">-2</span>].transpose())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用输出层的误差和梯度，逐层向前计算样本x在每一层的误差梯度和权值梯度</span></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">2</span>, self.num_layers):</span><br><span class="line">        z = zs[-l]</span><br><span class="line">        sp = sigmoid_prime(z)</span><br><span class="line">        delta = np.dot(self.weights[-l+<span class="number">1</span>].transpose(), delta) * sp</span><br><span class="line">        nabla_b[-l] = delta</span><br><span class="line">        nabla_w[-l] = np.dot(delta, activations[-l<span class="number">-1</span>].transpose())</span><br><span class="line">    <span class="keyword">return</span> (nabla_b, nabla_w)</span><br></pre></td></tr></table></figure>
+<h2 id="反向传播算法为什么更高效"><a href="#反向传播算法为什么更高效" class="headerlink" title="反向传播算法为什么更高效"></a>反向传播算法为什么更高效</h2><p>待更新</p>
+<h2 id="反向传播整体描述"><a href="#反向传播整体描述" class="headerlink" title="反向传播整体描述"></a>反向传播整体描述</h2><p>我们对 $w_{jk}^{l}$ 作出一个小的改变$\triangle w_{jk}^l$ </p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fr0xrdb02qj30gg07tglv.jpg" alt=""></p>
+<p>这个改变量会导致与它相连的神经元的输出激活值改变</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fr0xu1ob6pj30ge079weq.jpg" alt=""></p>
+<p>然后，这个激活着会影响下一层的所有激活值</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fr0xxn08p3j30ge06d74i.jpg" alt=""></p>
+<p>这样一层一层地，最终引起代价函数的改变，并且这个改变我们可以算出。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Weights"><span class="toc-text">Weights</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Biases-and-Activations"><span class="toc-text">Biases and Activations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经元的视角"><span class="toc-text">神经元的视角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层视角"><span class="toc-text">层视角</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weighted-Input"><span class="toc-text">Weighted Input</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function-的两个假设"><span class="toc-text">Cost Function 的两个假设</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#假设一"><span class="toc-text">假设一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#假设二"><span class="toc-text">假设二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hadamard-Product"><span class="toc-text">Hadamard Product</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播背后的四个基本等式"><span class="toc-text">反向传播背后的四个基本等式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播算法"><span class="toc-text">反向传播算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入一组训练数据"><span class="toc-text">输入一组训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于训练数据中的每个样本-x"><span class="toc-text">对于训练数据中的每个样本 x</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Feedforward（正向传播）"><span class="toc-text">Feedforward（正向传播）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出层的误差"><span class="toc-text">输出层的误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将误差反向传播"><span class="toc-text">将误差反向传播</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Descent"><span class="toc-text">Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播算法的实现"><span class="toc-text">反向传播算法的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化网络"><span class="toc-text">初始化网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机梯度下降"><span class="toc-text">随机梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#随机"><span class="toc-text">随机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#梯度下降"><span class="toc-text">梯度下降</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播算法为什么更高效"><span class="toc-text">反向传播算法为什么更高效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播整体描述"><span class="toc-text">反向传播整体描述</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="../../../04/28/deep_learning_1_neural_networks/" class="next">Next post Deep Learning - 1 神经网络 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+

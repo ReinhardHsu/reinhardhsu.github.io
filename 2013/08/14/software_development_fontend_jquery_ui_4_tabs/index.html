@@ -1,0 +1,822 @@
+
+
+
+
+
+
+
+    
+      
+    
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Reinhard Hsu">
+  
+  
+  
+  
+    <meta name="description" content="之前，我们已经介绍了 jQuery UI 库，CSS 框架。下面，我们将学习这些有增强可视化效果，高度可配置的用户交互组件。
+Tab 的特性是，点击 tab 后，会高亮该 tab，并显示他的关联content panel，期间会确保所有其他的 content panel 是 hidden。一次最多只有一个 content panel 可以被打开，也可以没有。
+本章我们主要介绍以下几点：
+
+默...">
+  
+  <title>Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.4.Tabs控件 - Reinhard Hsu</title>
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+  <link rel="stylesheet" href="../../../../css/random.css">
+<link rel="stylesheet" href="../../../../css/vegas.min.css">
+<link rel="stylesheet" href="../../../../css/highlight-railscasts.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox.css">
+<link rel="stylesheet" href="../../../../css/iconfont/iconfont.css">
+<link rel="stylesheet" href="../../../../css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="../../../../css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="../../../../2015/01/05/dynamics_ax_2012_r2_install_dynamics_ax_aif_iis_web_service/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Dynamics AX 2012 R2 Install Dynamics AX Aif IIS Web Service
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="../software_development_fontend_jquery_ui_3_create_control/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.3.创建控件
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png"/>
+          <div id="homelink">Reinhard Hsu</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="http://reinhardhsu.com">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="http://www.cnblogs.com/msdynax">Blog</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="../../../../about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.4.Tabs控件</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2013-08-14</span>
+      
+        <span id = "post-title-updated">Updated at 2018-05-04</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="../../../../categories/software-development/">Software Development</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="../../../../tags/software-development/">Software Development</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/jquery/">jQuery</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/javascript/">JavaScript</a>
+      
+        
+          /
+        
+        
+        <a href="../../../../tags/fontend/">FontEnd</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>之前，我们已经介绍了 jQuery UI 库，CSS 框架。下面，我们将学习这些有增强可视化效果，高度可配置的用户交互组件。</p>
+<p>Tab 的特性是，点击 tab 后，会高亮该 tab，并显示他的关联content panel，期间会确保所有其他的 content panel 是 hidden。一次最多只有一个 content panel 可以被打开，也可以没有。</p>
+<p>本章我们主要介绍以下几点：</p>
+<ul>
+<li>默认安装启用控件</li>
+<li>CSS框架是如何触发 tab 控件</li>
+<li>怎样为一组 tabs 应用自定义样式</li>
+<li>使用 tab 控件的配置选项配置它</li>
+<li>content panel 变换时，内置过渡效果</li>
+<li>使用 tab 控件的方法控制他们</li>
+<li>tab 的自定义事件</li>
+<li>AJAX tabs</li>
+</ul>
+<h2 id="1-默认安装启用-tab"><a href="#1-默认安装启用-tab" class="headerlink" title="1.默认安装启用 tab"></a>1.默认安装启用 tab</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Tabs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/smoothness/jquery-ui-1.8.9.custom.css"</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myTabs"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#a"</span>&gt;</span>Tab 1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#b"</span>&gt;</span>Tab 2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"a"</span>&gt;</span>This is the content panel linked to the first tab, it is shown by default.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"b"</span>&gt;</span>This content is linked to the second tab and will be shown when its tab is clicked.<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/jquery-x.x.x,js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.core.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.widget.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.tabs.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">"#myTabs"</span>).tabs();</span></span><br><span class="line"><span class="undefined">      &#125;)(jQuery);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Tab 控件一般由几个特定方式组合在一起的基本HTML元素构建：</p>
+<ul>
+<li>一个调用 tabs 方法的外层容器元素</li>
+<li>一个元素列表 ，如<ul> 或 <ol></ol></ul></li>
+<li>每个 </li><li> 都是一个 tab，其中包含 一个 <a> 元素</a></li>
+<li>每个 tab 的 content panel 元素</li>
+</ul>
+<p>链接的 href 属性必须设置 # 为前缀的 识别。content panel 使用 <div> 元素，也可以使用其他HTML元素，panle Template 和 tabTemplate配置选项可以用来设置构成控件的匀速。</div></p>
+<p>在 style sheets 和 page elements 后面加载 script ，被证明是一种能够显然改善加载时间的技巧，一旦有可能就要使用。</p>
+<p>在链接了jQuery后，我们链接到所有的组件都必须的jquery.ui.core.js文件（除了 effects，它们有自己的 core 文件），还有jquery.ui.widget.js文件。这时我们连接到组件自己的源文件，jquery.ui.tabs.js。</p>
+<p>在加载了必须的 script 后，我们加载自己的 script。</p>
+<h2 id="2-Tab-CSS框架-classes"><a href="#2-Tab-CSS框架-classes" class="headerlink" title="2.Tab CSS框架 classes"></a>2.Tab CSS框架 classes</h2><p>来简短地复习下 classnames，看看它们如何为控件外貌做贡献 。</p>
+<p>外层div 被加上以下 classnames：</p>
+<table>
+<thead>
+<tr>
+<th>Classname</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ui-tabs</td>
+<td>允许应用tab特有的结构CSS</td>
+</tr>
+<tr>
+<td>ui-widget</td>
+<td>设置一般字体样式，被嵌入元素继承</td>
+</tr>
+<tr>
+<td>ui-widget-content</td>
+<td>提供主题特有的样式</td>
+</tr>
+<tr>
+<td>ui-corner-all</td>
+<td>为容器应用圆角</td>
+</tr>
+</tbody>
+</table>
+<p><ul>元素被加上以下 classnames：</ul></p>
+<table>
+<thead>
+<tr>
+<th>Classname</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ui-tabs-nav</td>
+<td>允许应用tab特有的结构CSS</td>
+</tr>
+<tr>
+<td>ui-helper-reset</td>
+<td>使应用到<ul>上的浏览器应特有的样式失效</ul></td>
+</tr>
+<tr>
+<td>ui-helper-clearfix</td>
+<td>当这个元素有子元素在浮动，为这个元素应用clear-fix</td>
+</tr>
+<tr>
+<td>ui-widget-header</td>
+<td>提供主题特有的样式</td>
+</tr>
+<tr>
+<td>ui-corner-all</td>
+<td>应用圆角</td>
+</tr>
+</tbody>
+</table>
+<p>成为tab headings 的每个<li>元素个体，被加上了以下classnames：</li></p>
+<table>
+<thead>
+<tr>
+<th>Classname</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ui-state-default</td>
+<td>为tab headings 应用基本的、没有激活的、没有被选中的、没有被鼠标悬停的状态</td>
+</tr>
+<tr>
+<td>ui-corner-top</td>
+<td>将元素上边缘设置为圆角</td>
+</tr>
+<tr>
+<td>ui-tabs-selected</td>
+<td>仅仅被用在活动的tab上。页面加载后默认是第一个tab，选择其他的tab 会从当前被选中的tab上移除这个class，并应用到新的选中的tab上。</td>
+</tr>
+<tr>
+<td>ui-state-active</td>
+<td>为当前选中的tab应用主题特有的样式，像ui-tabs-selected一样工作。ui-tabs-selected提供CSS功能，而ui-state-active提供可视化，装饰样式。</td>
+</tr>
+</tbody>
+</table>
+<p>每个<li>中的<a>元素，没有得到任何classnames，但是框架依然会为他们应用结构和主题特有的样式。</a></li></p>
+<p>panel 元素被加上以下classnames：</p>
+<table>
+<thead>
+<tr>
+<th>Classname</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ui-tabs-panel</td>
+<td>为content panels应用结构CSS</td>
+</tr>
+<tr>
+<td>ui-widget-content</td>
+<td>应用主题特有的样式</td>
+</tr>
+<tr>
+<td>ui-corner-bottom</td>
+<td>为content panels的下边缘应用圆角</td>
+</tr>
+</tbody>
+</table>
+<p>所有这些classes被库自动地添加到HTML元素下面，我们在页面编码时或添加基本的化妆时，不需要手动添加他们。</p>
+<h2 id="3-为tabs应用自定义主题"><a href="#3-为tabs应用自定义主题" class="headerlink" title="3.为tabs应用自定义主题"></a>3.为tabs应用自定义主题</h2><p>下面我们通过覆盖的方法，改变tabs的基本外貌。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 #myTabs &#123; 2 width:400px; padding:5px; border:1px solid #636363; 3 background:#c2c2c2 none; 4 &#125; 5 .ui-widget-header &#123; 6 border:0; background:#c2c2c2 none; font-family:Georgia; 7 &#125; 8 #myTabs .ui-widget-content &#123; 9 border:1px solid #aaa; background:#fff none; font-size:80%; 10 &#125; 11 .ui-state-default, .ui-widget-content .ui-state-default &#123; 12 border:1px solid #636363; background:#a2a2a2 none; 13 &#125; 14 .ui-state-active, .ui-widget-content .ui-state-active &#123; 15 border:1px solid #aaa; background:#fff none; 16 &#125;</span><br></pre></td></tr></table></figure>
+<p>我们覆盖了jquery.ui.tabs.css中的规则。我们需要使用我们容器元素和jquery.ui.theme.css中的选择器   的ID选择器，最后击败 .ui-tabs .ui-tabs-panle。</p>
+<h2 id="4-配置选项"><a href="#4-配置选项" class="headerlink" title="4.配置选项"></a>4.配置选项</h2><p>不是默认的行为如下：</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default value</th>
+<th>Used to…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ajaxOptions</td>
+<td>null</td>
+<td>指定额外的AJAX选项。我们可以使用任何jQuery的$.ajax()方法暴漏的选项，如data,type,url等。</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>false</td>
+<td>控制远程数据仅在页面初始化时被加载一次。还是每次相应的tab被点击时都被重新加载。</td>
+</tr>
+<tr>
+<td>collapsible</td>
+<td>false</td>
+<td>允许一个活动的tab被点击后不被选中，所有的content panels被hidden ，只有tab headings 可见。</td>
+</tr>
+<tr>
+<td>cookie</td>
+<td>null</td>
+<td>使用页面加载的cookie data来显示活动tab。这个选项必须使用cookie插件。</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>false</td>
+<td>页面加载时禁用控件。我们也可以传送一个tab索引（从0开始）目录数组来禁用指定的tabs。</td>
+</tr>
+<tr>
+<td>event</td>
+<td>“click”</td>
+<td>指定播放content panels时触发的事件</td>
+</tr>
+<tr>
+<td>fx</td>
+<td>null</td>
+<td>指定一个变换tabs时的动画效果。支持一个对象或一个动画效果数组。</td>
+</tr>
+<tr>
+<td>idPrefix</td>
+<td>“ui-tabs-”</td>
+<td>当远程tab heading的<a>元素没有title attribute，为其生成一个独一无二的ID和碎片标识。</a></td>
+</tr>
+<tr>
+<td>panelTemplate</td>
+<td>“<div></div>”</td>
+<td>指定tab panel的 content 部分所使用的元素名称。</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>0</td>
+<td>当页面加载时，显示一个不是第一个的tab panel（覆盖cookie属性）</td>
+</tr>
+<tr>
+<td>spinner</td>
+<td>“Loding&amp;#8230”</td>
+<td>为远程tabs指定加载图标。</td>
+</tr>
+<tr>
+<td>tabTemplate</td>
+<td><li><a href="”#{href}”"><span>#{label}</span></a></li></td>
+<td>指定当创建一个新的tabs时所使用的元素。当新tab被创建时，#{href}和#{label}字符串会被控件内部替换</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-1-选一个tab，selected、disabled、collapsible选项"><a href="#4-1-选一个tab，selected、disabled、collapsible选项" class="headerlink" title="4.1 选一个tab，selected、disabled、collapsible选项"></a>4.1 选一个tab，selected、disabled、collapsible选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 var tabOpts = &#123; 2 selected: 1, 3 disabled:[2], 4 collapsible:true 5 &#125;; 6 $(&quot;#myTabs&quot;).tabs(tabOpts);</span><br></pre></td></tr></table></figure>
+<p>索引从0开始。当页面加载后，第三个tab被应用上ui-widget-disabled，从ui.theme.css获得disabled样式。它不再会相应任何鼠标的交互。</p>
+<h3 id="4-2-过渡效果，fx-选项"><a href="#4-2-过渡效果，fx-选项" class="headerlink" title="4.2 过渡效果，fx 选项"></a>4.2 过渡效果，fx 选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 var tabOpts = &#123; 2 fx: [&#123; 3 opacity: &quot;toggle&quot;, 4 duration: &quot;slow&quot; 5 &#125;, 6 null] 7 &#125;;</span><br></pre></td></tr></table></figure>
+<p>设置 fades-out 为淡出，设置 fades-in 为null。</p>
+<p>toggle是切换的意思，opacity是不透明，即在可见和不可见见切换。duration是持续时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 var tabOpts = &#123; 2 fx: &#123; 3 opacity: &quot;toggle&quot;, 4 duration: &quot;slow&quot; 5 &#125; 6 &#125;;</span><br></pre></td></tr></table></figure>
+<p>只设置一个时，此时fades-out 和 fades-in 共享此选项。</p>
+<h2 id="5-tab的事件"><a href="#5-tab的事件" class="headerlink" title="5. tab的事件"></a>5. tab的事件</h2><table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Fired when…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add</td>
+<td>一个新tab已经被添加</td>
+</tr>
+<tr>
+<td>disable</td>
+<td>一个tab已经被禁用</td>
+</tr>
+<tr>
+<td>enable</td>
+<td>一个tab已经被启用</td>
+</tr>
+<tr>
+<td>load</td>
+<td>一个tab的远程数据已经被加载完毕</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>一个tab已经被移除</td>
+</tr>
+<tr>
+<td>select</td>
+<td>一个tab已经被选择</td>
+</tr>
+<tr>
+<td>show</td>
+<td>一个tab已经被显示</td>
+</tr>
+</tbody>
+</table>
+<p>每个组件都有回调选项，我们总是在变更执行之前调用回调函数。因此，你可以从你的回调返回一个false来防止执行。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> handleSelect = <span class="function"><span class="keyword">function</span>(<span class="params">e, tab</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"&lt;p&gt;&lt;/p&gt;"</span>, &#123;</span></span><br><span class="line"><span class="javascript">        text: <span class="string">"Tab at index "</span> + tab.index + <span class="string">" selected"</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">"class"</span>: <span class="string">"status-message ui-corner-all"</span></span></span><br><span class="line"><span class="javascript">      &#125;).appendTo(<span class="string">".ui-tabs-nav"</span>, <span class="string">"#myTabs"</span>).fadeOut(<span class="number">5000</span>,</span></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="keyword">this</span>).remove();</span></span><br><span class="line"><span class="undefined">      &#125;);</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    tabOpts = &#123;</span></span><br><span class="line"><span class="undefined">      select: handleSelect</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#myTabs"</span>).tabs(tabOpts);</span></span><br><span class="line"><span class="undefined">  &#125;)(jQuery);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.status-message</span>&#123; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">padding</span><span class="selector-pseudo">:11px</span> 8<span class="selector-tag">px</span> 10<span class="selector-tag">px</span>; <span class="selector-tag">margin</span><span class="selector-pseudo">:0</span>; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">border</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span> <span class="selector-id">#aaa</span>; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">right</span><span class="selector-pseudo">:10px</span>; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">top</span><span class="selector-pseudo">:9px</span>; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span><span class="selector-pseudo">:11px</span>; </span></span><br><span class="line"><span class="css">        <span class="selector-tag">background-color</span>:<span class="selector-id">#fff</span>; </span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span></span><br></pre></td></tr></table></figure>
+<h3 id="5-1-绑定事件"><a href="#5-1-绑定事件" class="headerlink" title="5.1 绑定事件"></a>5.1 绑定事件</h3><p>使用组件暴漏的事件回调函数是控制交互的基本的方式，然而，我们也可以抓住在任何组件任何时间触发的事件。我们可以使用基本的jQuery bind()方法，将自定义事件绑定到 event handler，通过像绑定一个基本DOM事件那样，以同样的方式触发，例如点击。下面是自定义绑定事件和它们的触发时机：</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Fired when…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tabsselect</td>
+<td></td>
+</tr>
+<tr>
+<td>tabsload</td>
+<td></td>
+</tr>
+<tr>
+<td>tabsshow</td>
+<td></td>
+</tr>
+<tr>
+<td>tabsadd</td>
+<td>一个tab已经被加到界面</td>
+</tr>
+<tr>
+<td>tabsremove</td>
+<td>一个tab已经从界面移除</td>
+</tr>
+<tr>
+<td>tabsdisable</td>
+<td></td>
+</tr>
+<tr>
+<td>tabsenable</td>
+</tr>
+</tbody>
+</table>
+<p>列表中的前三个事件依次发生。这些事件有不同的触发时机，有时在执行之前触发，有时在执行后触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span><br><span class="line">    $(<span class="string">"#myTabs"</span>).tabs();</span><br><span class="line">    $(<span class="string">"#myTabs"</span>).bind(<span class="string">"tabsselect"</span>,</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">e, tab</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">"The tab at index "</span> + tab.index + <span class="string">" was selected"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)(jQuery);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过绑定 tabsselect 和使用 select 回调函数产生同样的效果，在新tab激活前，显示提示信息。所有的空间都能使用bind()方法，只需简单地替换事件的前缀。</p>
+<h2 id="6-使用tab的方法"><a href="#6-使用tab的方法" class="headerlink" title="6 使用tab的方法"></a>6 使用tab的方法</h2><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Used to…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abort</td>
+<td>停止当前进程中的任何的动画或AJAX请求</td>
+</tr>
+<tr>
+<td>add</td>
+<td>以编码的方式添加一个新tab，指定 content的 URL，一个 label，和可选的index作为参数。</td>
+</tr>
+<tr>
+<td>destroy</td>
+<td>完全地移除tabs控件</td>
+</tr>
+<tr>
+<td>disable</td>
+<td>通过传递一个以0开头的索引数字给此方法，禁用指定tab。或什么都不传，禁用全部tabs</td>
+</tr>
+<tr>
+<td>enable</td>
+<td>通过传递一个以0开头的索引数字给此方法，启用指定tab。或什么都不传，启用全部tabs</td>
+</tr>
+<tr>
+<td>length</td>
+<td>返回tabs控件的个数</td>
+</tr>
+<tr>
+<td>load</td>
+<td>重载AJAX tab的 content，指定tab的索引数字。</td>
+</tr>
+<tr>
+<td>option</td>
+<td>在控件初始化后，get或set 任何属性</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>指定tab的索引，通过编码的方式移除一个tab。如果没有提供索引，则第一个tab被移除。也可以用tab的href值移除它</td>
+</tr>
+<tr>
+<td>rotate</td>
+<td>在指定的milliseconds后，自动改变活动tab，一次或者重复地。</td>
+</tr>
+<tr>
+<td>select</td>
+<td>基于索引，以编码的方式选择一个tab，与浏览者点击一个tab的效果一样。</td>
+</tr>
+<tr>
+<td>url</td>
+<td>改变AJAX tab的content的URL。这个方法需要tab的索引数字和新url。</td>
+</tr>
+<tr>
+<td>widget</td>
+<td>tabs() widget方法被调用时，返回该元素。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-1-启用、禁用tabs"><a href="#6-1-启用、禁用tabs" class="headerlink" title="6.1 启用、禁用tabs"></a>6.1 启用、禁用tabs</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"enable"</span>&gt;</span>Enable<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"disable"</span>&gt;</span>Disable<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#myTabs"</span>).tabs(&#123;</span></span><br><span class="line"><span class="undefined">      disabled: [1]</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#enable"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"#myTabs"</span>).tabs(<span class="string">"enable"</span>, <span class="number">1</span>);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#disable"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"#myTabs"</span>).tabs(<span class="string">"disable"</span>, <span class="number">1</span>);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">  &#125;)(jQuery);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第一个参数是方法名称，第二个参数是索引号。不传递第二个参数将启用禁用全部tabs。</p>
+<h3 id="6-2-添加、移除tabs"><a href="#6-2-添加、移除tabs" class="headerlink" title="6.2 添加、移除tabs"></a>6.2 添加、移除tabs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;label&gt;Enter a tab to remove:&lt;/label&gt; </span><br><span class="line">2 &lt;input for=&quot;indexNum&quot; id=&quot;indexNum&quot;&gt; </span><br><span class="line">3 &lt;button type=&quot;button&quot;id=&quot;remove&quot;&gt;Remove!&lt;/button&gt;&lt;br&gt; 4 &lt;button type=&quot;button&quot; id=&quot;add&quot;&gt;Add a new tab!&lt;/button&gt; 5 6&lt;script&gt; 7 (function($)&#123; 8 $(&quot;#myTabs&quot;).tabs(); 9 $(&quot;#remove&quot;).click(function() &#123; 10$(&quot;#myTabs&quot;).tabs(&quot;remove&quot;, parseInt($(&quot;#indexNum&quot;).val(), 11 10)); 12 &#125;); 13 $(&quot;#add&quot;).click(function() &#123; 14$(&quot;#myTabs&quot;).tabs(&quot;add&quot;, &quot;remoteTab.txt&quot;, &quot;A New Tab!&quot;); 15 &#125;); 16 &#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+<p>remove若没有指定索引参数，则删除全部tabs。</p>
+<p>add的第二个参数会读取文件中的内容，还可以增加一个索引参数，定义新标签新增的位置，如果没有，则默认在最后一个。</p>
+<h3 id="6-3-创建旋转木马样式的tab"><a href="#6-3-创建旋转木马样式的tab" class="headerlink" title="6.3 创建旋转木马样式的tab"></a>6.3 创建旋转木马样式的tab</h3><p>rotate方法会使得所有的tabs（和它关联的content panel）自动地一个接一个地播放。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;script&gt;2 (function($)&#123; 3 $(&quot;#myTabs&quot;).tabs().tabs(&quot;rotate&quot;, 1000, true); 4 &#125;)(jQuery); 5 &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>尽管我们不能直接地使用初始化的tabs()方法，我们依然可以在链式地使用它。第一个参数是milliseconds，第二个参数是表明循环式是一直不断地还是仅仅发生一次。</p>
+<h3 id="6-4-destroy-方法"><a href="#6-4-destroy-方法" class="headerlink" title="6.4 destroy 方法"></a>6.4 destroy 方法</h3><p>和所有的jQuery UI控件一样，拥有destroy方法。这个方法会完全移除tab控件，回到HTML的原始状态。如果原始tabs采用硬编码的形式，而不是那些使用add方法添加的，destroyed后会依然残存。</p>
+<h3 id="6-5-Getting-和-Setting-选项"><a href="#6-5-Getting-和-Setting-选项" class="headerlink" title="6.5 Getting 和 Setting 选项"></a>6.5 Getting 和 Setting 选项</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"show"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Show Selected!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"newIndex"</span>&gt;</span>Enter a index to actiave<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"newIndex"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"setIndex"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Set Index<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myTabs"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#a"</span>&gt;</span>a<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#b"</span>&gt;</span>b<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"a"</span>&gt;</span>ddafaf<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"b"</span>&gt;</span>fasdfafa<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#myTabs"</span>).tabs();</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#show"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"&lt;p&gt;&lt;/p&gt;"</span>).text(<span class="string">"Tab at index"</span> + $(<span class="string">"#myTabs"</span>).tabs(<span class="string">"option"</span>, <span class="string">"selected"</span>) + <span class="string">" is active"</span>).appendTo(<span class="string">".ui-tabs-nav"</span>).fadeOut(<span class="number">1000</span>);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#setIndex"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"#myTabs"</span>).tabs(<span class="string">"option"</span>, <span class="string">"selected"</span>, <span class="built_in">parseInt</span>($(<span class="string">"#newIndex"</span>).val(), <span class="number">10</span>));</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">  &#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们通过传递一个字符串 selected 作为第二个参数。任何option的值都能通过这种方法访问到。</p>
+<h2 id="7-AJAX-tabs"><a href="#7-AJAX-tabs" class="headerlink" title="7 AJAX tabs"></a>7 AJAX tabs</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"remoteTab.txt"</span>&gt;</span>AJAX Tab<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">$("#myTabs").tabs();</span><br></pre></td></tr></table></figure>
+<p>如果你使用的是DOM浏览器，你会看到我们添加的远程tab的文件路径已经被替换。作为替代，它生成了一个新的片段标示符，并设置给了href。新的片段作为新tab的id，所以tab heading依然显示这个tab。<br>从外部文件加载数据，依然可以从URLs加载。当使用查询字符串加载content从数据库，或者从web service的时候，很有用。AJAX tabs包含 load 和 url 方法。load 方法用来从在或者重载 content，它能够非常方便地刷新变化很频繁content。<br>tabs 空间的AJAX功能没有构建固有的 cross-domain 支持 。因此，除非附加地使用PHP或也谢其他的server-scripting language作为代理，<br>才能使用JSON结构的数据和jQuery的JSONP功能，不然的话文件或者URLs必须处于同一个domain。</p>
+<h3 id="7-1-改变远程tab的content-的URL"><a href="#7-1-改变远程tab的content-的URL" class="headerlink" title="7.1 改变远程tab的content 的URL"></a>7.1 改变远程tab的content 的URL</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"fileChooser"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"buttonTheme.css"</span>&gt;</span>buttonTheme.css<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"remoteAccordion.txt"</span>&gt;</span>remoteAccordion<span class="tag">&lt;/<span class="name">option</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myTabs"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#a"</span>&gt;</span>a<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"remoteAccordion.txt"</span>&gt;</span>b<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"a"</span>&gt;</span>ddafaf<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#fileChooser"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"#myTabs"</span>).tabs(<span class="string">"url"</span>, <span class="number">1</span>, $(<span class="keyword">this</span>).val());</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#myTabs"</span>).tabs();</span></span><br><span class="line"><span class="undefined">  &#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们只需调用url方法，传递tab的索引和新的URL。</p>
+<h3 id="7-2-远程tab的重载"><a href="#7-2-远程tab的重载" class="headerlink" title="7.2 远程tab的重载"></a>7.2 远程tab的重载</h3><p>也许你已经注意到了，当远程tab的url已经变更，但是此时content没有更新。直到切换到不同的tab再切换回来。为了维修这个问题，可以使用 load 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">"#fileChooser"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $(<span class="string">"#myTabs"</span>).tabs(<span class="string">"url"</span>, <span class="number">1</span>, $(<span class="keyword">this</span>).val()).tabs(<span class="string">"load"</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    $(<span class="string">"#myTabs"</span>).tabs();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>tab heading轻微的闪烁是因为 spinner 选项的默认值被设为 Loading。</p>
+<h3 id="7-3-显示通过JSONP获得的数据"><a href="#7-3-显示通过JSONP获得的数据" class="headerlink" title="7.3 显示通过JSONP获得的数据"></a>7.3 显示通过JSONP获得的数据</h3><p>使用 jQuery 库的 getJSON 方法，可以绕过 cross-domain 的排除政策，并显示来自其他的 domain 的供给。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>ssss<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"Stylesheet"</span> <span class="attr">href</span>=<span class="string">"jq/jquery-ui-1.8.9.css"</span> /&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myTabs"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#a"</span>&gt;</span>a<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#flickr"</span>&gt;</span>b<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"a"</span>&gt;</span>ddafaf<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"flickr"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/jquery-1.4.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.core.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.widget.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"development-bundle/ui/jquery.ui.tabs.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> img = $(<span class="string">"&lt;img /&gt;"</span>, &#123;</span></span><br><span class="line"><span class="undefined">          height: 100,</span></span><br><span class="line"><span class="undefined">          width: 100</span></span><br><span class="line"><span class="undefined">        &#125;),</span></span><br><span class="line"><span class="undefined">        tabOpts = &#123;</span></span><br><span class="line"><span class="javascript">          select: <span class="function"><span class="keyword">function</span>(<span class="params">event, ui</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (ui.tab.toString().indexOf(<span class="string">"flickr"</span>) != <span class="number">-1</span>) &#123;</span></span><br><span class="line"><span class="javascript">              <span class="built_in">console</span>.log(<span class="string">"flickr"</span>);</span></span><br><span class="line"><span class="javascript">              <span class="keyword">var</span> flickerAPI = <span class="string">"http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"</span>;</span></span><br><span class="line"><span class="javascript">              $.getJSON(flickerAPI, &#123;</span></span><br><span class="line"><span class="javascript">                tags: <span class="string">"nebula"</span>,</span></span><br><span class="line"><span class="javascript">                format: <span class="string">"json"</span>,</span></span><br><span class="line"><span class="javascript">                tagmode: <span class="string">"any"</span></span></span><br><span class="line"><span class="undefined">              &#125;,</span></span><br><span class="line"><span class="javascript">              <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"sucess"</span>);</span></span><br><span class="line"><span class="javascript">                $(<span class="string">"#flickr"</span>).empty();</span></span><br><span class="line"><span class="javascript">                $.each(data.items,</span></span><br><span class="line"><span class="javascript">                <span class="function"><span class="keyword">function</span>(<span class="params">i, item</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                  <span class="built_in">console</span>.log(i);</span></span><br><span class="line"><span class="javascript">                  img.clone().attr(<span class="string">"src"</span>, item.media.m).appendTo(<span class="string">"#flickr"</span>);</span></span><br><span class="line"><span class="javascript">                  <span class="keyword">if</span> (i == <span class="number">5</span>) &#123;</span></span><br><span class="line"><span class="undefined">                    returnfalse;</span></span><br><span class="line"><span class="undefined">                  &#125;</span></span><br><span class="line"><span class="undefined">                &#125;);</span></span><br><span class="line"><span class="undefined">              &#125;);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">"#myTabs"</span>).tabs(tabOpts);</span></span><br><span class="line"><span class="undefined">      &#125;)(jQuery);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>每次id 为 filickr 的 tab 被选中，jQuery getJSON 方法被用来重新获得 <a href="http://www.flickr.com/" target="_blank" rel="noopener">http://www.flickr.com</a>提供的供给。<br>一旦数据返回，首先清空contents来防止。。。。然后使用 jQuery 的 each() 功能方法，迭代返回的JSON中的每一个对象，并创建一个 img 克隆来存储。<br>没个图像的新的拷贝都有src属性，它被设为当前供给对象的信息，并把图像添加到空的tab中。一旦迭代超过6次，我们退出each()方法。</p>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8 总结"></a>8 总结</h2><p>tab控件是一个卓越的方式，来组织相关或完全无关的 content 节，当访问者点击的时候让它们隐藏或显示，来节省页面上的空间。它可以调高站点的交互性，提升全部的功能，提供有吸引力的页面。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-默认安装启用-tab"><span class="toc-text">1.默认安装启用 tab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tab-CSS框架-classes"><span class="toc-text">2.Tab CSS框架 classes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-为tabs应用自定义主题"><span class="toc-text">3.为tabs应用自定义主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-配置选项"><span class="toc-text">4.配置选项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-选一个tab，selected、disabled、collapsible选项"><span class="toc-text">4.1 选一个tab，selected、disabled、collapsible选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-过渡效果，fx-选项"><span class="toc-text">4.2 过渡效果，fx 选项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-tab的事件"><span class="toc-text">5. tab的事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-绑定事件"><span class="toc-text">5.1 绑定事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-使用tab的方法"><span class="toc-text">6 使用tab的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-启用、禁用tabs"><span class="toc-text">6.1 启用、禁用tabs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-添加、移除tabs"><span class="toc-text">6.2 添加、移除tabs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-创建旋转木马样式的tab"><span class="toc-text">6.3 创建旋转木马样式的tab</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-destroy-方法"><span class="toc-text">6.4 destroy 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-Getting-和-Setting-选项"><span class="toc-text">6.5 Getting 和 Setting 选项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-AJAX-tabs"><span class="toc-text">7 AJAX tabs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-改变远程tab的content-的URL"><span class="toc-text">7.1 改变远程tab的content 的URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-远程tab的重载"><span class="toc-text">7.2 远程tab的重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-显示通过JSONP获得的数据"><span class="toc-text">7.3 显示通过JSONP获得的数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-总结"><span class="toc-text">8 总结</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="../../../../2015/01/05/dynamics_ax_2012_r2_install_dynamics_ax_aif_iis_web_service/" class="prev">&larr; Prev post Dynamics AX 2012 R2 Install Dynamics AX Aif IIS Web Service</a>
+  
+
+  
+
+  
+    <a href="../software_development_fontend_jquery_ui_3_create_control/" class="next">Next post Software Development FontEnd 【jQuery UI 1.8 The User Interface Library for jQuery】.学习笔记.3.创建控件 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Reinhard Hsu using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- VL BEGIN -->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+new Valine({
+    el: '#uyan_frame' ,
+    notify:false, 
+    verify:false, 
+    appId: 'TWoEQAlGPJwcRhNfqjKsmBUI-gzGzoHsz',
+    appKey: 'cuCvIecOqw2bk7bDoReqTDWj',
+    placeholder: 'just go go',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+<!-- VL END -->
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://ReinhardHsu.com/images/ReinhardHsu.png">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ReinhardHsu">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/ReinhardHsu">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.facebook.com/reinhardhsu">
+        
+          <i class="icon iconfont facebook">&#xe604;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/Reinhaid">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.zhihu.com/people/reinhardhsu">
+        
+          <i class="icon iconfont zhihu">&#xe60b;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/ReinhardHsu">
+        
+          <i class="icon iconfont linkedin">&#xe601;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?9ddaf4c58daefd4b2d98d95e643549b3";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="../../../../js/jquery-2.2.3.min.js"></script>
+  
+    <script src="../../../../js/vegas.min.js"></script>
+  
+    <script src="../../../../js/random.js"></script>
+  
+    <script src="../../../../js/highlight.pack.js"></script>
+  
+    <script src="../../../../js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox.pack.js"></script>
+  
+    <script src="../../../../js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="../../../../js/plyr.js"></script>
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "D7CCC8";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '../../../../css/sprite.svg'});
+</script>
+</body>
+</html>
+
