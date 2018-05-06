@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/numpy/</loc>
+        <lastmod>2018-05-01T13:55:58.637Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/pandas/</loc>
+        <lastmod>2018-05-01T13:55:58.637Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/python/</loc>
+        <lastmod>2018-05-01T13:59:13.428Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/mongodb/</loc>
+        <lastmod>2018-05-01T13:59:13.428Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/iot/</loc>
+        <lastmod>2018-05-01T15:48:13.485Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/e%E6%B5%B7%E6%8B%BE%E8%B4%9D/</loc>
+        <lastmod>2018-05-02T15:46:04.376Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/xml/</loc>
+        <lastmod>2018-05-03T12:31:14.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/data-structures-and-algorithms/</loc>
+        <lastmod>2018-05-03T12:43:38.436Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/mysql/</loc>
+        <lastmod>2018-05-03T12:47:31.020Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/json-net/</loc>
+        <lastmod>2018-05-03T12:50:31.368Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/jquery/</loc>
+        <lastmod>2018-05-04T14:13:34.616Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/javascript/</loc>
+        <lastmod>2018-05-04T14:13:34.616Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/fontend/</loc>
+        <lastmod>2018-05-04T14:13:34.616Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/artificial-neuron/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/perceptron/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/sigmoid/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/feedforward/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/normalization/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/stochastic-gradient-descent/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/gradient-descent/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/ssis/</loc>
+        <lastmod>2018-05-06T02:26:19.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/statistics/</loc>
+        <lastmod>2018-05-06T02:26:24.721Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/weekend-project/</loc>
+        <lastmod>2018-05-06T02:36:46.398Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/microsoft-dynamics-ax/</loc>
+        <lastmod>2018-05-06T02:41:59.055Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/sql-server/</loc>
+        <lastmod>2018-05-06T02:41:59.055Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/career/</loc>
+        <lastmod>2018-05-06T02:43:19.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/dotnet/</loc>
+        <lastmod>2018-05-06T02:50:58.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/software-development/</loc>
+        <lastmod>2018-05-06T02:50:58.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/asp-net/</loc>
+        <lastmod>2018-05-06T02:50:58.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/data-analysis/</loc>
+        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/machine-learning/</loc>
+        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/deep-learning/</loc>
+        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/neural-networks/</loc>
+        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/backpropagation/</loc>
+        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

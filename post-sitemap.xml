@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://reinhardhsu.com</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2018/05/06/deep_learning_3_improving_the_way_learn/</loc>
+        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/08/software_development_dot_net_asp_net_11_basic_principles_of_web_development_2/</loc>
+        <lastmod>2018-05-06T02:50:58.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/01/20/career_2016_personal_summary_community_edition/</loc>
+        <lastmod>2018-05-06T02:43:19.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/02/06/dynamics_ax_sql_server_replication/</loc>
+        <lastmod>2018-05-06T02:41:59.055Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/03/22/dynamics_ax_2012_r2_email_error_0x80040213/</loc>
+        <lastmod>2018-05-06T02:39:38.203Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/</loc>
+        <lastmod>2018-05-06T02:38:15.008Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/09/17/data_analysis_weekend_project_the_cruel_world_data_visualization/</loc>
+        <lastmod>2018-05-06T02:36:46.398Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/12/26/data_analysis_weekend_project_personal_loans_risk_score_of_prosper/</loc>
+        <lastmod>2018-05-06T02:34:28.988Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_table_relation_properties/</loc>
+        <lastmod>2018-05-06T02:28:58.918Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/10/22/data_analysis_weekend_project_stroop_effect/</loc>
+        <lastmod>2018-05-06T02:26:24.721Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/11/03/data_analysis_weekend_project_openstreetmap/</loc>
+        <lastmod>2018-05-06T02:26:20.483Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/02/09/data_analysis_ssis_package_deploy_error/</loc>
+        <lastmod>2018-05-06T02:26:19.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/12/12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/</loc>
+        <lastmod>2018-05-06T02:26:10.877Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/01/04/data_analysis_weekend_project_enron/</loc>
+        <lastmod>2018-05-06T02:26:09.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2017/12/21/machine_learning_calculating_distance/</loc>
+        <lastmod>2018-05-06T02:26:08.829Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/08/28/dynamics_ax_2012_r2_business_series_purchase_process/</loc>
+        <lastmod>2018-05-06T02:26:00.978Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/12/31/dynamics_ax_2012_r2_business_series_sale_process/</loc>
+        <lastmod>2018-05-06T02:25:58.768Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/09/28/dynamics_ax_2012_r2_installation_reporting_services_extention/</loc>
+        <lastmod>2018-05-06T02:25:53.237Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2018/05/03/deep_learning_2_backpropagation/</loc>
+        <lastmod>2018-05-05T16:46:54.903Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2018/04/28/deep_learning_1_neural_networks/</loc>
+        <lastmod>2018-05-05T02:21:32.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/08/14/software_development_fontend_jquery_ui_4_tabs/</loc>
+        <lastmod>2018-05-04T14:13:34.616Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/08/14/software_development_fontend_jquery_ui_3_create_control/</loc>
+        <lastmod>2018-05-03T13:29:23.044Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/08/13/software_development_fontend_jquery_ui_2_theme/</loc>
+        <lastmod>2018-05-03T13:12:44.103Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/08/13/software_development_fontend_jquery_ui_1_css_framework/</loc>
+        <lastmod>2018-05-03T13:12:09.572Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/04/14/software_development_dotnet_json_net/</loc>
+        <lastmod>2018-05-03T12:50:31.368Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/04/13/software_development_mysql_chinese_character_set/</loc>
+        <lastmod>2018-05-03T12:47:31.020Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/03/01/data_structures_and_algorithms_dotnet_2_linkedlist/</loc>
+        <lastmod>2018-05-03T12:43:38.436Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/02/26/data_structures_and_algorithms_dotnet_1_sort_and_search/</loc>
+        <lastmod>2018-05-03T12:41:18.640Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/02/14/software_development_dot_net_asp_net_15_httphandler/</loc>
+        <lastmod>2018-05-03T12:38:25.472Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/02/14/software_development_dot_net_asp_net_14_server/</loc>
+        <lastmod>2018-05-03T12:35:30.728Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/02/14/software_development_dot_net_asp_net_13_response/</loc>
+        <lastmod>2018-05-03T12:34:09.473Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/18/data_structures_and_algorithms_dotnet_read_windows_event_xml/</loc>
+        <lastmod>2018-05-03T12:31:14.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/08/software_development_dot_net_asp_net_12_request/</loc>
+        <lastmod>2018-05-03T12:20:56.504Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/08/software_development_dot_net_asp_net_10_basic_principles_of_web_development_1/</loc>
+        <lastmod>2018-05-03T12:13:59.815Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/08/software_development_dot_net_asp_net_9_request_response/</loc>
+        <lastmod>2018-05-03T12:10:45.711Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_8_http_protocol/</loc>
+        <lastmod>2018-05-03T12:07:37.539Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_7_verification_code/</loc>
+        <lastmod>2018-05-03T12:03:19.948Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_6_register_crack/</loc>
+        <lastmod>2018-05-03T12:01:13.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_5_login_crack/</loc>
+        <lastmod>2018-05-03T11:55:00.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_4_netsession/</loc>
+        <lastmod>2018-05-03T11:53:33.628Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_3_cookie/</loc>
+        <lastmod>2018-05-03T11:49:57.648Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_2_viewstate/</loc>
+        <lastmod>2018-05-03T11:44:42.189Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2013/01/07/software_development_dot_net_asp_net_1_internal_principle/</loc>
+        <lastmod>2018-05-03T11:24:20.532Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2001/10/19/life_legend_of_sword_and_fairy/</loc>
+        <lastmod>2018-05-02T15:46:04.376Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/12/28/dynamics_ax_iot/</loc>
+        <lastmod>2018-05-01T15:48:13.485Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/08/15/dynamics_ax_2012_r2_morphX_reporting/</loc>
+        <lastmod>2018-05-01T14:44:54.579Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/03/12/dynamics_ax_2012_r2_execute_stored_procedure_with_parameters/</loc>
+        <lastmod>2018-05-01T14:42:41.474Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/02/25/dynamics_ax_2012_r2_the_inventory_module/</loc>
+        <lastmod>2018-05-01T14:38:57.507Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/27/dynamics_ax_2012_r2_custom_rdp_reporting_param_dialog/</loc>
+        <lastmod>2018-05-01T14:27:08.920Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/15/dynamics_ax_2012_r2_call_ssrs_report_in_x_code/</loc>
+        <lastmod>2018-05-01T14:21:20.762Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/14/dynamics_ax_2012_r2_transcation_rollback_bug_inside_aif_customer_service/</loc>
+        <lastmod>2018-05-01T14:17:20.877Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/25/data_analysis_how_many_and_how_much/</loc>
+        <lastmod>2018-05-01T14:08:28.396Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/11/09/data_analysis_using_r_language_to_research_data/</loc>
+        <lastmod>2018-05-01T14:05:24.536Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/10/14/data_analysis_hypothesis/</loc>
+        <lastmod>2018-05-01T14:04:29.109Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/28/data_analysis_python_operate_mongodb/</loc>
+        <lastmod>2018-05-01T13:59:13.428Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/25/data_analysis_statistics_foundation/</loc>
+        <lastmod>2018-05-01T13:58:49.601Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/10/15/data_analysis_t_test/</loc>
+        <lastmod>2018-05-01T13:57:37.906Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/24/data_analysis_numpy_and_pandas/</loc>
+        <lastmod>2018-05-01T13:55:58.637Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/</loc>
+        <lastmod>2018-05-01T13:54:18.490Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/10/12/data_analysis_python_operate_data_file/</loc>
+        <lastmod>2018-05-01T13:54:01.237Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/10/23/data_analysis_process/</loc>
+        <lastmod>2018-05-01T13:53:46.708Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/11/02/data_analysis_data_clean/</loc>
+        <lastmod>2018-05-01T13:53:36.055Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/</loc>
+        <lastmod>2018-05-01T13:53:21.468Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_7_string_and_stringbuilder_class/</loc>
+        <lastmod>2018-05-01T13:50:19.129Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_5_stacks_and_queues/</loc>
+        <lastmod>2018-05-01T13:50:04.891Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_4_basic_searching_algorithms/</loc>
+        <lastmod>2018-05-01T13:49:45.223Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_3_basic_sorting_algorithms/</loc>
+        <lastmod>2018-05-01T13:49:32.106Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_2_array_and_arraylist/</loc>
+        <lastmod>2018-05-01T13:49:16.310Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_1_collection/</loc>
+        <lastmod>2018-05-01T13:49:05.959Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_python_3_sequences/</loc>
+        <lastmod>2018-05-01T13:46:11.212Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_python_2_Recursion/</loc>
+        <lastmod>2018-05-01T13:44:06.239Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_python_1_overview/</loc>
+        <lastmod>2018-05-01T13:43:13.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/10/09/dynamics_ax_2012_r2_bi_series_planning_considerations_for_analytics/</loc>
+        <lastmod>2018-05-01T13:36:14.079Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/10/08/dynamics_ax_2012_r2_bi_series_cube_overview/</loc>
+        <lastmod>2018-05-01T13:36:04.182Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/10/09/dynamics_ax_2012_r2_bi_series_analytics_architecture/</loc>
+        <lastmod>2018-05-01T13:35:52.123Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/09/28/dynamics_ax_2012_r2_ssrs_report_preview_no_data_in_vs2010/</loc>
+        <lastmod>2018-05-01T13:11:30.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/08/06/dynamics_ax_2012_r2_how_to_process_long_run_time_reporting/</loc>
+        <lastmod>2018-05-01T13:10:35.865Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/08/06/dynamics_ax_2012_r2_trigger_event_when_save_records_using_datasource/</loc>
+        <lastmod>2018-05-01T13:10:06.043Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/02/03/dynamics_ax_proforma_invoice/</loc>
+        <lastmod>2018-05-01T13:06:38.132Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/02/05/dynamics_ax_collective_piece_wage_system/</loc>
+        <lastmod>2018-05-01T13:06:06.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/29/dynamics_ax_co_products_and_by_products/</loc>
+        <lastmod>2018-05-01T13:05:54.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/06/dynamics_ax_grandfather_generation_ax/</loc>
+        <lastmod>2018-05-01T12:55:05.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/05/31/dynamics_ax_7_new_feature_explore/</loc>
+        <lastmod>2018-05-01T12:52:10.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/03/30/dynamics_ax_2012_r2_accounts_payable_modules/</loc>
+        <lastmod>2018-05-01T12:51:55.897Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/12/22/dynamics_ax_2012_r2_aif_no_endpoint_behavior_named_clientendpointbehavior/</loc>
+        <lastmod>2018-05-01T12:51:27.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_aot_overview/</loc>
+        <lastmod>2018-05-01T12:51:12.601Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/14/dynamics_ax_2012_r2_ax_iis_website_unauthorized_401/</loc>
+        <lastmod>2018-05-01T12:50:48.073Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/14/dynamics_ax_2012_r2_ax_reporting_deploy_auth_error/</loc>
+        <lastmod>2018-05-01T12:50:27.553Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_base_enum_properties/</loc>
+        <lastmod>2018-05-01T12:50:04.283Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/21/dynamics_ax_2012_r2_create_a_dedicated_batch_server/</loc>
+        <lastmod>2018-05-01T12:49:24.372Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/21/dynamics_ax_2012_r2_create_a_server_cluster_with_load_balancer/</loc>
+        <lastmod>2018-05-01T12:49:04.236Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_data_set_data_source_properties/</loc>
+        <lastmod>2018-05-01T12:48:44.258Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/04/29/dynamics_ax_2012_r2_distribution_and_trade/</loc>
+        <lastmod>2018-05-01T12:48:23.460Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/22/dynamics_ax_2012_r2_drain_users/</loc>
+        <lastmod>2018-05-01T12:47:51.878Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_extended_data_type_properties/</loc>
+        <lastmod>2018-05-01T12:46:49.618Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/21/dynamics_ax_2012_r2_install_an_additional_aos/</loc>
+        <lastmod>2018-05-01T12:44:14.442Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_install_dynamics_ax_aif_iis_web_service/</loc>
+        <lastmod>2018-05-01T12:43:52.149Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/04/16/dynamics_ax_2012_r2_ledger_integration_in_production/</loc>
+        <lastmod>2018-05-01T12:43:32.564Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/21/dynamics_ax_2012_r2_link_user_to_employee/</loc>
+        <lastmod>2018-05-01T12:43:15.427Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_morphx_concepts/</loc>
+        <lastmod>2018-05-01T12:42:57.822Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/08/dynamics_ax_2012_r2_pos_users_list/</loc>
+        <lastmod>2018-05-01T12:42:26.062Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_server_error_in_microsoft_dynamics_ax_aif_60_application/</loc>
+        <lastmod>2018-05-01T12:42:02.299Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_system_and_common_properties/</loc>
+        <lastmod>2018-05-01T12:41:28.329Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_table_field_properties/</loc>
+        <lastmod>2018-05-01T12:41:03.736Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_table_groups/</loc>
+        <lastmod>2018-05-01T12:40:46.886Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_table_index_properties/</loc>
+        <lastmod>2018-05-01T12:40:27.093Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_table_properties/</loc>
+        <lastmod>2018-05-01T12:40:02.439Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_temporary_inmemory_tables/</loc>
+        <lastmod>2018-05-01T12:39:23.577Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_temporary_tables_and_the_tabletype_property/</loc>
+        <lastmod>2018-05-01T12:39:05.128Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_temporary_tempdb_tables/</loc>
+        <lastmod>2018-05-01T12:38:46.417Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/03/30/dynamics_ax_2012_r2_the_ledger_module/</loc>
+        <lastmod>2018-05-01T12:38:02.796Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/07/dynamics_ax_2012_r2_unchecked_cannot_be_called_on_the_client/</loc>
+        <lastmod>2018-05-01T12:36:41.893Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_understanding_the_relationshiptype_enumeration/</loc>
+        <lastmod>2018-05-01T12:36:04.604Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/06/27/dynamics_ax_2012_r2_using_datetime_in_aif_service_contract/</loc>
+        <lastmod>2018-05-01T12:35:30.552Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/05/dynamics_ax_2012_r2_view_properties/</loc>
+        <lastmod>2018-05-01T12:34:59.359Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/02/27/dynamics_ax_2012_r2_trigger_method_and_sequence_when_modify_form_field/</loc>
+        <lastmod>2018-05-01T12:30:14.960Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/23/dynamics_ax_2012_r2_setup_email_templete/</loc>
+        <lastmod>2018-05-01T12:28:24.868Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/02/10/dynamics_ax_2012_r2_setup_reporting_server/</loc>
+        <lastmod>2018-05-01T12:26:07.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/23/dynamics_ax_2012_r2_setup_track_for_database_change/</loc>
+        <lastmod>2018-05-01T12:22:48.136Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/23/dynamics_ax_2012_r2_setup_early_warning_for_failure_batch_jobs/</loc>
+        <lastmod>2018-05-01T12:18:59.538Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/01/23/dynamics_ax_2012_r2_setup_email/</loc>
+        <lastmod>2018-05-01T12:17:51.606Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/02/19/dynamics_ax_2012_r2_can_not_create_class_excel_application_com_object/</loc>
+        <lastmod>2018-05-01T12:14:44.798Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/04/06/dynamics_ax_2012_r2_aif_exception/</loc>
+        <lastmod>2018-05-01T12:10:52.211Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/06/12/dynamics_ax_2012_R3_demo_installation_step_4/</loc>
+        <lastmod>2018-05-01T12:04:59.070Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/06/22/dynamics_ax_2012_R2_remoteapp_export_project_error/</loc>
+        <lastmod>2018-05-01T12:03:41.245Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2016/01/28/dynamics_ax_2012_r3_warehouse_and_transportation_management/</loc>
+        <lastmod>2018-05-01T12:00:53.447Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/06/02/dynamics_ax_2012_r3_demo_installation_step_2/</loc>
+        <lastmod>2018-05-01T11:54:09.366Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/06/09/dynamics_ax_2012_r3_demo_installation_step_3/</loc>
+        <lastmod>2018-05-01T11:52:40.047Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/2015/05/30/dynamics_ax_2012_r3_demo_installation_step_1/</loc>
+        <lastmod>2018-05-01T11:49:19.152Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->
