@@ -205,78 +205,78 @@
     </url>
 
     <url>
-        <loc>http://reinhardhsu.com/tags/data-analysis/</loc>
-        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://reinhardhsu.com/tags/machine-learning/</loc>
-        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://reinhardhsu.com/tags/deep-learning/</loc>
-        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://reinhardhsu.com/tags/neural-networks/</loc>
-        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://reinhardhsu.com/tags/backpropagation/</loc>
-        <lastmod>2018-05-06T11:55:45.501Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://reinhardhsu.com/tags/blog/</loc>
-        <lastmod>2018-05-12T17:29:52.304Z</lastmod>
+        <lastmod>2018-05-12T17:46:56.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://reinhardhsu.com/tags/vps/</loc>
-        <lastmod>2018-05-12T17:29:52.304Z</lastmod>
+        <lastmod>2018-05-12T17:46:56.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://reinhardhsu.com/tags/auto-deploy/</loc>
-        <lastmod>2018-05-12T17:29:52.304Z</lastmod>
+        <lastmod>2018-05-12T17:46:56.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://reinhardhsu.com/tags/webhook/</loc>
-        <lastmod>2018-05-12T17:29:52.304Z</lastmod>
+        <lastmod>2018-05-12T17:46:56.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://reinhardhsu.com/tags/github-pages/</loc>
-        <lastmod>2018-05-12T17:29:52.304Z</lastmod>
+        <lastmod>2018-05-12T17:46:56.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://reinhardhsu.com/tags/continuous-deployment/</loc>
-        <lastmod>2018-05-12T17:29:52.304Z</lastmod>
+        <lastmod>2018-05-12T17:46:56.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/data-analysis/</loc>
+        <lastmod>2018-05-21T07:01:36.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/machine-learning/</loc>
+        <lastmod>2018-05-21T07:01:36.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/deep-learning/</loc>
+        <lastmod>2018-05-21T07:01:36.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/neural-networks/</loc>
+        <lastmod>2018-05-21T07:01:36.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://reinhardhsu.com/tags/backpropagation/</loc>
+        <lastmod>2018-05-21T07:01:36.249Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

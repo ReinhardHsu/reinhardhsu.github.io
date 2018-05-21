@@ -166,7 +166,7 @@ Cost Function这里来看一个非常简单的神经元，我们输入1，期望
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2018-05-06</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-06</span>
+        <span id = "post-title-updated">Updated at 2018-05-21</span>
       
       
       <span id = "post-title-categories">Category
@@ -325,25 +325,24 @@ Cost Function这里来看一个非常简单的神经元，我们输入1，期望
 <p>虽然过拟合依然存在，但已经大大降低，我们的网络能从训练数据更好地泛化到测试数据。</p>
 <h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><p>除了增加训练数据，还能通过减小网络规模去避免过拟合。但是我们觉得大型网络更有潜力，不愿意减小规模。</p>
 <p>在固定网络规模和固定训练数据大小的时候，我们还可以选择 Regularization（正则化）技术。</p>
-<p>Weight Decay</p>
-<p>权重衰减是最常用的正则化技术，也叫 L2 Regularization（L2 正则）。它的思想是在代价函数中加入一个额外的正则化项。<br>$$<br>C = C_0 + \frac{\lambda}{2n} \sum_w w^2<br>$$</p>
+<h4 id="L2-Weight-Decay"><a href="#L2-Weight-Decay" class="headerlink" title="L2 Weight Decay"></a>L2 Weight Decay</h4><p>权重衰减是最常用的正则化技术，也叫 L2 Regularization（L2 正则）。它的思想是在代价函数中加入一个额外的正则化项。<br>$$<br>C = C_0 + \frac{\lambda}{2n} \sum_w w^2<br>$$</p>
 <ul>
 <li>$C_0$ 是原本没有正则化的代价函数</li>
 <li>第二项是网络中所有 Weights 的平方和</li>
 <li>$\lambda$ 是 <em>regularization parameter</em>（正则化参数），并且 $\lambda &gt; 0$</li>
 </ul>
 <p>当 $\lambda$ 较小时，我们偏好最小化原来的代价函数，当 $\lambda$ 较大时，我们让网络偏好学习更小的 Weights 。</p>
-<h4 id="在随机梯度下降算法中应用正则化"><a href="#在随机梯度下降算法中应用正则化" class="headerlink" title="在随机梯度下降算法中应用正则化"></a>在随机梯度下降算法中应用正则化</h4><p>在正则化的网络中应用随机梯度下降算法，对上面的公式求偏导可知：<br>$$<br>\frac{\partial C}{\partial w} = \frac{\partial C_0}{\partial w} + \frac{\lambda}{n} w \<br>\frac{\partial C}{\partial b} = \frac{\partial C_0}{\partial b}<br>$$<br>只要照常使用反向传播，并把 $\frac{\lambda}{n} w$ 代入<br>$$<br>b \rightarrow b - \eta \frac{\partial C_0}{\partial b} \<br>w \rightarrow w - \eta \frac{\partial C_0}{\partial w} - \frac{\eta \lambda}{n} w \<br>= \left(1 - \frac{\eta \lambda}{n}\right) w - \eta \frac{\partial C_0}{\partial w}<br>$$<br>我们看到，跟之前唯一的变化时，我们用 $\left(1 - \frac{\eta \lambda}{n}\right) $ 来调整 Weights ，这种调叫做 Weight Decay（权重衰减）。</p>
+<h5 id="在随机梯度下降算法中应用正则化"><a href="#在随机梯度下降算法中应用正则化" class="headerlink" title="在随机梯度下降算法中应用正则化"></a>在随机梯度下降算法中应用正则化</h5><p>在正则化的网络中应用随机梯度下降算法，对上面的公式求偏导可知：<br>$$<br>\frac{\partial C}{\partial w} = \frac{\partial C_0}{\partial w} + \frac{\lambda}{n} w \<br>\frac{\partial C}{\partial b} = \frac{\partial C_0}{\partial b}<br>$$<br>只要照常使用反向传播，并把 $\frac{\lambda}{n} w$ 代入<br>$$<br>b \rightarrow b - \eta \frac{\partial C_0}{\partial b} \<br>w \rightarrow w - \eta \frac{\partial C_0}{\partial w} - \frac{\eta \lambda}{n} w \<br>= \left(1 - \frac{\eta \lambda}{n}\right) w - \eta \frac{\partial C_0}{\partial w}<br>$$<br>我们看到，跟之前唯一的变化时，我们用 $\left(1 - \frac{\eta \lambda}{n}\right) $ 来调整 Weights ，这种调叫做 Weight Decay（权重衰减）。</p>
 <p>之前我们的随机梯度下降，时在包含m个训练样本的mini-batch数据中进行平均以估计$\frac{\partial C_0}{\partial w}$，现在对于随机梯度下降法而言正则化的学习方法变成了：<br>$$<br>w \rightarrow \left(1 - \frac{\eta \lambda}{n}\right) w - \frac{\eta}{m} \sum_x \frac{\partial C_x}{\partial w} \<br>b \rightarrow b - \frac{\eta}{m} \sum_x \frac{\partial C_x}{\partial wb}<br>$$<br>$\sum$ 是针对mini-batch中所有训练样本进行求和</p>
 <p>$C_x$ 是每个样本未进行正则化的代价</p>
 <p>我们看到，正则化只是增加了权重衰减。</p>
-<h4 id="Round-1-1"><a href="#Round-1-1" class="headerlink" title="Round 1"></a>Round 1</h4><p>我们使用 $n = 1000$ 个训练样本再跑一次，这次由30个隐藏层神经元，每个mini-batch的大小是10，学习率是0.5，使用交叉熵代价函数，正则化参数 $\lambda = 0.1$。使用1000个训练样本。</p>
+<h5 id="Round-1-1"><a href="#Round-1-1" class="headerlink" title="Round 1"></a>Round 1</h5><p>我们使用 $n = 1000$ 个训练样本再跑一次，这次由30个隐藏层神经元，每个mini-batch的大小是10，学习率是0.5，使用交叉熵代价函数，正则化参数 $\lambda = 0.1$。使用1000个训练样本。</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fr1rnh7l1tj30d70agjs3.jpg" alt=""></p>
 <p>我们看到训练数据的代价函数一直在下降，与之前没有进行正则化时一样。</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fr1rqik8uej30cw0amdh2.jpg" alt=""></p>
 <p>但是从测试数据的准确度，我们看到应用正则化抑制了过拟合。</p>
 <p>准确度也从之前的82.27上升到87.1 。</p>
-<h4 id="Round-2-1"><a href="#Round-2-1" class="headerlink" title="Round 2"></a>Round 2</h4><p>这次将训练样本增加到 $n=50000$ ，相应的，也需要调整正则化参数 $\lambda = 5$，让权重衰减跟之前保持一样。</p>
+<h5 id="Round-2-1"><a href="#Round-2-1" class="headerlink" title="Round 2"></a>Round 2</h5><p>这次将训练样本增加到 $n=50000$ ，相应的，也需要调整正则化参数 $\lambda = 5$，让权重衰减跟之前保持一样。</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fr1rxfhc2gj30cm0aqaax.jpg" alt=""></p>
 <p>我们之前看到过，对于50000样本量的训练数据，过拟合已经不再是个大问题了。但是应用正则化后，我们在测试数据上的准确度从95.49%提升到96.49% 。</p>
 <p>从经验来看，正则化让我们的网络声称得更好，并有效地减弱了过拟合效应。</p>
@@ -355,6 +354,54 @@ Cost Function这里来看一个非常简单的神经元，我们输入1，期望
 <p>使用随机 Weights 初始化时，经常卡在代价函数的局部最优中，结果就是每次运行可能产生相当不同的结果。</p>
 <p>而应用了正则化后，每次运行可以提供更容易复现的结果。</p>
 <h4 id="为什么正则化能够降低过拟合"><a href="#为什么正则化能够降低过拟合" class="headerlink" title="为什么正则化能够降低过拟合"></a>为什么正则化能够降低过拟合</h4><p>一般的说法是：某种程度上，越小的权重复杂度越低，能更简单有效地描绘数据，所以我们倾向于选择这样的权重。</p>
+<h4 id="L1"><a href="#L1" class="headerlink" title="L1"></a>L1</h4><p>$$<br>C = C_0 + \frac{\lambda}{n} \sum_w |w|<br>$$</p>
+<p>我们再来看下L2正则的代价函数<br>$$<br>C = C_0 + \frac{\lambda}{2n} \sum_w w^2<br>$$<br>对L1代价函数求偏导<br>$$<br>\frac{\partial C}{\partial w} = \frac{\partial C_0}{\partial w} + \frac{\lambda}{n} sgn(w)<br>$$<br>$sgn(w)$是取w的符号，当w为正数时，$sgn(w) = +1$。当w为负数时，$sgn(w) = -1$。</p>
+<p>对反向传播进行修改，使用基于L1正则化的随机梯度下降进行学习。<br>$$<br>w \rightarrow w’ = w - \frac{\eta \lambda}{n} sgn(w) - \eta \frac{\partial C_0}{\partial w}<br>$$<br>我们可以使用 mini-batch 的均值去估计 $\frac{ \partial C_0}{\partial w}$，<br>$$<br>w \rightarrow w’ = (1 - \frac{\eta \lambda}{n}) w - \eta \frac{\partial C_0}{\partial w}<br>$$<br>我们再来看下L2正则的：<br>$$<br>w \rightarrow w’ =  \left(1 - \frac{\eta \lambda}{n}\right) w - \frac{\eta}{m} \sum_x \frac{\partial C_x}{\partial w}<br>$$</p>
+<h5 id="共同点"><a href="#共同点" class="headerlink" title="共同点"></a>共同点</h5><p>L1 和 L2 的共同点是都惩罚大的权重。</p>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><p>L1 中，权值通过一个<strong>常量</strong>向 0 缩小。</p>
+<p>L2中，权值通过一个<strong>和 w 成比例的量</strong>进行缩小。</p>
+<ul>
+<li>当 $|w|$ 很大时，L1 比 L2 缩小得少。</li>
+<li>当 $|w|$ 很小时，L1 比 L2 缩小得多。</li>
+</ul>
+<p>结果是，L1 会将权值保留在少量的高重要度的连接上，其它权值会趋向0接近。</p>
+<h2 id="Dropout-弃权"><a href="#Dropout-弃权" class="headerlink" title="Dropout 弃权"></a>Dropout 弃权</h2><p>L1 和 L2 正则化是对代价函数的修改。Dropout 是改变网络本身。</p>
+<p>假设我们有训练数据 x，和输出 y，一般会通过在网络中正向传播 x 进行训练，再反向传播确定梯度的贡献。</p>
+<p>当使用 Dropout 时：</p>
+<ol>
+<li>我们先随机临时删除网络中的一半的隐藏神经元，同时输入层和输出层的神经元保持不变。</li>
+<li>在一个 mini-batch 中，前向传播输入 x ，通过修改后的网络，然后反向传播结果，并通过这个修改后的网络。然后对有关权值和偏置进行更新。</li>
+<li>重复上面的过程，先重置弃权的神经元，再选择一个新的隐藏神经元的随机子集，对这个不同的 mini-batch 估计它的梯度，然后再更新权值和偏置。</li>
+</ol>
+<p>我们弃权掉不同的神经元几何，这样就像是我们在训练不同的神经元集合。弃权过程如同大量不同网络的效果的平均。不同的网络会以不同的方式过度拟合，所以弃权过的网络效果会减轻过拟合。</p>
+<p>比如我们训练了五个网络，其中三个把数字分类为3，那很可能就是3了。</p>
+<p>在图像、语音识别、自然语言处理时，很有效。大规模深度网络时也很有用，因为这样的网络过拟合问题特别突出。</p>
+<h2 id="人为扩展训练数据"><a href="#人为扩展训练数据" class="headerlink" title="人为扩展训练数据"></a>人为扩展训练数据</h2><p>一般我们认为大量的训练数据会得到更好的性能。</p>
+<p>但这个代价很大。有时我们可以人为扩展训练数据，比如图片5，将其做一个旋转，转换，扭曲，都懂，使用扩展后的训练数据来提升网络的性能。</p>
+<p>更多的训练数据能补偿不同算法的差距。</p>
+<h2 id="权值初始化"><a href="#权值初始化" class="headerlink" title="权值初始化"></a>权值初始化</h2><p>之前我们一直用均值为0，标准差为1的独立高斯随机变量来选择权值和偏置。</p>
+<p>其实用归一化的高斯分布不是最好的。</p>
+<p>跟以前的归一化问题一样，如果权值大，$z$ 也大，$\sigma ( z )$ 就接近 1 或 0，隐藏层神经元会饱和，梯度下降算法学习慢。</p>
+<p>之前我们通过选择不同的代价函数来解决，但那只是对输出神经元有效，对隐藏神经元不起作用。</p>
+<p>假设我们有一个神经元，它的输入权值是 $n_{in}$，然后我们用均值是0，标准差是 $\frac{1}{\sqrt{n_{in}}}$ 的高斯随机变量来初始化这些权值。</p>
+<p>这样，$z = \sum_j w_j x_j +b$ 的取值更小。</p>
+<p>这样的神经元更不容易饱和，也更不可能使学习速度下降。</p>
+<p>$\frac{1}{\sqrt{n_{in}}}$ 权值初始化，可以加快训练速度，有时也能提升网络的最终性能。</p>
+<h2 id="如何选择超参数"><a href="#如何选择超参数" class="headerlink" title="如何选择超参数"></a>如何选择超参数</h2><p>每一 epoch 的精确度一直下降，但是我们一开始并不知道哪些超参数应该被调整。</p>
+<ul>
+<li>也许问题在于无论我们怎么选择超参数，30个隐藏神经元网络永远都不会工作得很好。</li>
+<li>我们可能真的需要至少100个隐藏神经元？或300个隐藏神经元？或多个隐藏层？</li>
+<li>可能我们的网络正在学习，但是需要更多的 epoch。</li>
+<li>可能 mini-batch 太小了。</li>
+<li>可能我们我们应该换回 均方误差代价函数。</li>
+<li>可能我们需要尝试一个不同的途径来初始化权值。</li>
+<li>等等。</li>
+</ul>
+<p>我们很容易就会迷失方向。这里我们解释一些启发式的方法，帮助你开发一个工作流，能让你更好地设置超参数。</p>
+<h3 id="Broad-Strategy-宽泛策略"><a href="#Broad-Strategy-宽泛策略" class="headerlink" title="Broad Strategy 宽泛策略"></a>Broad Strategy 宽泛策略</h3><p>宽泛策略不好。</p>
+<h3 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h3><p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fri7540jx1j30ct0a80tk.jpg" alt="Different Learning Rate"></p>
+<p>$\eta = 0.025$，代价函数平滑下降到最后回合。</p>
+<p>$\eta = 0.25$ ，代价在20回合时</p>
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
@@ -362,7 +409,7 @@ Cost Function这里来看一个非常简单的神经元，我们输入1，期望
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-2"><span class="toc-text">Round 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么学习速度变慢"><span class="toc-text">为什么学习速度变慢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么偏导很小"><span class="toc-text">为什么偏导很小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-Entropy-Cost-Function"><span class="toc-text">Cross Entropy Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#均方误差代价函数和交叉熵代价函数都有两个特点"><span class="toc-text">均方误差代价函数和交叉熵代价函数都有两个特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#交叉熵是正数"><span class="toc-text">交叉熵是正数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当所有输入x的输出都能接近期望输出y时，代价函数接近0"><span class="toc-text">当所有输入x的输出都能接近期望输出y时，代价函数接近0</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交叉熵独有的特点"><span class="toc-text">交叉熵独有的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-3"><span class="toc-text">Round 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-4"><span class="toc-text">Round 4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-text">Softmax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的单调性"><span class="toc-text">Softmax的单调性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的非局部性"><span class="toc-text">Softmax的非局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转Softmax层"><span class="toc-text">反转Softmax层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-Likelihood-Cost-Function"><span class="toc-text">Log-Likelihood Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习速度不会衰退"><span class="toc-text">学习速度不会衰退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过拟合和正则化"><span class="toc-text">过拟合和正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Validation-Data"><span class="toc-text">Validation Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用-Validation-Data-而不是使用-Test-Data-来苹果结果去设置超参"><span class="toc-text">为什么使用 Validation Data 而不是使用 Test Data 来苹果结果去设置超参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据训练数据"><span class="toc-text">增加数据训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-text">Regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在随机梯度下降算法中应用正则化"><span class="toc-text">在随机梯度下降算法中应用正则化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-1-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Round-2-1"><span class="toc-text">Round 2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化的好处"><span class="toc-text">正则化的好处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么正则化能够降低过拟合"><span class="toc-text">为什么正则化能够降低过拟合</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-2"><span class="toc-text">Round 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么学习速度变慢"><span class="toc-text">为什么学习速度变慢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么偏导很小"><span class="toc-text">为什么偏导很小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-Entropy-Cost-Function"><span class="toc-text">Cross Entropy Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#均方误差代价函数和交叉熵代价函数都有两个特点"><span class="toc-text">均方误差代价函数和交叉熵代价函数都有两个特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#交叉熵是正数"><span class="toc-text">交叉熵是正数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当所有输入x的输出都能接近期望输出y时，代价函数接近0"><span class="toc-text">当所有输入x的输出都能接近期望输出y时，代价函数接近0</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交叉熵独有的特点"><span class="toc-text">交叉熵独有的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-3"><span class="toc-text">Round 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-4"><span class="toc-text">Round 4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-text">Softmax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的单调性"><span class="toc-text">Softmax的单调性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的非局部性"><span class="toc-text">Softmax的非局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转Softmax层"><span class="toc-text">反转Softmax层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-Likelihood-Cost-Function"><span class="toc-text">Log-Likelihood Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习速度不会衰退"><span class="toc-text">学习速度不会衰退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过拟合和正则化"><span class="toc-text">过拟合和正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Validation-Data"><span class="toc-text">Validation Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用-Validation-Data-而不是使用-Test-Data-来苹果结果去设置超参"><span class="toc-text">为什么使用 Validation Data 而不是使用 Test Data 来苹果结果去设置超参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据训练数据"><span class="toc-text">增加数据训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-text">Regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L2-Weight-Decay"><span class="toc-text">L2 Weight Decay</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#在随机梯度下降算法中应用正则化"><span class="toc-text">在随机梯度下降算法中应用正则化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-1-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-2-1"><span class="toc-text">Round 2</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化的好处"><span class="toc-text">正则化的好处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么正则化能够降低过拟合"><span class="toc-text">为什么正则化能够降低过拟合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L1"><span class="toc-text">L1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#共同点"><span class="toc-text">共同点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不同点"><span class="toc-text">不同点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dropout-弃权"><span class="toc-text">Dropout 弃权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人为扩展训练数据"><span class="toc-text">人为扩展训练数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权值初始化"><span class="toc-text">权值初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何选择超参数"><span class="toc-text">如何选择超参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Broad-Strategy-宽泛策略"><span class="toc-text">Broad Strategy 宽泛策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-Rate"><span class="toc-text">Learning Rate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
 
