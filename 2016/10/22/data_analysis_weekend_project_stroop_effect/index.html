@@ -39,6 +39,21 @@
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -170,12 +185,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Data Analysis Weekend Project 斯特鲁普效应(Stroop effect)</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-10-22</span>
+      <span id = "post-title-date">撰写于 2016-10-22</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-06</span>
+        <span id = "post-title-updated">修改于 2018-05-06</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -186,7 +201,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -250,10 +265,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#斯特鲁普效应-Stroop-effect"><span class="toc-text">斯特鲁普效应(Stroop effect)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#假设"><span class="toc-text">假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#统计测试类型"><span class="toc-text">统计测试类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样本数据可视化"><span class="toc-text">样本数据可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直方图"><span class="toc-text">直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箱线图"><span class="toc-text">箱线图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据集的统计描述"><span class="toc-text">数据集的统计描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反应前后二者平均值之间的差别"><span class="toc-text">反应前后二者平均值之间的差别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准偏差"><span class="toc-text">标准偏差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准误差"><span class="toc-text">标准误差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#t统计量"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#t临界值"><span class="toc-text">t临界值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效应量-r-2"><span class="toc-text">效应量$r^2$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#置信区间"><span class="toc-text">置信区间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#决策"><span class="toc-text">决策</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
   </div>
 </div>
@@ -261,13 +276,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../23/data_analysis_process/" class="prev">&larr; Prev post Data Analysis 数据分析的过程</a>
+    <a href="../../23/data_analysis_process/" class="prev">&larr; 上一篇 Data Analysis 数据分析的过程</a>
   
 
   
 
   
-    <a href="../../15/data_analysis_t_test/" class="next">Next post Data Analysis t验证 &rarr;</a>
+    <a href="../../15/data_analysis_t_test/" class="next">下一篇 Data Analysis t验证 &rarr;</a>
   
 </nav>
 
@@ -377,19 +392,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

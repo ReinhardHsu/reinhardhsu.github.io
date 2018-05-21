@@ -38,6 +38,21 @@ MAPI（Messaging Application Programming Interface），是一个Client-Side方�
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -169,12 +184,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Dynamics AX 2012 R2 为AX设置E-Mail</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2015-01-23</span>
+      <span id = "post-title-date">撰写于 2015-01-23</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-01</span>
+        <span id = "post-title-updated">修改于 2018-05-01</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -185,7 +200,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -212,10 +227,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2015/06/22/dynamics_ax_2012_R2_remoteapp_export_project_error/">Dynamics AX 2012 R2 RemoteApp导出项目报错</a></li><li><a href="http://reinhardhsu.com/2015/06/12/dynamics_ax_2012_R3_demo_installation_step_4/">Dynamics AX 2012 R3 Demo 安装与配置 – 导入测试数据 (Step 4)</a></li><li><a href="http://reinhardhsu.com/2015/03/30/dynamics_ax_2012_r2_accounts_payable_modules/">Dynamics AX 2012 R2 Accounts Payable modules</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
   </div>
 </div>
@@ -223,13 +238,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../dynamics_ax_2012_r2_setup_email_templete/" class="prev">&larr; Prev post Dynamics AX 2012 R2 配置E-Mail模板</a>
+    <a href="../dynamics_ax_2012_r2_setup_email_templete/" class="prev">&larr; 上一篇 Dynamics AX 2012 R2 配置E-Mail模板</a>
   
 
   
 
   
-    <a href="../dynamics_ax_2012_r2_setup_track_for_database_change/" class="next">Next post Dynamics AX 2012 R2 为数据库配置变更跟踪 &rarr;</a>
+    <a href="../dynamics_ax_2012_r2_setup_track_for_database_change/" class="next">下一篇 Dynamics AX 2012 R2 为数据库配置变更跟踪 &rarr;</a>
   
 </nav>
 
@@ -339,19 +354,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

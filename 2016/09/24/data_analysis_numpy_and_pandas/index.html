@@ -46,6 +46,21 @@ argmax()可以回去最大值...">
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -177,12 +192,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Data Analysis NumPy和Pandas</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-09-24</span>
+      <span id = "post-title-date">撰写于 2016-09-24</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-01</span>
+        <span id = "post-title-updated">修改于 2018-05-01</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -193,7 +208,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -312,10 +327,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li><li><a href="http://w23ta0.github.io/2015/11/18/Error-command-gcc-failed-with-exit-status-1-when-installing-MySQLdb-under-centos6-6.html">Centos6下安装MySQLdb时出现“error: command 'gcc' failed with exit status 1</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一维数据"><span class="toc-text">一维数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#向量运算，线性代数"><span class="toc-text">向量运算，线性代数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引数组"><span class="toc-text">索引数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vs"><span class="toc-text">+ vs +=</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pandas"><span class="toc-text">Pandas</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如果想要的计算没有内建怎么办"><span class="toc-text">如果想要的计算没有内建怎么办</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二维数组"><span class="toc-text">二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NumPy-1"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分片"><span class="toc-text">分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运算"><span class="toc-text">运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#轴"><span class="toc-text">轴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pandas-1"><span class="toc-text">Pandas</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分片-1"><span class="toc-text">分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算相关性，Pearson矩阵相关系数r"><span class="toc-text">计算相关性，Pearson矩阵相关系数r</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移动元素"><span class="toc-text">移动元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#applymap和apply"><span class="toc-text">applymap和apply</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Series和DataFrame相加"><span class="toc-text">Series和DataFrame相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向量运算"><span class="toc-text">向量运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#合并多个DataFrame"><span class="toc-text">合并多个DataFrame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用散点图展示"><span class="toc-text">用散点图展示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#处理缺失值"><span class="toc-text">处理缺失值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三维数据"><span class="toc-text">三维数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NumPy-2"><span class="toc-text">NumPy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pandas-2"><span class="toc-text">Pandas</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -323,13 +338,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../25/data_analysis_commucating_data_art/" class="prev">&larr; Prev post Data Analysis 数据交流的艺术</a>
+    <a href="../../25/data_analysis_commucating_data_art/" class="prev">&larr; 上一篇 Data Analysis 数据交流的艺术</a>
   
 
   
 
   
-    <a href="../../19/data_analysis_different_roles_of_bi_field/" class="next">Next post Data Analysis 商业智能领域里的不同角色 &rarr;</a>
+    <a href="../../19/data_analysis_different_roles_of_bi_field/" class="next">下一篇 Data Analysis 商业智能领域里的不同角色 &rarr;</a>
   
 </nav>
 
@@ -439,19 +454,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

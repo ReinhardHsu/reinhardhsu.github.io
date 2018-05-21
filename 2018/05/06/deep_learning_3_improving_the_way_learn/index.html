@@ -47,6 +47,21 @@ Cost Function这里来看一个非常简单的神经元，我们输入1，期望
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -178,12 +193,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Deep Learning - 3 改进神经网络的学习方式</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2018-05-06</span>
+      <span id = "post-title-date">撰写于 2018-05-06</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-21</span>
+        <span id = "post-title-updated">修改于 2018-05-21</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -194,7 +209,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -419,10 +434,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-2"><span class="toc-text">Round 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么学习速度变慢"><span class="toc-text">为什么学习速度变慢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么偏导很小"><span class="toc-text">为什么偏导很小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-Entropy-Cost-Function"><span class="toc-text">Cross Entropy Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#均方误差代价函数和交叉熵代价函数都有两个特点"><span class="toc-text">均方误差代价函数和交叉熵代价函数都有两个特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#交叉熵是正数"><span class="toc-text">交叉熵是正数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当所有输入x的输出都能接近期望输出y时，代价函数接近0"><span class="toc-text">当所有输入x的输出都能接近期望输出y时，代价函数接近0</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交叉熵独有的特点"><span class="toc-text">交叉熵独有的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-3"><span class="toc-text">Round 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-4"><span class="toc-text">Round 4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-text">Softmax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的单调性"><span class="toc-text">Softmax的单调性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的非局部性"><span class="toc-text">Softmax的非局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转Softmax层"><span class="toc-text">反转Softmax层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-Likelihood-Cost-Function"><span class="toc-text">Log-Likelihood Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习速度不会衰退"><span class="toc-text">学习速度不会衰退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过拟合和正则化"><span class="toc-text">过拟合和正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Validation-Data"><span class="toc-text">Validation Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用-Validation-Data-而不是使用-Test-Data-来苹果结果去设置超参"><span class="toc-text">为什么使用 Validation Data 而不是使用 Test Data 来苹果结果去设置超参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据训练数据"><span class="toc-text">增加数据训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-text">Regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L2-Weight-Decay"><span class="toc-text">L2 Weight Decay</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#在随机梯度下降算法中应用正则化"><span class="toc-text">在随机梯度下降算法中应用正则化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-1-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-2-1"><span class="toc-text">Round 2</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化的好处"><span class="toc-text">正则化的好处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么正则化能够降低过拟合"><span class="toc-text">为什么正则化能够降低过拟合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L1"><span class="toc-text">L1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#共同点"><span class="toc-text">共同点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不同点"><span class="toc-text">不同点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dropout-弃权"><span class="toc-text">Dropout 弃权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人为扩展训练数据"><span class="toc-text">人为扩展训练数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权值初始化"><span class="toc-text">权值初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何选择超参数"><span class="toc-text">如何选择超参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Broad-Strategy-宽泛策略"><span class="toc-text">Broad Strategy 宽泛策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-Rate"><span class="toc-text">Learning Rate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -430,13 +445,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../12/software_development_continuous_deployment_github_to_vps/" class="prev">&larr; Prev post Software Development 使用Webhook将 Github 持续部署到 VPS</a>
+    <a href="../../12/software_development_continuous_deployment_github_to_vps/" class="prev">&larr; 上一篇 Software Development 使用Webhook将 Github 持续部署到 VPS</a>
   
 
   
 
   
-    <a href="../../03/deep_learning_2_backpropagation/" class="next">Next post Deep Learning - 2 反向传播 &rarr;</a>
+    <a href="../../03/deep_learning_2_backpropagation/" class="next">下一篇 Deep Learning - 2 反向传播 &rarr;</a>
   
 </nav>
 
@@ -546,19 +561,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

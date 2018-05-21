@@ -42,6 +42,21 @@
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -173,12 +188,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Data Analysis t验证</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-10-15</span>
+      <span id = "post-title-date">撰写于 2016-10-15</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-01</span>
+        <span id = "post-title-updated">修改于 2018-05-01</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -189,7 +204,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -390,10 +405,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#t检验"><span class="toc-text">t检验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分布"><span class="toc-text">分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自由度"><span class="toc-text">自由度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#决策"><span class="toc-text">决策</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#P值"><span class="toc-text">P值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#租金"><span class="toc-text">租金</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cohen’s-d"><span class="toc-text">Cohen’s d</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#置信区间"><span class="toc-text">置信区间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相依样本"><span class="toc-text">相依样本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#键盘"><span class="toc-text">键盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相依样本t检验（Dependent-samples-t-test）的设计类型"><span class="toc-text">相依样本t检验（Dependent-samples t-test）的设计类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重复衡量设计"><span class="toc-text">重复衡量设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#纵向设计"><span class="toc-text">纵向设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预期检验和后期检验"><span class="toc-text">预期检验和后期检验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#习题"><span class="toc-text">习题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#词汇量"><span class="toc-text">词汇量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效应量-Effect-Size"><span class="toc-text">效应量(Effect Size)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#效应量度量的类型"><span class="toc-text">效应量度量的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#差异度量"><span class="toc-text">差异度量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关度量"><span class="toc-text">相关度量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计显著性"><span class="toc-text">统计显著性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cohen’s-d-1"><span class="toc-text">Cohen’s d</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#r-2"><span class="toc-text">$r^2$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#报告结果"><span class="toc-text">报告结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述统计量-M-SD"><span class="toc-text">描述统计量(M,SD)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#推论统计量"><span class="toc-text">推论统计量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#假设检验"><span class="toc-text">假设检验</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#置信区间-1"><span class="toc-text">置信区间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#度量的效应量"><span class="toc-text">度量的效应量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个完整的单样本t检验"><span class="toc-text">一个完整的单样本t检验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#研究类型"><span class="toc-text">研究类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dependent-variable因变量"><span class="toc-text">dependent variable因变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#treatment自变量"><span class="toc-text">treatment自变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#零假设"><span class="toc-text">零假设</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对立假设"><span class="toc-text">对立假设</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t检验-1"><span class="toc-text">t检验</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#误差分数"><span class="toc-text">误差分数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t临界值"><span class="toc-text">t临界值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#标准误差"><span class="toc-text">标准误差</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t统计量"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#决策-1"><span class="toc-text">决策</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Cohen’s-d-2"><span class="toc-text">Cohen’s d</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#置信区间-2"><span class="toc-text">置信区间</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#独立样本"><span class="toc-text">独立样本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相依样本（重复测量）"><span class="toc-text">相依样本（重复测量）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优势"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#劣势"><span class="toc-text">劣势</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#独立样本-1"><span class="toc-text">独立样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#样本误差"><span class="toc-text">样本误差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子－餐厅价格"><span class="toc-text">例子－餐厅价格</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#要比较两个样本，需要哪些数据"><span class="toc-text">要比较两个样本，需要哪些数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#样本的均值"><span class="toc-text">样本的均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#样本的标准偏差"><span class="toc-text">样本的标准偏差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#均值的标准误差"><span class="toc-text">均值的标准误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t统计量-1"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#双尾检验的t临界值"><span class="toc-text">双尾检验的t临界值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#决策-2"><span class="toc-text">决策</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子－药物"><span class="toc-text">例子－药物</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#t统计量-2"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t临界值-1"><span class="toc-text">t临界值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#决策-3"><span class="toc-text">决策</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子－男性鞋子多还是女性鞋子多"><span class="toc-text">例子－男性鞋子多还是女性鞋子多</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准误差-1"><span class="toc-text">标准误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t统计量-3"><span class="toc-text">t统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#决策-4"><span class="toc-text">决策</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#置信区间-3"><span class="toc-text">置信区间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性别与鞋子"><span class="toc-text">性别与鞋子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#合并方差"><span class="toc-text">合并方差</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#T-test的假设"><span class="toc-text">T-test的假设</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
   </div>
 </div>
@@ -401,13 +416,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../22/data_analysis_weekend_project_stroop_effect/" class="prev">&larr; Prev post Data Analysis Weekend Project 斯特鲁普效应(Stroop effect)</a>
+    <a href="../../22/data_analysis_weekend_project_stroop_effect/" class="prev">&larr; 上一篇 Data Analysis Weekend Project 斯特鲁普效应(Stroop effect)</a>
   
 
   
 
   
-    <a href="../../14/data_analysis_hypothesis/" class="next">Next post Data Analysis 假设 &rarr;</a>
+    <a href="../../14/data_analysis_hypothesis/" class="next">下一篇 Data Analysis 假设 &rarr;</a>
   
 </nav>
 
@@ -517,19 +532,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

@@ -41,6 +41,21 @@ EDA的第二个目标评估和验证假设，基于这些假设将得到未来�
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -172,12 +187,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Data Analysis 使用R研究和总结数据</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-11-09</span>
+      <span id = "post-title-date">撰写于 2016-11-09</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-01</span>
+        <span id = "post-title-updated">修改于 2018-05-01</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -188,7 +203,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -315,10 +330,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是探索数据分析"><span class="toc-text">什么是探索数据分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EDA的第一个目标"><span class="toc-text">EDA的第一个目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EDA的第二个目标"><span class="toc-text">EDA的第二个目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电视的发展"><span class="toc-text">电视的发展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#R基本操作"><span class="toc-text">R基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置工作路径"><span class="toc-text">设置工作路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取文件"><span class="toc-text">读取文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-Markdown文件"><span class="toc-text">R Markdown文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#探索数据"><span class="toc-text">探索数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据概览"><span class="toc-text">数据概览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑操作"><span class="toc-text">逻辑操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加删除列"><span class="toc-text">添加删除列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加分类"><span class="toc-text">添加分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除变量"><span class="toc-text">删除变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reddit"><span class="toc-text">Reddit</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#因数变量"><span class="toc-text">因数变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#有序因子"><span class="toc-text">有序因子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给数据科学家的建议"><span class="toc-text">给数据科学家的建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#探索单一变量"><span class="toc-text">探索单一变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先该做什么"><span class="toc-text">首先该做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建直方图"><span class="toc-text">创建直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤异常值"><span class="toc-text">过滤异常值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置组宽"><span class="toc-text">设置组宽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略NA值"><span class="toc-text">忽略NA值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#划分"><span class="toc-text">划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#填充颜色"><span class="toc-text">填充颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置标签"><span class="toc-text">设置标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据"><span class="toc-text">数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对数"><span class="toc-text">对数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#平方根"><span class="toc-text">平方根</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#频率多边形"><span class="toc-text">频率多边形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#箱线图"><span class="toc-text">箱线图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑转换"><span class="toc-text">逻辑转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析单一变量的总结"><span class="toc-text">分析单一变量的总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#过滤数据求行数"><span class="toc-text">过滤数据求行数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看直方图"><span class="toc-text">查看直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#按照切割工艺分割直方图"><span class="toc-text">按照切割工艺分割直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#每克拉钻石的价格，按切割工艺分割的直方图"><span class="toc-text">每克拉钻石的价格，按切割工艺分割的直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#透明度、颜色、切割工艺的箱线图"><span class="toc-text">透明度、颜色、切割工艺的箱线图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#每克拉钻石不同颜色的价格"><span class="toc-text">每克拉钻石不同颜色的价格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#颜色价格的频数多变型"><span class="toc-text">颜色价格的频数多变型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#观察两个变量"><span class="toc-text">观察两个变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置点的透明度"><span class="toc-text">设置点的透明度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置抖动"><span class="toc-text">设置抖动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变换轴"><span class="toc-text">变换轴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dplyr"><span class="toc-text">dplyr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#叠加摘要和原始数据"><span class="toc-text">叠加摘要和原始数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关性"><span class="toc-text">相关性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#子集相关性"><span class="toc-text">子集相关性</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -326,13 +341,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../../12/12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/" class="prev">&larr; Prev post Dynamics AX 2012 R2 在BI分析中建立数据仓库的必要性</a>
+    <a href="../../../12/12/dynamics_ax_2012_r2_necessity-of-build-data-warehouse/" class="prev">&larr; 上一篇 Dynamics AX 2012 R2 在BI分析中建立数据仓库的必要性</a>
   
 
   
 
   
-    <a href="../../03/data_analysis_weekend_project_openstreetmap/" class="next">Next post Data Analysis Weekend Project 开放街道地图(OpenStreetMap) &rarr;</a>
+    <a href="../../03/data_analysis_weekend_project_openstreetmap/" class="next">下一篇 Data Analysis Weekend Project 开放街道地图(OpenStreetMap) &rarr;</a>
   
 </nav>
 
@@ -442,19 +457,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

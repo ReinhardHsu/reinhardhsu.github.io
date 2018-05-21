@@ -37,6 +37,21 @@
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -168,12 +183,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Data Structures and Algorithms DotNet － 1、排序和查找</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2013-02-26</span>
+      <span id = "post-title-date">撰写于 2013-02-26</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-03</span>
+        <span id = "post-title-updated">修改于 2018-05-03</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -184,7 +199,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -205,10 +220,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2016/10/12/data_analysis_python_operate_data_file/">Data Analysis Python 操作数据文件</a></li><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_1_collection/">Data Structures and Algorithms DotNet－ 1、群集</a></li><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_2_array_and_arraylist/">Data Structures and Algorithms DotNet － 2、数组和ArrayList</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
   </div>
 </div>
@@ -216,13 +231,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../../03/01/data_structures_and_algorithms_dotnet_2_linkedlist/" class="prev">&larr; Prev post Data Structures and Algorithms DotNet － 2、单向和双向链表</a>
+    <a href="../../../03/01/data_structures_and_algorithms_dotnet_2_linkedlist/" class="prev">&larr; 上一篇 Data Structures and Algorithms DotNet － 2、单向和双向链表</a>
   
 
   
 
   
-    <a href="../../14/software_development_dot_net_asp_net_15_httphandler/" class="next">Next post Software Development DotNet ASP.NET - 15、HttpHandler &rarr;</a>
+    <a href="../../14/software_development_dot_net_asp_net_15_httphandler/" class="next">下一篇 Software Development DotNet ASP.NET - 15、HttpHandler &rarr;</a>
   
 </nav>
 
@@ -332,19 +347,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

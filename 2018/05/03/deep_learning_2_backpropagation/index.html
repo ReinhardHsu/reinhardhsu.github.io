@@ -43,6 +43,21 @@ Backpropagation
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -174,12 +189,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Deep Learning - 2 反向传播</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2018-05-03</span>
+      <span id = "post-title-date">撰写于 2018-05-03</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-06</span>
+        <span id = "post-title-updated">修改于 2018-05-06</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -190,7 +205,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -299,10 +314,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Weights"><span class="toc-text">Weights</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Biases-and-Activations"><span class="toc-text">Biases and Activations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经元的视角"><span class="toc-text">神经元的视角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层视角"><span class="toc-text">层视角</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weighted-Input"><span class="toc-text">Weighted Input</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function-的两个假设"><span class="toc-text">Cost Function 的两个假设</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#假设一"><span class="toc-text">假设一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#假设二"><span class="toc-text">假设二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hadamard-Product"><span class="toc-text">Hadamard Product</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播背后的四个基本等式"><span class="toc-text">反向传播背后的四个基本等式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播算法"><span class="toc-text">反向传播算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入一组训练数据"><span class="toc-text">输入一组训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于训练数据中的每个样本-x"><span class="toc-text">对于训练数据中的每个样本 x</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Feedforward（正向传播）"><span class="toc-text">Feedforward（正向传播）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出层的误差"><span class="toc-text">输出层的误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将误差反向传播"><span class="toc-text">将误差反向传播</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Descent"><span class="toc-text">Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播算法的实现"><span class="toc-text">反向传播算法的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化网络"><span class="toc-text">初始化网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机梯度下降"><span class="toc-text">随机梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#随机"><span class="toc-text">随机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#梯度下降"><span class="toc-text">梯度下降</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播算法为什么更高效"><span class="toc-text">反向传播算法为什么更高效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播整体描述"><span class="toc-text">反向传播整体描述</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -310,13 +325,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../06/deep_learning_3_improving_the_way_learn/" class="prev">&larr; Prev post Deep Learning - 3 改进神经网络的学习方式</a>
+    <a href="../../06/deep_learning_3_improving_the_way_learn/" class="prev">&larr; 上一篇 Deep Learning - 3 改进神经网络的学习方式</a>
   
 
   
 
   
-    <a href="../../../04/28/deep_learning_1_neural_networks/" class="next">Next post Deep Learning - 1 神经网络 &rarr;</a>
+    <a href="../../../04/28/deep_learning_1_neural_networks/" class="next">下一篇 Deep Learning - 1 神经网络 &rarr;</a>
   
 </nav>
 
@@ -426,19 +441,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {

@@ -45,6 +45,21 @@ HttpAnalyzer：分析计算机上所有Http请求数据
 <link rel="stylesheet" href="../../../../css/plyr.css">
   
   
+  <script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  
     </script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119133633-1"></script>
@@ -176,12 +191,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Software Development DotNet ASP.NET - 8、HTTP协议</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2013-01-07</span>
+      <span id = "post-title-date">撰写于 2013-01-07</span>
       
-        <span id = "post-title-updated">Updated at 2018-05-03</span>
+        <span id = "post-title-updated">修改于 2018-05-03</span>
       
       
-      <span id = "post-title-categories">Category
+      <span id = "post-title-categories">分类
       
       
         
@@ -192,7 +207,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      Tag
+      标签
       
       
         
@@ -437,10 +452,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_1_collection/">Data Structures and Algorithms DotNet－ 1、群集</a></li><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_2_array_and_arraylist/">Data Structures and Algorithms DotNet － 2、数组和ArrayList</a></li><li><a href="http://reinhardhsu.com/2013/02/26/data_structures_and_algorithms_dotnet_1_sort_and_search/">Data Structures and Algorithms DotNet － 1、排序和查找</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#1、HTTP协议分析工具"><span class="toc-text">1、HTTP协议分析工具</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2、几个概念"><span class="toc-text">2、几个概念</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3、页面中的每个资源（图片，JS，CSS），都是单独请求的，每个资源一个请求，可一起下载。"><span class="toc-text">3、页面中的每个资源（图片，JS，CSS），都是单独请求的，每个资源一个请求，可一起下载。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4、直接在地址栏里敲击地址，都被视为Get请求。"><span class="toc-text">4、直接在地址栏里敲击地址，都被视为Get请求。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5、以上说明Http是无状态的，哪怕是同一个页面的JS，CSS，JPG也都要重复提交报文。"><span class="toc-text">5、以上说明Http是无状态的，哪怕是同一个页面的JS，CSS，JPG也都要重复提交报文。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#6、Content-Type：告诉客户端响应的数据类型，这样浏览器根据返回数据的类型来进行不同的处理，如果是图片类型，就显示，如果是下载类型，就弹出下载工具。"><span class="toc-text">6、Content-Type：告诉客户端响应的数据类型，这样浏览器根据返回数据的类型来进行不同的处理，如果是图片类型，就显示，如果是下载类型，就弹出下载工具。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#8、Content-Length：报文长度，报文头两个回车后"><span class="toc-text">8、Content-Length：报文长度，报文头两个回车后</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#9、基于安全和性能，一般服务器只有收到请求才推送数据。如果需要主动推送，可使用ServerPush。"><span class="toc-text">9、基于安全和性能，一般服务器只有收到请求才推送数据。如果需要主动推送，可使用ServerPush。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10、HTTP是“请求——响应”的工作方式，因此页面会不断刷新，可用Ajax避免刷新。"><span class="toc-text">10、HTTP是“请求——响应”的工作方式，因此页面会不断刷新，可用Ajax避免刷新。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#11、HTTP协议支持断点续传，其原理是下载一部分"><span class="toc-text">11、HTTP协议支持断点续传，其原理是下载一部分</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#12、HTTP协议不支持的部分，无法实现"><span class="toc-text">12、HTTP协议不支持的部分，无法实现</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#13、服务器处理请求可能是成功，可能失败，可能没有权限访问，响应码来告诉浏览器处理结果。"><span class="toc-text">13、服务器处理请求可能是成功，可能失败，可能没有权限访问，响应码来告诉浏览器处理结果。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -448,13 +463,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../08/software_development_dot_net_asp_net_9_request_response/" class="prev">&larr; Prev post Software Development DotNet ASP.NET - 9、请求响应模型</a>
+    <a href="../../08/software_development_dot_net_asp_net_9_request_response/" class="prev">&larr; 上一篇 Software Development DotNet ASP.NET - 9、请求响应模型</a>
   
 
   
 
   
-    <a href="../software_development_dot_net_asp_net_7_verification_code/" class="next">Next post Software Development DotNet ASP.NET - 7、用注册码防止暴力注册 &rarr;</a>
+    <a href="../software_development_dot_net_asp_net_7_verification_code/" class="next">下一篇 Software Development DotNet ASP.NET - 7、用注册码防止暴力注册 &rarr;</a>
   
 </nav>
 
@@ -564,19 +579,7 @@ new Valine({
 
 <div id="btn-view">Hide</div>
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
-
-var isTriggerAnalytics = !( true && isIgnoreHost );
-
-</script>
 
   <script>
 if(isTriggerAnalytics) {
