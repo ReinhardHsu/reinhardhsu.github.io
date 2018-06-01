@@ -184,12 +184,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Data Analysis Weekend Project 美国金融科技公司Prosper的风险评分分析</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2017-12-26</span>
+      <span id = "post-title-date">Created at 2017-12-26</span>
       
-        <span id = "post-title-updated">修改于 2018-05-06</span>
+        <span id = "post-title-updated">Updated at 2018-05-06</span>
       
       
-      <span id = "post-title-categories">分类
+      <span id = "post-title-categories">Category
       
       
         
@@ -200,7 +200,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      标签
+      Tag
       
       
         
@@ -388,10 +388,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主要指标的统计描述"><span class="toc-text">主要指标的统计描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单变量"><span class="toc-text">单变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#借款金额分布"><span class="toc-text">借款金额分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评级"><span class="toc-text">风险评级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分"><span class="toc-text">风险评分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#借款期数"><span class="toc-text">借款期数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#借款人征信数据的信用评分上下限的均值"><span class="toc-text">借款人征信数据的信用评分上下限的均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#借款人发起借款的时间段"><span class="toc-text">借款人发起借款的时间段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#借款人当前职业持续月数"><span class="toc-text">借款人当前职业持续月数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信用卡已用额度占比"><span class="toc-text">信用卡已用额度占比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#负债收入比"><span class="toc-text">负债收入比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#借款金额直方图按照借款期数进行分面"><span class="toc-text">借款金额直方图按照借款期数进行分面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单变量分析"><span class="toc-text">单变量分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prosper风险评分"><span class="toc-text">Prosper风险评分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双变量"><span class="toc-text">双变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评级和风险评分"><span class="toc-text">风险评级和风险评分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和借款年化利率"><span class="toc-text">风险评分和借款年化利率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评级和借款年化利率"><span class="toc-text">风险评级和借款年化利率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和负债收入比"><span class="toc-text">风险评分和负债收入比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和信用卡已用额度占比"><span class="toc-text">风险评分和信用卡已用额度占比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和征信数据信用评分范围均值"><span class="toc-text">风险评分和征信数据信用评分范围均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和借款金额"><span class="toc-text">风险评分和借款金额</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和最近职业持续月数"><span class="toc-text">风险评分和最近职业持续月数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分和最近6个月借款人征信数据被查询次数"><span class="toc-text">风险评分和最近6个月借款人征信数据被查询次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时段和逾期超过一个月的次数的均值"><span class="toc-text">时段和逾期超过一个月的次数的均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时段和前6个月征信数据被查询的次数的均值"><span class="toc-text">时段和前6个月征信数据被查询的次数的均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时段和征信信用评分范围的均值"><span class="toc-text">时段和征信信用评分范围的均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双变量分析"><span class="toc-text">双变量分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多变量"><span class="toc-text">多变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多变量分析"><span class="toc-text">多变量分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#逾期一个月以上的次数的均值与借款时间段"><span class="toc-text">逾期一个月以上的次数的均值与借款时间段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风险评分与信用卡已用额度占比"><span class="toc-text">风险评分与信用卡已用额度占比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#借款期限与借款金额"><span class="toc-text">借款期限与借款金额</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反思"><span class="toc-text">反思</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -399,13 +399,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../../../2018/04/28/deep_learning_1_neural_networks/" class="prev">&larr; 上一篇 Deep Learning - 1 神经网络</a>
+    <a href="../../../../2018/04/28/deep_learning_1_neural_networks/" class="prev">&larr; Prev post Deep Learning - 1 神经网络</a>
   
 
   
 
   
-    <a href="../../21/machine_learning_calculating_distance/" class="next">下一篇 Machine Learning - 距离计算 &rarr;</a>
+    <a href="../../21/machine_learning_calculating_distance/" class="next">Next post Machine Learning - 距离计算 &rarr;</a>
   
 </nav>
 

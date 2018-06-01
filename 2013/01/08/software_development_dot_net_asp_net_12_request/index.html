@@ -204,12 +204,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Software Development DotNet ASP.NET - 12、Request</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2013-01-08</span>
+      <span id = "post-title-date">Created at 2013-01-08</span>
       
-        <span id = "post-title-updated">修改于 2018-05-03</span>
+        <span id = "post-title-updated">Updated at 2018-05-03</span>
       
       
-      <span id = "post-title-categories">分类
+      <span id = "post-title-categories">Category
       
       
         
@@ -220,7 +220,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      标签
+      Tag
       
       
         
@@ -360,10 +360,10 @@ if(isTriggerAnalytics) {
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_1_collection/">Data Structures and Algorithms DotNet－ 1、群集</a></li><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_2_array_and_arraylist/">Data Structures and Algorithms DotNet － 2、数组和ArrayList</a></li><li><a href="http://reinhardhsu.com/2013/02/26/data_structures_and_algorithms_dotnet_1_sort_and_search/">Data Structures and Algorithms DotNet － 1、排序和查找</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#1、路径标识符。"><span class="toc-text">1、路径标识符。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#“-”转换为html能用的相对于应用根路径，经过转换为根路径，Html才认。"><span class="toc-text">“~”转换为html能用的相对于应用根路径，经过转换为根路径，Html才认。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2、VirtualPathUtility类的一些主要方法："><span class="toc-text">2、VirtualPathUtility类的一些主要方法：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#string-AppendTrailingSlash-string-virtualPath"><span class="toc-text">string AppendTrailingSlash(string virtualPath)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#检查路径是否为“-”结尾，不是的话加上。"><span class="toc-text">检查路径是否为“/”结尾，不是的话加上。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#string-Combine-string-basePath-string-relativePath"><span class="toc-text">string Combine(string basePath,string relativePath)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#“-a-b”-“c-aspx”-“-a-c-aspx”"><span class="toc-text">“~/a/b”+“c.aspx”=“~/a/c.aspx”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#“-a-b-”-“c-aspx”-“-a-b-c-aspx”"><span class="toc-text">“~/a/b/”+“c.aspx”=“~/a/b/c.aspx”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#string-GetDirectory-string-virtualPaht"><span class="toc-text">string GetDirectory(string virtualPaht)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#返回虚拟路径的目录部分。"><span class="toc-text">返回虚拟路径的目录部分。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#string-MakeRelative-string-fromPath-string-toPath"><span class="toc-text">string MakeRelative(string fromPath,string toPath)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#计算两个路径的相对路径。"><span class="toc-text">计算两个路径的相对路径。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#string-ToAbsolute"><span class="toc-text">string ToAbsolute</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#转化为绝对路径"><span class="toc-text">转化为绝对路径</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3、Request是Page类的一个属性，所以在ashx中需要用context-Request"><span class="toc-text">3、Request是Page类的一个属性，所以在ashx中需要用context.Request</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-AppRelativeCurrentExecutionFilePath"><span class="toc-text">Request.AppRelativeCurrentExecutionFilePath</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获取当前执行请求相对于应用根目录的虚拟目录。比如“-Handle-ashx”"><span class="toc-text">获取当前执行请求相对于应用根目录的虚拟目录。比如“~/Handle.ashx”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-PhysicalApplicationPath"><span class="toc-text">Request.PhysicalApplicationPath</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获取当前应用的物理路径。“D-a-a”"><span class="toc-text">获取当前应用的物理路径。“D:\a\a”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-PhysicalPath"><span class="toc-text">Request.PhysicalPath</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获取当前请求的物理路径。“D-a-a-b-aspx”"><span class="toc-text">获取当前请求的物理路径。“D:a\a\b.aspx”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-RawUrl"><span class="toc-text">Request.RawUrl</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获得原始请求Url"><span class="toc-text">获得原始请求Url</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-Url"><span class="toc-text">Request.Url</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获得请求Url"><span class="toc-text">获得请求Url</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#区别为设计到Url重写的问题"><span class="toc-text">区别为设计到Url重写的问题</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-UrlReferrer"><span class="toc-text">Request.UrlReferrer</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网页的来源，它去读取Http报文中的Referrer，通过这个做防盗链，全域中"><span class="toc-text">网页的来源，它去读取Http报文中的Referrer，通过这个做防盗链，全域中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#用来防盗链，一般用于图片。因迅雷把所有网页正确的Request-UrlReferrer保存在一个库里，下载的时候伪造Referrer。"><span class="toc-text">用来防盗链，一般用于图片。因迅雷把所有网页正确的Request.UrlReferrer保存在一个库里，下载的时候伪造Referrer。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-UserHostAddress"><span class="toc-text">Request.UserHostAddress</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获得访问者的IP地址，配合来源地址库，分析来源。"><span class="toc-text">获得访问者的IP地址，配合来源地址库，分析来源。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-UserLanguages"><span class="toc-text">Request.UserLanguages</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#访问者支持的语言，从报问获得。"><span class="toc-text">访问者支持的语言，从报问获得。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-Cookies"><span class="toc-text">Request.Cookies</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#context-Request-Cookies-“mysessionID”"><span class="toc-text">context.Request.Cookies[“mysessionID”]</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Response-cookies-“”"><span class="toc-text">Response.cookies[“”]</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Request-MapPath-virtulPath"><span class="toc-text">Request.MapPath(virtulPath)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#将虚拟路径转换为磁盘上的物理路径，程序用的时候才稳妥。"><span class="toc-text">将虚拟路径转换为磁盘上的物理路径，程序用的时候才稳妥。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -371,13 +371,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../../18/data_structures_and_algorithms_dotnet_read_windows_event_xml/" class="prev">&larr; 上一篇 Data Structures and Algorithms DotNet 读取Windows事件XML日志</a>
+    <a href="../../18/data_structures_and_algorithms_dotnet_read_windows_event_xml/" class="prev">&larr; Prev post Data Structures and Algorithms DotNet 读取Windows事件XML日志</a>
   
 
   
 
   
-    <a href="../software_development_dot_net_asp_net_11_basic_principles_of_web_development_2/" class="next">下一篇 Software Development DotNet ASP.NET - 11、Web开发的一些基本原则2 &rarr;</a>
+    <a href="../software_development_dot_net_asp_net_11_basic_principles_of_web_development_2/" class="next">Next post Software Development DotNet ASP.NET - 11、Web开发的一些基本原则2 &rarr;</a>
   
 </nav>
 

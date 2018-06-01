@@ -193,12 +193,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Deep Learning - 3 改进神经网络的学习方式</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2018-05-06</span>
+      <span id = "post-title-date">Created at 2018-05-06</span>
       
-        <span id = "post-title-updated">修改于 2018-05-21</span>
+        <span id = "post-title-updated">Updated at 2018-06-01</span>
       
       
-      <span id = "post-title-categories">分类
+      <span id = "post-title-categories">Category
       
       
         
@@ -209,7 +209,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      标签
+      Tag
       
       
         
@@ -429,29 +429,49 @@ if(isTriggerAnalytics) {
 <p>我们很容易就会迷失方向。这里我们解释一些启发式的方法，帮助你开发一个工作流，能让你更好地设置超参数。</p>
 <h3 id="Broad-Strategy-宽泛策略"><a href="#Broad-Strategy-宽泛策略" class="headerlink" title="Broad Strategy 宽泛策略"></a>Broad Strategy 宽泛策略</h3><p>宽泛策略不好。</p>
 <h3 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h3><p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fri7540jx1j30ct0a80tk.jpg" alt="Different Learning Rate"></p>
-<p>$\eta = 0.025$，代价函数平滑下降到最后回合。</p>
-<p>$\eta = 0.25$ ，代价在20回合时</p>
+<ul>
+<li><p>$\eta = 0.025$，代价函数平滑下降到最后回合。</p>
+</li>
+<li><p>$\eta = 0.25$ ，代价在20回合时接近饱和。后面微震荡和随机抖动。</p>
+</li>
+<li>$\eta = 2.5$，代价一直震荡。</li>
+</ul>
+<p>震荡的原因是$\eta$太大，使算法在接近最小值时，又越过谷底。</p>
+<p>随机梯度下降期望我们能够逐渐地抵达代价函数的谷底。</p>
+<p>学习率太大，代价一直震荡，太小又算法变慢，如果可变学习速度会更好。开始时使用$\eta = 0.25$，接近谷底换成$\eta = 0.025$。</p>
+<p>策略是：</p>
+<ul>
+<li>一开始就找到使代价震荡的 $\eta$ 的量级，也就是 $\eta$ 的 threshold。</li>
+<li>如果0.01没有震荡，加到0.1, 1.0。</li>
+<li>如果0.01就震荡，减到0.001，0.0001。</li>
+<li>先找量级，再确定 threshold，再将 $\eta$ 设为 threshold 的一半。</li>
+</ul>
+<h3 id="Early-Stopping"><a href="#Early-Stopping" class="headerlink" title="Early Stopping"></a>Early Stopping</h3><p>在每个 epoch 结束时，我们都会在验证数据上计算分类精度。当分类精度不再提升时，我们就结束它。Early Stopping 会自动防止过拟合。但是在试验的早期阶段，我们会关闭 Early Stopping ，这样我们能够看到任何过拟合的信号，并用这些信息去选择正则化算法。</p>
+<p>即使是总体趋势在提升的情况下，我们也能看到精度在抖动和震荡。如果我们在精度刚开始下降的时候就终止它，我们肯定会错过更好的模型。一个更好的准则是当最好的分类精度一段时间都没有提升时，再终止它。这样既不会错过什么，也不会等太久。</p>
+<p>这里有一个准则：连续十次没有提升就终止。但是网络有时会在很长一段时间内，分类精度很平缓，然后才会有提升。如果你想要获得更好的性能，这个准则就太草率了。</p>
+<h3 id="Learning-Rate-Schedule"><a href="#Learning-Rate-Schedule" class="headerlink" title="Learning Rate Schedule"></a>Learning Rate Schedule</h3><p>我们一直将 $\eta$ 设置为常量。一开始，我们会使用一个大的学习速率，让权值变化地快一点。然后，我们减小学习速率，这样可以对权值做出更加精良的调整。</p>
+<p>一个观点是保持学习速率不变，直到验证数据集精度开始变差时，按照 1/2 或 1/10 去降低学习速率。这样重复几次，直到学习学习速率变为初始值的 1/1000，就停止。</p>
 <div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2017/07/17/career_richdad_team_ppdai_magic_mirror_cup_second_fintech_data_application_competition/">Career 祝贺富爸爸队的投资分析作品成功进入拍拍贷魔镜杯复赛阶段</a></li><li><a href="http://reinhardhsu.com/2016/09/25/data_analysis_commucating_data_art/">Data Analysis 数据交流的艺术</a></li><li><a href="http://reinhardhsu.com/2016/09/19/data_analysis_different_roles_of_bi_field/">Data Analysis 商业智能领域里的不同角色</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-2"><span class="toc-text">Round 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么学习速度变慢"><span class="toc-text">为什么学习速度变慢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么偏导很小"><span class="toc-text">为什么偏导很小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-Entropy-Cost-Function"><span class="toc-text">Cross Entropy Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#均方误差代价函数和交叉熵代价函数都有两个特点"><span class="toc-text">均方误差代价函数和交叉熵代价函数都有两个特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#交叉熵是正数"><span class="toc-text">交叉熵是正数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当所有输入x的输出都能接近期望输出y时，代价函数接近0"><span class="toc-text">当所有输入x的输出都能接近期望输出y时，代价函数接近0</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交叉熵独有的特点"><span class="toc-text">交叉熵独有的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-3"><span class="toc-text">Round 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-4"><span class="toc-text">Round 4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-text">Softmax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的单调性"><span class="toc-text">Softmax的单调性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的非局部性"><span class="toc-text">Softmax的非局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转Softmax层"><span class="toc-text">反转Softmax层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-Likelihood-Cost-Function"><span class="toc-text">Log-Likelihood Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习速度不会衰退"><span class="toc-text">学习速度不会衰退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过拟合和正则化"><span class="toc-text">过拟合和正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Validation-Data"><span class="toc-text">Validation Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用-Validation-Data-而不是使用-Test-Data-来苹果结果去设置超参"><span class="toc-text">为什么使用 Validation Data 而不是使用 Test Data 来苹果结果去设置超参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据训练数据"><span class="toc-text">增加数据训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-text">Regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L2-Weight-Decay"><span class="toc-text">L2 Weight Decay</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#在随机梯度下降算法中应用正则化"><span class="toc-text">在随机梯度下降算法中应用正则化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-1-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-2-1"><span class="toc-text">Round 2</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化的好处"><span class="toc-text">正则化的好处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么正则化能够降低过拟合"><span class="toc-text">为什么正则化能够降低过拟合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L1"><span class="toc-text">L1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#共同点"><span class="toc-text">共同点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不同点"><span class="toc-text">不同点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dropout-弃权"><span class="toc-text">Dropout 弃权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人为扩展训练数据"><span class="toc-text">人为扩展训练数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权值初始化"><span class="toc-text">权值初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何选择超参数"><span class="toc-text">如何选择超参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Broad-Strategy-宽泛策略"><span class="toc-text">Broad Strategy 宽泛策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-Rate"><span class="toc-text">Learning Rate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-2"><span class="toc-text">Round 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么学习速度变慢"><span class="toc-text">为什么学习速度变慢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么偏导很小"><span class="toc-text">为什么偏导很小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-Entropy-Cost-Function"><span class="toc-text">Cross Entropy Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#均方误差代价函数和交叉熵代价函数都有两个特点"><span class="toc-text">均方误差代价函数和交叉熵代价函数都有两个特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#交叉熵是正数"><span class="toc-text">交叉熵是正数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当所有输入x的输出都能接近期望输出y时，代价函数接近0"><span class="toc-text">当所有输入x的输出都能接近期望输出y时，代价函数接近0</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交叉熵独有的特点"><span class="toc-text">交叉熵独有的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-3"><span class="toc-text">Round 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-4"><span class="toc-text">Round 4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-text">Softmax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的单调性"><span class="toc-text">Softmax的单调性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax的非局部性"><span class="toc-text">Softmax的非局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转Softmax层"><span class="toc-text">反转Softmax层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-Likelihood-Cost-Function"><span class="toc-text">Log-Likelihood Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习速度不会衰退"><span class="toc-text">学习速度不会衰退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过拟合和正则化"><span class="toc-text">过拟合和正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Validation-Data"><span class="toc-text">Validation Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用-Validation-Data-而不是使用-Test-Data-来苹果结果去设置超参"><span class="toc-text">为什么使用 Validation Data 而不是使用 Test Data 来苹果结果去设置超参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据训练数据"><span class="toc-text">增加数据训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization"><span class="toc-text">Regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L2-Weight-Decay"><span class="toc-text">L2 Weight Decay</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#在随机梯度下降算法中应用正则化"><span class="toc-text">在随机梯度下降算法中应用正则化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-1-1"><span class="toc-text">Round 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Round-2-1"><span class="toc-text">Round 2</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化的好处"><span class="toc-text">正则化的好处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么正则化能够降低过拟合"><span class="toc-text">为什么正则化能够降低过拟合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L1"><span class="toc-text">L1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#共同点"><span class="toc-text">共同点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不同点"><span class="toc-text">不同点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dropout-弃权"><span class="toc-text">Dropout 弃权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人为扩展训练数据"><span class="toc-text">人为扩展训练数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权值初始化"><span class="toc-text">权值初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何选择超参数"><span class="toc-text">如何选择超参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Broad-Strategy-宽泛策略"><span class="toc-text">Broad Strategy 宽泛策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-Rate"><span class="toc-text">Learning Rate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Early-Stopping"><span class="toc-text">Early Stopping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-Rate-Schedule"><span class="toc-text">Learning Rate Schedule</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="../../12/software_development_continuous_deployment_github_to_vps/" class="prev">&larr; 上一篇 Software Development 使用Webhook将 Github 持续部署到 VPS</a>
+    <a href="../../12/software_development_continuous_deployment_github_to_vps/" class="prev">&larr; Prev post Software Development 使用Webhook将 Github 持续部署到 VPS</a>
   
 
   
 
   
-    <a href="../../03/deep_learning_2_backpropagation/" class="next">下一篇 Deep Learning - 2 反向传播 &rarr;</a>
+    <a href="../../03/deep_learning_2_backpropagation/" class="next">Next post Deep Learning - 2 反向传播 &rarr;</a>
   
 </nav>
 

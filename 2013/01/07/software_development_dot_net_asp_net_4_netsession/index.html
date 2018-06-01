@@ -187,12 +187,12 @@ if(isTriggerAnalytics) {
   <article id="post">
     <h1>Software Development DotNet ASP.NET - 4、NetSession</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2013-01-07</span>
+      <span id = "post-title-date">Created at 2013-01-07</span>
       
-        <span id = "post-title-updated">修改于 2018-05-03</span>
+        <span id = "post-title-updated">Updated at 2018-05-03</span>
       
       
-      <span id = "post-title-categories">分类
+      <span id = "post-title-categories">Category
       
       
         
@@ -203,7 +203,7 @@ if(isTriggerAnalytics) {
       
       
       <span id = "post-title-tags">
-      标签
+      Tag
       
       
         
@@ -243,10 +243,10 @@ if(isTriggerAnalytics) {
 <h6 id="4、Session有超时。（应用Ajax每隔十分钟骚扰下服务器，告诉服务器自己还活着。）需要定时销毁。"><a href="#4、Session有超时。（应用Ajax每隔十分钟骚扰下服务器，告诉服务器自己还活着。）需要定时销毁。" class="headerlink" title="4、Session有超时。（应用Ajax每隔十分钟骚扰下服务器，告诉服务器自己还活着。）需要定时销毁。"></a>4、Session有超时。（应用Ajax每隔十分钟骚扰下服务器，告诉服务器自己还活着。）需要定时销毁。</h6><h6 id="5、ASP-NET内置有Session，内置Session的ID自动分配，只用复制与取值。在Cookie中叫做ASP-NET-SessionId。"><a href="#5、ASP-NET内置有Session，内置Session的ID自动分配，只用复制与取值。在Cookie中叫做ASP-NET-SessionId。" class="headerlink" title="5、ASP.NET内置有Session，内置Session的ID自动分配，只用复制与取值。在Cookie中叫做ASP.NET_SessionId。"></a>5、ASP.NET内置有Session，内置Session的ID自动分配，只用复制与取值。在Cookie中叫做ASP.NET_SessionId。</h6><h6 id="6、Session不能放太大的数据，格式是object"><a href="#6、Session不能放太大的数据，格式是object" class="headerlink" title="6、Session不能放太大的数据，格式是object"></a>6、Session不能放太大的数据，格式是object</h6><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_1_collection/">Data Structures and Algorithms DotNet－ 1、群集</a></li><li><a href="http://reinhardhsu.com/2016/09/15/data_structures_and_algorithms_dotnet_2_array_and_arraylist/">Data Structures and Algorithms DotNet － 2、数组和ArrayList</a></li><li><a href="http://reinhardhsu.com/2013/02/26/data_structures_and_algorithms_dotnet_1_sort_and_search/">Data Structures and Algorithms DotNet － 1、排序和查找</a></li></ul></div>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#1、每次请求来了，都会new一个新的实现了IHttpHandle接口的类页面的实例，进行处理。用完就GC掉，所以-不会保持上次的值。即访问者访问的是不同i的实例。"><span class="toc-text">1、每次请求来了，都会new一个新的实现了IHttpHandle接口的类页面的实例，进行处理。用完就GC掉，所以 不会保持上次的值。即访问者访问的是不同i的实例。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2、所有的访问者都访问的同一个j的实例，即可实现全局变量。"><span class="toc-text">2、所有的访问者都访问的同一个j的实例，即可实现全局变量。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3、Session原理，自己造轮子"><span class="toc-text">3、Session原理，自己造轮子</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4、Session有超时。（应用Ajax每隔十分钟骚扰下服务器，告诉服务器自己还活着。）需要定时销毁。"><span class="toc-text">4、Session有超时。（应用Ajax每隔十分钟骚扰下服务器，告诉服务器自己还活着。）需要定时销毁。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5、ASP-NET内置有Session，内置Session的ID自动分配，只用复制与取值。在Cookie中叫做ASP-NET-SessionId。"><span class="toc-text">5、ASP.NET内置有Session，内置Session的ID自动分配，只用复制与取值。在Cookie中叫做ASP.NET_SessionId。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#6、Session不能放太大的数据，格式是object"><span class="toc-text">6、Session不能放太大的数据，格式是object</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
   </div>
 </div>
@@ -254,13 +254,13 @@ if(isTriggerAnalytics) {
   
 <nav id="pagination">
   
-    <a href="../software_development_dot_net_asp_net_5_login_crack/" class="prev">&larr; 上一篇 Software Development DotNet ASP.NET - 5、暴力破解原理</a>
+    <a href="../software_development_dot_net_asp_net_5_login_crack/" class="prev">&larr; Prev post Software Development DotNet ASP.NET - 5、暴力破解原理</a>
   
 
   
 
   
-    <a href="../software_development_dot_net_asp_net_3_cookie/" class="next">下一篇 Software Development DotNet ASP.NET - 3、Cookie &rarr;</a>
+    <a href="../software_development_dot_net_asp_net_3_cookie/" class="next">Next post Software Development DotNet ASP.NET - 3、Cookie &rarr;</a>
   
 </nav>
 
