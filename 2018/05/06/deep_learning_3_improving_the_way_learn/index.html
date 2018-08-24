@@ -195,7 +195,7 @@ if(isTriggerAnalytics) {
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2018-05-06</span>
       
-        <span id = "post-title-updated">Updated at 2018-06-01</span>
+        <span id = "post-title-updated">Updated at 2018-06-03</span>
       
       
       <span id = "post-title-categories">Category
@@ -297,7 +297,7 @@ if(isTriggerAnalytics) {
 <p>对于样本x<br>$$<br>y = 1 \<br>a \approx 1<br>$$<br>等式的第二项为0</p>
 <p>等式的第一项$\ln a \approx 0$</p>
 <p>上面两种情况，交叉熵代价函数都约等于0</p>
-<h4 id="交叉熵独有的特点"><a href="#交叉熵独有的特点" class="headerlink" title="交叉熵独有的特点"></a>交叉熵独有的特点</h4><p>先看下交叉熵关于权重的偏导<br>$$<br>\begin{eqnarray}<br>  \frac{\partial C}{\partial w_j} &amp; = &amp; -\frac{1}{n} \sum_x \left(<br>    \frac{y }{\sigma(z)} -\frac{(1-y)}{1-\sigma(z)} \right)<br>  \frac{\partial \sigma}{\partial w_j} \tag{58}\<br> &amp; = &amp; -\frac{1}{n} \sum_x \left(<br>    \frac{y}{\sigma(z)}<br>    -\frac{(1-y)}{1-\sigma(z)} \right)\sigma’(z) x_j.<br>\tag{59}\end{eqnarray}<br>$$<br>通分简化后<br>$$<br>\begin{eqnarray}<br>  \frac{\partial C}{\partial w_j} &amp; = &amp; \frac{1}{n}<br>  \sum_x \frac{\sigma’(z) x_j}{\sigma(z) (1-\sigma(z))}<br>  (\sigma(z)-y).<br>\tag{60}\end{eqnarray}<br>$$<br>我们知道$\sigma’$<br>$$<br>\sigma(z) = \frac{1}{1+e^{-z}} \<br>\sigma’(z) = \sigma(z)(1-\sigma(z))<br>$$<br>代入到上面的公式中<br>$$<br>\frac{\partial C}{\partial w_j} = \frac{1}{n} \sum_x x_j(\sigma(z)-y)<br>$$<br>从交叉熵关于权重的偏导中，我们看到权重的学习速率可以是被输出结果的误差所控制。</p>
+<h4 id="交叉熵独有的特点"><a href="#交叉熵独有的特点" class="headerlink" title="交叉熵独有的特点"></a>交叉熵独有的特点</h4><p>先看下交叉熵关于权重的偏导<br>$$<br>\frac{\partial C}{\partial w_j}  =  -\frac{1}{n} \sum_x \left(<br>    \frac{y }{\sigma(z)} -\frac{(1-y)}{1-\sigma(z)} \right)<br>  \frac{\partial \sigma}{\partial w_j}<br>  \<br>   =  -\frac{1}{n} \sum_x \left(<br>    \frac{y}{\sigma(z)}<br>    -\frac{(1-y)}{1-\sigma(z)} \right)\sigma’(z) x_j<br>$$<br>通分简化后<br>$$<br>\begin{eqnarray}<br>  \frac{\partial C}{\partial w_j} &amp; = &amp; \frac{1}{n}<br>  \sum_x \frac{\sigma’(z) x_j}{\sigma(z) (1-\sigma(z))}<br>  (\sigma(z)-y).<br>\tag{60}\end{eqnarray}<br>$$<br>我们知道$\sigma’$<br>$$<br>\sigma(z) = \frac{1}{1+e^{-z}} \<br>\sigma’(z) = \sigma(z)(1-\sigma(z))<br>$$<br>代入到上面的公式中<br>$$<br>\frac{\partial C}{\partial w_j} = \frac{1}{n} \sum_x x_j(\sigma(z)-y)<br>$$<br>从交叉熵关于权重的偏导中，我们看到权重的学习速率可以是被输出结果的误差所控制。</p>
 <p>之前均方误差关于权重的偏导中，误差太大导致$\sigma’(z)$非常小，造成学习速度非常慢。</p>
 <p>现在交叉熵关于权重的偏导中，$\sigma’(z)$被抵消掉了，因此不会担心误差太大会导致学习速度慢。相反，误差越大我们的神经元学习速率越大。</p>
 <h3 id="Round-3"><a href="#Round-3" class="headerlink" title="Round 3"></a>Round 3</h3><p>再来看看使用交叉熵代价函数时的学习速度。<br>$$<br>Weight = 0.6 \<br>Bias = 0.9 \<br>\eta = 0.15<br>$$<br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fr1mj5ladyj30e7081aa5.jpg" alt=""></p>
@@ -325,7 +325,7 @@ if(isTriggerAnalytics) {
 </ul>
 <p>如果输入的是数字 7 对应的图像，那么 Log-Likelihood 代价是<br>$$<br>-\ln a_7^L<br>$$<br>如果网络工作很好，对输出 7 非常自信，$a_7^L$ 会非常接近1，那么$-\ln a_7^L$ 就会很小。</p>
 <p>如果网络工作不好，概率 $a_7^L$ 会很小，而 $-\ln a_7^L$ 会很大。</p>
-<h3 id="学习速度不会衰退"><a href="#学习速度不会衰退" class="headerlink" title="学习速度不会衰退"></a>学习速度不会衰退</h3><p>$$<br>\begin{eqnarray}<br>  \frac{\partial C}{\partial b^L_j} &amp; = &amp; a^L_j-y_j  \tag{81}\<br>  \frac{\partial C}{\partial w^L_{jk}} &amp; = &amp; a^{L-1}_k (a^L_j-y_j)<br>\tag{82}\end{eqnarray}<br>$$</p>
+<h3 id="学习速度不会衰退"><a href="#学习速度不会衰退" class="headerlink" title="学习速度不会衰退"></a>学习速度不会衰退</h3><p>$$<br>  \frac{\partial C}{\partial b^L_j}  =  a^L_j-y_j<br>  \<br>  \frac{\partial C}{\partial w^L_{jk}}  =  a^{L-1}_k (a^L_j-y_j)<br>$$</p>
 <p>这些表达式确保我们不会遇到学习速度衰退的问题。</p>
 <h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p>$\delta_j^L = a_j^L - y_j$</p>
 <h2 id="过拟合和正则化"><a href="#过拟合和正则化" class="headerlink" title="过拟合和正则化"></a>过拟合和正则化</h2><p>Johnny von Neumann 说四个参数可以模拟一头大象，五个参数可以让它摇动鼻子。</p>

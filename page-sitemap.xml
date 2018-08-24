@@ -7,6 +7,20 @@
     </url>
     
     <url>
+        <loc>http://reinhardhsu.com/about/</loc>
+        <lastmod>2018-08-24T15:00:23.562Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>http://reinhardhsu.com/about.html</loc>
+        <lastmod>2018-08-24T14:19:35.048Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://reinhardhsu.com/categories/</loc>
         <lastmod>2018-05-01T13:34:21.277Z</lastmod>
         <changefreq>weekly</changefreq>
