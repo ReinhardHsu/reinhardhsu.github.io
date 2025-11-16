@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>三个倒计时 · PSLE / 18 岁 / 20 岁</title>
+    <style>
+        :root {
+            --bg1: #000000;
+            --bg2: #000000;
+            --card-overlay: rgba(0, 0, 0, 0.45);
+            --text: #ffffff;
+            --num-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Helvetica Neue", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+            background: #000000;
+            color: var(--text);
+            padding: 20px;
+        }
+
+        .wrap {
+            width: 100%;
+            /*max-width: 1000px;*/
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        p.sub {
+            margin: 6px 0 0 0;
+            opacity: 0.7;
+            font-size: 14px;
+            color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 840px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 14px;
+            color: white;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            min-width: 480px;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--card-overlay);
+            border-radius: 14px;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 38px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .target {
+            font-size: 13px;
+            opacity: 0.85;
+            color: white;
+        }
+
+        .counts {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .unit {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 12px 18px;
+            border-radius: 12px;
+            min-width: 90px;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .num {
+            font-size: 48px;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+            color: var(--num-color);
+            transform-origin: center;
+        }
+
+        .label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 6px;
+            color: white;
+        }
+
+        .pulse {
+            animation: pulse 420ms cubic-bezier(.2, .9, .4, 1);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            40% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            opacity: 0.6;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <h1>倒计时 — PSLE / 18 岁 / 20 岁</h1>
+        <p class="sub"></p>
+    </header>
+
+    <div class="grid">
+        <div class="card" id="card-psle">
+            <div class="title">PSLE 倒计时</div>
+            <div class="target" id="psle-target-text"></div>
+            <div class="counts">
+                <div class="unit"><span class="num" id="psle-days">0</span><span class="label">天</span></div>
+                <div class="unit"><span class="num" id="psle-hours">0</span><span class="label">小时</span></div>
+                <div class="unit"><span class="num" id="psle-mins">0</span><span class="label">分钟</span></div>
+                <div class="unit"><span class="num" id="psle-secs">0</span><span class="label">秒</span></div>
+            </div>
+        </div>
+
+        <div class="card" id="card-18">
+            <div class="title">18 岁 倒计时</div>
+            <div class="target">目标日期：<span id="t18-text">2033-03-26</span></div>
+            <div class="counts">
+                <div class="unit"><span class="num" id="a18-days">0</span><span class="label">天</span></div>
+                <div class="unit"><span class="num" id="a18-hours">0</span><span class="label">小时</span></div>
+                <div class="unit"><span class="num" id="a18-mins">0</span><span class="label">分钟</span></div>
+                <div class="unit"><span class="num" id="a18-secs">0</span><span class="label">秒</span></div>
+            </div>
+        </div>
+
+        <div class="card" id="card-20">
+            <div class="title">20 岁 倒计时</div>
+            <div class="target">目标日期：<span id="t20-text">2035-03-26</span></div>
+            <div class="counts">
+                <div class="unit"><span class="num" id="a20-days">0</span><span class="label">天</span></div>
+                <div class="unit"><span class="num" id="a20-hours">0</span><span class="label">小时</span></div>
+                <div class="unit"><span class="num" id="a20-mins">0</span><span class="label">分钟</span></div>
+                <div class="unit"><span class="num" id="a20-secs">0</span><span class="label">秒</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        注：PSLE 默认日期为 <strong id="psleDefault"></strong>
+    </div>
+
+    <footer><code></code></footer>
+</div>
+
+<script>
+    /*
+      配置区 — 修改这里来更新目标日期
+      PSLE_TARGET_STR 默认设置为 2027-09-01（示例）。如有正式公布日期，请替换为确切 YYYY-MM-DD（本地午夜）。
+    */
+    const PSLE_TARGET_STR = "2027-09-01"; // <-- 若已知确切 PSLE 日期，请修改此处（格式 YYYY-MM-DD）
+    const TARGET_18_STR = "2033-03-26";
+    const TARGET_20_STR = "2035-03-26";
+
+    /* 显示 PSLE 默认供参考 */
+    document.getElementById('psleDefault').textContent = PSLE_TARGET_STR;
+    document.getElementById('psle-target-text').textContent = "目标日期：" + PSLE_TARGET_STR;
+    document.getElementById('t18-text').textContent = TARGET_18_STR;
+    document.getElementById('t20-text').textContent = TARGET_20_STR;
+
+    /* helper: build Date at local midnight from YYYY-MM-DD */
+    function toLocalMidnight(dateStr) {
+        // dateStr like "2027-09-01"
+        const [y, m, d] = dateStr.split('-').map(Number);
+        return new Date(y, m - 1, d, 0, 0, 0);
+    }
+
+    /* helper: compute remaining time parts */
+    function computeRemaining(targetDate) {
+        const now = new Date();
+        const diff = targetDate - now;
+        if (diff <= 0) return {past: true, days: 0, hours: 0, minutes: 0, seconds: 0};
+        let rem = diff;
+        const days = Math.floor(rem / (1000 * 60 * 60 * 24));
+        rem %= (1000 * 60 * 60 * 24);
+        const hours = Math.floor(rem / (1000 * 60 * 60));
+        rem %= (1000 * 60 * 60);
+        const minutes = Math.floor(rem / (1000 * 60));
+        rem %= (1000 * 60);
+        const seconds = Math.floor(rem / 1000);
+        return {past: false, days, hours, minutes, seconds};
+    }
+
+    /* animate-if-changed */
+    function animateIfChanged(el, value) {
+        const s = String(value);
+        if (el.textContent !== s) {
+            el.textContent = s;
+            el.classList.remove('pulse');
+            void el.offsetWidth; // reflow
+            el.classList.add('pulse');
+        } else {
+            el.textContent = s;
+        }
+    }
+
+    /* element refs */
+    const psleEls = {
+        days: document.getElementById('psle-days'),
+        hours: document.getElementById('psle-hours'),
+        mins: document.getElementById('psle-mins'),
+        secs: document.getElementById('psle-secs'),
+    };
+    const a18Els = {
+        days: document.getElementById('a18-days'),
+        hours: document.getElementById('a18-hours'),
+        mins: document.getElementById('a18-mins'),
+        secs: document.getElementById('a18-secs'),
+    };
+    const a20Els = {
+        days: document.getElementById('a20-days'),
+        hours: document.getElementById('a20-hours'),
+        mins: document.getElementById('a20-mins'),
+        secs: document.getElementById('a20-secs'),
+    };
+
+    /* target dates */
+    const psleTarget = toLocalMidnight(PSLE_TARGET_STR);
+    const target18 = toLocalMidnight(TARGET_18_STR);
+    const target20 = toLocalMidnight(TARGET_20_STR);
+
+    /* update loop */
+    function updateAll() {
+        const p = computeRemaining(psleTarget);
+        animateIfChanged(psleEls.days, p.days);
+        animateIfChanged(psleEls.hours, p.hours);
+        animateIfChanged(psleEls.mins, p.minutes);
+        animateIfChanged(psleEls.secs, p.seconds);
+
+        const t18 = computeRemaining(target18);
+        animateIfChanged(a18Els.days, t18.days);
+        animateIfChanged(a18Els.hours, t18.hours);
+        animateIfChanged(a18Els.mins, t18.minutes);
+        animateIfChanged(a18Els.secs, t18.seconds);
+
+        const t20 = computeRemaining(target20);
+        animateIfChanged(a20Els.days, t20.days);
+        animateIfChanged(a20Els.hours, t20.hours);
+        animateIfChanged(a20Els.mins, t20.minutes);
+        animateIfChanged(a20Els.secs, t20.seconds);
+    }
+
+    /* start */
+    updateAll();
+    setInterval(updateAll, 1000);
+</script>
+
+</body>
+</html>
